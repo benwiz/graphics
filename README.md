@@ -10,3 +10,7 @@ Take an image and output a low-poly version.
 - Choose a random subset of the above detected points / edges
 - Triangulate using Delaunay Triangulation
 - Fill the triangles with the mean value of all pixels contained by it (in parallel for faster computation)
+
+# To Do
+
+- Decide language. Considering Go, Clojure, or C.
