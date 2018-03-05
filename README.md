@@ -15,4 +15,4 @@ Inspired by https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpo
 
 # To Do
 
-- Decide language. Considering Go, Clojure, or C.
+- Decide language. Considering Go, Clojure, or C. Leaning toward C.
