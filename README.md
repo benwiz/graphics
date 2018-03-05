@@ -2,7 +2,7 @@
 
 Take an image and output a low-poly version.
 
-Inspired by https://github.com/ghostwriternr/lowpolify
+Inspired by https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py
 
 ## How
 
