@@ -2,6 +2,8 @@
 
 Take an image and output a low-poly version.
 
+Inspired by https://github.com/ghostwriternr/lowpolify
+
 ## How
 
 - Pre-process the input image to remove noise and reduce image size
