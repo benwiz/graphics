@@ -4,6 +4,8 @@ Take an image and output a low-poly version.
 
 Inspired by https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py
 
+https://docs.opencv.org/3.1.0/d7/d1e/tutorial_clojure_dev_intro.html
+
 ## How
 
 - Pre-process the input image to remove noise and reduce image size (OpenCV 2)
