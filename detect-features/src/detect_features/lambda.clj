@@ -3,7 +3,8 @@
             [clojure.java.io :as io]
             [ring.middleware.apigw :refer [wrap-apigw-lambda-proxy]]
             [cheshire.core :as cheshire]
-            [detect-features.handler :refer [app]]))
+            [detect-features.handler :refer [app]]
+            [detect-features.worker :as worker]))
 
 (def lambda-handler (wrap-apigw-lambda-proxy app {:scheduled-event-route "/warmup"}))
 
@@ -18,5 +19,4 @@
 (defn -main
   "A function to enable easier local development."
   []
-  (println "Go!")
-  nil)
+  (worker/run))
