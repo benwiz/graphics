@@ -2,9 +2,9 @@
 
 Take an image and output a low-poly version.
 
-Inspired by https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py
+Inspired by [this project](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py).
 
-https://docs.opencv.org/3.1.0/d7/d1e/tutorial_clojure_dev_intro.html
+[OpenCV clojure tutorial](https://docs.opencv.org/3.1.0/d7/d1e/tutorial_clojure_dev_intro.html)
 
 ## Useful commands
 
@@ -16,7 +16,7 @@ lein run
 
 Deploy.
 
-``bash
+```bash
 lein lambda deploy production
 ```
 
