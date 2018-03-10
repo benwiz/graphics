@@ -72,7 +72,7 @@ Go? Clojure? Python?
 
 ## To Do
 
-- Run _py-detect-features_ on lambda
+- _py-detect-features_ deploy script
 - Run an opencv function
 - Trigger event with S3 image put
 - Generate fake data
