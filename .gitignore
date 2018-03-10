@@ -1,8 +1,8 @@
 .DS_Store
-target/
-lib/
-classes/
-checkouts/
+target
+lib
+classes
+checkouts
 pom.xml
 pom.xml.asc
 *.jar
