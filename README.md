@@ -20,6 +20,12 @@ Deploy.
 lein lambda deploy production
 ```
 
+Zip.
+
+```bash
+zip -r py-detect-features py-detect-features/*
+```
+
 ## Initial Plan
 
 - Pre-process the input image to remove noise and reduce image size (OpenCV)
@@ -31,12 +37,26 @@ lein lambda deploy production
 
 ## Parts
 
+### S3 Structure
+
+- lowpoly
+  - session id
+    - start.png
+    - points.json
+    - points.png
+    - trianges.json
+    - triangles.png
+    - lowpoly.png
+
 ### UI
+
+- Github pages static site
 
 #### Image Upload
 
-- Github pages static site
 - [Image upload](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html)
+
+#### Results display and download
 
 ### Feature Detections
 
@@ -52,5 +72,14 @@ Go? Clojure? Python?
 
 ## To Do
 
-- Image upload
-- Get OpenCV working on Lambda
+- Run _py-detect-features_ on lambda
+- Run an opencv function
+- Trigger event with S3 image put
+- Generate fake data
+- Draw on image and upload to S3
+- Upload raw points to S3
+- Use real feature detection
+
+### Later
+
+- Figure out how to make _clj-detect-features_ small enough for Lambda.

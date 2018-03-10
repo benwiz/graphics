@@ -10,3 +10,4 @@ pom.xml.asc
 .lein-*
 .nrepl-port
 grey-neko.jpg
+py-detect-features.zip
