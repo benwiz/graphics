@@ -10,7 +10,6 @@
             [lein-ring "0.9.7"]
             [lein-lambda "0.2.0"]]
   :auto {:default {:file-pattern #"\.(clj)$"}}
-  :main opencv3.ok
   :repositories [["vendredi" "https://repository.hellonico.info/repository/hellonico/"]]
   :aliases {"notebook" ["gorilla" ":ip" "0.0.0.0" ":port" "10000"]}
   :profiles {:dev {:resource-paths ["resources"]
@@ -36,4 +35,13 @@
                  [ring-apigw-lambda-proxy "0.3.0"]
                  [feedme "0.0.3"]
                  [clj-spotify "0.1.5"]
-                 [rotary "0.4.1"]])
+                 [rotary "0.4.1"]]
+  :ring {:handler lowpoly.handler/app}
+  :lambda {:function {:name "lowpoly" ; bucket name cannot contain underscores
+                      :handler "lowpoly.lambda.LambdaFn"}
+           :api-gateway {:name "lowpoly"}
+           :stages {"production" {:warmup {:enable true}}
+                    "staging"    {}}}
+  ; For local runs. Probably needs to be off in projection.
+  ; :main opencv3.ok)
+  :main lowpoly.lambda)

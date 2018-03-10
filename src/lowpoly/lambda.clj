@@ -14,3 +14,9 @@
         (cheshire/parse-stream true)
         (lambda-handler)
         (cheshire/generate-stream writer))))
+
+(defn -main
+  "A function to enable easier local development."
+  []
+  (println "Go!")
+  nil)
