@@ -20,15 +20,33 @@ Deploy.
 lein lambda deploy production
 ```
 
-## How
+## Initial Plan
 
-- Pre-process the input image to remove noise and reduce image size (OpenCV 2)
-- Detect edges in the input image (OpenCV 2)
+- Pre-process the input image to remove noise and reduce image size (OpenCV)
+- Detect edges in the input image (OpenCV)
 - If the image contains humans faces, detect facial features as well (DLib)
 - Choose a random subset of the above detected points / edges
 - Triangulate using Delaunay Triangulation
 - Fill the triangles with the mean value of all pixels contained by it (in parallel for faster computation)
 
+## Parts
+
+### UI
+
+#### Image Upload
+
+- Github pages static site
+- [Image upload](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html)
+
+### Feature Detections
+
+Clojure AWS Lambda function that uses OpenCV to identify key points.
+
+### Delauney Triangulation
+
+### Coloring
+
 ## To Do
 
-- Decide language. Considering Go, Clojure, or C. Leaning toward C.
+- Image upload
+- Get OpenCV working on Lambda
