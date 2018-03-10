@@ -6,6 +6,20 @@ Inspired by https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpo
 
 https://docs.opencv.org/3.1.0/d7/d1e/tutorial_clojure_dev_intro.html
 
+## Useful commands
+
+Run worker.
+
+```bash
+lein run
+```
+
+Deploy.
+
+``bash
+lein lambda deploy production
+```
+
 ## How
 
 - Pre-process the input image to remove noise and reduce image size (OpenCV 2)
