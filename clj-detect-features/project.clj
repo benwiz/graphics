@@ -1,5 +1,5 @@
 (defproject clj-opencv "0.1-SNAPSHOT"
-  :description "Identify key points and edges to use for good looking Delauney triangulation."
+  :description "Identify key points and edges to use for good looking Delaunay triangulation."
   :url "https://www.example.com/TODO"
   :min-lein-version "2.0.0"
   :injections [(clojure.lang.RT/loadLibrary org.opencv.core.Core/NATIVE_LIBRARY_NAME)]

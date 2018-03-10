@@ -42,7 +42,7 @@ lein lambda deploy production
 
 Clojure AWS Lambda function that uses OpenCV to identify key points.
 
-### Delauney Triangulation
+### Delaunay Triangulation
 
 Go? Clojure?
 
