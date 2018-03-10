@@ -20,7 +20,11 @@
                                   [proto-repl "0.3.1"]
                                   ; use to start a gorilla repl
                                   [gorilla-repl "0.4.0"]
-                                  [seesaw "1.4.5"]]}}
+                                  [seesaw "1.4.5"]
+                                  ; aws lambda
+                                  [javax.servlet/servlet-api "2.5"]
+                                  [ring/ring-mock "0.3.1"]]}
+             :uberjar {:aot :all}}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/tools.cli "0.3.5"]
                  [origami "0.1.10"]])
