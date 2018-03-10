@@ -1,4 +1,4 @@
-(ns lowpoly.handler
+(ns detect-features.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
@@ -10,9 +10,9 @@
     (response {:message "Hello World"}))
 
   (route/not-found
-    (response/not-found {:message "Not Found"})))
+   (response/not-found {:message "Not Found"})))
 
 (def app
   (-> app-routes
-    (wrap-json-response)
-    (wrap-defaults api-defaults)))
+      (wrap-json-response)
+      (wrap-defaults api-defaults)))

@@ -1,7 +1,7 @@
-(ns lowpoly.handler-test
+(ns detect-features.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [lowpoly.handler :refer :all]))
+            [detect-features.handler :refer :all]))
 
 (deftest test-app
   (testing "main route"

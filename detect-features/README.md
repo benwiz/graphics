@@ -15,6 +15,6 @@ https://docs.opencv.org/3.1.0/d7/d1e/tutorial_clojure_dev_intro.html
 - Triangulate using Delaunay Triangulation
 - Fill the triangles with the mean value of all pixels contained by it (in parallel for faster computation)
 
-# To Do
+## To Do
 
 - Decide language. Considering Go, Clojure, or C. Leaning toward C.
