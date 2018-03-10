@@ -1,7 +1,7 @@
-(ns delaunay-triangulation.handler-test
+(ns partition.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [delaunay-triangulation.handler :refer :all]))
+            [partition.handler :refer :all]))
 
 (deftest test-app
   (testing "main route"
