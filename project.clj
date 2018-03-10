@@ -27,4 +27,13 @@
              :uberjar {:aot :all}}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/tools.cli "0.3.5"]
-                 [origami "0.1.10"]])
+                 [origami "0.1.10"]
+                 [compojure "1.6.0"]
+                 [ring/ring-defaults "0.3.1"]
+                 [ring/ring-json "0.4.0"]
+                 [uswitch/lambada "0.1.2"]
+                 [cheshire "5.7.1"]
+                 [ring-apigw-lambda-proxy "0.3.0"]
+                 [feedme "0.0.3"]
+                 [clj-spotify "0.1.5"]
+                 [rotary "0.4.1"]])
