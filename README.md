@@ -23,7 +23,7 @@ lein lambda deploy production
 Zip.
 
 ```bash
-zip -r py-detect-features py-detect-features/*
+zip -r9 py-detect-features.zip *
 ```
 
 ## Initial Plan
