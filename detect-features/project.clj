@@ -37,7 +37,7 @@
                  [clj-spotify "0.1.5"]
                  [rotary "0.4.1"]]
   :ring {:handler detect-features.handler/app}
-  :lambda {:function {:name "detect_features" ; bucket name cannot contain underscores
+  :lambda {:function {:name "detect-features" ; bucket name cannot contain underscores
                       :handler "detect-features.lambda.LambdaFn"}
            :api-gateway {:name "detect-features"}
            :stages {"production" {:warmup {:enable true}}
