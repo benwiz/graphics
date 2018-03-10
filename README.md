@@ -73,7 +73,7 @@ Go? Clojure? Python?
 ## To Do
 
 - _py-detect-features_ deploy script
-- Run an opencv function
+- Run an opencv function to prove it works
 - Trigger event with S3 image put
 - Generate fake data
 - Draw on image and upload to S3
