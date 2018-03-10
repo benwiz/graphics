@@ -64,7 +64,7 @@ Clojure AWS Lambda function that uses OpenCV to identify key points.
 
 ### Delaunay Triangulation
 
-Go? Clojure?
+Clojure AWS Lambda function that performs Delaunay triangulation given a set of points.
 
 ### Coloring
 

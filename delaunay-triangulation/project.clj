@@ -8,7 +8,8 @@
                  [ring/ring-json "0.4.0"]
                  [uswitch/lambada "0.1.2"]
                  [cheshire "5.7.1"]
-                 [ring-apigw-lambda-proxy "0.3.0"]]
+                 [ring-apigw-lambda-proxy "0.3.0"]
+                 [trystan/delaunay-triangulation "1.0.1"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-lambda "0.2.0"]]
   :ring {:handler delaunay-triangulation.handler/app}
@@ -20,4 +21,6 @@
                       :handler "delaunay-triangulation.lambda.LambdaFn"}
            :api-gateway {:name "delaunay-triangulation"}
            :stages {"production" {:warmup {:enable true}}
-                    "staging"    {}}})
+                    "staging"    {}}}
+  ; For local runs. Probably needs to be off in projection.
+  :main delaunay-triangulation.lambda)

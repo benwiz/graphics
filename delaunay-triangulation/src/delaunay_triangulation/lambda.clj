@@ -3,7 +3,8 @@
             [clojure.java.io :as io]
             [ring.middleware.apigw :refer [wrap-apigw-lambda-proxy]]
             [cheshire.core :as cheshire]
-            [delaunay-triangulation.handler :refer [app]]))
+            [delaunay-triangulation.handler :refer [app]]
+            [delaunay-triangulation.worker :as worker]))
 
 (def lambda-handler (wrap-apigw-lambda-proxy app {:scheduled-event-route "/warmup"}))
 
@@ -14,3 +15,8 @@
         (cheshire/parse-stream true)
         (lambda-handler)
         (cheshire/generate-stream writer))))
+
+(defn -main
+  "A function to enable easier local development."
+  []
+  (worker/run))
