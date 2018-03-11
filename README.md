@@ -72,8 +72,7 @@ Go? Clojure? Python?
 
 ## To Do
 
-- First feature to detect: 10x10 grid inside image.
-- Draw on image and upload to S3
+- Draw points on image and upload to S3
 
 ### Later
 

@@ -37,12 +37,13 @@ def lambda_handler(event, context):
         return
 
     # TODO: Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-    # image = cv2.imread(filename, 0)
+    image = cv2.imread(filename)
+
+    # Method: Canny and display
+
     # Canny edge detection
     # edges = cv2.Canny(image, 300, 500)
     # print len(edges[10])
-
-    # Draw results
     # from matplotlib import pyplot as plt
     # plt.subplot(121)
     # plt.imshow(image, cmap='gray')
@@ -56,22 +57,24 @@ def lambda_handler(event, context):
     # plt.yticks([])
     # plt.show()
 
-    image = cv2.imread(filename)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    sift = cv2.xfeatures2d.SIFT_create()
-    kp = sift.detect(gray, None)
-    img = cv2.drawKeypoints(gray, kp, image, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    cv2.imwrite('sift_keypoints.jpg', img)
+    # Method: Key points and save
+    # image = cv2.imread(filename)
+    # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # sift = cv2.xfeatures2d.SIFT_create()
+    # kp = sift.detect(gray, None)
+    # img = cv2.drawKeypoints(gray, kp, image, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    # cv2.imwrite('sift_keypoints.jpg', img)
 
-    # TODO: Extract key points
-    points = [
-        [20, 20],
-        [40, 40],
-        [100, 100],
-        [200, 200],
-        [250, 250],
-        [1000, 1000],
-    ]
+    # Method: NxN grid
+    N = 10
+    height, width, channels = image.shape
+    points = []
+    for x in range(width):
+        if x % 100 == 0:
+            for y in range(height):
+                if y % 100 == 0:
+                    point = [x, y]
+                    points.append(point)
 
     # Upload key points as JSON to S3
     data = json.dumps(points, indent=2)
