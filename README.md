@@ -72,7 +72,8 @@ Go? Clojure? Python?
 
 ## To Do
 
-
+- Calculate trianges
+- Write to S3 in JSON file (human readable, ideally)
 
 ### Later
 
