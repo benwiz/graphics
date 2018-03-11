@@ -1,6 +1,5 @@
 (ns partition.worker
-  ; (:require [trystan/delaunay-triangulation :as delaunay])
-  )
+  (:require [delaunay-triangulation.core :as delaunay]))
 
 (defn run
   "Run."
