@@ -72,7 +72,7 @@ Go? Clojure? Python?
 
 ## To Do
 
-- Draw points on image and upload to S3
+
 
 ### Later
 
