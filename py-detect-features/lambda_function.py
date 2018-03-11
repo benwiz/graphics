@@ -3,9 +3,9 @@ import cv2
 
 def lambda_handler(event, context):
     print "OpenCV installed version:", cv2.__version__
+    print "Event:\n", event
+    print "Context:\n", context
     return "It works!"
 
 if __name__ == "__main__":
     lambda_handler(42, 42)
-
-# python -m py-detect-features.lambda_function
