@@ -80,7 +80,7 @@ def lambda_handler(event, context):
         radius = 10
         color = (255, 0, 255)
         cv2.circle(img, center, radius, color, -1)
-    cv2.imwrite('points.jpg', img)
+    # cv2.imwrite('points.jpg', img)
 
     # Upload image with drawing
     img = cv2.imencode('.jpg', img)[1].tostring()
