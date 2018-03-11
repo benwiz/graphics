@@ -75,7 +75,11 @@ Go? Clojure? Python?
 - Calculate trianges
 - Write to S3 in JSON file (human readable, ideally)
 
+- matplotlib
+- pillow
+
 ### Later
 
 - Selectable detect features algorithm
 - Figure out how to make _clj-detect-features_ small enough for Lambda.
+- Handle more extensions. Developed against _.jpg_
