@@ -47,12 +47,12 @@ Pip packages path.
 
 - lowpoly
   - session id
-    - start.png
+    - start.jpg
     - points.json
-    - points.png
+    - points.jpg
     - trianges.json
-    - triangles.png
-    - lowpoly.png
+    - triangles.jpg
+    - lowpoly.jpg
 
 ### UI
 
