@@ -72,13 +72,8 @@ Go? Clojure? Python?
 
 ## To Do
 
-- _py-detect-features_ deploy script, maybe can trigger function update and point to s3 via cli
-- Run an opencv function to prove it works
-- Trigger event with S3 image put
-- Generate fake data
+- First feature to detect: 10x10 grid inside image.
 - Draw on image and upload to S3
-- Upload raw points to S3
-- Use real feature detection
 
 ### Later
 
