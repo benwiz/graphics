@@ -11,4 +11,7 @@
 (defn run
   "Run."
   []
+  ; TODO: Download file from S3
+  ; TODO: Parse file
+  ; TODO: Pass to delaunay-triangulation
   (delaunay-triangulation [[2 3] [-4 9.3] [4 3] [2 2]]))

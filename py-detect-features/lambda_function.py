@@ -27,6 +27,7 @@ def lambda_handler(event, context):
 
     # Download image
     try:
+        # TODO: Download image inmem
         s3.Bucket(BUCKET_NAME).download_file(key, filename)
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == '404':
