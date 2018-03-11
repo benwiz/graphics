@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# HOW TO: Run from this directory using `./deploy.sh`
+
 rm py-detect-features.zip
 mv linux-libs/cv2 .
 mv linux-libs/numpy .
