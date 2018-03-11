@@ -26,6 +26,12 @@ Zip.
 zip -r9 py-detect-features.zip *
 ```
 
+Pip packages path.
+
+```bash
+/usr/local/Cellar/python@2/2.7.14_3/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages
+```
+
 ## Initial Plan
 
 - Pre-process the input image to remove noise and reduce image size (OpenCV)
