@@ -36,7 +36,32 @@ def lambda_handler(event, context):
             raise
         return
 
-    # TODO: Analyze image
+    # TODO: Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
+    # image = cv2.imread(filename, 0)
+    # Canny edge detection
+    # edges = cv2.Canny(image, 300, 500)
+    # print len(edges[10])
+
+    # Draw results
+    # from matplotlib import pyplot as plt
+    # plt.subplot(121)
+    # plt.imshow(image, cmap='gray')
+    # plt.title('Original Image')
+    # plt.xticks([])
+    # plt.yticks([])
+    # plt.subplot(122)
+    # plt.imshow(edges, cmap='gray')
+    # plt.title('Edge Image')
+    # plt.xticks([])
+    # plt.yticks([])
+    # plt.show()
+
+    image = cv2.imread(filename)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    sift = cv2.xfeatures2d.SIFT_create()
+    kp = sift.detect(gray, None)
+    img = cv2.drawKeypoints(gray, kp, image, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    cv2.imwrite('sift_keypoints.jpg', img)
 
     # TODO: Extract key points
     points = [
