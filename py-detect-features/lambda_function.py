@@ -37,12 +37,10 @@ def lambda_handler(event, context):
             raise
         return
 
-    # TODO: Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
+    # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
     img = cv2.imread(filename)
 
-    # Method: Canny and display
-
-    # Canny edge detection
+    # Method: Canny edge detection and display
     # edges = cv2.Canny(img, 300, 500)
     # print len(edges[10])
     # from matplotlib import pyplot as plt

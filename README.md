@@ -77,4 +77,5 @@ Go? Clojure? Python?
 
 ### Later
 
+- Selectable detect features algorithm
 - Figure out how to make _clj-detect-features_ small enough for Lambda.
