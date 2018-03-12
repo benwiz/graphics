@@ -35,10 +35,30 @@ Pip packages path.
 Install pip libraries
 
 ```bash
-docker run -v $(pwd):/home/proj amazonlinux bash
-yum -y install python-pip
-python-pip install boto3 matplotlib pillow -t .
+docker run -it -v $(pwd):/home/proj amazonlinux bash
 
+yum -y update
+yum -y upgrade
+yum -y groupinstall "Development Tools"
+yum -y install blas --enablerepo=epel
+yum -y install lapack --enablerepo=epel
+yum -y install Cython --enablerepo=epel
+yum install python27-devel python27-pip gcc
+
+pip install virtualenv
+virtualenv ~/env
+source ~/env/bin/activate
+
+~/env/bin/pip2.7 install numpy -t /home/proj/
+```
+
+```bash
+docker run -it -v $(pwd):/home/proj lambci/lambda:build bash
+
+cd /home/proj
+
+easy_install pip
+pip install numpy -t libs/
 ```
 
 ## Initial Plan
@@ -87,13 +107,8 @@ Go? Clojure? Python?
 
 ## To Do
 
-- Try to remove matplotlib by not using it's imread
-
 - Calculate trianges
 - Write to S3 in JSON file (human readable, ideally)
-
-- matplotlib
-- pillow
 
 ### Later
 
