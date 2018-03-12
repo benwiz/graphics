@@ -80,7 +80,7 @@ def lambda_handler(event, context):
                     points.append(point)
 
     # Upload key points as JSON to S3
-    data = json.dumps(points, indent=2)
+    data = json.dumps(points)
     points_key = session_id + '/points.json'
     s3.Object(BUCKET_NAME, points_key).put(Body=data)
 
