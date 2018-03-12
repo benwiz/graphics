@@ -14,7 +14,12 @@
   (println a)
   (println b)
   (println c)
-  ; TODO: Download file from S3
+  ; TODO: Download start image
+  ; TODO: Download json file from S3
+
   ; TODO: Parse file
   ; TODO: Pass to delaunay-triangulation
+
+  ; TODO: Write json file to s3
+  ; TODO: Draw triangles on start image and write to s3
   (delaunay-triangulation [[2 3] [-4 9.3] [4 3] [2 2]]))
