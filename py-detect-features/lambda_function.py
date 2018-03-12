@@ -38,7 +38,9 @@ def lambda_handler(event, context):
     ext = filename.split('.')[1]
     image_object = bucket.Object(key)
     # image_buffer = io.BytesIO(image_object.get()['Body'].read())
-    img = cv2.imdecode(numpy.fromstring(image_object.get()['Body'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
+    img = cv2.imdecode(numpy.fromstring(image_object.get()['Body'].read(),
+                                        numpy.uint8),
+                       cv2.IMREAD_UNCHANGED)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
 
