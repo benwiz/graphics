@@ -35,30 +35,12 @@ Pip packages path.
 Install pip libraries
 
 ```bash
-docker run -it -v $(pwd):/home/proj amazonlinux bash
-
-yum -y update
-yum -y upgrade
-yum -y groupinstall "Development Tools"
-yum -y install blas --enablerepo=epel
-yum -y install lapack --enablerepo=epel
-yum -y install Cython --enablerepo=epel
-yum install python27-devel python27-pip gcc
-
-pip install virtualenv
-virtualenv ~/env
-source ~/env/bin/activate
-
-~/env/bin/pip2.7 install numpy -t /home/proj/
-```
-
-```bash
 docker run -it -v $(pwd):/home/proj lambci/lambda:build bash
 
 cd /home/proj
-
+export PYTHONPATH=/local/lib/python2.7/site-packages/
 easy_install pip
-pip install numpy -t libs/
+/local/bin/pip install numpy -t libs/
 ```
 
 ## Initial Plan
