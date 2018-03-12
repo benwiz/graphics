@@ -1,6 +1,8 @@
 """
 Consume an S3 create event, download the file, run some analysis, return the
 key points.
+
+sudo yum -y install
 """
 
 import io
@@ -12,6 +14,12 @@ import matplotlib.image as mpimg
 
 
 BUCKET_NAME = 'lowpoly'
+
+
+def create_opencv_image_from_stringio(img_stream, cv2_img_flag=0):
+    img_stream.seek(0)
+    img_array = np.asarray(bytearray(img_stream.read()), dtype=np.uint8)
+    return cv2.imdecode(img_array, cv2_img_flag)
 
 
 def lambda_handler(event, context):
@@ -29,7 +37,8 @@ def lambda_handler(event, context):
 
     ext = filename.split('.')[1]
     image_object = bucket.Object(key)
-    img = mpimg.imread(io.BytesIO(image_object.get()['Body'].read()), ext)
+    image_buffer = io.BytesIO(image_object.get()['Body'].read())
+    img = create_opencv_image_from_stringio(image_buffer)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
 

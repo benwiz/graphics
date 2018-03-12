@@ -32,6 +32,15 @@ Pip packages path.
 /usr/local/Cellar/python@2/2.7.14_3/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages
 ```
 
+Install pip libraries
+
+```bash
+docker run -v $(pwd):/home/proj amazonlinux bash
+yum -y install python-pip
+python-pip install boto3 matplotlib pillow -t .
+
+```
+
 ## Initial Plan
 
 - Pre-process the input image to remove noise and reduce image size (OpenCV)
@@ -77,6 +86,8 @@ Clojure AWS Lambda function that performs Delaunay triangulation given a set of 
 Go? Clojure? Python?
 
 ## To Do
+
+- Try to remove matplotlib by not using it's imread
 
 - Calculate trianges
 - Write to S3 in JSON file (human readable, ideally)
