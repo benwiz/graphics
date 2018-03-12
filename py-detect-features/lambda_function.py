@@ -11,7 +11,6 @@ import json
 import cv2
 import boto3
 import numpy
-# import matplotlib.image as mpimg
 
 
 BUCKET_NAME = 'lowpoly'
