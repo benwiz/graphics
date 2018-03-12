@@ -2,11 +2,17 @@
 
 # HOW TO: Run from this directory using `./deploy.sh`
 
+# Move libs
+mv libs/cv2 .
+
 # Remove old zip
 rm py-detect-features.zip
 
 # Create zip artifact
 zip -r9 py-detect-features.zip * -x *.zip -x deploy.sh
+
+# Replace libs
+mv cv2 libs/
 
 # Upload zip to S3
 aws s3 cp py-detect-features.zip s3://lowpoly/py-detect-features.zip --profile personal
