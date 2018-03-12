@@ -10,7 +10,10 @@
 
 (defn run
   "Run."
-  []
+  [a b c]
+  (println a)
+  (println b)
+  (println c)
   ; TODO: Download file from S3
   ; TODO: Parse file
   ; TODO: Pass to delaunay-triangulation

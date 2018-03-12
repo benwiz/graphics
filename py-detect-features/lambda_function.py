@@ -32,7 +32,6 @@ def lambda_handler(event, context):
     img = mpimg.imread(io.BytesIO(image_object.get()['Body'].read()), ext)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-    # img = cv2.imread(raw_img)
 
     # Method: Canny edge detection and display
     # edges = cv2.Canny(img, 300, 500)
