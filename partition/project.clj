@@ -17,7 +17,9 @@
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.1"]]}
    :uberjar {:aot :all}}
-  :lambda {:function {:name "lowpoly-partition"
+  :lambda {:credentials {:region "us-east-1"
+                         :profile "personal"}
+           :function {:name "lowpoly-partition"
                       :handler "partition.lambda.LambdaFn"}
            :api-gateway {:name "partition"}
            :stages {"production" {:warmup {:enable true}}
