@@ -24,5 +24,5 @@
            :api-gateway {:name "partition"}
            :stages {"production" {:warmup {:enable true}}
                     "staging"    {}}}
-  ; For local runs. Probably needs to be off in projection.
+  ; For local runs.
   :main partition.lambda)

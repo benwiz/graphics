@@ -89,10 +89,12 @@ Go? Clojure? Python?
 
 ## To Do
 
-- Calculate trianges
+- Calculate triangles
 
 ### Later
 
+- The `lein lambda-api` thing I'm using for `partition` is bloated for a non-api based event.
+  - https://medium.com/@jamesleonis/clojure-and-aws-serverless-basic-lambda-201b60183d6d
 - Selectable detect features algorithm
 - Figure out how to make _clj-detect-features_ small enough for Lambda.
 - Handle more extensions. Developed against _.jpg_
