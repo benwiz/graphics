@@ -18,13 +18,15 @@
 (defn delaunay-triangulation
   [points]
   (let [{:keys [points edges triangles]} (delaunay/triangulate points)]
+    ; TODO: Clean to make all coordinates integers
     triangles))
 
 (defn draw
+  ; TODO: Draw triangles
   "Take width, height, and the map of mines. Save to a file.
   Supposed to take a generate-random-map{,-perc} mapping.
   https://stackoverflow.com/questions/6973290/generate-and-save-a-png-image-in-clojure"
-  [image]
+  [image triangles]
   (let [block 5 ; block size
         ; bi (BufferedImage. (* block width) (* block height) BufferedImage/TYPE_INT_ARGB)
         ; bi (ImageIO/read (io/file source)))
@@ -47,12 +49,12 @@
         points (cheshire/parse-string (slurp (:content (s3-old/get-object cred bucket (str key "points.json")))))
         ; Identify triangles
         triangles (delaunay-triangulation points)]
-    ; (with-open [in (io/input-stream image)
-    ;             out (io/output-stream "image.jpg")]
-    ;             ; https://stackoverflow.com/questions/6973290/generate-and-save-a-png-image-in-clojure
-    ;   (io/copy in out)
-    (let [image (draw image)
+    ; Draw on image
+    (let [image (draw image triangles)
           image-output-stream (ByteArrayOutputStream.)]
       (ImageIO/write image "jpg" image-output-stream)
+      ; Upload image to S3
       (s3-old/put-object cred bucket (str key "triangles.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
+    ; TODO: Write string to S3
+    (s3-old/put-object cred bucket (str key "triangles.json") (cheshire/generate-string triangles))
     nil))
