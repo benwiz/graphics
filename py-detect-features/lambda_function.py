@@ -69,14 +69,16 @@ def lambda_handler(event, context):
     # cv2.imwrite('sift_keypoints.jpg', img)
 
     # Method: NxN grid
-    N = 100
+    N = 10
     height, width, channels = img.shape
+    height_n = height / 10
+    width_n = width / 10
     points = []
     for x in range(width):
-        if x % N == 0:
+        if x % width_n == 0 or x == width - 1:
             for y in range(height):
-                if y % N == 0:
-                    point = (x+N/3, y+N/4)
+                if y % height_n == 0 or y == height - 1:
+                    point = (x, y)
                     points.append(point)
 
     # Upload key points as JSON to S3
