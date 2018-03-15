@@ -55,6 +55,6 @@
       (ImageIO/write image "jpg" image-output-stream)
       ; Upload image to S3
       (s3-old/put-object cred bucket (str key "triangles.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
-    ; TODO: Write string to S3
+    ; Write string to S3. TODO: May need to foce this upload to happen second
     (s3-old/put-object cred bucket (str key "triangles.json") (cheshire/generate-string triangles))
     nil))
