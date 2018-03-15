@@ -98,3 +98,4 @@ Go? Clojure? Python?
 - Selectable detect features algorithm
 - Figure out how to make _clj-detect-features_ small enough for Lambda.
 - Handle more extensions. Developed against _.jpg_
+- Draw features should really be it's own function.

@@ -9,6 +9,7 @@
                  [uswitch/lambada "0.1.2"]
                  [cheshire "5.7.1"]
                  [ring-apigw-lambda-proxy "0.3.0"]
+                 [clj-aws-s3 "0.3.10"]
                  [trystan/delaunay-triangulation "1.0.1"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-lambda "0.2.0"]]
