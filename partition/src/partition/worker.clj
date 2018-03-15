@@ -6,7 +6,7 @@
             [cheshire.core :as cheshire]
             [clojure.java.io :as io])
   (:import
-   [java.io File]
+   [java.io ByteArrayOutputStream ByteArrayInputStream]
    [java.awt.image BufferedImage]
    [javax.imageio ImageIO]
    [java.awt Color]))
@@ -24,7 +24,7 @@
   "Take width, height, and the map of mines. Save to a file.
   Supposed to take a generate-random-map{,-perc} mapping.
   https://stackoverflow.com/questions/6973290/generate-and-save-a-png-image-in-clojure"
-  [width height image file]
+  [image]
   (let [block 5 ; block size
         ; bi (BufferedImage. (* block width) (* block height) BufferedImage/TYPE_INT_ARGB)
         ; bi (ImageIO/read (io/file source)))
@@ -51,13 +51,8 @@
     ;             out (io/output-stream "image.jpg")]
     ;             ; https://stackoverflow.com/questions/6973290/generate-and-save-a-png-image-in-clojure
     ;   (io/copy in out)
-    ; (let [image (ImageIO/read "...")
-    ;       image-output-stream (ByteArrayOutputStream.)]
-    ;   (ImageIO/write image "jpg" image-output-stream)
-    ;   (jpeg-response (ByteArrayInputStream (.toByteArray image-output-stream))))
-
-    ; (s3/put-object :bucket-name bucket
-    ;                :key (str key "triangles.jpg")
-    ;                 ; :metadata {:server-side-encryption "AES256"}
-    ;                :file (draw 200 200 image "out.jpg"))
-    triangles))
+    (let [image (draw image)
+          image-output-stream (ByteArrayOutputStream.)]
+      (ImageIO/write image "jpg" image-output-stream)
+      (s3-old/put-object cred bucket (str key "triangles.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
+    nil))
