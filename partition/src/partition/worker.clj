@@ -22,19 +22,22 @@
     triangles))
 
 (defn draw
-  ; TODO: Draw triangles
   "Take width, height, and the map of mines. Save to a file.
   Supposed to take a generate-random-map{,-perc} mapping.
   https://stackoverflow.com/questions/6973290/generate-and-save-a-png-image-in-clojure"
   [image triangles]
-  (let [block 5 ; block size
-        ; bi (BufferedImage. (* block width) (* block height) BufferedImage/TYPE_INT_ARGB)
-        ; bi (ImageIO/read (io/file source)))
-        bi (ImageIO/read (io/input-stream image))
+  (let [bi (ImageIO/read (io/input-stream image))
         g (.createGraphics bi)]
     (do
-      (.drawLine g 50 200 200 300)
-      bi)))
+      (reduce (fn [idk-what-this-is triangle]
+                (let [a (get triangle 0)
+                      b (get triangle 1)
+                      c (get triangle 2)]
+                (.drawLine g (get a 0) (get a 1) (get b 0) (get b 1))
+                (.drawLine g (get b 0) (get b 1) (get c 0) (get c 1))
+                (.drawLine g (get c 0) (get c 1) (get a 0) (get a 1))
+                bi))
+              triangles))))
       ; (ImageIO/write bi "jpg" (File. file)))))
 
 (defn run
