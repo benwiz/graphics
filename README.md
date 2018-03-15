@@ -79,9 +79,11 @@ easy_install pip
 
 Clojure AWS Lambda function that uses OpenCV to identify key points.
 
-### Delaunay Triangulation
+### Partition
 
 Clojure AWS Lambda function that performs Delaunay triangulation given a set of points.
+
+https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawLine(int,%20int,%20int,%20int)
 
 ### Coloring
 
