@@ -31,13 +31,11 @@
         g (.createGraphics bi)]
     (do
       (reduce (fn [idk-what-this-is triangle]
-                (let [a (get triangle 0)
-                      b (get triangle 1)
-                      c (get triangle 2)]
-                  (.drawLine g (get a 0) (get a 1) (get b 0) (get b 1))
-                  (.drawLine g (get b 0) (get b 1) (get c 0) (get c 1))
-                  (.drawLine g (get c 0) (get c 1) (get a 0) (get a 1))
-                  bi))
+                (.drawPolygon g
+                              (int-array (map (fn [point] (get point 0)) triangle))
+                              (int-array (map (fn [point] (get point 1)) triangle))
+                              (count triangle))
+                bi)
               triangles))))
       ; (ImageIO/write bi "jpg" (File. file)))))
 
@@ -45,7 +43,6 @@
   "Run."
   [context]
   ; (println "\nContext:\n" context)
-  (println cred)
   (let [; Get folder name
         key (-> context :Records (get 0) :s3 :object :key (clojure.string/split #"points") (get 0))
         ; Download image and JSON
