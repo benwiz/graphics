@@ -87,14 +87,16 @@ https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawLine(int,%2
 
 ### Coloring
 
-Go? Clojure? Python?
+Clojure AWS Lambda function that colors each triangle according to some algorithm. For now that is the average color.
 
 ## To Do
 
-- Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized.
+- Iterate over every point within triangle and output the color
+- Calculate the average color of each triangle and use that to color the triangle
 
 ### Later
 
+- Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized.
 - The `lein lambda-api` thing I'm using for `partition` is bloated for a non-api based event.
   - https://medium.com/@jamesleonis/clojure-and-aws-serverless-basic-lambda-201b60183d6d
 - Selectable detect features algorithm
