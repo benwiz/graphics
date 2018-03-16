@@ -21,6 +21,8 @@
     (do
       (println (type g))
       (reduce (fn [idk-what-this-is triangle]
+                ; TODO: Get average color of each triangle and make it that color.
+                ; TODO: In the future do something more interesting than average color. HSV is a good starting place.
                 (let [a (get triangle 0)
                       b (get triangle 1)
                       c (get triangle 2)]
