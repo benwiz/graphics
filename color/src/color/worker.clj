@@ -30,7 +30,6 @@
                 ; https://stackoverflow.com/questions/11075505/get-all-points-within-a-triangle
 
                 ; For now, fill polygon with a color
-                (println triangle)
                 (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
                 (.fillPolygon g
                               (int-array (map (fn [point] (get point 0)) triangle))
