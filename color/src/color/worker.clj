@@ -14,7 +14,8 @@
 (def bucket "lowpoly")
 
 (defn draw
-  "https://stackoverflow.com/questions/6973290/generate-and-save-a-png-image-in-clojure"
+  "Get average color of each triangles then make the whole triangle that color.
+  In the future do something more interesting than average color. HSV is a good starting place."
   [image triangles]
   (let [bi (ImageIO/read (io/input-stream image))
         g (.createGraphics bi)]
@@ -22,16 +23,20 @@
       (println (type g))
       (reduce (fn [idk-what-this-is triangle]
                 ; TODO: Get average color of each triangle and make it that color.
-                ; TODO: In the future do something more interesting than average color. HSV is a good starting place.
-                (let [a (get triangle 0)
-                      b (get triangle 1)
-                      c (get triangle 2)]
-                  (.drawLine g (get a 0) (get a 1) (get b 0) (get b 1))
-                  (.drawLine g (get b 0) (get b 1) (get c 0) (get c 1))
-                  (.drawLine g (get c 0) (get c 1) (get a 0) (get a 1))
-                  bi))
+                  ; TODO: Get all points within polygon
+                  ; TODO: For each point, sum RGB values
+                  ; TODO: Take average of RGB values
+
+                ; https://stackoverflow.com/questions/11075505/get-all-points-within-a-triangle
+
+                ; For now, fill polygon with a color
+                (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
+                (.fillPolygon g
+                              (int-array (map (fn [point] (get point 0)) triangle))
+                              (int-array (map (fn [point] (get point 1)) triangle))
+                              (count triangle))
+                bi)
               triangles))))
-      ; (ImageIO/write bi "jpg" (File. file)))))
 
 (defn run
   "Run."
