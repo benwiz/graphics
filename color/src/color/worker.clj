@@ -46,7 +46,5 @@
           image-output-stream (ByteArrayOutputStream.)]
       (ImageIO/write image "jpg" image-output-stream)
       ; Upload image to S3 (TODO: use .getSize to get size of bytearrayinputstream)
-      (s3-old/put-object cred bucket (str key "triangles.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
-    ; Write string to S3. TODO: May need to foce this upload to happen second
-    (s3-old/put-object cred bucket (str key "triangles.json") (cheshire/generate-string triangles))
+      (s3-old/put-object cred bucket (str key "lowpoly.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
     nil))

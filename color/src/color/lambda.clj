@@ -3,8 +3,7 @@
             [clojure.java.io :as io]
             [ring.middleware.apigw :refer [wrap-apigw-lambda-proxy]]
             [cheshire.core :as cheshire]
-            [color.handler :refer [app]]
-            [partition.worker :as worker]))
+            [color.worker :as worker]))
 
 ; (def lambda-handler (wrap-apigw-lambda-proxy app {:scheduled-event-route "/warmup"}))
 
