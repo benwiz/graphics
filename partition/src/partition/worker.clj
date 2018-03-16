@@ -33,10 +33,10 @@
                 (let [a (get triangle 0)
                       b (get triangle 1)
                       c (get triangle 2)]
-                (.drawLine g (get a 0) (get a 1) (get b 0) (get b 1))
-                (.drawLine g (get b 0) (get b 1) (get c 0) (get c 1))
-                (.drawLine g (get c 0) (get c 1) (get a 0) (get a 1))
-                bi))
+                  (.drawLine g (get a 0) (get a 1) (get b 0) (get b 1))
+                  (.drawLine g (get b 0) (get b 1) (get c 0) (get c 1))
+                  (.drawLine g (get c 0) (get c 1) (get a 0) (get a 1))
+                  bi))
               triangles))))
       ; (ImageIO/write bi "jpg" (File. file)))))
 
@@ -44,7 +44,7 @@
   "Run."
   [context]
   ; (println "\nContext:\n" context)
-  (println (keys context))
+  (println cred)
   (let [; Get folder name
         key (-> context :Records (get 0) :s3 :object :key (clojure.string/split #"points") (get 0))
         ; Download image and JSON
@@ -56,7 +56,7 @@
     (let [image (draw image triangles)
           image-output-stream (ByteArrayOutputStream.)]
       (ImageIO/write image "jpg" image-output-stream)
-      ; Upload image to S3
+      ; Upload image to S3 (TODO: use .getSize to get size of bytearrayinputstream)
       (s3-old/put-object cred bucket (str key "triangles.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
     ; Write string to S3. TODO: May need to foce this upload to happen second
     (s3-old/put-object cred bucket (str key "triangles.json") (cheshire/generate-string triangles))
