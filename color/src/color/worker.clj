@@ -35,9 +35,8 @@
   "Run."
   [context]
   ; (println "\nContext:\n" context)
-  (println cred)
   (let [; Get folder name
-        key (-> context :Records (get 0) :s3 :object :key (clojure.string/split #"points") (get 0))
+        key (-> context :Records (get 0) :s3 :object :key (clojure.string/split #"triangles") (get 0))
         ; Download image and JSON
         image (:content (s3-old/get-object cred bucket (str key "start.jpg")))
         triangles (cheshire/parse-string (slurp (:content (s3-old/get-object cred bucket (str key "triangles.json")))))]
