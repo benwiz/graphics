@@ -40,6 +40,7 @@
                 ; Doing that for X's between the smallest and the largest within the triangle,
                 ; and you have all the points in the triangle!
 
+                ; TODO: Here
 
                 ; For now, fill polygon with a color
                 (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
