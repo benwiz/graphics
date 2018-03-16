@@ -36,6 +36,8 @@
                               (int-array (map (fn [point] (get point 1)) triangle))
                               (count triangle))
                 bi)
+              ; Reduce won't handle the last element so we add an additional element.
+              ; (conj triangles [0 0])))))
               triangles))))
       ; (ImageIO/write bi "jpg" (File. file)))))
 
