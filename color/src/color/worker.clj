@@ -28,11 +28,12 @@
                   ; TODO: Take average of RGB values
 
                 ; https://stackoverflow.com/questions/11075505/get-all-points-within-a-triangle
-                ; Introduction:
+
                 ; The general idea was to get the triangle's edges (y-Wise) for every x in it's range,
                 ; and then you have all the y's that exist within the triangle for every single x,
                 ; which with simple conversion turns into all points within the triangle.
                 ; You can look at it as if you cut the triangle into stripes, each being of width 1.
+
                 ; So for X=0, on the line between A and B, the Y is 6, and on the line between A and C,
                 ; the Y is -2, so you can see that the stripe of X=0 is between -2 and 6. Therefore,
                 ; you can tell that (0, -2) (0, -1) (0, 0) ... (0, 5) (0, 6) are all in the triangle.
