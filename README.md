@@ -91,7 +91,7 @@ Go? Clojure? Python?
 
 ## To Do
 
-- Calculate triangles
+- Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized.
 
 ### Later
 

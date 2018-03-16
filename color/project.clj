@@ -19,7 +19,7 @@
    :uberjar {:aot :all}}
   :lambda {:credentials {:region "us-east-1"
                          :profile "personal"}
-           :function {:name "color"
+           :function {:name "lowpoly-color"
                       :handler "color.lambda.LambdaFn"}
            :api-gateway {:name "color"}
            :stages {"production" {:warmup {:enable false}}
