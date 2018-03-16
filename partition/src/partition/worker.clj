@@ -11,8 +11,9 @@
    [javax.imageio ImageIO]
    [java.awt Color]))
 
-(def cred {:access-key (System/getenv "AWS_ACCESS_KEY_ID")
-           :secret-key (System/getenv "AWS_SECRET_ACCESS_KEY")})
+; There's something not right with the AWS IAM Role so I'm including my personal keys. Stupid.
+(def cred {:access-key (System/getenv "MY_AWS_ACCESS_KEY_ID")
+           :secret-key (System/getenv "MY_AWS_SECRET_ACCESS_KEY")})
 (def bucket "lowpoly")
 
 (defn delaunay-triangulation
