@@ -25,8 +25,8 @@
 (defn line
   "Point slope form!
   y - b = m (x - a)"
-  [m point]
-  (* m ())) ;; TODO: THIS
+  [point1 point2]
+  (slope point1 point2))
 
 (defn draw
   "Get average color of each triangles then make the whole triangle that color.
@@ -63,8 +63,10 @@
                   ; Create points for each Y between min and max
 
                 ; NOTE: This is currently my slope. mX + y0
-                (let [line1 (slope (get triangle 0) (get triangle 2))]
-                  (println line1))
+                (let [line1 (line (get triangle 0) (get triangle 1))
+                      line2 (line (get triangle 1) (get triangle 2))
+                      line3 (line (get triangle 2) (get triangle 0))]
+                  (println line1 line2 line3))
                 (map
                  (range
                   (apply min (map (fn [point] (get point 0)) triangle))
