@@ -40,7 +40,16 @@
                 ; Doing that for X's between the smallest and the largest within the triangle,
                 ; and you have all the points in the triangle!
 
-                ; TODO: Here
+                ; Get min X
+                ; Get max X
+                ; For each X between min and max
+                (println
+                 (range
+                  (apply min (map (fn [point] (get point 0)) triangle))
+                 (apply max (map (fn [point] (get point 0)) triangle))))
+                ; Get min Y
+                  ; Get max Y
+                  ; Create points for each Y between min and max
 
                 ; For now, fill polygon with a color
                 (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
