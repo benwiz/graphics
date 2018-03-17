@@ -13,6 +13,21 @@
            :secret-key (System/getenv "MY_AWS_SECRET_ACCESS_KEY")})
 (def bucket "lowpoly")
 
+(defn slope
+  "Calculate slope from two points"
+  [point1 point2]
+  (try
+    (/
+     (- (get point1 1) (get point2 1))
+     (- (get point1 0) (get point2 0)))
+    (catch ArithmeticException e Double/POSITIVE_INFINITY)))
+
+(defn line
+  "Point slope form!
+  y - b = m (x - a)"
+  [m point]
+  (* m ())) ;; TODO: THIS
+
 (defn draw
   "Get average color of each triangles then make the whole triangle that color.
   In the future do something more interesting than average color. HSV is a good starting place."
@@ -43,13 +58,17 @@
                 ; Get min X
                 ; Get max X
                 ; For each X between min and max
-                (println
-                 (range
-                  (apply min (map (fn [point] (get point 0)) triangle))
-                 (apply max (map (fn [point] (get point 0)) triangle))))
                 ; Get min Y
                   ; Get max Y
                   ; Create points for each Y between min and max
+
+                ; NOTE: This is currently my slope. mX + y0
+                (let [line1 (slope (get triangle 0) (get triangle 2))]
+                  (println line1))
+                (map
+                 (range
+                  (apply min (map (fn [point] (get point 0)) triangle))
+                  (apply max (map (fn [point] (get point 0)) triangle))))
 
                 ; For now, fill polygon with a color
                 (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
