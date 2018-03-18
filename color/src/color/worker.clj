@@ -103,7 +103,10 @@
                                                                       (* x (- y2 y3))
                                                                       (* x2 (- y3 y))
                                                                       (* x3 (- y y2))))))
-                                                               (.getColor g x y)
+                                                               [(.getRed (Color. (.getRGB bi x y)))
+                                                               (.getGreen (Color. (.getRGB bi x y)))
+                                                               (.getBlue (Color. (.getRGB bi x y)))
+                                                               (.getAlpha (Color. (.getRGB bi x y)))]
                                                                nil))
                                                            y-range))])
                                   x-range)
