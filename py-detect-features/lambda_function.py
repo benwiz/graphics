@@ -69,7 +69,7 @@ def lambda_handler(event, context):
     # cv2.imwrite('sift_keypoints.jpg', img)
 
     # Method: NxN grid
-    N = 75
+    N = 40
     height, width, channels = img.shape
     height_n = height / N
     width_n = width / N

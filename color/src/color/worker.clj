@@ -113,7 +113,7 @@
                   ; (println "colors:" colors)
                   ; (println "sum:" (apply map + colors))
                   ; (println "avg:" (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))
-                  (println triangle average-color)
+                  ; (println triangle average-color)
                   ; Fill polygon with a color
                   (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
                   (.fillPolygon g
