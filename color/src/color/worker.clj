@@ -80,7 +80,7 @@
                                (apply min (map (fn [point] (get point 1)) triangle))
                                (apply max (map (fn [point] (get point 1)) triangle)))
                       colors (map (fn [x]
-                                    (filter identity (map (fn [y]
+                                    (vec (filter identity (map (fn [y]
                                                             (if
                                                              (= (Math/abs
                                                                  (+
@@ -107,9 +107,9 @@
                                                                (.getBlue (Color. (.getRGB bi x y)))
                                                                (.getAlpha (Color. (.getRGB bi x y)))]
                                                               nil))
-                                                          y-range)))
+                                                          y-range))))
                                   x-range)]
-                  (println "colors:" (type colors))
+                  (println "colors:" (vec colors))
                   ; (println "sum:" (apply map + (take 1 (take 1 colors))))
                   (println "Done."))
 
