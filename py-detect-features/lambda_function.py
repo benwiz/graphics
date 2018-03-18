@@ -69,10 +69,10 @@ def lambda_handler(event, context):
     # cv2.imwrite('sift_keypoints.jpg', img)
 
     # Method: NxN grid
-    N = 10
+    N = 75
     height, width, channels = img.shape
-    height_n = height / 10
-    width_n = width / 10
+    height_n = height / N
+    width_n = width / N
     points = []
     for x in range(width):
         if x % width_n == 0 or x == width - 1:
@@ -84,7 +84,7 @@ def lambda_handler(event, context):
     # Draw on img
     for point in points:
         center = point
-        radius = 10
+        radius = 5
         color = (255, 0, 255)
         cv2.circle(img, center, radius, color, -1)
     # cv2.imwrite('points.jpg', img)
