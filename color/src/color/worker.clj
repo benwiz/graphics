@@ -40,7 +40,6 @@
   (let [bi (ImageIO/read (io/input-stream image))
         g (.createGraphics bi)]
     (do
-      (println (type g))
       (reduce (fn [idk-what-this-is triangle]
                 ; TODO: Get average color of each triangle and make it that color.
                   ; TODO: Get all points within polygon
@@ -67,6 +66,7 @@
                   ; Get max Y
                   ; Create points for each Y between min and max
 
+                (println "triangle:" triangle)
                 (let [x1 (get (get triangle 0) 0)
                       y1 (get (get triangle 0) 1)
                       x2 (get (get triangle 1) 0)
@@ -78,36 +78,41 @@
                                (apply max (map (fn [point] (get point 0)) triangle)))
                       y-range (range
                                (apply min (map (fn [point] (get point 1)) triangle))
-                               (apply max (map (fn [point] (get point 1)) triangle)))]
-                  (reduce (fn [idk x]
-                            (reduce (fn [idk y]
-                                      (if
-                                       (= (Math/abs
-                                           (+
-                                            (* x1 (- y2 y3))
-                                            (* x2 (- y3 y1))
-                                            (* x3 (- y1 y2))))
-                                          (+ (Math/abs
-                                              (+
-                                               (* x1 (- y2 y))
-                                               (* x2 (- y y1))
-                                               (* x (- y1 y2))))
-                                             (Math/abs
-                                              (+
-                                               (* x1 (- y y3))
-                                               (* x (- y3 y1))
-                                               (* x3 (- y1 y))))
-                                             (Math/abs
-                                              (+
-                                               (* x (- y2 y3))
-                                               (* x2 (- y3 y))
-                                               (* x3 (- y y2))))))
-                                        (println
-                                         (.getRGB g x y))))
-                                    y-range))
-                          x-range))
+                               (apply max (map (fn [point] (get point 1)) triangle)))
+                      points (map (fn [x]
+                                    [x
+                                     (filter identity (map (fn [y]
+                                                             (if
+                                                              (= (Math/abs
+                                                                  (+
+                                                                   (* x1 (- y2 y3))
+                                                                   (* x2 (- y3 y1))
+                                                                   (* x3 (- y1 y2))))
+                                                                 (+ (Math/abs
+                                                                     (+
+                                                                      (* x1 (- y2 y))
+                                                                      (* x2 (- y y1))
+                                                                      (* x (- y1 y2))))
+                                                                    (Math/abs
+                                                                     (+
+                                                                      (* x1 (- y y3))
+                                                                      (* x (- y3 y1))
+                                                                      (* x3 (- y1 y))))
+                                                                    (Math/abs
+                                                                     (+
+                                                                      (* x (- y2 y3))
+                                                                      (* x2 (- y3 y))
+                                                                      (* x3 (- y y2))))))
+                                                               (.getColor g x y)
+                                                               nil))
+                                                           y-range))])
+                                  x-range)
+                      r 0
+                      g 0
+                      b 0]
+                  (println "points:" points))
 
-                ; For now, fill polygon with a color
+                ; Fill polygon with a color
                 (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
                 (.fillPolygon g
                               (int-array (map (fn [point] (get point 0)) triangle))
@@ -125,11 +130,13 @@
         key (-> context :Records (get 0) :s3 :object :key (clojure.string/split #"triangles") (get 0))
         ; Download image and JSON
         image (:content (s3-old/get-object cred bucket (str key "start.jpg")))
-        triangles (cheshire/parse-string (slurp (:content (s3-old/get-object cred bucket (str key "triangles.json")))))]
+        triangles (cheshire/parse-string (slurp (:content (s3-old/get-object cred bucket (str key "triangles.json")))))
+        triangles (take 1 triangles)]
     ; Draw on image
     (let [image (draw image triangles)
           image-output-stream (ByteArrayOutputStream.)]
       (ImageIO/write image "jpg" image-output-stream)
       ; Upload image to S3 (TODO: use .getSize to get size of bytearrayinputstream)
-      (s3-old/put-object cred bucket (str key "lowpoly.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
+      ; (s3-old/put-object cred bucket (str key "lowpoly.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream)))
+)
     nil))
