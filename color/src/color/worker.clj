@@ -22,11 +22,16 @@
      (- (get point1 0) (get point2 0)))
     (catch ArithmeticException e Double/POSITIVE_INFINITY)))
 
-(defn line
+(defn y
   "Point slope form!
-  y - b = m (x - a)"
+  y - b = m (x - a)
+  y = m (x - a) + b"
   [point1 point2]
-  (slope point1 point2))
+  (+
+   (* (slope point1 point2)
+      (- (get point1 0)
+         (get point2 0)))
+   (get point2 1)))
 
 (defn draw
   "Get average color of each triangles then make the whole triangle that color.
@@ -62,15 +67,45 @@
                   ; Get max Y
                   ; Create points for each Y between min and max
 
-                ; NOTE: This is currently my slope. mX + y0
-                (let [line1 (line (get triangle 0) (get triangle 1))
-                      line2 (line (get triangle 1) (get triangle 2))
-                      line3 (line (get triangle 2) (get triangle 0))]
-                  (println line1 line2 line3))
-                (map
-                 (range
-                  (apply min (map (fn [point] (get point 0)) triangle))
-                  (apply max (map (fn [point] (get point 0)) triangle))))
+                (let [x1 (get (get triangle 0) 0)
+                      y1 (get (get triangle 0) 1)
+                      x2 (get (get triangle 1) 0)
+                      y2 (get (get triangle 1) 1)
+                      x3 (get (get triangle 2) 0)
+                      y3 (get (get triangle 2) 1)
+                      x-range (range
+                               (apply min (map (fn [point] (get point 0)) triangle))
+                               (apply max (map (fn [point] (get point 0)) triangle)))
+                      y-range (range
+                               (apply min (map (fn [point] (get point 1)) triangle))
+                               (apply max (map (fn [point] (get point 1)) triangle)))]
+                  (reduce (fn [idk x]
+                            (reduce (fn [idk y]
+                                      (if
+                                       (= (Math/abs
+                                           (+
+                                            (* x1 (- y2 y3))
+                                            (* x2 (- y3 y1))
+                                            (* x3 (- y1 y2))))
+                                          (+ (Math/abs
+                                              (+
+                                               (* x1 (- y2 y))
+                                               (* x2 (- y y1))
+                                               (* x (- y1 y2))))
+                                             (Math/abs
+                                              (+
+                                               (* x1 (- y y3))
+                                               (* x (- y3 y1))
+                                               (* x3 (- y1 y))))
+                                             (Math/abs
+                                              (+
+                                               (* x (- y2 y3))
+                                               (* x2 (- y3 y))
+                                               (* x3 (- y y2))))))
+                                        (println
+                                         (.getRGB g x y))))
+                                    y-range))
+                          x-range))
 
                 ; For now, fill polygon with a color
                 (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
