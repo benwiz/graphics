@@ -109,19 +109,20 @@
                                                                             nil))
                                                                         y-range)))
                                                 x-range))
-                    average-color (map (fn [value] (int (/ value (count colors)))) (apply map + colors))]
+                      average-color (vec (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))]
+
                   ; (println "colors:" colors)
                   ; (println "sum:" (apply map + colors))
                   ; (println "avg:" (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))
                   (println "avg:" average-color)
+                  (println (get average-color 0) (type (get average-color 0)))
+                  ; Fill polygon with a color
+                  (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
+                  (.fillPolygon g
+                                (int-array (map (fn [point] (get point 0)) triangle))
+                                (int-array (map (fn [point] (get point 1)) triangle))
+                                (count triangle))
                   (println "Done."))
-
-                ; Fill polygon with a color
-                (.setColor g (Color. (rand-int 256) (rand-int 256) (rand-int 256)))
-                (.fillPolygon g
-                              (int-array (map (fn [point] (get point 0)) triangle))
-                              (int-array (map (fn [point] (get point 1)) triangle))
-                              (count triangle))
                 bi)
               ; Reduce won't handle the last element so we add an additional element.
               (conj triangles [0 0])))))
@@ -141,6 +142,5 @@
           image-output-stream (ByteArrayOutputStream.)]
       (ImageIO/write image "jpg" image-output-stream)
       ; Upload image to S3 (TODO: use .getSize to get size of bytearrayinputstream)
-      ; (s3-old/put-object cred bucket (str key "lowpoly.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream)))
-)
+      (s3-old/put-object cred bucket (str key "lowpoly.jpg") (ByteArrayInputStream. (.toByteArray image-output-stream))))
     nil))
