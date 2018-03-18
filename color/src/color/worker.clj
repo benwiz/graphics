@@ -66,7 +66,6 @@
                   ; Get max Y
                   ; Create points for each Y between min and max
 
-                (println "triangle:" triangle)
                 (let [x1 (get (get triangle 0) 0)
                       y1 (get (get triangle 0) 1)
                       x2 (get (get triangle 1) 0)
@@ -114,15 +113,13 @@
                   ; (println "colors:" colors)
                   ; (println "sum:" (apply map + colors))
                   ; (println "avg:" (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))
-                  (println "avg:" average-color)
-                  (println (get average-color 0) (type (get average-color 0)))
+                  (println triangle average-color)
                   ; Fill polygon with a color
                   (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
                   (.fillPolygon g
                                 (int-array (map (fn [point] (get point 0)) triangle))
                                 (int-array (map (fn [point] (get point 1)) triangle))
-                                (count triangle))
-                  (println "Done."))
+                                (count triangle)))
                 bi)
               ; Reduce won't handle the last element so we add an additional element.
               (conj triangles [0 0])))))
@@ -135,8 +132,7 @@
         key (-> context :Records (get 0) :s3 :object :key (clojure.string/split #"triangles") (get 0))
         ; Download image and JSON
         image (:content (s3-old/get-object cred bucket (str key "start.jpg")))
-        triangles (cheshire/parse-string (slurp (:content (s3-old/get-object cred bucket (str key "triangles.json")))))
-        triangles (take 1 triangles)]
+        triangles (cheshire/parse-string (slurp (:content (s3-old/get-object cred bucket (str key "triangles.json")))))]
     ; Draw on image
     (let [image (draw image triangles)
           image-output-stream (ByteArrayOutputStream.)]
