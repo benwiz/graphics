@@ -79,37 +79,37 @@
                       y-range (range
                                (apply min (map (fn [point] (get point 1)) triangle))
                                (apply max (map (fn [point] (get point 1)) triangle)))
-                      colors (map (fn [x]
+                      colors (vec (map (fn [x]
                                     (vec (filter identity (map (fn [y]
-                                                            (if
-                                                             (= (Math/abs
-                                                                 (+
-                                                                  (* x1 (- y2 y3))
-                                                                  (* x2 (- y3 y1))
-                                                                  (* x3 (- y1 y2))))
-                                                                (+ (Math/abs
-                                                                    (+
-                                                                     (* x1 (- y2 y))
-                                                                     (* x2 (- y y1))
-                                                                     (* x (- y1 y2))))
-                                                                   (Math/abs
-                                                                    (+
-                                                                     (* x1 (- y y3))
-                                                                     (* x (- y3 y1))
-                                                                     (* x3 (- y1 y))))
-                                                                   (Math/abs
-                                                                    (+
-                                                                     (* x (- y2 y3))
-                                                                     (* x2 (- y3 y))
-                                                                     (* x3 (- y y2))))))
-                                                              [(.getRed (Color. (.getRGB bi x y)))
-                                                               (.getGreen (Color. (.getRGB bi x y)))
-                                                               (.getBlue (Color. (.getRGB bi x y)))
-                                                               (.getAlpha (Color. (.getRGB bi x y)))]
-                                                              nil))
-                                                          y-range))))
-                                  x-range)]
-                  (println "colors:" (vec colors))
+                                                                 (if
+                                                                  (= (Math/abs
+                                                                      (+
+                                                                       (* x1 (- y2 y3))
+                                                                       (* x2 (- y3 y1))
+                                                                       (* x3 (- y1 y2))))
+                                                                     (+ (Math/abs
+                                                                         (+
+                                                                          (* x1 (- y2 y))
+                                                                          (* x2 (- y y1))
+                                                                          (* x (- y1 y2))))
+                                                                        (Math/abs
+                                                                         (+
+                                                                          (* x1 (- y y3))
+                                                                          (* x (- y3 y1))
+                                                                          (* x3 (- y1 y))))
+                                                                        (Math/abs
+                                                                         (+
+                                                                          (* x (- y2 y3))
+                                                                          (* x2 (- y3 y))
+                                                                          (* x3 (- y y2))))))
+                                                                   [(.getRed (Color. (.getRGB bi x y)))
+                                                                    (.getGreen (Color. (.getRGB bi x y)))
+                                                                    (.getBlue (Color. (.getRGB bi x y)))
+                                                                    (.getAlpha (Color. (.getRGB bi x y)))]
+                                                                   nil))
+                                                               y-range))))
+                                  x-range))]
+                  (println "colors:" (flatten colors))
                   ; (println "sum:" (apply map + (take 1 (take 1 colors))))
                   (println "Done."))
 
