@@ -18,7 +18,7 @@
 
 (defn delaunay-triangulation
   [points]
-  (let [{:keys [points edges triangles]} (delaunay/triangulate points)]
+  (let [{:keys [_ _ triangles]} (delaunay/triangulate points)]
     ; TODO: Clean to make all coordinates integers
     triangles))
 
