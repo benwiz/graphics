@@ -4,13 +4,11 @@
 @import "{{ site.theme }}";
 
 .main-content {
-  display: grid;
-  grid-column-gap: 50px;
-  grid-row-gap: 50px;
+  display: flex;
 }
 
 .start-image {
-  width: 250px;
-  height: 300px;
+  min-width: 250px;
+  min-height: 300px;
   border: 2px dotted teal;
 }
