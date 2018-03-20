@@ -2,3 +2,9 @@
 ---
 
 @import "{{ site.theme }}";
+
+.start-image {
+  width: 250px;
+  height: 300px;
+  border: teal;
+}
