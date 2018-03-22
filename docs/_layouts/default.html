@@ -28,7 +28,9 @@
 
       <!-- Main Content -->
 
-      <input type="file">
+      <input type="file" onchange="onFileChange(this)">
+      <br><br>
+
       <div class="images">
         <div class="image start-image">
 
@@ -66,4 +68,13 @@
     {% endif %}
 
   </body>
+
+  <script>
+    function onFileChange (e) {
+      // TODO: Upload file
+
+      // TODO: On success, trigger recurring function that checks for the next images
+    }
+  </script>
+
 </html>

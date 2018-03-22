@@ -43,6 +43,12 @@ easy_install pip
 /local/bin/pip install numpy -t libs/
 ```
 
+Run jekyll site locally
+
+```bash
+bundle exec jekyll serve
+```
+
 ## Initial Plan
 
 - Pre-process the input image to remove noise and reduce image size (OpenCV)
@@ -91,8 +97,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 
 ## To Do
 
-- Iterate over every point within triangle and output the color
-- Calculate the average color of each triangle and use that to color the triangle
+- UI
+  - File upload should be done by clicking on the start image div
 
 ### Later
 
