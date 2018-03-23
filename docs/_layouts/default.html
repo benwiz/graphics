@@ -92,18 +92,32 @@
       console.log('Get', imageName);
       s3.getObject(params, function(err, data) {
         if (err) {
-          console.log('Error! So retry!');
+          console.log('Retry:', uuid);
           setTimeout(function () {
             getImage(uuid, imageName);
           }, 1000);
         }
         else {
-          console.log(data);
           console.log('Found:', imageName);
-          // Display image
-          var img = document.querySelector('.points-image');
-          img.setAttribute('src', "data:image/jpeg;base64," + encode(data.Body));
+          // Set this image class and next image filename
+          if (imageName === 'points.jpg') {
+            var currImgClass = '.points-image';
+            var nextImageName = 'triangles.jpg';
+          } else if (imageName === 'triangles.jpg') {
+            var currImgClass = '.partition-image';
+            var nextImageName = 'lowpoly.jpg';
+          } else if (imageName === 'lowpoly.jpg') {
+            var currImgClass = '.lowpoly-image';
+          }
 
+          // Display image
+          var img = document.querySelector(currImgClass);
+          img.setAttribute('src', 'data:image/jpeg;base64,' + encode(data.Body));
+
+          // Get next image
+          if (nextImageName) {
+            getImage(uuid, nextImageName);
+          }
         }
       });
     }
