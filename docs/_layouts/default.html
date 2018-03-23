@@ -35,15 +35,9 @@
 
       <div class="images">
         <img class="image start-image"></img>
-        <div class="image points-image">
-
-        </div>
-        <div class="image partition-image">
-
-        </div>
-        <div class="image lowpoly-image">
-
-        </div>
+        <img class="image points-image"></img>
+        <img class="image partition-image"></img>
+        <img class="image lowpoly-image"></img>
       </div>
 
       <!-- End Main Content -->
@@ -85,6 +79,11 @@
       params: {Bucket: bucketName}
     });
 
+    function encode(data) {
+      var str = data.reduce(function(a,b){ return a+String.fromCharCode(b) },'');
+      return btoa(str).replace(/.{76}(?=.)/g,'$&\n');
+    }
+
     function getImage (uuid, imageName) {
       var params = {
         Bucket: bucketName,
@@ -99,7 +98,12 @@
           }, 1000);
         }
         else {
-          console.log('Success:', data);
+          console.log(data);
+          console.log('Found:', imageName);
+          // Display image
+          var img = document.querySelector('.points-image');
+          img.setAttribute('src', "data:image/jpeg;base64," + encode(data.Body));
+
         }
       });
     }
@@ -151,7 +155,6 @@
 
       // Upload file
       uploadImage(uuid);
-      // getImage('8c790d32-6250-5342-36c9-5f91cc90a229', 'points.jpg');
     }
   </script>
 
