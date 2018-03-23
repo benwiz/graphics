@@ -70,7 +70,7 @@ def lambda_handler(event, context):
 
     # Method: NxN grid
     height, width, channels = img.shape
-    N = 10
+    N = 16
     height_n = N  # height * N
     width_n = N  # width * N
     points = []
