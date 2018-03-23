@@ -34,9 +34,7 @@
       <br><br>
 
       <div class="images">
-        <div class="image start-image">
-
-        </div>
+        <img class="image start-image"></img>
         <div class="image points-image">
 
         </div>
@@ -87,33 +85,45 @@
       params: {Bucket: bucketName}
     });
 
-    function getNextImage (uuid, imageName) {
+    function getImage (uuid, imageName) {
       var params = {
         Bucket: bucketName,
-        Key: 'HappyFace.jpg'
+        Key: uuid + '/' + imageName,
       };
+      console.log('Get', imageName);
       s3.getObject(params, function(err, data) {
         if (err) {
-          console.log(err, err.stack);
+          console.log('Error! So retry!');
+          setTimeout(function () {
+            getImage(uuid, imageName);
+          }, 1000);
         }
         else {
-          console.log(data);
+          console.log('Success:', data);
         }
       });
     }
 
     function uploadImage (uuid) {
+      // Get file
       var files = document.getElementById('base-image').files;
       if (!files.length) {
         return alert('Please choose a file to upload first.');
       }
       var file = files[0];
+
+      // Display image
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          var img = document.querySelector('.start-image');
+          img.setAttribute('src', e.target.result);
+      };
+      reader.readAsDataURL(file);
+
+      // S3 upload
       var fileName = 'start.jpg';
       var folder = uuid + '/';
       var imageKey = folder + fileName;
-
-      console.log(imageKey);
-
       s3.upload({
         Key: imageKey,
         Body: file,
@@ -122,8 +132,7 @@
         if (err) {
           return alert('There was an error uploading your photo: ', err.message);
         }
-        console.log('complete');
-        // TODO: Trigger recursive function that searches for next image
+        getImage(uuid, 'points.jpg')
       });
     }
 
@@ -142,6 +151,7 @@
 
       // Upload file
       uploadImage(uuid);
+      // getImage('8c790d32-6250-5342-36c9-5f91cc90a229', 'points.jpg');
     }
   </script>
 
