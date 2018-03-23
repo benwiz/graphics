@@ -8,6 +8,8 @@
     <meta name="theme-color" content="#157878">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.212.1.min.js"></script>
   </head>
   <body>
     <section class="page-header">
@@ -28,7 +30,7 @@
 
       <!-- Main Content -->
 
-      <input type="file" onchange="onFileChange(this)">
+      <input id="base-image" type="file" onchange="onFileChange(this)">
       <br><br>
 
       <div class="images">
@@ -66,12 +68,55 @@
         ga('send', 'pageview');
       </script>
     {% endif %}
-
   </body>
 
   <script>
+    var bucketName = 'lowpoly';
+    var bucketRegion = 'us-east-1';
+    var identityPoolId = 'us-east-1:cac600e3-5b4e-4acd-8126-ce02f444cf25';
+
+    AWS.config.update({
+      region: bucketRegion,
+      credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: identityPoolId,
+      }),
+    });
+
+    var s3 = new AWS.S3({
+      apiVersion: '2006-03-01',
+      params: {Bucket: bucketName}
+    });
+
+    function uploadImage (uuid) {
+      var files = document.getElementById('base-image').files;
+      if (!files.length) {
+        return alert('Please choose a file to upload first.');
+      }
+      var file = files[0];
+      var fileName = 'start.jpg';
+      var folder = uuid + '/';
+      var imageKey = folder + fileName;
+
+      console.log(imageKey);
+
+      s3.upload({
+        Key: imageKey,
+        Body: file,
+        ACL: 'public-read'
+      }, function(err, data) {
+        if (err) {
+          return alert('There was an error uploading your photo: ', err.message);
+        }
+        alert('Successfully uploaded photo.');
+      });
+    }
+
     function onFileChange (e) {
+      // TODO: Generate UUID
+      var uuid = '12345';
+
       // TODO: Upload file
+      uploadImage(uuid);
 
       // TODO: On success, trigger recurring function that checks for the next images
     }
