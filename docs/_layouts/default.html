@@ -34,10 +34,10 @@
       <br><br>
 
       <div class="images">
-        <img class="image start-image"></img>
-        <img class="image points-image"></img>
-        <img class="image partition-image"></img>
-        <img class="image lowpoly-image"></img>
+        <img class="image start-image" onclick="openImage(this)"></img>
+        <img class="image points-image" onclick="openImage(this)"></img>
+        <img class="image partition-image" onclick="openImage(this)"></img>
+        <img class="image lowpoly-image" onclick="openImage(this)"></img>
       </div>
 
       <!-- End Main Content -->
@@ -137,7 +137,7 @@
           img.setAttribute('src', e.target.result);
       };
       reader.readAsDataURL(file);
-      //return;
+      return;
 
       // S3 upload
       var fileName = 'start.jpg';
@@ -170,6 +170,16 @@
 
       // Upload file
       uploadImage(uuid);
+    }
+
+    function openImage(e) {
+      // If it has src
+      var src = e.getAttribute('src');
+      if (src) {
+        // Open in new tab
+        var w = window.open("");
+        w.document.write(e.outerHTML);
+      }
     }
   </script>
 
