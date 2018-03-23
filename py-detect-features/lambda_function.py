@@ -84,7 +84,7 @@ def lambda_handler(event, context):
     # Draw on img
     for point in points:
         center = point
-        radius = 5
+        radius = 2
         color = (255, 0, 255)
         cv2.circle(img, center, radius, color, -1)
     # cv2.imwrite('points.jpg', img)
