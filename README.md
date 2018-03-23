@@ -98,9 +98,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 ## To Do
 
 - UI
-  - Images should load with better ratios
-  - Images should not be wider than the width of the banner
   - Make images easy to open into a new tab or download on click
+  - Spinners inside each empty image
 - Feature Detections
   - Actually use CV
 
@@ -112,3 +111,4 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 - Selectable detect features algorithm
 - Figure out how to make _clj-detect-features_ small enough for Lambda.
 - Handle more extensions. Developed against _.jpg_.
+- Implement other partitioning algorithms like Voronio Diagrams

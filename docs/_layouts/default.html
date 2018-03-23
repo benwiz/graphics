@@ -34,10 +34,10 @@
       <br><br>
 
       <div class="images">
-        <img class="image start-image" width="250"></img>
-        <img class="image points-image" width="250"></img>
-        <img class="image partition-image" width="250"></img>
-        <img class="image lowpoly-image" width="250"></img>
+        <img class="image start-image"></img>
+        <img class="image points-image"></img>
+        <img class="image partition-image"></img>
+        <img class="image lowpoly-image"></img>
       </div>
 
       <!-- End Main Content -->
@@ -137,6 +137,7 @@
           img.setAttribute('src', e.target.result);
       };
       reader.readAsDataURL(file);
+      //return;
 
       // S3 upload
       var fileName = 'start.jpg';
