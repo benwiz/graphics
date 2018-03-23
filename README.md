@@ -102,6 +102,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
   - Spinners inside each empty image
 - Feature Detections
   - Actually use CV
+- Color
+  - Randomly sample to speed up
 
 ### Later
 
