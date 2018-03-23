@@ -98,7 +98,11 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 ## To Do
 
 - UI
-  - File upload should be done by clicking on the start image div
+  - Images should load with better ratios
+  - Images should not be wider than the width of the banner
+  - Make images easy to open into a new tab or download on click
+- Feature Detections
+  - Actually use CV
 
 ### Later
 
