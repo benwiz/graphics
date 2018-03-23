@@ -87,6 +87,21 @@
       params: {Bucket: bucketName}
     });
 
+    function getNextImage (uuid, imageName) {
+      var params = {
+        Bucket: bucketName,
+        Key: 'HappyFace.jpg'
+      };
+      s3.getObject(params, function(err, data) {
+        if (err) {
+          console.log(err, err.stack);
+        }
+        else {
+          console.log(data);
+        }
+      });
+    }
+
     function uploadImage (uuid) {
       var files = document.getElementById('base-image').files;
       if (!files.length) {
@@ -107,18 +122,26 @@
         if (err) {
           return alert('There was an error uploading your photo: ', err.message);
         }
-        alert('Successfully uploaded photo.');
+        console.log('complete');
+        // TODO: Trigger recursive function that searches for next image
       });
     }
 
+    function guid() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+    }
+
     function onFileChange (e) {
-      // TODO: Generate UUID
-      var uuid = '12345';
+      // Generate UUID
+      var uuid = guid();
 
-      // TODO: Upload file
+      // Upload file
       uploadImage(uuid);
-
-      // TODO: On success, trigger recurring function that checks for the next images
     }
   </script>
 
