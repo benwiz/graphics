@@ -30,14 +30,15 @@
 
       <!-- Main Content -->
 
-      <input id="base-image" type="file" onchange="onFileChange(this)">
-      <br><br>
+      {% comment %} <input id="base-image" type="file" onchange="onFileChange(this)">
+      <br><br> {% endcomment %}
 
       <div class="images">
-        <img class="image start-image" onclick="openImage(this)"></img>
-        <img class="image points-image" onclick="openImage(this)"></img>
-        <img class="image partition-image" onclick="openImage(this)"></img>
-        <img class="image lowpoly-image" onclick="openImage(this)"></img>
+        <input type="file" onchange="onFileChange(this)" class="image upload-image">
+        <img class="image start-image" onclick="openImage(this)" hidden></img>
+        <img class="image points-image" onclick="openImage(this)" hidden></img>
+        <img class="image partition-image" onclick="openImage(this)" hidden></img>
+        <img class="image lowpoly-image" onclick="openImage(this)" hidden></img>
       </div>
 
       <!-- End Main Content -->
@@ -124,20 +125,28 @@
 
     function uploadImage (uuid) {
       // Get file
-      var files = document.getElementById('base-image').files;
+      var uploadImage = document.querySelector('.upload-image');
+      var files = uploadImage.files;
       if (!files.length) {
         return alert('Please choose a file to upload first.');
       }
       var file = files[0];
 
+      // Hide upload and display image
+      uploadImage.setAttribute('hidden', true);
+      document.querySelectorAll('.images img').forEach(function (imageDiv) {
+        imageDiv.removeAttribute('hidden');
+      });
+
       // Display image
       var reader = new FileReader();
       reader.onload = function (e) {
           var img = document.querySelector('.start-image');
+          console.log(e.target.result);
           img.setAttribute('src', e.target.result);
       };
       reader.readAsDataURL(file);
-      //return;
+      return;
 
       // S3 upload
       var fileName = 'start.jpg';
