@@ -98,8 +98,6 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 ## To Do
 
 - UI
-  - Make images easy to open into a new tab or download on click
-  - Spinners inside each empty image
   - Favicon
 - Feature Detections
   - Actually use CV

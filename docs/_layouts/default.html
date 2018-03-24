@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#157878">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+     <link rel="icon" type="image/png" href="/assets/images/three-triangles.png">
 
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.212.1.min.js"></script>
   </head>
@@ -91,7 +92,7 @@
 
     function setStatus(i) {
       if (STATUS === 'Done') {
-        i = -1;
+        i = 0;
       }
 
       var span = document.querySelector('.status');
@@ -142,6 +143,7 @@
             var nextImageName = 'lowpoly.jpg';
           } else if (imageName === 'lowpoly.jpg') {
             var currImgClass = '.lowpoly-image';
+            var nextImageName = null;
           }
 
           // Display image
