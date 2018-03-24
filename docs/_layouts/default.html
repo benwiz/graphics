@@ -29,18 +29,21 @@
       <br>
 
       <!-- Main Content -->
-
-      {% comment %} <input id="base-image" type="file" onchange="onFileChange(this)">
-      <br><br> {% endcomment %}
-
       <div class="images">
-        <input type="file" onchange="onFileChange(this)" class="image upload-image">
+        <span class="status"></span>
+
+        <label class="upload-image-label">
+          Select or drag an image into the box.
+          <br>
+          The process will take a few minutes for a medium sized image.
+        </label>
+        <input id="upload-image" type="file" onchange="onFileChange(this)" class="image upload-image">
+
         <img class="image start-image" onclick="openImage(this)" hidden></img>
         <img class="image points-image" onclick="openImage(this)" hidden></img>
         <img class="image partition-image" onclick="openImage(this)" hidden></img>
         <img class="image lowpoly-image" onclick="openImage(this)" hidden></img>
       </div>
-
       <!-- End Main Content -->
 
       <footer class="site-footer">
@@ -67,6 +70,7 @@
     var bucketName = 'lowpoly';
     var bucketRegion = 'us-east-1';
     var identityPoolId = 'us-east-1:cac600e3-5b4e-4acd-8126-ce02f444cf25';
+    var STATUS = '';
 
     AWS.config.update({
       region: bucketRegion,
@@ -85,15 +89,44 @@
       return btoa(str).replace(/.{76}(?=.)/g,'$&\n');
     }
 
+    function setStatus(i) {
+      if (STATUS === 'Done') {
+        i = -1;
+      }
+
+      var span = document.querySelector('.status');
+      span.textContent = STATUS + '.'.repeat(i);
+
+      if (STATUS !== 'Done') {
+        if (i >= 3) {
+          i = -1;
+        }
+        setTimeout(function () {
+          setStatus(i + 1);
+        }, 500);
+      } else {
+
+      }
+    }
+
     function getImage (uuid, imageName) {
+      if (imageName === 'points.jpg') {
+        STATUS = 'Identifying features'
+        document.querySelector('.points-image').removeAttribute('hidden');
+      } else if (imageName === 'triangles.jpg') {
+        STATUS = 'Partitioning'
+        document.querySelector('.partition-image').removeAttribute('hidden');
+      } else if (imageName === 'lowpoly.jpg') {
+        STATUS = 'Coloring'
+        document.querySelector('.lowpoly-image').removeAttribute('hidden');
+      }
+
       var params = {
         Bucket: bucketName,
         Key: uuid + '/' + imageName,
       };
-      console.log('Get', imageName);
       s3.getObject(params, function(err, data) {
         if (err) {
-          console.log('Retry:', uuid);
           setTimeout(function () {
             getImage(uuid, imageName);
           }, 5000);
@@ -118,6 +151,8 @@
           // Get next image
           if (nextImageName) {
             getImage(uuid, nextImageName);
+          } else {
+            STATUS = 'Done'
           }
         }
       });
@@ -133,20 +168,21 @@
       var file = files[0];
 
       // Hide upload and display image
-      uploadImage.setAttribute('hidden', true);
-      document.querySelectorAll('.images img').forEach(function (imageDiv) {
-        imageDiv.removeAttribute('hidden');
-      });
+      uploadImage.setAttribute('hidden', true)
+      document.querySelector('.upload-image-label').setAttribute('hidden', true);
+      document.querySelector('.start-image').removeAttribute('hidden');
 
       // Display image
       var reader = new FileReader();
       reader.onload = function (e) {
           var img = document.querySelector('.start-image');
-          console.log(e.target.result);
           img.setAttribute('src', e.target.result);
       };
       reader.readAsDataURL(file);
-      return;
+
+      // Start status updated
+      STATUS = 'Uploading';
+      setStatus(0);
 
       // S3 upload
       var fileName = 'start.jpg';
