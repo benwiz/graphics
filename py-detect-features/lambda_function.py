@@ -22,7 +22,67 @@ def create_opencv_image_from_stringio(img_stream, cv2_img_flag=0):
     return cv2.imdecode(img_array, cv2_img_flag)
 
 
+def identify_points_by_grid(img, N):
+    """
+    Create a grid using 1/N. Higher N means more points (higher resolution).
+    """
+
+    # Method: NxN grid
+    height, width, channels = img.shape
+    height_n = height / N
+    width_n = width / N
+    points = []
+    for x in range(width):
+        if x % width_n == 0 or x == width - 1:
+            for y in range(height):
+                if y % height_n == 0 or y == height - 1:
+                    point = (x, y)
+                    points.append(point)
+
+    return points
+
+#
+# Other future point identification algorithms:
+#
+# Method: Canny edge detection and display
+# edges = cv2.Canny(img, 300, 500)
+# print len(edges[10])
+# from matplotlib import pyplot as plt
+# plt.subplot(121)
+# plt.imshow(img, cmap='gray')
+# plt.title('Original Image')
+# plt.xticks([])
+# plt.yticks([])
+# plt.subplot(122)
+# plt.imshow(edges, cmap='gray')
+# plt.title('Edge Image')
+# plt.xticks([])
+# plt.yticks([])
+# plt.show()
+#
+# Method: Key points and save
+# img = cv2.imread(filename)
+# gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# sift = cv2.xfeatures2d.SIFT_create()
+# kp = sift.detect(gray, None)
+# img = cv2.drawKeypoints(gray, kp, img, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+# cv2.imwrite('sift_keypoints.jpg', img)
+
+
+def identify_points(img):
+    """
+    Use a method to identify points
+    """
+
+    points = identify_points_by_grid(img, 25)
+    return points
+
+
 def lambda_handler(event, context):
+    """
+    Called by AWS Lambda.
+    """
+
     # print "Event:\n", json.dumps(event)
     # print "Context:\n", context
 
@@ -43,43 +103,7 @@ def lambda_handler(event, context):
                        cv2.IMREAD_UNCHANGED)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-
-    # Method: Canny edge detection and display
-    # edges = cv2.Canny(img, 300, 500)
-    # print len(edges[10])
-    # from matplotlib import pyplot as plt
-    # plt.subplot(121)
-    # plt.imshow(img, cmap='gray')
-    # plt.title('Original Image')
-    # plt.xticks([])
-    # plt.yticks([])
-    # plt.subplot(122)
-    # plt.imshow(edges, cmap='gray')
-    # plt.title('Edge Image')
-    # plt.xticks([])
-    # plt.yticks([])
-    # plt.show()
-
-    # Method: Key points and save
-    # img = cv2.imread(filename)
-    # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # sift = cv2.xfeatures2d.SIFT_create()
-    # kp = sift.detect(gray, None)
-    # img = cv2.drawKeypoints(gray, kp, img, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    # cv2.imwrite('sift_keypoints.jpg', img)
-
-    # Method: NxN grid
-    height, width, channels = img.shape
-    N = 25  # Higher means more points (higher resolution)
-    height_n = height / N
-    width_n = width / N
-    points = []
-    for x in range(width):
-        if x % width_n == 0 or x == width - 1:
-            for y in range(height):
-                if y % height_n == 0 or y == height - 1:
-                    point = (x, y)
-                    points.append(point)
+    points = identify_points(img)
 
     # Draw on img
     for point in points:
@@ -101,5 +125,6 @@ def lambda_handler(event, context):
     s3.Object(BUCKET_NAME, points_key).put(Body=data)
 
 if __name__ == "__main__":
-    event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': u'748205b7-c744-4be2-ae9a-5f49f34abf73/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly', u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
+    uuid = '014f477c-b45c-5798-da21-01e3cc4993d2'
+    event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': uuid + u'/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly', u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
     lambda_handler(event, None)
