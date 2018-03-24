@@ -15,6 +15,7 @@ import numpy
 
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
+UPLOAD_ANYWAY = False
 
 
 def create_opencv_image_from_stringio(img_stream, cv2_img_flag=0):
@@ -60,14 +61,21 @@ def identify_points_by_grid(img, N):
 # plt.xticks([])
 # plt.yticks([])
 # plt.show()
-#
-# Method: Key points and save
-# img = cv2.imread(filename)
-# gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# sift = cv2.xfeatures2d.SIFT_create()
-# kp = sift.detect(gray, None)
-# img = cv2.drawKeypoints(gray, kp, img, flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-# cv2.imwrite('sift_keypoints.jpg', img)
+
+
+def identify_points_by_key_points(img):
+    """
+    Method: Key points.
+    """
+
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    sift = cv2.xfeatures2d.SIFT_create()
+    kp = sift.detect(gray, None)
+    points = map(
+        lambda point: (int(point.pt[0]), int(point.pt[1])),
+        kp
+    )
+    return points
 
 
 def identify_points(img):
@@ -75,7 +83,8 @@ def identify_points(img):
     Use a method to identify points
     """
 
-    points = identify_points_by_grid(img, 25)
+    # points = identify_points_by_grid(img, 25)
+    points = identify_points_by_key_points(img)
     return points
 
 
@@ -116,7 +125,8 @@ def lambda_handler(event, context):
     # If testing locally write image to file system then exit
     if IS_LOCAL:
         cv2.imwrite('points.jpg', img)
-        return
+        if not UPLOAD_ANYWAY:
+            return
 
     # Upload image with drawing
     img = cv2.imencode('.jpg', img)[1].tostring()
@@ -131,6 +141,7 @@ def lambda_handler(event, context):
 
 if __name__ == "__main__":
     IS_LOCAL = True
-    uuid = '014f477c-b45c-5798-da21-01e3cc4993d2'
+    UPLOAD_ANYWAY = True
+    uuid = 'cat'
     event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': uuid + u'/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly', u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
     lambda_handler(event, None)
