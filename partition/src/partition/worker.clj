@@ -1,10 +1,11 @@
 (ns partition.worker
-  (:require [delaunay-triangulation.core :as delaunay]
-            [aws.sdk.s3 :as s3-old] ; TODO: Stop using this
+  (:require ;[delaunay-triangulation.core :as delaunay]
+   [partition.delaunay :as delaunay]
+   [aws.sdk.s3 :as s3-old] ; TODO: Stop using this
             ; [amazonica.aws.s3 :as s3]
             ; [amazonica.aws.s3transfer :as s3transfer]
-            [cheshire.core :as cheshire]
-            [clojure.java.io :as io])
+   [cheshire.core :as cheshire]
+   [clojure.java.io :as io])
   (:import
    [java.io ByteArrayOutputStream ByteArrayInputStream]
    [java.awt.image BufferedImage]

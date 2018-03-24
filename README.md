@@ -97,8 +97,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 
 ## To Do
 
-- Feature Detections
-  - Actually use CV
+- Partition
+  - Clojure delaunay triangulation not working so try: https://github.com/jdiemke/delaunay-triangulator.
 - Color
   - Randomly sample to speed up
 
