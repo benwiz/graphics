@@ -97,8 +97,6 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 
 ## To Do
 
-- UI
-  - Favicon
 - Feature Detections
   - Actually use CV
 - Color
