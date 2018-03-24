@@ -97,6 +97,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 
 ## To Do
 
+- UI
+  - Allow picture to be taken with camera
 - Feature Detections
   - Actually use CV
 - Color
