@@ -107,20 +107,23 @@
                                                                              (.getAlpha (Color. (.getRGB bi x y)))]
                                                                             nil))
                                                                         y-range)))
-                                                x-range))
-                      average-color (vec (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))]
-
-                  ; (println "colors:" colors)
+                                                x-range))]
+                  (if (not (empty? colors))
+                    (let [total-rgb (apply map + colors)
+                          average-color-map (map
+                                             (fn [value] (int (/ value (count colors))))
+                                             total-rgb)
+                          average-color (vec average-color-map)]; (println "colors:" colors)
                   ; (println "sum:" (apply map + colors))
                   ; (println "avg:" (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))
                   ; (println triangle average-color)
                   ; Fill polygon with a color
-                  (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
-                  (.fillPolygon g
-                                (int-array (map (fn [point] (get point 0)) triangle))
-                                (int-array (map (fn [point] (get point 1)) triangle))
-                                (count triangle)))
-                bi)
+                      (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
+                      (.fillPolygon g
+                                    (int-array (map (fn [point] (get point 0)) triangle))
+                                    (int-array (map (fn [point] (get point 1)) triangle))
+                                    (count triangle))))
+                  bi))
               ; Reduce won't handle the last element so we add an additional element.
               (conj triangles [0 0])))))
 
