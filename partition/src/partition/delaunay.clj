@@ -25,8 +25,10 @@
 (defn edges [[p1 p2 p3]] [[p1 p2] [p2 p3] [p3 p1]])
 
 (defn contains-point? [{:keys [x y radius-squared]} [px py]]
-  (let [distance-squared (+ (Math/pow (- x px) 2) (Math/pow (- y py) 2))]
-    (< distance-squared radius-squared)))
+  (println "contains-point? inputs:" {:x x :y y :radius-squared radius-squared :px px :py py})
+  (if (and x y radius-squared px py) ; Ensure not nil
+    (let [distance-squared (+ (Math/pow (- x px) 2) (Math/pow (- y py) 2))]
+      (< distance-squared radius-squared))))
 
 (defn outer-edges [triangles]
   (let [all-edges    (mapcat edges triangles)
