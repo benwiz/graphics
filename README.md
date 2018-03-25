@@ -81,7 +81,7 @@ bundle exec jekyll serve
 
 #### Results display and download
 
-### Feature Detections
+### Feature Detection
 
 Clojure AWS Lambda function that uses OpenCV to identify key points.
 
@@ -91,14 +91,14 @@ Clojure AWS Lambda function that performs Delaunay triangulation given a set of 
 
 https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawLine(int,%20int,%20int,%20int)
 
-### Coloring
+### Color
 
 Clojure AWS Lambda function that colors each triangle according to some algorithm. For now that is the average color.
 
 ## To Do
 
 - Partition
-  - Clojure delaunay triangulation not working so try: https://github.com/jdiemke/delaunay-triangulator.
+  - Clojure delaunay triangulation not working on some point sets
 - Color
   - Randomly sample to speed up
 
