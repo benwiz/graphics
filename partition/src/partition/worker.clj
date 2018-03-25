@@ -19,9 +19,6 @@
 
 (defn delaunay-triangulation
   [points]
-  (println "COUNT of POINTS:" (count points))
-  (println "TYPE of POINTS:" (type points))
-  (println "POINTS:" points)
   (let [{:keys [_ _ triangles]} (delaunay/triangulate points)]
     ; TODO: Clean to make all coordinates integers
     (println "TRIANGLES:" triangles)
