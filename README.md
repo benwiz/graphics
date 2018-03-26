@@ -100,8 +100,10 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 - Python install instructions `pip install opencv-contrib-python` in docker container (really, not much)
 - remove `opencv-install` dir after confident all works
 
+- UI
+  - Allow people to take webcam pics on desktop
 - Feature detect
-  - Look into using Key Points `size` parameter to reduce number of points
+  - Look into using Key Points `size` and `?` parameters to reduce number of points
 - Partition
   - Clojure delaunay triangulation not working on some point sets
 - Color
