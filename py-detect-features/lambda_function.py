@@ -8,8 +8,8 @@ sudo yum -y install
 import io
 import json
 
-import cv2
 import boto3
+import cv2
 import numpy
 
 
@@ -71,6 +71,8 @@ def identify_points_by_key_points(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     sift = cv2.xfeatures2d.SIFT_create()
     kp = sift.detect(gray, None)
+    # orb = cv2.ORB_create()
+    # kp, _ = orb.detectAndCompute(gray, None)
     points = map(
         lambda point: (int(point.pt[0]), int(point.pt[1])),
         kp
@@ -95,6 +97,8 @@ def lambda_handler(event, context):
 
     # print "Event:\n", json.dumps(event)
     # print "Context:\n", context
+    print dir(cv2)
+    print cv2.__version__
 
     # Consume S3 create event
     key = event['Records'][0]['s3']['object']['key']
