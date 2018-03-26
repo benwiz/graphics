@@ -97,9 +97,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 
 ## To Do
 
-- Fork this into a docker version https://github.com/bgaurav7/aws-lambda-python-opencv-contrib
-  - `docker run -v $(pwd):/src benwiz/aws-lambda-python-opencv-contrib
-  - `docker run` should automatically pull a published image that does everything
+- Python install instructions `pip install opencv-contrib-python` in docker container
+- remove `opencv-install` dir after confident
 - Partition
   - Clojure delaunay triangulation not working on some point sets
 - Color
