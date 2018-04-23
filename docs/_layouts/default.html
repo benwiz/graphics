@@ -196,7 +196,7 @@
         ACL: 'public-read'
       }, function(err, data) {
         if (err) {
-          console.log('There was an error uploading your photo: ', err.message);
+          console.log('There was an error uploading your photo: ', err);
           return alert('There was an error uploading your photo: ', err.message);
         }
         getImage(uuid, 'points.jpg')
