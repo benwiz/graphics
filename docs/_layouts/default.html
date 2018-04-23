@@ -197,7 +197,7 @@
       }, function(err, data) {
         if (err) {
           console.log('There was an error uploading your photo: ', err);
-          return alert('There was an error uploading your photo: ', err.message);
+          return alert('There was an error uploading your photo: ', err);
         }
         getImage(uuid, 'points.jpg')
       });
