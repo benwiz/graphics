@@ -106,8 +106,8 @@
                                                                              (.getBlue (Color. (.getRGB bi x y)))
                                                                              (.getAlpha (Color. (.getRGB bi x y)))]
                                                                             nil))
-                                                                        y-range)))
-                                                x-range))]
+                                                                        (take-nth 1 y-range))))
+                                                (take-nth 1 x-range)))]
                   (if (not (empty? colors))
                     (let [total-rgb (apply map + colors)
                           average-color-map (map

@@ -97,6 +97,10 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 
 ## To Do
 
+- Randomly sample to speed up
+  - Compress image. Resizing is not what I'm looking for.
+  - Ensure that all borders are covered. Maybe as simple as placing points in each of the 4 corners
+
 - Python install instructions `pip install opencv-contrib-python` in docker container (really, not much)
 - remove `opencv-install` dir after confident all works
 
@@ -106,20 +110,13 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
   - Look into using Key Points `size` and `?` parameters to reduce number of points
 - Partition
   - Clojure delaunay triangulation not working on some point sets
-- Color
-  - Randomly sample to speed up
 
 ### Later
 
-- Now
-  - Compress image. Resizing is not what I'm looking for.
-  - Ensure that all borders are covered. Maybe as simple as placing points in each of the 4 corners
-
-- Secondary
-  - Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized.
-  - The `lein lambda-api` thing I'm using for `partition` is bloated for a non-api based event.
-    - https://medium.com/@jamesleonis/clojure-and-aws-serverless-basic-lambda-201b60183d6d
-  - Selectable detect features algorithm
-  - Figure out how to make _clj-detect-features_ small enough for Lambda.
-  - Handle more extensions. Developed against _.jpg_.
-  - Implement other partitioning algorithms like Voronio Diagrams
+- Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized.
+- The `lein lambda-api` thing I'm using for `partition` is bloated for a non-api based event.
+  - https://medium.com/@jamesleonis/clojure-and-aws-serverless-basic-lambda-201b60183d6d
+- Selectable detect features algorithm
+- Figure out how to make _clj-detect-features_ small enough for Lambda.
+- Handle more extensions. Developed against _.jpg_.
+- Implement other partitioning algorithms like Voronio Diagrams
