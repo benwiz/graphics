@@ -219,7 +219,7 @@
 
       // Reduce file size
       //console.log('uploaded file:', file); // For some unknown reason, logging (probably bc of reference) makes everything load correctly
-      file = downsize(file, 1000, function (file) {
+      file = downsize(file, 600, function (file) {
         // Display image
         var reader = new FileReader();
         reader.onload = function (e) {
