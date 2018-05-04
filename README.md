@@ -98,8 +98,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 ## To Do
 
 - Randomly sample to speed up
-  - Compress image. Resizing is not what I'm looking for.
-  - Ensure that all borders are covered. Maybe as simple as placing points in each of the 4 corners
+  - Compress image. Resizing is not what I'm looking for. Or maybe my algorithms need to be better.
+- Ensure that all borders are covered. Maybe as simple as placing points in each of the 4 corners
 
 - Python install instructions `pip install opencv-contrib-python` in docker container (really, not much)
 - remove `opencv-install` dir after confident all works
