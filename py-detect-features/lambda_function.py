@@ -41,12 +41,6 @@ def identify_points_by_grid(img, N):
                     point = (x, y)
                     points.append(point)
 
-    # Add points for every corner
-    points.append((0, 0))
-    points.append((0, height - 1))
-    points.append((width - 1, 0))
-    points.append((width - 1, height - 1))
-
     return points
 
 #
@@ -93,6 +87,15 @@ def identify_points(img):
 
     # points = identify_points_by_grid(img, 25)
     points = identify_points_by_key_points(img)
+
+    # Add points for every corner
+    height, width, channels = img.shape
+    points.append((0, 0))
+    points.append((0, height - 1))
+    points.append((width - 1, 0))
+    points.append((width - 1, height - 1))
+    print(points)
+
     return points
 
 
@@ -103,13 +106,13 @@ def lambda_handler(event, context):
 
     # print "Event:\n", json.dumps(event)
     # print "Context:\n", context
-    print dir(cv2)
-    print cv2.__version__
+    # print dir(cv2)
+    # print cv2.__version__
 
     # Consume S3 create event
     key = event['Records'][0]['s3']['object']['key']
     session_id, filename = key.split('/')
-    print key
+    # print key
 
     # Download image
     s3 = boto3.resource('s3', region_name='us-east-1')
