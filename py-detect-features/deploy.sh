@@ -6,7 +6,7 @@
 mv libs/cv2 .
 mv libs/numpy .
 mv libs/numpy-1.14.2.dist-info .
-mv libs/opencv_python-3.4.0.12.dist-info .
+mv libs/opencv_contrib_python-3.4.0.12.dist-info .
 
 # Remove old zip
 rm py-detect-features.zip
@@ -18,7 +18,7 @@ zip -r9 py-detect-features.zip * -x *.zip -x deploy.sh
 mv cv2 libs/
 mv numpy libs/
 mv numpy-1.14.2.dist-info libs/
-mv opencv_python-3.4.0.12.dist-info libs/
+mv opencv_contrib_python-3.4.0.12.dist-info libs/
 
 # Upload zip to S3
 aws s3 cp py-detect-features.zip s3://lowpoly/py-detect-features.zip --profile personal
