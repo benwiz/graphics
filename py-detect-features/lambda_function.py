@@ -41,6 +41,12 @@ def identify_points_by_grid(img, N):
                     point = (x, y)
                     points.append(point)
 
+    # Add points for every corner
+    points.append([0, 0])
+    points.append([0, height - 1])
+    points.append([width - 1, 0])
+    points.append([width - 1, height - 1])
+
     return points
 
 #
