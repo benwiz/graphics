@@ -94,7 +94,6 @@ def identify_points(img):
     points.append((0, height - 1))
     points.append((width - 1, 0))
     points.append((width - 1, height - 1))
-    print(points)
 
     return points
 
