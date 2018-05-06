@@ -2,6 +2,14 @@
 
 Create my first ClojureScript website and learn to use http://quil.info
 
+## Notes
+
+Run web browser repl
+
+```bash
+clj --main cljs.main --compile squiggle.core --repl
+```
+
 ## Ideas
 
 - Swimming squid
@@ -10,4 +18,3 @@ Create my first ClojureScript website and learn to use http://quil.info
 ## To Do
 
 - https://clojurescript.org/guides/quick-start
-
