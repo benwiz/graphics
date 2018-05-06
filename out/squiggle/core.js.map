@@ -1,1 +1,1 @@
-{"version":3,"file":"\/Users\/bwisialowski\/github\/personal\/squiggle\/out\/squiggle\/core.js","sources":["core.cljs"],"lineCount":9,"mappings":";AAAA;;AAEA,4BAAA,5BAACA;AAED,wBAAA,xBAAMC,wDAASC,EAAEC;AAAjB,AACI,kBAAA,VAAG,CAAGD,IAAEC","names":["cljs.core\/println","squiggle.core\/average","a","b"]}
+{"version":3,"file":"\/Users\/bwisialowski\/github\/personal\/squiggle\/out\/squiggle\/core.js","sources":["core.cljs"],"lineCount":7,"mappings":";AAAA;;AAEA,4BAAA,5BAACA;AACD,oDAAA,QAAA,5DACI,AACI,uBAAA,vBAAgBC","names":["cljs.core\/println","js\/document"]}
