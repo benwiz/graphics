@@ -1,1 +1,1 @@
-{"version":3,"file":"\/Users\/bwisialowski\/github\/personal\/squiggle\/out\/squiggle\/core.js","sources":["core.cljs"],"lineCount":7,"mappings":";AAAA;;AAEA,4BAAA,5BAACA;AACD,oDAAA,QAAA,5DACI,AACI,uBAAA,vBAAgBC","names":["cljs.core\/println","js\/document"]}
+{"version":3,"file":"\/Users\/bwisialowski\/github\/personal\/squiggle\/out\/squiggle\/core.js","sources":["core.cljs"],"lineCount":8,"mappings":";AAAA;;AAEA,4BAAA,5BAACA;AACD,oDAAA,QAAA,5DACC,AACC,uBAAA,vBAAgBC;AAGlB,YAAA,ZAAMC","names":["cljs.core\/println","js\/document","js\/console"]}

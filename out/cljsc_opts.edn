@@ -1,1 +1,1 @@
-{:main squiggle.core, :output-to "out/main.js", :output-dir "out", :aot-cache true}
+{:browser-repl true, :main squiggle.core, :output-to "out/main.js", :output-dir "out", :aot-cache true}
