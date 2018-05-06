@@ -10,11 +10,15 @@ Run web browser repl
 clj --main cljs.main --compile squiggle.core --repl
 ```
 
-## Ideas
-
-- Swimming squid
-- Separately, record soundwave from Spotify song or use matching MP3. Create animation and embed spotify player. Link the animation to the current timestamp of the embedded Spotify player.
-
 ## To Do
 
-- https://clojurescript.org/guides/quick-start
+- Now
+  - Create fist few pieces in a very simple grid
+
+- Next
+  - Create header and subtitle
+  - Create nice looking format
+
+- Later
+  - Piece created by listening to music then display it with Spotify play button
+  - Swimming squid
