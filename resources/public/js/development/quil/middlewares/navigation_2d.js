@@ -27,8 +27,8 @@ return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"po
 quil.middlewares.navigation_2d.setup_2d_nav = (function quil$middlewares$navigation_2d$setup_2d_nav(user_setup,user_settings){
 var initial_state = cljs.core.merge.call(null,quil.middlewares.navigation_2d.default_position.call(null),cljs.core.select_keys.call(null,user_settings,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"position","position",-2011731912),new cljs.core.Keyword(null,"zoom","zoom",-1827487038)], null)));
 return cljs.core.update_in.call(null,user_setup.call(null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"navigation-2d","navigation-2d",-1924168611)], null),((function (initial_state){
-return (function (p1__2358_SHARP_){
-return cljs.core.merge.call(null,initial_state,p1__2358_SHARP_);
+return (function (p1__23178_SHARP_){
+return cljs.core.merge.call(null,initial_state,p1__23178_SHARP_);
 });})(initial_state))
 );
 });
@@ -61,15 +61,15 @@ quil.middlewares.navigation_2d.assert_state_has_navigation.call(null,state);
 
 quil.core.push_matrix.call(null);
 
-var nav_2d_2359 = new cljs.core.Keyword(null,"navigation-2d","navigation-2d",-1924168611).cljs$core$IFn$_invoke$arity$1(state);
-var zoom_2360 = new cljs.core.Keyword(null,"zoom","zoom",-1827487038).cljs$core$IFn$_invoke$arity$1(nav_2d_2359);
-var pos_2361 = new cljs.core.Keyword(null,"position","position",-2011731912).cljs$core$IFn$_invoke$arity$1(nav_2d_2359);
-quil.core.scale.call(null,zoom_2360);
+var nav_2d_23179 = new cljs.core.Keyword(null,"navigation-2d","navigation-2d",-1924168611).cljs$core$IFn$_invoke$arity$1(state);
+var zoom_23180 = new cljs.core.Keyword(null,"zoom","zoom",-1827487038).cljs$core$IFn$_invoke$arity$1(nav_2d_23179);
+var pos_23181 = new cljs.core.Keyword(null,"position","position",-2011731912).cljs$core$IFn$_invoke$arity$1(nav_2d_23179);
+quil.core.scale.call(null,zoom_23180);
 
-var tr__2265__auto___2362 = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(((quil.core.width.call(null) / (2)) / zoom_2360) - cljs.core.first.call(null,pos_2361)),(((quil.core.height.call(null) / (2)) / zoom_2360) - cljs.core.second.call(null,pos_2361))], null);
+var tr__23078__auto___23182 = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(((quil.core.width.call(null) / (2)) / zoom_23180) - cljs.core.first.call(null,pos_23181)),(((quil.core.height.call(null) / (2)) / zoom_23180) - cljs.core.second.call(null,pos_23181))], null);
 quil.core.push_matrix.call(null);
 
-try{quil.core.translate.call(null,tr__2265__auto___2362);
+try{quil.core.translate.call(null,tr__23078__auto___23182);
 
 user_draw.call(null,state);
 }finally {quil.core.pop_matrix.call(null);
@@ -113,4 +113,4 @@ return user_mouse_wheel.call(null,quil.middlewares.navigation_2d.mouse_wheel.cal
 );
 });
 
-//# sourceMappingURL=navigation_2d.js.map
+//# sourceMappingURL=navigation_2d.js.map?rel=1525651790151

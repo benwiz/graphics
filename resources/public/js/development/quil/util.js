@@ -31,8 +31,8 @@ throw (new Error(["Expecting a keyword, got: ",cljs.core.str.cljs$core$IFn$_invo
  * (length-of-longest-key {}) ;=> 0
  */
 quil.util.length_of_longest_key = (function quil$util$length_of_longest_key(m){
-var or__3922__auto__ = cljs.core.last.call(null,cljs.core.sort.call(null,cljs.core.map.call(null,(function (p1__1343_SHARP_){
-return p1__1343_SHARP_.length();
+var or__3922__auto__ = cljs.core.last.call(null,cljs.core.sort.call(null,cljs.core.map.call(null,(function (p1__21702_SHARP_){
+return p1__21702_SHARP_.length();
 }),cljs.core.keys.call(null,m))));
 if(cljs.core.truth_(or__3922__auto__)){
 return or__3922__auto__;
@@ -47,8 +47,8 @@ return (0);
  * empty string and also without pad in which case it defaults to a single space
  */
 quil.util.gen_padding = (function quil$util$gen_padding(var_args){
-var G__1345 = arguments.length;
-switch (G__1345) {
+var G__21704 = arguments.length;
+switch (G__21704) {
 case 1:
 return quil.util.gen_padding.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -88,10 +88,10 @@ quil.util.gen_padding.cljs$lang$maxFixedArity = 3;
 quil.util.print_definition_list = (function quil$util$print_definition_list(definitions){
 var longest_key = quil.util.length_of_longest_key.call(null,definitions);
 return cljs.core.dorun.call(null,cljs.core.map.call(null,((function (longest_key){
-return (function (p__1347){
-var vec__1348 = p__1347;
-var k = cljs.core.nth.call(null,vec__1348,(0),null);
-var v = cljs.core.nth.call(null,vec__1348,(1),null);
+return (function (p__21706){
+var vec__21707 = p__21706;
+var k = cljs.core.nth.call(null,vec__21707,(0),null);
+var v = cljs.core.nth.call(null,vec__21707,(1),null);
 var len = k.length();
 var diff = (longest_key - len);
 var pad = quil.util.gen_padding.call(null,diff);
@@ -106,29 +106,29 @@ quil.util.prepare_quil_name = (function quil$util$prepare_quil_name(const_keywor
 return clojure.string.replace.call(null,clojure.string.upper_case.call(null,cljs.core.name.call(null,const_keyword)),/-/,"_");
 });
 quil.util.prepare_quil_clj_constants = (function quil$util$prepare_quil_clj_constants(constants){
-return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p1__1351_SHARP_){
-return (new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[p1__1351_SHARP_,cljs.core.symbol.call(null,["PConstants/",cljs.core.str.cljs$core$IFn$_invoke$arity$1(quil.util.prepare_quil_name.call(null,p1__1351_SHARP_))].join(''))],null));
+return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p1__21710_SHARP_){
+return (new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[p1__21710_SHARP_,cljs.core.symbol.call(null,["PConstants/",cljs.core.str.cljs$core$IFn$_invoke$arity$1(quil.util.prepare_quil_name.call(null,p1__21710_SHARP_))].join(''))],null));
 }),constants));
 });
 quil.util.prepare_quil_cljs_constants = (function quil$util$prepare_quil_cljs_constants(constants){
-return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p1__1352_SHARP_){
-return (new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[p1__1352_SHARP_,cljs.core.sequence.call(null,cljs.core.seq.call(null,cljs.core.concat.call(null,(new cljs.core.List(null,new cljs.core.Symbol("cljs.core","aget","cljs.core/aget",6345791,null),null,(1),null)),(new cljs.core.List(null,new cljs.core.Symbol("js","Processing.prototype.PConstants","js/Processing.prototype.PConstants",2034048972,null),null,(1),null)),(new cljs.core.List(null,quil.util.prepare_quil_name.call(null,p1__1352_SHARP_),null,(1),null)))))],null));
+return cljs.core.into.call(null,cljs.core.PersistentArrayMap.EMPTY,cljs.core.map.call(null,(function (p1__21711_SHARP_){
+return (new cljs.core.PersistentVector(null,2,(5),cljs.core.PersistentVector.EMPTY_NODE,[p1__21711_SHARP_,cljs.core.sequence.call(null,cljs.core.seq.call(null,cljs.core.concat.call(null,(new cljs.core.List(null,new cljs.core.Symbol("cljs.core","aget","cljs.core/aget",6345791,null),null,(1),null)),(new cljs.core.List(null,new cljs.core.Symbol("js","Processing.prototype.PConstants","js/Processing.prototype.PConstants",2034048972,null),null,(1),null)),(new cljs.core.List(null,quil.util.prepare_quil_name.call(null,p1__21711_SHARP_),null,(1),null)))))],null));
 }),constants));
 });
 quil.util.make_quil_constant_map = (function quil$util$make_quil_constant_map(target,const_map_name,const_map){
 return cljs.core.sequence.call(null,cljs.core.seq.call(null,cljs.core.concat.call(null,(new cljs.core.List(null,new cljs.core.Symbol(null,"def","def",597100991,null),null,(1),null)),(new cljs.core.List(null,const_map_name,null,(1),null)),(new cljs.core.List(null,((cljs.core._EQ_.call(null,target,new cljs.core.Keyword(null,"clj","clj",-660495428)))?quil.util.prepare_quil_clj_constants.call(null,const_map):quil.util.prepare_quil_cljs_constants.call(null,const_map)),null,(1),null)))));
 });
-var ret__4533__auto___1358 = (function (){
+var ret__4533__auto___21717 = (function (){
 quil.util.generate_quil_constants = (function quil$util$generate_quil_constants(var_args){
 var args__4502__auto__ = [];
-var len__4499__auto___1359 = arguments.length;
-var i__4500__auto___1360 = (0);
+var len__4499__auto___21718 = arguments.length;
+var i__4500__auto___21719 = (0);
 while(true){
-if((i__4500__auto___1360 < len__4499__auto___1359)){
-args__4502__auto__.push((arguments[i__4500__auto___1360]));
+if((i__4500__auto___21719 < len__4499__auto___21718)){
+args__4502__auto__.push((arguments[i__4500__auto___21719]));
 
-var G__1361 = (i__4500__auto___1360 + (1));
-i__4500__auto___1360 = G__1361;
+var G__21720 = (i__4500__auto___21719 + (1));
+i__4500__auto___21719 = G__21720;
 continue;
 } else {
 }
@@ -140,23 +140,23 @@ return quil.util.generate_quil_constants.cljs$core$IFn$_invoke$arity$variadic((a
 });
 
 quil.util.generate_quil_constants.cljs$core$IFn$_invoke$arity$variadic = (function (_AMPERSAND_form,_AMPERSAND_env,target,opts){
-return cljs.core.sequence.call(null,cljs.core.seq.call(null,cljs.core.concat.call(null,(new cljs.core.List(null,new cljs.core.Symbol(null,"do","do",1686842252,null),null,(1),null)),cljs.core.map.call(null,(function (p1__1353_SHARP_){
-return quil.util.make_quil_constant_map.call(null,target,cljs.core.first.call(null,p1__1353_SHARP_),cljs.core.second.call(null,p1__1353_SHARP_));
+return cljs.core.sequence.call(null,cljs.core.seq.call(null,cljs.core.concat.call(null,(new cljs.core.List(null,new cljs.core.Symbol(null,"do","do",1686842252,null),null,(1),null)),cljs.core.map.call(null,(function (p1__21712_SHARP_){
+return quil.util.make_quil_constant_map.call(null,target,cljs.core.first.call(null,p1__21712_SHARP_),cljs.core.second.call(null,p1__21712_SHARP_));
 }),cljs.core.partition.call(null,(2),opts)))));
 });
 
 quil.util.generate_quil_constants.cljs$lang$maxFixedArity = (3);
 
 /** @this {Function} */
-quil.util.generate_quil_constants.cljs$lang$applyTo = (function (seq1354){
-var G__1355 = cljs.core.first.call(null,seq1354);
-var seq1354__$1 = cljs.core.next.call(null,seq1354);
-var G__1356 = cljs.core.first.call(null,seq1354__$1);
-var seq1354__$2 = cljs.core.next.call(null,seq1354__$1);
-var G__1357 = cljs.core.first.call(null,seq1354__$2);
-var seq1354__$3 = cljs.core.next.call(null,seq1354__$2);
+quil.util.generate_quil_constants.cljs$lang$applyTo = (function (seq21713){
+var G__21714 = cljs.core.first.call(null,seq21713);
+var seq21713__$1 = cljs.core.next.call(null,seq21713);
+var G__21715 = cljs.core.first.call(null,seq21713__$1);
+var seq21713__$2 = cljs.core.next.call(null,seq21713__$1);
+var G__21716 = cljs.core.first.call(null,seq21713__$2);
+var seq21713__$3 = cljs.core.next.call(null,seq21713__$2);
 var self__4486__auto__ = this;
-return self__4486__auto__.cljs$core$IFn$_invoke$arity$variadic(G__1355,G__1356,G__1357,seq1354__$3);
+return self__4486__auto__.cljs$core$IFn$_invoke$arity$variadic(G__21714,G__21715,G__21716,seq21713__$3);
 });
 
 return null;
@@ -165,4 +165,4 @@ return null;
 quil.util.generate_quil_constants.cljs$lang$macro = true;
 
 
-//# sourceMappingURL=util.js.map
+//# sourceMappingURL=util.js.map?rel=1525651787412
