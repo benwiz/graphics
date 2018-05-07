@@ -1,2 +1,11 @@
 .DS_Store
 .cpcache/
+/target
+/classes
+/checkouts
+pom.xmlpom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+figwheel_server.log

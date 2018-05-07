@@ -4,10 +4,22 @@ Create my first ClojureScript website and learn to use http://quil.info
 
 ## Notes
 
-Run web browser repl
+Run web browser repl. No longer using this method.
 
 ```bash
 clj --main cljs.main --compile squiggle.core --repl
+```
+
+Build for prod
+
+```bash
+lein cljsbuild once optimized
+```
+
+Dev
+
+```bash
+lein figwheel
 ```
 
 ## To Do
