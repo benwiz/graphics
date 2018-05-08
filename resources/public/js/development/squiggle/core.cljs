@@ -34,7 +34,7 @@
 
 ; this function is called in index.html
 (defn ^:export run-sketch []
-  (q/defsketch squiggle
+  (q/defsketch squiggle1
     :host "squiggle1"
     :size [500 500]
     ; setup function called only once, during sketch initialization.
