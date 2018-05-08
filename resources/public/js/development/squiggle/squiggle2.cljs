@@ -1,9 +1,9 @@
-(ns squiggle.squiggle1
+(ns squiggle.squiggle2
   (:require [quil.core :as q :include-macros true]))
 
 (defn setup []
   ; Set frame rate to 30 frames per second.
-  (q/frame-rate 30)
+  (q/frame-rate 20)
   ; Set color mode to HSB (HSV) instead of default RGB.
   (q/color-mode :hsb)
   ; setup function returns initial state. It contains
