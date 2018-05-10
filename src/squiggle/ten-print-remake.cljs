@@ -25,10 +25,16 @@
     :x2 x
     :y2 (+ y (/ (q/height) percent))})
 
+(defn cell [x y]
+  {:x x
+    :y y
+    :width (+ (/ (q/width) percent) 1)
+    :height (/ (q/height) percent)})
+
 (defn setup []
   (q/frame-rate 30)
   (q/color-mode :hsb)
-  (q/background 20)
+  (q/background 20 0 0)
   {:hue 200
     :x 0
     :y 0})
@@ -40,7 +46,14 @@
     :y (next-y (:x state) (:y state) percent)})
 
 (defn draw-state [state]
+  ; Clear "cell" by painting it black
+  (let [rect (cell (:x state) (:y state))]
+    (q/fill 20 0 0)
+    (q/stroke 20 0 0)
+    (q/rect (:x rect) (:y rect) (:width rect) (:height rect)))
+  ; Draw line
+  (let [direction (rand-nth [down-right down-left])
+        coords (direction (:x state) (:y state))]
   (q/stroke (:hue state) 255 255)
-  (let [coords (down-left (:x state) (:y state))]
     (q/line (:x1 coords) (:y1 coords)
             (:x2 coords) (:y2 coords))))
