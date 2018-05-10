@@ -1,4 +1,4 @@
-(ns squiggle.squiggle1
+(ns squiggle.ten-print-remake
   (:require [quil.core :as q :include-macros true]))
 
 (defn setup []

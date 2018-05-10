@@ -1,19 +1,19 @@
 (ns squiggle.core
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]
-            [squiggle.squiggle1 :as squiggle1]
+            [squiggle.ten-print-remake :as ten-print-remake]
             [squiggle.squiggle2 :as squiggle2]))
 
 ; this function is called in index.html
 (defn ^:export run-sketch []
-  (q/defsketch sketch-squiggle1
-    :host "squiggle1"
+  (q/defsketch sketch-ten-print-remake
+    :host "ten-print-remake"
     :size [500 500]
     ; setup function called only once, during sketch initialization.
-    :setup squiggle1/setup
+    :setup ten-print-remake/setup
     ; update-state is called on each iteration before draw-state.
-    :update squiggle1/update-state
-    :draw squiggle1/draw-state
+    :update ten-print-remake/update-state
+    :draw ten-print-remake/draw-state
     ; This sketch uses functional-mode middleware.
     ; Check quil wiki for more info about middlewares and particularly
     ; fun-mode.
