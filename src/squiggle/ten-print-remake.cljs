@@ -6,9 +6,10 @@
     (if (> desired-x (q/width)) 0 desired-x)))
 
 (defn next-y [x y r]
-  (if (>= (if (= x (q/width)) (+ y (/ (q/width) r)) y) 240)
-    0
-    (if (= x (q/width)) (+ y (/ (q/width) r)) y)))
+  (let [desired-y (if (= x (q/width)) (+ y (/ (q/width) r)) y)]
+    (if (>= desired-y 240)
+      0
+      desired-y)))
 
 (defn setup []
   (q/frame-rate 30)

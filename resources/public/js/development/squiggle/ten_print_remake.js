@@ -11,14 +11,11 @@ return desired_x;
 }
 });
 squiggle.ten_print_remake.next_y = (function squiggle$ten_print_remake$next_y(x,y,r){
-if((((cljs.core._EQ_.call(null,x,quil.core.width.call(null)))?(y + (quil.core.width.call(null) / r)):y) >= (240))){
+var desired_y = ((cljs.core._EQ_.call(null,x,quil.core.width.call(null)))?(y + (quil.core.width.call(null) / r)):y);
+if((desired_y >= (240))){
 return (0);
 } else {
-if(cljs.core._EQ_.call(null,x,quil.core.width.call(null))){
-return (y + (quil.core.width.call(null) / r));
-} else {
-return y;
-}
+return desired_y;
 }
 });
 squiggle.ten_print_remake.setup = (function squiggle$ten_print_remake$setup(){
@@ -41,4 +38,4 @@ quil.core.fill.call(null,new cljs.core.Keyword(null,"hue","hue",-508078848).cljs
 return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),(10),(10));
 });
 
-//# sourceMappingURL=ten_print_remake.js.map?rel=1525923607428
+//# sourceMappingURL=ten_print_remake.js.map?rel=1525923673891
