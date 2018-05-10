@@ -31,9 +31,11 @@ lein cljsbuild once optimized
 
 - Now
   - Solar system
-    - Draw accurate ellipse for Mercury
-    - Figure out how to move planet over ellipse
-    - BUG: Single rotation affects everything
+    - Figure out how to move planet around all points on ellipse
+    - Draw accurate orbits
+    - Figure out how to move planet at accurate speed
+    - Figure out rotation
+    - Draw asteroid belt as a dotted or dashed circle. Will probably need to draw every point.
 
 - Next
   - Create header and subtitle
