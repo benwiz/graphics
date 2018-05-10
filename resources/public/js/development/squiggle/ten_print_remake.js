@@ -18,6 +18,9 @@ return (0);
 return desired_y;
 }
 });
+squiggle.ten_print_remake.down_right = (function squiggle$ten_print_remake$down_right(x,y){
+return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"x1","x1",-1863922247),x,new cljs.core.Keyword(null,"y1","y1",589123466),y,new cljs.core.Keyword(null,"x2","x2",-1362513475),(x + (20)),new cljs.core.Keyword(null,"y2","y2",-718691301),(y + (20))], null);
+});
 squiggle.ten_print_remake.setup = (function squiggle$ten_print_remake$setup(){
 quil.core.frame_rate.call(null,(30));
 
@@ -31,11 +34,10 @@ squiggle.ten_print_remake.update_state = (function squiggle$ten_print_remake$upd
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"hue","hue",-508078848),cljs.core.rand_int.call(null,(255)),new cljs.core.Keyword(null,"x","x",2099068185),squiggle.ten_print_remake.next_x.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),(10)),new cljs.core.Keyword(null,"y","y",-1757859776),squiggle.ten_print_remake.next_y.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),(10))], null);
 });
 squiggle.ten_print_remake.draw_state = (function squiggle$ten_print_remake$draw_state(state){
-cljs.core.println.call(null,state);
+quil.core.stroke.call(null,new cljs.core.Keyword(null,"hue","hue",-508078848).cljs$core$IFn$_invoke$arity$1(state),(255),(255));
 
-quil.core.fill.call(null,new cljs.core.Keyword(null,"hue","hue",-508078848).cljs$core$IFn$_invoke$arity$1(state),(255),(255));
-
-return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),(10),(10));
+var coords = squiggle.ten_print_remake.down_right.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state));
+return quil.core.line.call(null,new cljs.core.Keyword(null,"x1","x1",-1863922247).cljs$core$IFn$_invoke$arity$1(coords),new cljs.core.Keyword(null,"y1","y1",589123466).cljs$core$IFn$_invoke$arity$1(coords),new cljs.core.Keyword(null,"x2","x2",-1362513475).cljs$core$IFn$_invoke$arity$1(coords),new cljs.core.Keyword(null,"y2","y2",-718691301).cljs$core$IFn$_invoke$arity$1(coords));
 });
 
-//# sourceMappingURL=ten_print_remake.js.map?rel=1525923673891
+//# sourceMappingURL=ten_print_remake.js.map?rel=1525923985308

@@ -11,6 +11,12 @@
       0
       desired-y)))
 
+(defn down-right [x y]
+  {:x1 x
+    :y1 y
+    :x2 (+ x 20)
+    :y2 (+ y 20)})
+
 (defn setup []
   (q/frame-rate 30)
   (q/color-mode :hsb)
@@ -26,6 +32,7 @@
     :y (next-y (:x state) (:y state) 10)})
 
 (defn draw-state [state]
-  (println state)
-  (q/fill (:hue state) 255 255)
-    (q/ellipse (:x state) (:y state) 10 10))
+  (q/stroke (:hue state) 255 255)
+  (let [coords (down-right (:x state) (:y state))]
+    (q/line (:x1 coords) (:y1 coords)
+            (:x2 coords) (:y2 coords))))
