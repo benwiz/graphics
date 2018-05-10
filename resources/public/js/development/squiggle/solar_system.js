@@ -20,6 +20,8 @@ quil.core.push_matrix.call(null);
 
 try{quil.core.translate.call(null,tr__22080__auto__);
 
+quil.core.no_stroke.call(null);
+
 quil.core.fill.call(null,new cljs.core.Keyword(null,"h","h",1109658740).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"sun","sun",-916295498).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"s","s",1705939918).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"sun","sun",-916295498).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"v","v",21465059).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"sun","sun",-916295498).cljs$core$IFn$_invoke$arity$1(state)));
 
 quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"sun","sun",-916295498).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"sun","sun",-916295498).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"sun","sun",-916295498).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"sun","sun",-916295498).cljs$core$IFn$_invoke$arity$1(state)));
@@ -38,4 +40,4 @@ return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185
 }finally {quil.core.pop_matrix.call(null);
 }});
 
-//# sourceMappingURL=solar_system.js.map?rel=1525956431231
+//# sourceMappingURL=solar_system.js.map?rel=1525956476022

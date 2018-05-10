@@ -36,6 +36,7 @@
   (q/with-translation [(/ (q/width) 2)
                           (/ (q/height) 2)]
     ; Sun
+    (q/no-stroke)
     (q/fill (:h (:sun state)) (:s (:sun state)) (:v (:sun state)))
     (q/ellipse (:x (:sun state)) (:y (:sun state))
               (:size (:sun state)) (:size (:sun state)))
