@@ -17,14 +17,14 @@
     ; This sketch uses functional-mode middleware.
     ; Check quil wiki for more info about middlewares and particularly
     ; fun-mode.
-    :middleware [m/fun-mode])
-  (q/defsketch sketch-squiggle2
-    :host "squiggle2"
-    :size [500 500]
-    :setup squiggle2/setup
-    :update squiggle2/update-state
-    :draw squiggle2/draw-state
     :middleware [m/fun-mode]))
+  ; (q/defsketch sketch-squiggle2
+  ;   :host "squiggle2"
+  ;   :size [500 500]
+  ;   :setup squiggle2/setup
+  ;   :update squiggle2/update-state
+  ;   :draw squiggle2/draw-state
+  ;   :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:
 (run-sketch)
