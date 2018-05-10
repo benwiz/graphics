@@ -20,13 +20,13 @@
     :x -40
     :y 35
     :size 4
+    :theta 0
     :orbit {
       :x 3
       :y -3
       :h 50
       :v 40
       :r 0
-      :theta 0
     }
   } :venus {
     :h 39
@@ -134,8 +134,39 @@
   x=h*cos(θ)
   y=v*sin(θ)"
   (-> state
-    (assoc-in [:mercury :x] (* (:h (:orbit (:mercury state))) (js/Math.cos (:theta (:orbit (:mercury state))))))
-    (assoc-in [:mercury :y] (* (:v (:orbit (:mercury state))) (js/Math.sin (:theta (:orbit (:mercury state))))))))
+    ; Mercury
+    (assoc-in [:mercury :x] (* (:h (:orbit (:mercury state))) (js/Math.cos (:theta (:mercury state)))))
+    (assoc-in [:mercury :y] (* (:v (:orbit (:mercury state))) (js/Math.sin (:theta (:mercury state)))))
+    (assoc-in [:mercury :theta] (+ (:theta (:mercury state)) 0.020))
+    ; Venus
+    (assoc-in [:venus :x] (* (:h (:orbit (:venus state))) (js/Math.cos (:theta (:venus state)))))
+    (assoc-in [:venus :y] (* (:v (:orbit (:venus state))) (js/Math.sin (:theta (:venus state)))))
+    (assoc-in [:venus :theta] (+ (:theta (:venus state)) 0.015))
+    ; Earth
+    (assoc-in [:earth :x] (* (:h (:orbit (:earth state))) (js/Math.cos (:theta (:earth state)))))
+    (assoc-in [:earth :y] (* (:v (:orbit (:earth state))) (js/Math.sin (:theta (:earth state)))))
+    (assoc-in [:earth :theta] (+ (:theta (:earth state)) 0.013))
+    ; Mars
+    (assoc-in [:mars :x] (* (:h (:orbit (:mars state))) (js/Math.cos (:theta (:mars state)))))
+    (assoc-in [:mars :y] (* (:v (:orbit (:mars state))) (js/Math.sin (:theta (:mars state)))))
+    (assoc-in [:mars :theta] (+ (:theta (:mars state)) 0.011))
+    ; Jupiter
+    (assoc-in [:jupiter :x] (* (:h (:orbit (:jupiter state))) (js/Math.cos (:theta (:jupiter state)))))
+    (assoc-in [:jupiter :y] (* (:v (:orbit (:jupiter state))) (js/Math.sin (:theta (:jupiter state)))))
+    (assoc-in [:jupiter :theta] (+ (:theta (:jupiter state)) 0.008))
+    ; Saturn
+    (assoc-in [:saturn :x] (* (:h (:orbit (:saturn state))) (js/Math.cos (:theta (:saturn state)))))
+    (assoc-in [:saturn :y] (* (:v (:orbit (:saturn state))) (js/Math.sin (:theta (:saturn state)))))
+    (assoc-in [:saturn :theta] (+ (:theta (:saturn state)) 0.007))
+    ; Uranus
+    (assoc-in [:uranus :x] (* (:h (:orbit (:uranus state))) (js/Math.cos (:theta (:uranus state)))))
+    (assoc-in [:uranus :y] (* (:v (:orbit (:uranus state))) (js/Math.sin (:theta (:uranus state)))))
+    (assoc-in [:uranus :theta] (+ (:theta (:uranus state)) 0.005))
+    ; Neptune
+    (assoc-in [:neptune :x] (* (:h (:orbit (:neptune state))) (js/Math.cos (:theta (:neptune state)))))
+    (assoc-in [:neptune :y] (* (:v (:orbit (:neptune state))) (js/Math.sin (:theta (:neptune state)))))
+    (assoc-in [:neptune :theta] (+ (:theta (:neptune state)) 0.003))
+  ))
 
 (defn draw-state [state]
   ; Clear screen

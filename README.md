@@ -31,10 +31,9 @@ lein cljsbuild once optimized
 
 - Now
   - Solar system
-    - Figure out how to move planet around all points on ellipse
     - Draw accurate orbits
-    - Figure out how to move planet at accurate speed
-    - Figure out rotation
+    - Accurate speeds
+    - Figure out rotation... this is just to make it look good
     - Draw asteroid belt as a dotted or dashed circle. Will probably need to draw every point.
 
 - Next
