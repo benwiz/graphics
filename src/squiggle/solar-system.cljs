@@ -26,6 +26,7 @@
       :h 50
       :v 40
       :r 0
+      :theta 0
     }
   } :venus {
     :h 39
@@ -132,10 +133,9 @@
   values and the ellipse.
   x=h*cos(θ)
   y=v*sin(θ)"
-  (println (* (:h (:orbit (:mercury state))) (js/Math.cos 0)))
   (-> state
-    (assoc-in [:mercury :x] (* (:h (:orbit (:mercury state))) (js/Math.cos 0)))
-    (assoc-in [:mercury :y] (* (:v (:orbit (:mercury state))) (js/Math.sin 0)))))
+    (assoc-in [:mercury :x] (* (:h (:orbit (:mercury state))) (js/Math.cos (:theta (:orbit (:mercury state))))))
+    (assoc-in [:mercury :y] (* (:v (:orbit (:mercury state))) (js/Math.sin (:theta (:orbit (:mercury state))))))))
 
 (defn draw-state [state]
   ; Clear screen
