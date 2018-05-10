@@ -127,7 +127,13 @@
   }})
 
 (defn update-state [state]
-  state)
+  "Update :x and :y based on previous
+  values and the ellipse.
+  x=acos(θ)
+  y=bsin(θ)"
+  (-> state
+    (assoc-in [:mercury :x] 0)
+    (assoc-in [:mercury :y]  0)))
 
 (defn draw-state [state]
   ; Clear screen
