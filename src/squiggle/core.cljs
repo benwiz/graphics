@@ -1,8 +1,9 @@
 (ns squiggle.core
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]
+            [squiggle.example :as example]
             [squiggle.ten-print-remake :as ten-print-remake]
-            [squiggle.example :as example]))
+            [squiggle.solar-system :as solar-system]))
 
 ; this function is called in index.html
 (defn ^:export run-sketch []
@@ -19,6 +20,13 @@
     :setup ten-print-remake/setup
     :update ten-print-remake/update-state
     :draw ten-print-remake/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-solar-system
+    :host "solar-system"
+    :size [240 240]
+    :setup solar-system/setup
+    :update solar-system/update-state
+    :draw solar-system/draw-state
     :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:

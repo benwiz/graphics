@@ -29,11 +29,9 @@ lein cljsbuild once optimized
 ## To Do
 
 - Now
-  - Ten print remake
-    - Set background to black or near black
-    - Set color palette
-    - Draw line from upper left to anywhere
-    - Draw functions for both diagonals
+  - Solar system
+    - Draw accurate ellipse for Mercury
+    - Figure out how to move planet over ellipse
 
 - Next
   - Create header and subtitle
