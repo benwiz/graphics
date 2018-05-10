@@ -2,6 +2,8 @@
   (:require [quil.core :as q :include-macros true]))
 
 (def percent 10)
+(def palette
+  [0 50 100 200])
 
 (defn next-x [x r]
   (let [desired-x (+ x (/ (q/width) r))]
@@ -41,7 +43,7 @@
 
 (defn update-state [state]
   ; Update sketch state by changing circle hue and position.
-  {:hue (rand-int 255)
+  {:hue (rand-nth palette) ; (rand-int 255)
     :x (next-x (:x state) percent)
     :y (next-y (:x state) (:y state) percent)})
 

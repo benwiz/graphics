@@ -27,4 +27,4 @@
   ;   :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:
-; (run-sketch)
+(run-sketch)
