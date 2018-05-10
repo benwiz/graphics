@@ -1,6 +1,14 @@
 (ns squiggle.ten-print-remake
   (:require [quil.core :as q :include-macros true]))
 
+(defn next-x [x]
+  (let [desired-x (+ x (/ (q/width) 10))]
+    (if (> desired-x (q/width)) 0 desired-x)))
+
+(defn next-y [y]
+  (let [desired-y (+ y (/ (q/height) 10))]
+    (if (> desired-y (q/height)) 0 desired-y)))
+
 (defn setup []
   (q/frame-rate 30)
   (q/color-mode :hsb)
@@ -12,10 +20,11 @@
 (defn update-state [state]
   ; Update sketch state by changing circle hue and position.
   {:hue (rand-int 255)
-    :x (+ (:x state) (/ (q/width) 10))
-    :y (+ (:y state) (/ (q/height) 10))})
+    :x (next-x (:x state))
+    :y (next-y (:y state))})
 
 (defn draw-state [state]
+  (println state)
   (q/fill (:hue state) 255 255)
       ; Draw the circle.
       (q/ellipse (:x state) (:y state) 10 10))
