@@ -1,4 +1,4 @@
-(ns squiggle.squiggle2
+(ns squiggle.example
   (:require [quil.core :as q :include-macros true]))
 
 (defn setup []

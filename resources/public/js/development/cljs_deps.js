@@ -34,10 +34,10 @@ goog.addDependency("../quil/middlewares/deprecated_options.js", ['quil.middlewar
 goog.addDependency("../quil/util.js", ['quil.util'], ['cljs.core', 'clojure.string']);
 goog.addDependency("../quil/sketch.js", ['quil.sketch'], ['goog.dom', 'cljs.core', 'quil.middlewares.deprecated_options', 'goog.events.EventType', 'goog.style', 'goog.events', 'quil.util']);
 goog.addDependency("../quil/core.js", ['quil.core'], ['org.processingjs.Processing', 'quil.sketch', 'cljs.core', 'clojure.string', 'quil.util']);
-goog.addDependency("../squiggle/squiggle2.js", ['squiggle.squiggle2'], ['cljs.core', 'quil.core']);
 goog.addDependency("../squiggle/ten_print_remake.js", ['squiggle.ten_print_remake'], ['cljs.core', 'quil.core']);
 goog.addDependency("../quil/middlewares/navigation_3d.js", ['quil.middlewares.navigation_3d'], ['cljs.core', 'quil.core']);
 goog.addDependency("../quil/middlewares/navigation_2d.js", ['quil.middlewares.navigation_2d'], ['cljs.core', 'quil.core']);
 goog.addDependency("../quil/middlewares/fun_mode.js", ['quil.middlewares.fun_mode'], ['cljs.core', 'quil.core']);
 goog.addDependency("../quil/middleware.js", ['quil.middleware'], ['cljs.core', 'quil.middlewares.navigation_3d', 'quil.middlewares.navigation_2d', 'quil.middlewares.fun_mode']);
-goog.addDependency("../squiggle/core.js", ['squiggle.core'], ['squiggle.squiggle2', 'cljs.core', 'squiggle.ten_print_remake', 'quil.core', 'quil.middleware']);
+goog.addDependency("../squiggle/example.js", ['squiggle.example'], ['cljs.core', 'quil.core']);
+goog.addDependency("../squiggle/core.js", ['squiggle.core'], ['cljs.core', 'squiggle.ten_print_remake', 'quil.core', 'quil.middleware', 'squiggle.example']);
