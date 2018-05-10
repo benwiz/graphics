@@ -25,6 +25,7 @@ lein cljsbuild once optimized
 ## Ideas
 
 - Flashing, twinkling shapes
+- Constellations, if I can find a dataset
 
 ## To Do
 

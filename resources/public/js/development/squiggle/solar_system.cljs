@@ -15,9 +15,15 @@
     :h 0
     :s 175
     :v 175
-    :x -35
-    :y 30
+    :x -40
+    :y 35
     :size 10
+    :orbit {
+      :x 3
+      :y -3
+      :h 100
+      :w 80
+    }
   }})
 
 (defn update-state [state]
@@ -36,4 +42,9 @@
     ; Mercury
     (q/fill (:h (:mercury state)) (:s (:mercury state)) (:v (:mercury state)))
     (q/ellipse (:x (:mercury state)) (:y (:mercury state))
-              (:size (:mercury state)) (:size (:mercury state)))))
+              (:size (:mercury state)) (:size (:mercury state)))
+    (q/no-fill)
+    (q/stroke (:h (:mercury state)) (:s (:mercury state)) (:v (:mercury state)))
+    (q/rotate -10)
+    (q/ellipse (:x (:orbit (:mercury state))) (:y (:orbit (:mercury state)))
+               (:h (:orbit (:mercury state))) (:w (:orbit (:mercury state))))))
