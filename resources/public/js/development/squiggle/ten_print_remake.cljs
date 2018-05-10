@@ -11,7 +11,7 @@
 
 (defn next-y [x y r]
   (let [desired-y (if (= x (q/width)) (+ y (/ (q/height) r)) y)]
-    (if (>= desired-y 240)
+    (if (>= desired-y (q/height))
       0
       desired-y)))
 
@@ -28,9 +28,9 @@
     :y2 (+ y (/ (q/height) percent))})
 
 (defn cell [x y]
-  {:x x
+  { :x x
     :y y
-    :width (+ (/ (q/width) percent) 1)
+    :width (/ (q/width) percent)
     :height (/ (q/height) percent)})
 
 (defn setup []

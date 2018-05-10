@@ -16,14 +16,14 @@
   ;   :middleware [m/fun-mode])
   (q/defsketch sketch-ten-print-remake
     :host "ten-print-remake"
-    :size [240 240]
+    :size [300 300]
     :setup ten-print-remake/setup
     :update ten-print-remake/update-state
     :draw ten-print-remake/draw-state
     :middleware [m/fun-mode])
   (q/defsketch sketch-solar-system
     :host "solar-system"
-    :size [240 240]
+    :size [300 300]
     :setup solar-system/setup
     :update solar-system/update-state
     :draw solar-system/draw-state

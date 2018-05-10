@@ -33,6 +33,7 @@ lein cljsbuild once optimized
   - Solar system
     - Draw accurate ellipse for Mercury
     - Figure out how to move planet over ellipse
+    - BUG: Single rotation affects everything
 
 - Next
   - Create header and subtitle
