@@ -13,7 +13,7 @@ return desired_x;
 }
 });
 squiggle.ten_print_remake.next_y = (function squiggle$ten_print_remake$next_y(x,y,r){
-var desired_y = ((cljs.core._EQ_.call(null,x,quil.core.width.call(null)))?(y + (quil.core.width.call(null) / r)):y);
+var desired_y = ((cljs.core._EQ_.call(null,x,quil.core.width.call(null)))?(y + (quil.core.height.call(null) / r)):y);
 if((desired_y >= (240))){
 return (0);
 } else {
@@ -42,12 +42,12 @@ squiggle.ten_print_remake.update_state = (function squiggle$ten_print_remake$upd
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"hue","hue",-508078848),cljs.core.rand_nth.call(null,squiggle.ten_print_remake.palette),new cljs.core.Keyword(null,"x","x",2099068185),squiggle.ten_print_remake.next_x.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),squiggle.ten_print_remake.percent),new cljs.core.Keyword(null,"y","y",-1757859776),squiggle.ten_print_remake.next_y.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),squiggle.ten_print_remake.percent)], null);
 });
 squiggle.ten_print_remake.draw_state = (function squiggle$ten_print_remake$draw_state(state){
-var rect_29774 = squiggle.ten_print_remake.cell.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state));
+var rect_27710 = squiggle.ten_print_remake.cell.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state));
 quil.core.fill.call(null,(20),(0),(0));
 
 quil.core.stroke.call(null,(20),(0),(0));
 
-quil.core.rect.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(rect_29774),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(rect_29774),new cljs.core.Keyword(null,"width","width",-384071477).cljs$core$IFn$_invoke$arity$1(rect_29774),new cljs.core.Keyword(null,"height","height",1025178622).cljs$core$IFn$_invoke$arity$1(rect_29774));
+quil.core.rect.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(rect_27710),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(rect_27710),new cljs.core.Keyword(null,"width","width",-384071477).cljs$core$IFn$_invoke$arity$1(rect_27710),new cljs.core.Keyword(null,"height","height",1025178622).cljs$core$IFn$_invoke$arity$1(rect_27710));
 
 var direction = cljs.core.rand_nth.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [squiggle.ten_print_remake.down_right,squiggle.ten_print_remake.down_left], null));
 var coords = direction.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state));
@@ -56,4 +56,4 @@ quil.core.stroke.call(null,new cljs.core.Keyword(null,"hue","hue",-508078848).cl
 return quil.core.line.call(null,new cljs.core.Keyword(null,"x1","x1",-1863922247).cljs$core$IFn$_invoke$arity$1(coords),new cljs.core.Keyword(null,"y1","y1",589123466).cljs$core$IFn$_invoke$arity$1(coords),new cljs.core.Keyword(null,"x2","x2",-1362513475).cljs$core$IFn$_invoke$arity$1(coords),new cljs.core.Keyword(null,"y2","y2",-718691301).cljs$core$IFn$_invoke$arity$1(coords));
 });
 
-//# sourceMappingURL=ten_print_remake.js.map?rel=1525925622677
+//# sourceMappingURL=ten_print_remake.js.map?rel=1525956678869

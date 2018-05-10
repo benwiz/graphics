@@ -10,7 +10,7 @@
     (if (> desired-x (q/width)) 0 desired-x)))
 
 (defn next-y [x y r]
-  (let [desired-y (if (= x (q/width)) (+ y (/ (q/width) r)) y)]
+  (let [desired-y (if (= x (q/width)) (+ y (/ (q/height) r)) y)]
     (if (>= desired-y 240)
       0
       desired-y)))
