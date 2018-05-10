@@ -5,9 +5,8 @@
   (let [desired-x (+ x (/ (q/width) 10))]
     (if (> desired-x (q/width)) 0 desired-x)))
 
-(defn next-y [y]
-  (let [desired-y (+ y (/ (q/height) 10))]
-    (if (> desired-y (q/height)) 0 desired-y)))
+(defn next-y [x y]
+  (if (= x (q/width)) (+ y (/ (q/width) 10)) y))
 
 (defn setup []
   (q/frame-rate 30)
@@ -21,10 +20,9 @@
   ; Update sketch state by changing circle hue and position.
   {:hue (rand-int 255)
     :x (next-x (:x state))
-    :y (next-y (:y state))})
+    :y (next-y (:x state) (:y state))})
 
 (defn draw-state [state]
   (println state)
   (q/fill (:hue state) 255 255)
-      ; Draw the circle.
-      (q/ellipse (:x state) (:y state) 10 10))
+    (q/ellipse (:x state) (:y state) 10 10))
