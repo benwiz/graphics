@@ -8,7 +8,7 @@
 (defn ^:export run-sketch []
   (q/defsketch sketch-ten-print-remake
     :host "ten-print-remake"
-    :size [500 500]
+    :size [240 240]
     ; setup function called only once, during sketch initialization.
     :setup ten-print-remake/setup
     ; update-state is called on each iteration before draw-state.

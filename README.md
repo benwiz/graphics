@@ -22,6 +22,10 @@ Build for prod
 lein cljsbuild once optimized
 ```
 
+## Ideas
+
+- Flashing, twinkling shapes
+
 ## To Do
 
 - Now

@@ -11,11 +11,11 @@
 
 (defn update-state [state]
   ; Update sketch state by changing circle hue and position.
-  {:hue (:hue state)
-    :x (:x state)
-    :y (:y state)})
+  {:hue (rand-int 255)
+    :x (+ (:x state) (/ (q/width) 10))
+    :y (+ (:y state) (/ (q/height) 10))})
 
 (defn draw-state [state]
   (q/fill (:hue state) 255 255)
       ; Draw the circle.
-      (q/ellipse (:x state) (:y state) 50 50))
+      (q/ellipse (:x state) (:y state) 10 10))
