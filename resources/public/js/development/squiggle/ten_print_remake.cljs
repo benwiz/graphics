@@ -19,6 +19,12 @@
     :x2 (+ x (/ (q/width) percent))
     :y2 (+ y (/ (q/height) percent))})
 
+(defn down-left [x y]
+  {:x1 (+ x (/ (q/width) percent))
+    :y1 y
+    :x2 x
+    :y2 (+ y (/ (q/height) percent))})
+
 (defn setup []
   (q/frame-rate 30)
   (q/color-mode :hsb)
@@ -35,6 +41,6 @@
 
 (defn draw-state [state]
   (q/stroke (:hue state) 255 255)
-  (let [coords (down-right (:x state) (:y state))]
+  (let [coords (down-left (:x state) (:y state))]
     (q/line (:x1 coords) (:y1 coords)
             (:x2 coords) (:y2 coords))))
