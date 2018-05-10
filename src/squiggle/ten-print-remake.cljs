@@ -1,6 +1,8 @@
 (ns squiggle.ten-print-remake
   (:require [quil.core :as q :include-macros true]))
 
+(def percent 10)
+
 (defn next-x [x r]
   (let [desired-x (+ x (/ (q/width) r))]
     (if (> desired-x (q/width)) 0 desired-x)))
@@ -14,8 +16,8 @@
 (defn down-right [x y]
   {:x1 x
     :y1 y
-    :x2 (+ x 20)
-    :y2 (+ y 20)})
+    :x2 (+ x (/ (q/width) percent))
+    :y2 (+ y (/ (q/height) percent))})
 
 (defn setup []
   (q/frame-rate 30)
@@ -28,8 +30,8 @@
 (defn update-state [state]
   ; Update sketch state by changing circle hue and position.
   {:hue (rand-int 255)
-    :x (next-x (:x state) 10)
-    :y (next-y (:x state) (:y state) 10)})
+    :x (next-x (:x state) percent)
+    :y (next-y (:x state) (:y state) percent)})
 
 (defn draw-state [state]
   (q/stroke (:hue state) 255 255)
