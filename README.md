@@ -31,8 +31,9 @@ lein cljsbuild once optimized
 
 - Now
   - Solar system
-    - Draw accurate orbits
+    - Accurate sizes
     - Accurate speeds
+    - Draw accurate orbits
     - Figure out rotation... this is just to make it look good
     - Draw asteroid belt as a dotted or dashed circle. Will probably need to draw every point.
 
