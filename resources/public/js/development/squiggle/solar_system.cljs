@@ -2,133 +2,133 @@
   (:require ;[clojure.math.numeric-tower :as math]
             [quil.core :as q :include-macros true]))
 
-(defn pow [x n] (reduce * (repeat n x)))
-
 (defn setup []
   (q/frame-rate 30)
   (q/color-mode :hsb)
   (q/ellipse-mode :radius)
-  { :sun {
-    :h 38
-    :s 230
-    :v 230
-    :x 0
-    :y 0
-    :size 10
-  } :mercury {
-    :h 15
-    :s 175
-    :v 175
-    :x -40
-    :y 35
-    :size 4
-    :theta 0
-    :orbit {
-      :x 3
-      :y -3
-      :h 50
-      :v 40
-      :r 0
-    }
-  } :venus {
-    :h 39
-    :s 175
-    :v 175
-    :x 40
-    :y 40
-    :size 6
-    :orbit {
-      :x 3
-      :y -3
-      :h 70
-      :v 50
-      :r 0
-    }
-  } :earth {
-    :h 100
-    :s 175
-    :v 175
-    :x -50
-    :y -50
-    :size 6
-    :orbit {
-      :x 3
-      :y -3
-      :h 80
-      :v 60
-      :r 0
-    }
-  } :mars {
-    :h 0
-    :s 175
-    :v 175
-    :x 60
-    :y -60
-    :size 6
-    :orbit {
-      :x 3
-      :y -3
+  (let [earth-size 4
+        au 100]
+    { :sun {
+      :h 38
+      :s 230
+      :v 230
+      :x 0
+      :y 0
+      :size (* 3 earth-size) ; (* 109 earth-size)
+    } :mercury {
+      :h 15
+      :s 175
+      :v 175
+      :x -40
+      :y 35
+      :size (* 0.4 earth-size)
+      :theta 0
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 0.387 au)
+        :v (* 0.342 au)
+        :r 0
+      }
+    } :venus {
+      :h 39
+      :s 175
+      :v 175
+      :x 40
+      :y 40
+      :size (* 0.9 earth-size)
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 0.500 au) ; (* 0.723 au)
+        :v (* 0.450 au) ; (* 0.723 au)
+        :r 0
+      }
+    } :earth {
       :h 100
-      :v 70
-      :r 0
-    }
-  } :jupiter {
-    :h 5
-    :s 175
-    :v 175
-    :x 40
-    :y -97
-    :size 8
-    :orbit {
-      :x 3
-      :y -3
-      :h 115
-      :v 100
-      :r 0
-    }
-  } :saturn {
-    :h 33
-    :s 175
-    :v 175
-    :x -90
-    :y 78
-    :size 7
-    :orbit {
-      :x 3
-      :y -3
-      :h 130
-      :v 115
-      :r 0
-    }
-  } :uranus {
-    :h 230
-    :s 175
-    :v 175
-    :x -80
-    :y 98
-    :size 7
-    :orbit {
-      :x 3
-      :y -3
-      :h 142
-      :v 125
-      :r 0
-    }
-  } :neptune {
-    :h 250
-    :s 175
-    :v 175
-    :x -148
-    :y -1
-    :size 6
-    :orbit {
-      :x 3
-      :y -3
-      :h 149
-      :v 125
-      :r 0
-    }
-  }})
+      :s 175
+      :v 175
+      :x -50
+      :y -50
+      :size earth-size
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 0.650 au) ; au
+        :v (* 0.600 au) ; au
+        :r 0
+      }
+    } :mars {
+      :h 0
+      :s 175
+      :v 175
+      :x 60
+      :y -60
+      :size (* 0.5 earth-size)
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 0.750 au) ; (* 1.524 au)
+        :v (* 0.690 au) ; (* 1.524 au)
+        :r 0
+      }
+    } :jupiter {
+      :h 5
+      :s 175
+      :v 175
+      :x 40
+      :y -97
+      :size (* 2.8 earth-size) ; (* 11.2 earth-size)
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 1.100 au) ; (* 5.203 au)
+        :v (* 1.000 au) ; (* 5.203 au)
+        :r 0
+      }
+    } :saturn {
+      :h 33
+      :s 175
+      :v 175
+      :x -90
+      :y 78
+      :size (* 2.4 earth-size) ; (* 9.4 earth-size)
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 1.200 au) ; (* 9.537 au)
+        :v (* 1.110 au) ; (* 9.537 au)
+        :r 0
+      }
+    } :uranus {
+      :h 230
+      :s 175
+      :v 175
+      :x -80
+      :y 98
+      :size (* 2.0 earth-size) ; (* 4 earth-size)
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 1.300 au) ; (* 19.191 au)
+        :v (* 1.240 au) ; (* 19.191 au)
+        :r 0
+      }
+    } :neptune {
+      :h 250
+      :s 175
+      :v 175
+      :x -148
+      :y -1
+      :size (* 1.9 earth-size) ; (* 3.9 earth-size)
+      :orbit {
+        :x 3
+        :y -3
+        :h (* 1.400 au) ; (* 30.069 au)
+        :v (* 1.310 au) ; (* 30.069 au)
+        :r 0
+      }
+    }}))
 
 (defn update-state [state]
   "Update :x and :y based on previous
@@ -139,37 +139,37 @@
   Calculate angular velocity by `2 radians / seconds_in_that_planets_year = radians / second`"
   (-> state
     ; Mercury
-    (assoc-in [:mercury :x] (* (:h (:orbit (:mercury state))) (js/Math.cos (:theta (:mercury state)))))
-    (assoc-in [:mercury :y] (* (:v (:orbit (:mercury state))) (js/Math.sin (:theta (:mercury state)))))
-    (assoc-in [:mercury :theta] (+ (:theta (:mercury state)) (* (* 0.263 (js/Math.pow 10 -6)) 1000000))) ; 2.63 * 10^-7 is angular velocity
+    (assoc-in [:mercury :x] (* (:h (:orbit (:mercury state))) (q/cos (:theta (:mercury state)))))
+    (assoc-in [:mercury :y] (* (:v (:orbit (:mercury state))) (q/sin (:theta (:mercury state)))))
+    (assoc-in [:mercury :theta] (+ (:theta (:mercury state)) (* (* 0.263 (q/pow 10 -6)) 1000000))) ; 2.63 * 10^-7 is angular velocity
     ; Venus
-    (assoc-in [:venus :x] (* (:h (:orbit (:venus state))) (js/Math.cos (:theta (:venus state)))))
-    (assoc-in [:venus :y] (* (:v (:orbit (:venus state))) (js/Math.sin (:theta (:venus state)))))
-    (assoc-in [:venus :theta] (+ (:theta (:venus state)) (* (* 0.103 (js/Math.pow 10 -6)) 1000000)))
+    (assoc-in [:venus :x] (* (:h (:orbit (:venus state))) (q/cos (:theta (:venus state)))))
+    (assoc-in [:venus :y] (* (:v (:orbit (:venus state))) (q/sin (:theta (:venus state)))))
+    (assoc-in [:venus :theta] (+ (:theta (:venus state)) (* (* 0.103 (q/pow 10 -6)) 1000000)))
     ; Earth
-    (assoc-in [:earth :x] (* (:h (:orbit (:earth state))) (js/Math.cos (:theta (:earth state)))))
-    (assoc-in [:earth :y] (* (:v (:orbit (:earth state))) (js/Math.sin (:theta (:earth state)))))
-    (assoc-in [:earth :theta] (+ (:theta (:earth state)) (* (* 0.635 (js/Math.pow 10 -7)) 1000000)))
+    (assoc-in [:earth :x] (* (:h (:orbit (:earth state))) (q/cos (:theta (:earth state)))))
+    (assoc-in [:earth :y] (* (:v (:orbit (:earth state))) (q/sin (:theta (:earth state)))))
+    (assoc-in [:earth :theta] (+ (:theta (:earth state)) (* (* 0.635 (q/pow 10 -7)) 1000000)))
     ; Mars
-    (assoc-in [:mars :x] (* (:h (:orbit (:mars state))) (js/Math.cos (:theta (:mars state)))))
-    (assoc-in [:mars :y] (* (:v (:orbit (:mars state))) (js/Math.sin (:theta (:mars state)))))
-    (assoc-in [:mars :theta] (+ (:theta (:mars state)) (* (* 0.337 (js/Math.pow 10 -7)) 1000000)))
+    (assoc-in [:mars :x] (* (:h (:orbit (:mars state))) (q/cos (:theta (:mars state)))))
+    (assoc-in [:mars :y] (* (:v (:orbit (:mars state))) (q/sin (:theta (:mars state)))))
+    (assoc-in [:mars :theta] (+ (:theta (:mars state)) (* (* 0.337 (q/pow 10 -7)) 1000000)))
     ; Jupiter
-    (assoc-in [:jupiter :x] (* (:h (:orbit (:jupiter state))) (js/Math.cos (:theta (:jupiter state)))))
-    (assoc-in [:jupiter :y] (* (:v (:orbit (:jupiter state))) (js/Math.sin (:theta (:jupiter state)))))
-    (assoc-in [:jupiter :theta] (+ (:theta (:jupiter state)) (* (* 0.541 (js/Math.pow 10 -8)) 1000000)))
+    (assoc-in [:jupiter :x] (* (:h (:orbit (:jupiter state))) (q/cos (:theta (:jupiter state)))))
+    (assoc-in [:jupiter :y] (* (:v (:orbit (:jupiter state))) (q/sin (:theta (:jupiter state)))))
+    (assoc-in [:jupiter :theta] (+ (:theta (:jupiter state)) (* (* 0.541 (q/pow 10 -8)) 1000000)))
     ; Saturn
-    (assoc-in [:saturn :x] (* (:h (:orbit (:saturn state))) (js/Math.cos (:theta (:saturn state)))))
-    (assoc-in [:saturn :y] (* (:v (:orbit (:saturn state))) (js/Math.sin (:theta (:saturn state)))))
-    (assoc-in [:saturn :theta] (+ (:theta (:saturn state)) (* (* 0.215 (js/Math.pow 10 -8)) 1000000)))
+    (assoc-in [:saturn :x] (* (:h (:orbit (:saturn state))) (q/cos (:theta (:saturn state)))))
+    (assoc-in [:saturn :y] (* (:v (:orbit (:saturn state))) (q/sin (:theta (:saturn state)))))
+    (assoc-in [:saturn :theta] (+ (:theta (:saturn state)) (* (* 0.215 (q/pow 10 -8)) 1000000)))
     ; Uranus
-    (assoc-in [:uranus :x] (* (:h (:orbit (:uranus state))) (js/Math.cos (:theta (:uranus state)))))
-    (assoc-in [:uranus :y] (* (:v (:orbit (:uranus state))) (js/Math.sin (:theta (:uranus state)))))
-    (assoc-in [:uranus :theta] (+ (:theta (:uranus state)) (* (* 0.741 (js/Math.pow 10 -9)) 1000000)))
+    (assoc-in [:uranus :x] (* (:h (:orbit (:uranus state))) (q/cos (:theta (:uranus state)))))
+    (assoc-in [:uranus :y] (* (:v (:orbit (:uranus state))) (q/sin (:theta (:uranus state)))))
+    (assoc-in [:uranus :theta] (+ (:theta (:uranus state)) (* (* 0.741 (q/pow 10 -9)) 1000000)))
     ; Neptune
-    (assoc-in [:neptune :x] (* (:h (:orbit (:neptune state))) (js/Math.cos (:theta (:neptune state)))))
-    (assoc-in [:neptune :y] (* (:v (:orbit (:neptune state))) (js/Math.sin (:theta (:neptune state)))))
-    (assoc-in [:neptune :theta] (+ (:theta (:neptune state)) (* (* 0.385 (js/Math.pow 10 -9)) 1000000)))
+    (assoc-in [:neptune :x] (* (:h (:orbit (:neptune state))) (q/cos (:theta (:neptune state)))))
+    (assoc-in [:neptune :y] (* (:v (:orbit (:neptune state))) (q/sin (:theta (:neptune state)))))
+    (assoc-in [:neptune :theta] (+ (:theta (:neptune state)) (* (* 0.385 (q/pow 10 -9)) 1000000)))
   ))
 
 (defn draw-state [state]
