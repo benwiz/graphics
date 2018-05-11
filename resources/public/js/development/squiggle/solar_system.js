@@ -133,25 +133,19 @@ var cent_x = (0);
 var cent_y = (0);
 var rads = cljs.core.map.call(null,quil.core.radians,cljs.core.range.call(null,(0),(365),(5)));
 var xs = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,tr__22079__auto__){
-return (function (p1__27855_SHARP_){
-return (cent_x + (radius_h * quil.core.cos.call(null,p1__27855_SHARP_)));
+return (function (p1__27903_SHARP_){
+return (cent_x + (radius_h * quil.core.cos.call(null,p1__27903_SHARP_)));
 });})(radius_h,radius_v,cent_x,cent_y,rads,tr__22079__auto__))
 ,rads);
 var ys = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,xs,tr__22079__auto__){
-return (function (p1__27856_SHARP_){
-return (cent_y + (radius_v * quil.core.sin.call(null,p1__27856_SHARP_)));
+return (function (p1__27904_SHARP_){
+return (cent_y + (radius_v * quil.core.sin.call(null,p1__27904_SHARP_)));
 });})(radius_h,radius_v,cent_x,cent_y,rads,xs,tr__22079__auto__))
 ,rads);
 quil.core.stroke.call(null,(20),(50),(70));
 
-return cljs.core.dorun.call(null,cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,xs,ys,tr__22079__auto__){
-return (function (x,y){
-cljs.core.println.call(null,x,y);
-
-return quil.core.point.call(null,x,y);
-});})(radius_h,radius_v,cent_x,cent_y,rads,xs,ys,tr__22079__auto__))
-,xs,ys));
+return cljs.core.dorun.call(null,cljs.core.map.call(null,quil.core.point,xs,ys));
 }finally {quil.core.pop_matrix.call(null);
 }});
 
-//# sourceMappingURL=solar_system.js.map?rel=1526050790074
+//# sourceMappingURL=solar_system.js.map?rel=1526050881447

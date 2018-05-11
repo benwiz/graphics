@@ -264,5 +264,5 @@
           xs        (map #(+ cent-x (* radius-h (q/cos %))) rads)
           ys        (map #(+ cent-y (* radius-v (q/sin %))) rads)]
       (q/stroke 20 50 70)
-      (dorun (map (fn [x y] (println x y) (q/point x y)) xs ys)))
+      (dorun (map q/point xs ys)))
     ))
