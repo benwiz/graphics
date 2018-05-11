@@ -34,11 +34,10 @@ lein cljsbuild once optimized
 ## To Do
 
 - Now
-  - Solar system
-    - Accurate sizes
-    - Draw accurate orbits
-    - Figure out rotation... this is just to make it look good
-    - Draw asteroid belt as a dotted or dashed circle. Will probably need to draw every point.
+  - Game of Life
+    - Draw the current state
+    - Update the state
+    - Allow user to input start state or select from a few options
 
 - Next
   - Create header and subtitle

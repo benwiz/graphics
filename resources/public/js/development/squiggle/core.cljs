@@ -3,7 +3,8 @@
             [quil.middleware :as m]
             [squiggle.example :as example]
             [squiggle.ten-print-remake :as ten-print-remake]
-            [squiggle.solar-system :as solar-system]))
+            [squiggle.solar-system :as solar-system]
+            [squiggle.game-of-life :as game-of-life]))
 
 ; this function is called in index.html
 (defn ^:export run-sketch []
@@ -27,6 +28,13 @@
     :setup solar-system/setup
     :update solar-system/update-state
     :draw solar-system/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-game-of-life
+    :host "game-of-life"
+    :size [300 300]
+    :setup game-of-life/setup
+    :update game-of-life/update-state
+    :draw game-of-life/draw-state
     :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:
