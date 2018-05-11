@@ -24,8 +24,15 @@
 (def matrix-width 10)
 (def matrix-height 10)
 
-(defn draw-cell [i j value]
-  (let [cell-width (/ (q/width) matrix-width)
+(defn tick [index value]
+  (let [i (nth index 0)
+        j (nth index 1)]
+    value))
+
+(defn draw-cell [index value]
+  (let [i (nth index 0)
+        j (nth index 1)
+        cell-width (/ (q/width) matrix-width)
         cell-height (/ (q/height) matrix-height)
         x (* i cell-width)
         y (* j cell-height)]
@@ -44,11 +51,7 @@
     (m/mset 5 3 1)))
 
 (defn update-state [state]
-  ; TODO: Follow the rules
-  state)
+  (m/emap-indexed tick state))
 
 (defn draw-state [state]
-  (m/emap-indexed
-    (fn [index value]
-      (draw-cell (nth index 0) (nth index 1) value))
-    state))
+  (m/emap-indexed draw-cell state))
