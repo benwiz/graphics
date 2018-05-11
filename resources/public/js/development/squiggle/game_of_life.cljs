@@ -21,8 +21,8 @@
 ; (in other words, each generation is a pure function of the preceding one). The rules continue
 ; to be applied repeatedly to create further generations.
 
-(def matrix-width 10)
-(def matrix-height 10)
+(def matrix-width 25)
+(def matrix-height 25)
 
 (defn n-live-neighbors [state i j]
   (get
@@ -49,7 +49,6 @@
   (let [i (nth index 0)
         j (nth index 1)
         n (n-live-neighbors state i j)]
-        (println (= value 0) (= n 3))
         (if (= value 1)
           (cond
             (< n 2) 0
@@ -77,9 +76,28 @@
   ; (q/stroke 0 0 255)
   (->
     (m/new-matrix matrix-width matrix-height)
-    (m/mset 3 3 1)
-    (m/mset 4 3 1)
-    (m/mset 5 3 1)))
+    (m/mset  9 11 1)
+    (m/mset 10 11 1)
+    (m/mset 11 11 1)
+    (m/mset 12 11 1)
+    (m/mset 13 11 1)
+    (m/mset 14 11 1)
+    (m/mset 15 11 1)
+    (m/mset 16 11 1)
+    (m/mset 9 12 1)
+    (m/mset 11 12 1)
+    (m/mset 12 12 1)
+    (m/mset 13 12 1)
+    (m/mset 14 12 1)
+    (m/mset 16 12 1)
+    (m/mset  9 13 1)
+    (m/mset 10 13 1)
+    (m/mset 11 13 1)
+    (m/mset 12 13 1)
+    (m/mset 13 13 1)
+    (m/mset 14 13 1)
+    (m/mset 15 13 1)
+    (m/mset 16 13 1)))
 
 (defn update-state [state]
   (q/background 0)
