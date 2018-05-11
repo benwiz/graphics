@@ -12,7 +12,7 @@
       :h 38
       :s 230
       :v 230
-      :x 0
+      :x -10
       :y 0
       :size (* 3 earth-size) ; (* 109 earth-size)
     } :mercury {
