@@ -24,9 +24,32 @@
 (def matrix-width 10)
 (def matrix-height 10)
 
-(defn tick [index value]
+(defn n-live-neighbors [state i j]
+  [
+    (if (and (> i 0) (> j 0))
+      (m/mget state (- i 1) (- j 1)) -1)
+    (if (> j 0 )
+      (m/mget state i (- j 1)) -1)
+    (if (and (< i (- matrix-width 1)) (> j 0))
+      (m/mget state (+ i 1) (- j 1)) -1)
+    (if (> i 0)
+      (m/mget state (- i 1) j) -1)
+    (if (< i (- matrix-width 1))
+      (m/mget state (+ i 1) j) -1)
+    (if (and (> i 0) (< j (- matrix-height 1)))
+      (m/mget state (- i 1) (+ j 1)) -1)
+    (if (< j (- matrix-height 1))
+      (m/mget state i (+ j 1)) -1)
+    (if (and (< i (- matrix-width 1)) (< j (- matrix-height 1)))
+      (m/mget state (+ i 1) (+ j 1)) -1)
+  ])
+
+(defn tick [state index value]
   (let [i (nth index 0)
         j (nth index 1)]
+        (if (some #(= 1 %) (n-live-neighbors state i j))
+          "true"
+          "false")
     value))
 
 (defn draw-cell [index value]
@@ -40,6 +63,7 @@
       (q/rect x y cell-width cell-height))))
 
 (defn setup []
+  (q/frame-rate 2)
   (q/color-mode :hsb)
   (q/background 0)
   (q/fill 0 0 255)
@@ -51,7 +75,7 @@
     (m/mset 5 3 1)))
 
 (defn update-state [state]
-  (m/emap-indexed tick state))
+  (m/emap-indexed (fn [index value] (tick state index value)) state))
 
 (defn draw-state [state]
   (m/emap-indexed draw-cell state))
