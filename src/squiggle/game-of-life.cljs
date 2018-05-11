@@ -25,32 +25,39 @@
 (def matrix-height 10)
 
 (defn n-live-neighbors [state i j]
-  [
-    (if (and (> i 0) (> j 0))
-      (m/mget state (- i 1) (- j 1)) -1)
-    (if (> j 0 )
-      (m/mget state i (- j 1)) -1)
-    (if (and (< i (- matrix-width 1)) (> j 0))
-      (m/mget state (+ i 1) (- j 1)) -1)
-    (if (> i 0)
-      (m/mget state (- i 1) j) -1)
-    (if (< i (- matrix-width 1))
-      (m/mget state (+ i 1) j) -1)
-    (if (and (> i 0) (< j (- matrix-height 1)))
-      (m/mget state (- i 1) (+ j 1)) -1)
-    (if (< j (- matrix-height 1))
-      (m/mget state i (+ j 1)) -1)
-    (if (and (< i (- matrix-width 1)) (< j (- matrix-height 1)))
-      (m/mget state (+ i 1) (+ j 1)) -1)
-  ])
+  (get
+    (frequencies [
+      (if (and (> i 0) (> j 0))
+        (m/mget state (- i 1) (- j 1)) -1)
+      (if (> j 0 )
+        (m/mget state i (- j 1)) -1)
+      (if (and (< i (- matrix-width 1)) (> j 0))
+        (m/mget state (+ i 1) (- j 1)) -1)
+      (if (> i 0)
+        (m/mget state (- i 1) j) -1)
+      (if (< i (- matrix-width 1))
+        (m/mget state (+ i 1) j) -1)
+      (if (and (> i 0) (< j (- matrix-height 1)))
+        (m/mget state (- i 1) (+ j 1)) -1)
+      (if (< j (- matrix-height 1))
+        (m/mget state i (+ j 1)) -1)
+      (if (and (< i (- matrix-width 1)) (< j (- matrix-height 1)))
+        (m/mget state (+ i 1) (+ j 1)) -1)])
+    1))
 
 (defn tick [state index value]
   (let [i (nth index 0)
-        j (nth index 1)]
-        (if (some #(= 1 %) (n-live-neighbors state i j))
-          "true"
-          "false")
-    value))
+        j (nth index 1)
+        n (n-live-neighbors state i j)]
+        (println (= value 0) (= n 3))
+        (if (= value 1)
+          (cond
+            (< n 2) 0
+            (> n 3) 0
+            :else 1)
+          (cond
+            (= n 3) 1
+            :else 0))))
 
 (defn draw-cell [index value]
   (let [i (nth index 0)
@@ -75,6 +82,7 @@
     (m/mset 5 3 1)))
 
 (defn update-state [state]
+  (q/background 0)
   (m/emap-indexed (fn [index value] (tick state index value)) state))
 
 (defn draw-state [state]

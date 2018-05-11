@@ -6,20 +6,33 @@ goog.require('clojure.core.matrix');
 squiggle.game_of_life.matrix_width = (10);
 squiggle.game_of_life.matrix_height = (10);
 squiggle.game_of_life.n_live_neighbors = (function squiggle$game_of_life$n_live_neighbors(state,i,j){
-return new cljs.core.PersistentVector(null, 8, 5, cljs.core.PersistentVector.EMPTY_NODE, [(((((i > (0))) && ((j > (0)))))?clojure.core.matrix.mget.call(null,state,(i - (1)),(j - (1))):(-1)),(((j > (0)))?clojure.core.matrix.mget.call(null,state,i,(j - (1))):(-1)),(((((i < (squiggle.game_of_life.matrix_width - (1)))) && ((j > (0)))))?clojure.core.matrix.mget.call(null,state,(i + (1)),(j - (1))):(-1)),(((i > (0)))?clojure.core.matrix.mget.call(null,state,(i - (1)),j):(-1)),(((i < (squiggle.game_of_life.matrix_width - (1))))?clojure.core.matrix.mget.call(null,state,(i + (1)),j):(-1)),(((((i > (0))) && ((j < (squiggle.game_of_life.matrix_height - (1))))))?clojure.core.matrix.mget.call(null,state,(i - (1)),(j + (1))):(-1)),(((j < (squiggle.game_of_life.matrix_height - (1))))?clojure.core.matrix.mget.call(null,state,i,(j + (1))):(-1)),(((((i < (squiggle.game_of_life.matrix_width - (1)))) && ((j < (squiggle.game_of_life.matrix_height - (1))))))?clojure.core.matrix.mget.call(null,state,(i + (1)),(j + (1))):(-1))], null);
+return cljs.core.get.call(null,cljs.core.frequencies.call(null,new cljs.core.PersistentVector(null, 8, 5, cljs.core.PersistentVector.EMPTY_NODE, [(((((i > (0))) && ((j > (0)))))?clojure.core.matrix.mget.call(null,state,(i - (1)),(j - (1))):(-1)),(((j > (0)))?clojure.core.matrix.mget.call(null,state,i,(j - (1))):(-1)),(((((i < (squiggle.game_of_life.matrix_width - (1)))) && ((j > (0)))))?clojure.core.matrix.mget.call(null,state,(i + (1)),(j - (1))):(-1)),(((i > (0)))?clojure.core.matrix.mget.call(null,state,(i - (1)),j):(-1)),(((i < (squiggle.game_of_life.matrix_width - (1))))?clojure.core.matrix.mget.call(null,state,(i + (1)),j):(-1)),(((((i > (0))) && ((j < (squiggle.game_of_life.matrix_height - (1))))))?clojure.core.matrix.mget.call(null,state,(i - (1)),(j + (1))):(-1)),(((j < (squiggle.game_of_life.matrix_height - (1))))?clojure.core.matrix.mget.call(null,state,i,(j + (1))):(-1)),(((((i < (squiggle.game_of_life.matrix_width - (1)))) && ((j < (squiggle.game_of_life.matrix_height - (1))))))?clojure.core.matrix.mget.call(null,state,(i + (1)),(j + (1))):(-1))], null)),(1));
 });
 squiggle.game_of_life.tick = (function squiggle$game_of_life$tick(state,index,value){
 var i = cljs.core.nth.call(null,index,(0));
 var j = cljs.core.nth.call(null,index,(1));
-if(cljs.core.truth_(cljs.core.some.call(null,((function (i,j){
-return (function (p1__40219_SHARP_){
-return cljs.core._EQ_.call(null,(1),p1__40219_SHARP_);
-});})(i,j))
-,squiggle.game_of_life.n_live_neighbors.call(null,state,i,j)))){
-} else {
-}
+var n = squiggle.game_of_life.n_live_neighbors.call(null,state,i,j);
+cljs.core.println.call(null,cljs.core._EQ_.call(null,value,(0)),cljs.core._EQ_.call(null,n,(3)));
 
-return value;
+if(cljs.core._EQ_.call(null,value,(1))){
+if((n < (2))){
+return (0);
+} else {
+if((n > (3))){
+return (0);
+} else {
+return (1);
+
+}
+}
+} else {
+if(cljs.core._EQ_.call(null,n,(3))){
+return (1);
+} else {
+return (0);
+
+}
+}
 });
 squiggle.game_of_life.draw_cell = (function squiggle$game_of_life$draw_cell(index,value){
 var i = cljs.core.nth.call(null,index,(0));
@@ -46,6 +59,8 @@ quil.core.fill.call(null,(0),(0),(255));
 return clojure.core.matrix.mset.call(null,clojure.core.matrix.mset.call(null,clojure.core.matrix.mset.call(null,clojure.core.matrix.new_matrix.call(null,squiggle.game_of_life.matrix_width,squiggle.game_of_life.matrix_height),(3),(3),(1)),(4),(3),(1)),(5),(3),(1));
 });
 squiggle.game_of_life.update_state = (function squiggle$game_of_life$update_state(state){
+quil.core.background.call(null,(0));
+
 return clojure.core.matrix.emap_indexed.call(null,(function (index,value){
 return squiggle.game_of_life.tick.call(null,state,index,value);
 }),state);
@@ -54,4 +69,4 @@ squiggle.game_of_life.draw_state = (function squiggle$game_of_life$draw_state(st
 return clojure.core.matrix.emap_indexed.call(null,squiggle.game_of_life.draw_cell,state);
 });
 
-//# sourceMappingURL=game_of_life.js.map?rel=1526062618885
+//# sourceMappingURL=game_of_life.js.map?rel=1526073493869
