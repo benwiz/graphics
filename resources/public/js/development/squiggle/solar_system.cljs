@@ -190,7 +190,6 @@
               (:size (:mercury state)) (:size (:mercury state)))
     (q/no-fill)
     (q/stroke (:h (:mercury state)) (:s (:mercury state)) (:v (:mercury state)))
-    ; (q/rotate (:r (:orbit (:mercury state))))
     (q/ellipse (:x (:orbit (:mercury state))) (:y (:orbit (:mercury state)))
                (:h (:orbit (:mercury state))) (:v (:orbit (:mercury state))))
     ; Venus
@@ -200,7 +199,6 @@
               (:size (:venus state)) (:size (:venus state)))
     (q/no-fill)
     (q/stroke (:h (:venus state)) (:s (:venus state)) (:v (:venus state)))
-    ; (q/rotate (:r (:orbit (:venus state))))
     (q/ellipse (:x (:orbit (:venus state))) (:y (:orbit (:venus state)))
                (:h (:orbit (:venus state))) (:v (:orbit (:venus state))))
     ; Earth
@@ -210,7 +208,6 @@
               (:size (:earth state)) (:size (:earth state)))
     (q/no-fill)
     (q/stroke (:h (:earth state)) (:s (:earth state)) (:v (:earth state)))
-    ; (q/rotate (:r (:orbit (:earth state))))
     (q/ellipse (:x (:orbit (:earth state))) (:y (:orbit (:earth state)))
                (:h (:orbit (:earth state))) (:v (:orbit (:earth state))))
     ; Mars
@@ -220,7 +217,6 @@
               (:size (:mars state)) (:size (:mars state)))
     (q/no-fill)
     (q/stroke (:h (:mars state)) (:s (:mars state)) (:v (:mars state)))
-    ; (q/rotate (:r (:orbit (:mars state))))
     (q/ellipse (:x (:orbit (:mars state))) (:y (:orbit (:mars state)))
                (:h (:orbit (:mars state))) (:v (:orbit (:mars state))))
     ; Jupiter
@@ -230,7 +226,6 @@
               (:size (:jupiter state)) (:size (:jupiter state)))
     (q/no-fill)
     (q/stroke (:h (:jupiter state)) (:s (:jupiter state)) (:v (:jupiter state)))
-    ; (q/rotate (:r (:orbit (:jupiter state))))
     (q/ellipse (:x (:orbit (:jupiter state))) (:y (:orbit (:jupiter state)))
                (:h (:orbit (:jupiter state))) (:v (:orbit (:jupiter state))))
     ; Saturn
@@ -240,7 +235,6 @@
               (:size (:saturn state)) (:size (:saturn state)))
     (q/no-fill)
     (q/stroke (:h (:saturn state)) (:s (:saturn state)) (:v (:saturn state)))
-    ; (q/rotate (:r (:orbit (:saturn state))))
     (q/ellipse (:x (:orbit (:saturn state))) (:y (:orbit (:saturn state)))
                (:h (:orbit (:saturn state))) (:v (:orbit (:saturn state))))
     ; Uranus
@@ -250,7 +244,6 @@
               (:size (:uranus state)) (:size (:uranus state)))
     (q/no-fill)
     (q/stroke (:h (:uranus state)) (:s (:uranus state)) (:v (:uranus state)))
-    ; (q/rotate (:r (:orbit (:uranus state))))
     (q/ellipse (:x (:orbit (:uranus state))) (:y (:orbit (:uranus state)))
                (:h (:orbit (:uranus state))) (:v (:orbit (:uranus state))))
     ; Neptune
@@ -260,7 +253,16 @@
               (:size (:neptune state)) (:size (:neptune state)))
     (q/no-fill)
     (q/stroke (:h (:neptune state)) (:s (:neptune state)) (:v (:neptune state)))
-    ; (q/rotate (:r (:orbit (:neptune state))))
     (q/ellipse (:x (:orbit (:neptune state))) (:y (:orbit (:neptune state)))
                (:h (:orbit (:neptune state))) (:v (:orbit (:neptune state))))
+    ; Asteroid Belt
+    (let [radius-h  97
+          radius-v  85
+          cent-x    0
+          cent-y    0
+          rads      (map q/radians (range 0 365 5))
+          xs        (map #(+ cent-x (* radius-h (q/cos %))) rads)
+          ys        (map #(+ cent-y (* radius-v (q/sin %))) rads)]
+      (q/stroke 20 50 70)
+      (dorun (map (fn [x y] (println x y) (q/point x y)) xs ys)))
     ))

@@ -125,8 +125,33 @@ quil.core.no_fill.call(null);
 
 quil.core.stroke.call(null,new cljs.core.Keyword(null,"h","h",1109658740).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"s","s",1705939918).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"v","v",21465059).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state)));
 
-return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))),new cljs.core.Keyword(null,"h","h",1109658740).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))),new cljs.core.Keyword(null,"v","v",21465059).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))));
+quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))),new cljs.core.Keyword(null,"h","h",1109658740).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))),new cljs.core.Keyword(null,"v","v",21465059).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"orbit","orbit",-1921385817).cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"neptune","neptune",-141252204).cljs$core$IFn$_invoke$arity$1(state))));
+
+var radius_h = (97);
+var radius_v = (85);
+var cent_x = (0);
+var cent_y = (0);
+var rads = cljs.core.map.call(null,quil.core.radians,cljs.core.range.call(null,(0),(365),(5)));
+var xs = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,tr__22079__auto__){
+return (function (p1__27855_SHARP_){
+return (cent_x + (radius_h * quil.core.cos.call(null,p1__27855_SHARP_)));
+});})(radius_h,radius_v,cent_x,cent_y,rads,tr__22079__auto__))
+,rads);
+var ys = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,xs,tr__22079__auto__){
+return (function (p1__27856_SHARP_){
+return (cent_y + (radius_v * quil.core.sin.call(null,p1__27856_SHARP_)));
+});})(radius_h,radius_v,cent_x,cent_y,rads,xs,tr__22079__auto__))
+,rads);
+quil.core.stroke.call(null,(20),(50),(70));
+
+return cljs.core.dorun.call(null,cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,xs,ys,tr__22079__auto__){
+return (function (x,y){
+cljs.core.println.call(null,x,y);
+
+return quil.core.point.call(null,x,y);
+});})(radius_h,radius_v,cent_x,cent_y,rads,xs,ys,tr__22079__auto__))
+,xs,ys));
 }finally {quil.core.pop_matrix.call(null);
 }});
 
-//# sourceMappingURL=solar_system.js.map?rel=1526049564193
+//# sourceMappingURL=solar_system.js.map?rel=1526050790074
