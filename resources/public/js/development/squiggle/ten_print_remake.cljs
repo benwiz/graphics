@@ -3,7 +3,7 @@
 
 (def percent 10)
 (def palette
-  [0 50 100 200])
+  [0 50 100 200 280])
 
 (defn next-x [x r]
   (let [desired-x (+ x (/ (q/width) r))]
