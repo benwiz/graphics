@@ -19,7 +19,9 @@
         x (if (= size 50)
                 (q/mouse-x)
                 (* (+ (:x state) (+ (rand-int 10) 10)) (rand-nth [1 1])))
-        y (q/mouse-y)]
+        y (if (= size 50)
+                (q/mouse-y)
+                (* (+ (:y state) (+ (rand-int 10) 10)) (rand-nth [1 1])))]
   { :size size
     :hue hue
     :x x
