@@ -13,8 +13,9 @@
 
 (defn update-state [state]
   ; Reduce size by 5. If 0 make it 50. Change hue if size is 50.
-  (let [size (if (= (- (:size state) 5) 0) 50 (- (:size state) 5))
-        hue (:hue state)
+  (let [next-size (- (:size state) 5)
+        size (if (= next-size 0) 50 next-size)
+        hue (if (= size 50) (rand-int 360) (:hue state))
         x (q/mouse-x)
         y (q/mouse-y)]
   { :size size
