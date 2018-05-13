@@ -5,7 +5,7 @@
   (q/frame-rate 20)
   (q/color-mode :hsb)
   (q/background 0)
-  (q/stroke 0)
+  (q/stroke 0 0 255)
   { :size 50
     :hue (rand-int 360)
     :x (/ (q/width) 2)
@@ -16,7 +16,9 @@
   (let [next-size (- (:size state) 5)
         size (if (= next-size 0) 50 next-size)
         hue (if (= size 50) (rand-int 360) (:hue state))
-        x (q/mouse-x)
+        x (if (= size 50)
+                (q/mouse-x)
+                (* (+ (:x state) (+ (rand-int 10) 10)) (rand-nth [1 1])))
         y (q/mouse-y)]
   { :size size
     :hue hue
