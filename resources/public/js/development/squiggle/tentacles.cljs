@@ -7,15 +7,20 @@
   (q/background 0)
   (q/stroke 0)
   { :size 50
-    :hue 50
+    :hue (rand-int 360)
     :x (/ (q/width) 2)
     :y (/ (q/height) 2)})
 
 (defn update-state [state]
-  { :size (:size state)
-    :hue (rand-int 360)
-    :x (q/mouse-x)
-    :y (q/mouse-y)})
+  ; Reduce size by 5. If 0 make it 50. Change hue if size is 50.
+  (let [size (if (= (- (:size state) 5) 0) 50 (- (:size state) 5))
+        hue (:hue state)
+        x (q/mouse-x)
+        y (q/mouse-y)]
+  { :size size
+    :hue hue
+    :x x
+    :y y}))
 
 (defn draw-state [state]
   (if (q/mouse-pressed?)
