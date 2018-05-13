@@ -84,7 +84,7 @@
     (m/mset 14 11 1)
     (m/mset 15 11 1)
     (m/mset 16 11 1)
-    (m/mset 9 12 1)
+    (m/mset  9 12 1)
     (m/mset 11 12 1)
     (m/mset 12 12 1)
     (m/mset 13 12 1)

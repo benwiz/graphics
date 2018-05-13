@@ -67,4 +67,4 @@ squiggle.game_of_life.draw_state = (function squiggle$game_of_life$draw_state(st
 return clojure.core.matrix.emap_indexed.call(null,squiggle.game_of_life.draw_cell,state);
 });
 
-//# sourceMappingURL=game_of_life.js.map?rel=1526073948184
+//# sourceMappingURL=game_of_life.js.map?rel=1526253056652
