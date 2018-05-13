@@ -54,4 +54,5 @@ goog.addDependency("../quil/middlewares/fun_mode.js", ['quil.middlewares.fun_mod
 goog.addDependency("../quil/middleware.js", ['quil.middleware'], ['cljs.core', 'quil.middlewares.navigation_3d', 'quil.middlewares.navigation_2d', 'quil.middlewares.fun_mode']);
 goog.addDependency("../squiggle/example.js", ['squiggle.example'], ['cljs.core', 'quil.core']);
 goog.addDependency("../squiggle/solar_system.js", ['squiggle.solar_system'], ['cljs.core', 'quil.core']);
-goog.addDependency("../squiggle/core.js", ['squiggle.core'], ['cljs.core', 'squiggle.ten_print_remake', 'squiggle.game_of_life', 'quil.core', 'quil.middleware', 'squiggle.example', 'squiggle.solar_system']);
+goog.addDependency("../squiggle/tentacles.js", ['squiggle.tentacles'], ['cljs.core', 'quil.core']);
+goog.addDependency("../squiggle/core.js", ['squiggle.core'], ['cljs.core', 'squiggle.ten_print_remake', 'squiggle.game_of_life', 'quil.core', 'quil.middleware', 'squiggle.example', 'squiggle.solar_system', 'squiggle.tentacles']);

@@ -4,7 +4,8 @@
             [squiggle.example :as example]
             [squiggle.ten-print-remake :as ten-print-remake]
             [squiggle.solar-system :as solar-system]
-            [squiggle.game-of-life :as game-of-life]))
+            [squiggle.game-of-life :as game-of-life]
+            [squiggle.tentacles :as tentacles]))
 
 ; this function is called in index.html
 (defn ^:export run-sketch []
@@ -35,6 +36,13 @@
     :setup game-of-life/setup
     :update game-of-life/update-state
     :draw game-of-life/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-tentacles
+    :host "tentacles"
+    :size [300 300]
+    :setup tentacles/setup
+    :update tentacles/update-state
+    :draw tentacles/draw-state
     :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:
