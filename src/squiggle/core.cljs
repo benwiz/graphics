@@ -1,21 +1,13 @@
 (ns squiggle.core
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]
-            [squiggle.example :as example]
             [squiggle.ten-print-remake :as ten-print-remake]
             [squiggle.solar-system :as solar-system]
             [squiggle.game-of-life :as game-of-life]
             [squiggle.tentacles :as tentacles]))
 
-; this function is called in index.html
+; This function is called in index.html
 (defn ^:export run-sketch []
-  ; (q/defsketch sketch-example
-  ;   :host "example"
-  ;   :size [500 500]
-  ;   :setup example/setup
-  ;   :update example/update-state
-  ;   :draw example/draw-state
-  ;   :middleware [m/fun-mode])
   (q/defsketch sketch-ten-print-remake
     :host "ten-print-remake"
     :size [300 300]
