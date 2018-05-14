@@ -67,18 +67,26 @@ lein cljsbuild once optimized
 ## To Do
 
 - Now
-  - Reducing circle brush
+  - Delaunay Ripple
+    - Setup
+      - Create some amount of points (state)
+      - Init an empty list of triangles (state)
+    - Update
+      - Move points
+      - Calculate triangles
+    - Draw
+      - Draw some lines. Draw some fills. Use one color with different saturation and value.
 
 - Next
-  - Website
-    - Create header and subtitle
-    - Create nice looking layout for the website – keep it very basic
-  - Game of Life
-    - Allow user to input start state or select from a few options
-  - Ten Print Remake
-    - Hue list should turn into a HSV list so that better color scheme can be selected
 
 - Later
   - Tentacles
     - Improve path
     - Improve colors
+  - Ten Print Remake
+    - Hue list should turn into a HSV list so that better color scheme can be selected
+  - Website
+    - Create header and subtitle
+    - Create nice looking layout for the website – keep it very basic
+  - Game of Life
+    - Allow user to input start state or select from a few options

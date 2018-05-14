@@ -20,10 +20,10 @@ return cljs.core.assoc_in.call(null,cljs.core.assoc_in.call(null,cljs.core.assoc
 squiggle.solar_system.draw_state = (function squiggle$solar_system$draw_state(state){
 quil.core.background.call(null,(0));
 
-var tr__22079__auto__ = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(quil.core.width.call(null) / (2)),(quil.core.height.call(null) / (2))], null);
+var tr__33328__auto__ = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(quil.core.width.call(null) / (2)),(quil.core.height.call(null) / (2))], null);
 quil.core.push_matrix.call(null);
 
-try{quil.core.translate.call(null,tr__22079__auto__);
+try{quil.core.translate.call(null,tr__33328__auto__);
 
 quil.core.no_stroke.call(null);
 
@@ -132,15 +132,15 @@ var radius_v = (85);
 var cent_x = (0);
 var cent_y = (0);
 var rads = cljs.core.map.call(null,quil.core.radians,cljs.core.range.call(null,(0),(365),(5)));
-var xs = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,tr__22079__auto__){
-return (function (p1__27903_SHARP_){
-return (cent_x + (radius_h * quil.core.cos.call(null,p1__27903_SHARP_)));
-});})(radius_h,radius_v,cent_x,cent_y,rads,tr__22079__auto__))
+var xs = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,tr__33328__auto__){
+return (function (p1__45843_SHARP_){
+return (cent_x + (radius_h * quil.core.cos.call(null,p1__45843_SHARP_)));
+});})(radius_h,radius_v,cent_x,cent_y,rads,tr__33328__auto__))
 ,rads);
-var ys = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,xs,tr__22079__auto__){
-return (function (p1__27904_SHARP_){
-return (cent_y + (radius_v * quil.core.sin.call(null,p1__27904_SHARP_)));
-});})(radius_h,radius_v,cent_x,cent_y,rads,xs,tr__22079__auto__))
+var ys = cljs.core.map.call(null,((function (radius_h,radius_v,cent_x,cent_y,rads,xs,tr__33328__auto__){
+return (function (p1__45844_SHARP_){
+return (cent_y + (radius_v * quil.core.sin.call(null,p1__45844_SHARP_)));
+});})(radius_h,radius_v,cent_x,cent_y,rads,xs,tr__33328__auto__))
 ,rads);
 quil.core.stroke.call(null,(20),(50),(70));
 
@@ -148,4 +148,4 @@ return cljs.core.dorun.call(null,cljs.core.map.call(null,quil.core.point,xs,ys))
 }finally {quil.core.pop_matrix.call(null);
 }});
 
-//# sourceMappingURL=solar_system.js.map?rel=1526050881447
+//# sourceMappingURL=solar_system.js.map?rel=1526258710109

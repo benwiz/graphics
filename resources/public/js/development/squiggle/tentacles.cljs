@@ -22,8 +22,8 @@
         hue (if (= size 50) (rand-int 360) (:hue state))
         sat (if (= size 50) (+ (rand-int 105) 150) (:sat state))
         val (if (= size 50) (+ (rand-int 105) 150) (:val state))
-        x-direction (if (= size 50) (rand-nth [-1 1]) (:x-direction state))
-        y-direction (if (= size 50) (rand-nth [-1 1]) (:y-direction state))
+        x-direction (if (= size 50) (* (rand-nth [-1 1]) (+ (rand 0.2) 0.8)) (:x-direction state))
+        y-direction (if (= size 50) (* (rand-nth [-1 1]) (+ (rand 0.2) 0.8)) (:y-direction state))
         x (if (= size 50)
                 (q/mouse-x)
                 (+ (:x state) (* (+ (rand-int 10) 3) x-direction)))
@@ -36,8 +36,8 @@
       :val val
       :x-direction x-direction
       :y-direction y-direction
-      :x x
-      :y y}))
+      :x (if (and (= x 0) (= y 0)) (/ (q/width) 2) x)
+      :y (if (and (= x 0) (= y 0)) (/ (q/height) 2) y)}))
 
 (defn draw-state [state]
   (q/fill (:hue state) (:sat state) (:val state))
