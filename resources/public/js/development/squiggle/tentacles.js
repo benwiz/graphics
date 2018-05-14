@@ -31,4 +31,4 @@ quil.core.fill.call(null,new cljs.core.Keyword(null,"hue","hue",-508078848).cljs
 return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=tentacles.js.map?rel=1526257859541
+//# sourceMappingURL=tentacles.js.map?rel=1526257927141
