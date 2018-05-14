@@ -68,6 +68,7 @@ lein cljsbuild once optimized
 
 - Now
   - Pointillism
+    - More images
   - Delaunay Ripple
     - Setup
       - Create some amount of points (state)
@@ -91,3 +92,5 @@ lein cljsbuild once optimized
     - Create nice looking layout for the website – keep it very basic
   - Game of Life
     - Allow user to input start state or select from a few options
+  - Pointillism
+    - Average color of area under point instead of specific pixel's color
