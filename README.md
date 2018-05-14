@@ -77,3 +77,8 @@ lein cljsbuild once optimized
     - Allow user to input start state or select from a few options
   - Ten Print Remake
     - Hue list should turn into a HSV list so that better color scheme can be selected
+
+- Later
+  - Tentacles
+    - Improve path
+    - Improve colors
