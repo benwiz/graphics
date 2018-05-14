@@ -17,7 +17,8 @@
           :c rgb
           :size (rand-int 10)
           :image (:image state)
-        }))
+        })
+      state)
     state))
 
 (defn draw-state [state]
