@@ -7,7 +7,7 @@
   {:x 0 :y 0 :r 0 :g 0 :b 0 :size 0 :image (q/load-image "/squiggle/assets/images/starry-night.jpg")})
 
 (defn update-state [state]
-  (if (contains? state :image)
+  (if (:image state)
     (if (> (.-width (:image state)) 0)
       (let [x (rand-int (q/width))
             y (rand-int (q/height))
