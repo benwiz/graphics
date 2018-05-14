@@ -68,6 +68,7 @@ lein cljsbuild once optimized
 
 - Now
   - Pointillism
+    - A way to identify if localhost or benwiz.io for image path.
     - More images
   - Delaunay Ripple
     - Setup
