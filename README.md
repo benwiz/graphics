@@ -33,6 +33,10 @@ simultaneously, and the discrete moment at which this happens is sometimes calle
 (in other words, each generation is a pure function of the preceding one). The rules continue
 to be applied repeatedly to create further generations.
 
+#### Tentacles
+
+A paintbrush that kind of looks like a tentacle. Paths can be improved by calculating a curve then accessing points along the curve.
+
 ## Notes
 
 Dev

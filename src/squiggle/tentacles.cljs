@@ -2,7 +2,7 @@
   (:require [quil.core :as q :include-macros true]))
 
 (defn setup []
-  (q/frame-rate 20)
+  (q/frame-rate 30)
   (q/color-mode :hsb)
   (q/background 0)
   (q/stroke 0 0 255)
@@ -20,10 +20,10 @@
         y-direction (if (= size 50) (rand-nth [-1 1]) (:y-direction state))
         x (if (= size 50)
                 (q/mouse-x)
-                (* (+ (:x state) (+ (rand-int 10) 5)) x-direction))
+                (+ (:x state) (* (+ (rand-int 10) 5) x-direction)))
         y (if (= size 50)
                 (q/mouse-y)
-                (* (+ (:y state) (+ (rand-int 10) 5)) y-direction))]
+                (+ (:y state) (* (+ (rand-int 10) 5) y-direction)))]
     { :size size
       :hue hue
       :x-direction x-direction
