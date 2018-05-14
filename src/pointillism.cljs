@@ -7,16 +7,17 @@
   {:x 0 :y 0 :r 0 :g 0 :b 0 :size 0 :image (q/load-image "/squiggle/assets/images/starry-night.jpg")})
 
 (defn update-state [state]
-  (if (> (.-width (:image state)) 0)
-    (let [x (rand-int (q/width))
-          y (rand-int (q/height))
-          rgb (q/get-pixel (:image state) x y)]
-      { :x x
-        :y y
-        :c rgb
-        :size (rand-int 10)
-        :image (:image state)
-      })))
+  (if (contains? state :image)
+    (if (> (.-width (:image state)) 0)
+      (let [x (rand-int (q/width))
+            y (rand-int (q/height))
+            rgb (q/get-pixel (:image state) x y)]
+        { :x x
+          :y y
+          :c rgb
+          :size (rand-int 10)
+          :image (:image state)
+        }))))
 
 (defn draw-state [state]
   (q/stroke (:c state))
