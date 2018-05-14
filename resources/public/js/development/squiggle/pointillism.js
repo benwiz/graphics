@@ -7,7 +7,7 @@ quil.core.frame_rate.call(null,(120));
 
 quil.core.background.call(null,(0));
 
-return new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Keyword(null,"x","x",2099068185),(0),new cljs.core.Keyword(null,"y","y",-1757859776),(0),new cljs.core.Keyword(null,"r","r",-471384190),(0),new cljs.core.Keyword(null,"g","g",1738089905),(0),new cljs.core.Keyword(null,"b","b",1482224470),(0),new cljs.core.Keyword(null,"size","size",1098693007),(0),new cljs.core.Keyword(null,"image","image",-58725096),quil.core.load_image.call(null,"/squiggle/assets/images/starry-night.jpg")], null);
+return new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Keyword(null,"x","x",2099068185),(0),new cljs.core.Keyword(null,"y","y",-1757859776),(0),new cljs.core.Keyword(null,"r","r",-471384190),(0),new cljs.core.Keyword(null,"g","g",1738089905),(0),new cljs.core.Keyword(null,"b","b",1482224470),(0),new cljs.core.Keyword(null,"size","size",1098693007),(0),new cljs.core.Keyword(null,"image","image",-58725096),quil.core.request_image.call(null,"/squiggle/assets/images/starry-night.jpg")], null);
 });
 squiggle.pointillism.update_state = (function squiggle$pointillism$update_state(state){
 if(cljs.core.truth_(new cljs.core.Keyword(null,"image","image",-58725096).cljs$core$IFn$_invoke$arity$1(state))){
@@ -20,7 +20,7 @@ return new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"x"
 return null;
 }
 } else {
-return null;
+return state;
 }
 });
 squiggle.pointillism.draw_state = (function squiggle$pointillism$draw_state(state){
@@ -36,4 +36,4 @@ quil.core.no_fill.call(null);
 return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=pointillism.js.map?rel=1526325644724
+//# sourceMappingURL=pointillism.js.map?rel=1526326502865

@@ -4,7 +4,7 @@
 (defn setup []
   (q/frame-rate 120)
   (q/background 0)
-  {:x 0 :y 0 :r 0 :g 0 :b 0 :size 0 :image (q/load-image "/squiggle/assets/images/starry-night.jpg")})
+  {:x 0 :y 0 :r 0 :g 0 :b 0 :size 0 :image (q/request-image "/squiggle/assets/images/starry-night.jpg")})
 
 (defn update-state [state]
   (if (:image state)
@@ -17,7 +17,8 @@
           :c rgb
           :size (rand-int 10)
           :image (:image state)
-        }))))
+        }))
+    state))
 
 (defn draw-state [state]
   (q/stroke (:c state))
