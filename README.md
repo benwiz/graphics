@@ -67,6 +67,7 @@ lein cljsbuild once optimized
 ## To Do
 
 - Now
+  - Pointillism
   - Delaunay Ripple
     - Setup
       - Create some amount of points (state)
