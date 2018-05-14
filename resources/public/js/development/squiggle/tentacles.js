@@ -17,18 +17,16 @@ squiggle.tentacles.update_state = (function squiggle$tentacles$update_state(stat
 var next_size = (new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state) - (5));
 var size = ((cljs.core._EQ_.call(null,next_size,(0)))?(50):next_size);
 var hue = ((cljs.core._EQ_.call(null,size,(50)))?cljs.core.rand_int.call(null,(360)):new cljs.core.Keyword(null,"hue","hue",-508078848).cljs$core$IFn$_invoke$arity$1(state));
-var x = ((cljs.core._EQ_.call(null,size,(50)))?quil.core.mouse_x.call(null):((new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state) + (cljs.core.rand_int.call(null,(10)) + (10))) * cljs.core.rand_nth.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(1),(1)], null))));
-var y = ((cljs.core._EQ_.call(null,size,(50)))?quil.core.mouse_y.call(null):((new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state) + (cljs.core.rand_int.call(null,(10)) + (10))) * cljs.core.rand_nth.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(1),(1)], null))));
-return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"size","size",1098693007),size,new cljs.core.Keyword(null,"hue","hue",-508078848),hue,new cljs.core.Keyword(null,"x","x",2099068185),x,new cljs.core.Keyword(null,"y","y",-1757859776),y], null);
+var x_direction = ((cljs.core._EQ_.call(null,size,(50)))?cljs.core.rand_nth.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(-1),(1)], null)):new cljs.core.Keyword(null,"x-direction","x-direction",1053577041).cljs$core$IFn$_invoke$arity$1(state));
+var y_direction = ((cljs.core._EQ_.call(null,size,(50)))?cljs.core.rand_nth.call(null,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(-1),(1)], null)):new cljs.core.Keyword(null,"y-direction","y-direction",-2054381685).cljs$core$IFn$_invoke$arity$1(state));
+var x = ((cljs.core._EQ_.call(null,size,(50)))?quil.core.mouse_x.call(null):((new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state) + (cljs.core.rand_int.call(null,(10)) + (5))) * x_direction));
+var y = ((cljs.core._EQ_.call(null,size,(50)))?quil.core.mouse_y.call(null):((new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state) + (cljs.core.rand_int.call(null,(10)) + (5))) * y_direction));
+return new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"size","size",1098693007),size,new cljs.core.Keyword(null,"hue","hue",-508078848),hue,new cljs.core.Keyword(null,"x-direction","x-direction",1053577041),x_direction,new cljs.core.Keyword(null,"y-direction","y-direction",-2054381685),y_direction,new cljs.core.Keyword(null,"x","x",2099068185),x,new cljs.core.Keyword(null,"y","y",-1757859776),y], null);
 });
 squiggle.tentacles.draw_state = (function squiggle$tentacles$draw_state(state){
-if(cljs.core.truth_(quil.core.mouse_pressed_QMARK_.call(null))){
 quil.core.fill.call(null,new cljs.core.Keyword(null,"hue","hue",-508078848).cljs$core$IFn$_invoke$arity$1(state),(250),(250));
 
 return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state));
-} else {
-return null;
-}
 });
 
-//# sourceMappingURL=tentacles.js.map?rel=1526255477226
+//# sourceMappingURL=tentacles.js.map?rel=1526257294577
