@@ -22,6 +22,12 @@
 (defn setup-girl-with-pearl-earing []
   (setup "girl-with-pearl-earing.jpg"))
 
+(defn setup-picasso-face []
+  (setup "picasso-face.jpg"))
+
+(defn setup-georges-seurat []
+  (setup "georges-seurat.jpg"))
+
 (defn update-state [state]
   (if (:image state)
     (if (> (.-width (:image state)) 0)
@@ -32,8 +38,8 @@
           :x x
           :y y
           :c rgb
-          ; Every 1000 iterations reduce the max size by 1 with a minimum max size of 2
-          :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 1000))) 2))
+          ; Every 2000 iterations reduce the max size by 1 with a minimum max size of 4
+          :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 2000))) 4))
           :image (:image state)})
       state)
     state))

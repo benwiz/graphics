@@ -50,6 +50,20 @@
     :setup pointillism/setup-girl-with-pearl-earing
     :update pointillism/update-state
     :draw pointillism/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-pointillism-picasso-face
+    :host "pointillism-picasso-face"
+    :size [300 300]
+    :setup pointillism/setup-picasso-face
+    :update pointillism/update-state
+    :draw pointillism/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-pointillism-georges-seurat
+    :host "pointillism-georges-seurat"
+    :size [604 300] ; 4 to account for gutters
+    :setup pointillism/setup-georges-seurat
+    :update pointillism/update-state
+    :draw pointillism/draw-state
     :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:

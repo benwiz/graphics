@@ -69,8 +69,8 @@ lein cljsbuild once optimized
 - Now
   - Pointillism
     - More images (3-5 total)
-    - Reduce max dot size as image fills. Probably to a minimum max size of 2.
-  - Fundamental Shape differentials
+    - Calculate average color of area under point
+  - Primitive Shape Differential Drawing
   - Delaunay Ripple
     - Setup
       - Create some amount of points (state)
