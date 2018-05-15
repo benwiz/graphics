@@ -5,7 +5,7 @@
   (let [path (if (= (.-hostname (.-location js/window)) "benwiz.io")
                  (str "/squiggle/assets/images/" filename)
                  (str "/assets/images/" filename))]
-    (q/frame-rate 120)
+    (q/frame-rate 1000)
     (q/background 0)
     { :i 0
       :x 0
@@ -39,7 +39,7 @@
           :y y
           :c rgb
           ; Every 2000 iterations reduce the max size by 1 with a minimum max size of 4
-          :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 2000))) 4))
+          :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 3000))) 4))
           :image (:image state)})
       state)
     state))

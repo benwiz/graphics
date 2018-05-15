@@ -4,7 +4,7 @@ goog.require('cljs.core');
 goog.require('quil.core');
 squiggle.pointillism.setup = (function squiggle$pointillism$setup(filename){
 var path = ((cljs.core._EQ_.call(null,window.location.hostname,"benwiz.io"))?["/squiggle/assets/images/",cljs.core.str.cljs$core$IFn$_invoke$arity$1(filename)].join(''):["/assets/images/",cljs.core.str.cljs$core$IFn$_invoke$arity$1(filename)].join(''));
-quil.core.frame_rate.call(null,(120));
+quil.core.frame_rate.call(null,(1000));
 
 quil.core.background.call(null,(0));
 
@@ -28,7 +28,7 @@ if((new cljs.core.Keyword(null,"image","image",-58725096).cljs$core$IFn$_invoke$
 var x = cljs.core.rand_int.call(null,quil.core.width.call(null));
 var y = cljs.core.rand_int.call(null,quil.core.height.call(null));
 var rgb = quil.core.get_pixel.call(null,new cljs.core.Keyword(null,"image","image",-58725096).cljs$core$IFn$_invoke$arity$1(state),x,y);
-return new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"i","i",-1386841315),(new cljs.core.Keyword(null,"i","i",-1386841315).cljs$core$IFn$_invoke$arity$1(state) + (1)),new cljs.core.Keyword(null,"x","x",2099068185),x,new cljs.core.Keyword(null,"y","y",-1757859776),y,new cljs.core.Keyword(null,"c","c",-1763192079),rgb,new cljs.core.Keyword(null,"size","size",1098693007),cljs.core.rand_int.call(null,Math.max(((10) - Math.floor((new cljs.core.Keyword(null,"i","i",-1386841315).cljs$core$IFn$_invoke$arity$1(state) / (2000)))),(4))),new cljs.core.Keyword(null,"image","image",-58725096),new cljs.core.Keyword(null,"image","image",-58725096).cljs$core$IFn$_invoke$arity$1(state)], null);
+return new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"i","i",-1386841315),(new cljs.core.Keyword(null,"i","i",-1386841315).cljs$core$IFn$_invoke$arity$1(state) + (1)),new cljs.core.Keyword(null,"x","x",2099068185),x,new cljs.core.Keyword(null,"y","y",-1757859776),y,new cljs.core.Keyword(null,"c","c",-1763192079),rgb,new cljs.core.Keyword(null,"size","size",1098693007),cljs.core.rand_int.call(null,Math.max(((10) - Math.floor((new cljs.core.Keyword(null,"i","i",-1386841315).cljs$core$IFn$_invoke$arity$1(state) / (3000)))),(4))),new cljs.core.Keyword(null,"image","image",-58725096),new cljs.core.Keyword(null,"image","image",-58725096).cljs$core$IFn$_invoke$arity$1(state)], null);
 } else {
 return state;
 }
@@ -49,4 +49,4 @@ quil.core.no_fill.call(null);
 return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=pointillism.js.map?rel=1526412445182
+//# sourceMappingURL=pointillism.js.map?rel=1526412617328
