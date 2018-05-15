@@ -37,10 +37,17 @@
     :update tentacles/update-state
     :draw tentacles/draw-state
     :middleware [m/fun-mode])
-  (q/defsketch sketch-pointillism
-    :host "pointillism"
+  (q/defsketch sketch-pointillism-starry-night
+    :host "pointillism-starry-night"
     :size [300 300]
-    :setup pointillism/setup
+    :setup pointillism/setup-starry-night
+    :update pointillism/update-state
+    :draw pointillism/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-pointillism-girl-with-pearl-earing
+    :host "pointillism-girl-with-pearl-earing"
+    :size [300 300]
+    :setup pointillism/setup-girl-with-pearl-earing
     :update pointillism/update-state
     :draw pointillism/draw-state
     :middleware [m/fun-mode]))
