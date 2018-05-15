@@ -31,6 +31,9 @@
 (defn setup-deep-space []
   (setup "deep-space.jpg"))
 
+(defn setup-andromeda []
+  (setup "andromeda.jpg"))
+
 (defn update-state [state]
   (if (:image state)
     (if (> (.-width (:image state)) 0)

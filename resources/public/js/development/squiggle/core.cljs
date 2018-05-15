@@ -71,6 +71,13 @@
     :setup pointillism/setup-deep-space
     :update pointillism/update-state
     :draw pointillism/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-pointillism-andromeda
+    :host "pointillism-andromeda"
+    :size [300 300]
+    :setup pointillism/setup-andromeda
+    :update pointillism/update-state
+    :draw pointillism/draw-state
     :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:
