@@ -44,8 +44,8 @@
           :x x
           :y y
           :c rgb
-          ; Every 2000 iterations reduce the max size by 1 with a minimum max size of 4
-          :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 3000))) 4))
+          ; Every 2000 iterations reduce the max size by 1 with a minimum max size of 6
+          :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 3000))) 6))
           :image (:image state)})
       state)
     state))
