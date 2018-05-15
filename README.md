@@ -69,7 +69,9 @@ lein cljsbuild once optimized
 - Now
   - Pointillism
     - A way to identify if localhost or benwiz.io for image path.
-    - More images
+    - More images. This will probably require passing in image name from core.cljs.
+      - Leaning away from looping or click based rotation because people will glance at the whole page briefly.
+  - Fundamental Shape differentials
   - Delaunay Ripple
     - Setup
       - Create some amount of points (state)
