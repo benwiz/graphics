@@ -67,9 +67,6 @@ lein cljsbuild once optimized
 ## To Do
 
 - Now
-  - Pointillism
-    - More images (3-5 total)
-    - Calculate average color of area under point
   - Primitive Shape Differential Drawing
   - Delaunay Ripple
     - Setup
