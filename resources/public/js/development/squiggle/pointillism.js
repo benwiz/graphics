@@ -22,6 +22,9 @@ return squiggle.pointillism.setup.call(null,"picasso-face.jpg");
 squiggle.pointillism.setup_georges_seurat = (function squiggle$pointillism$setup_georges_seurat(){
 return squiggle.pointillism.setup.call(null,"georges-seurat.jpg");
 });
+squiggle.pointillism.setup_deep_space = (function squiggle$pointillism$setup_deep_space(){
+return squiggle.pointillism.setup.call(null,"deep-space.jpg");
+});
 squiggle.pointillism.update_state = (function squiggle$pointillism$update_state(state){
 if(cljs.core.truth_(new cljs.core.Keyword(null,"image","image",-58725096).cljs$core$IFn$_invoke$arity$1(state))){
 if((new cljs.core.Keyword(null,"image","image",-58725096).cljs$core$IFn$_invoke$arity$1(state).width > (0))){
@@ -49,4 +52,4 @@ quil.core.no_fill.call(null);
 return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state),new cljs.core.Keyword(null,"size","size",1098693007).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=pointillism.js.map?rel=1526412617328
+//# sourceMappingURL=pointillism.js.map?rel=1526422705512

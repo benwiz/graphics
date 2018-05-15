@@ -28,6 +28,9 @@
 (defn setup-georges-seurat []
   (setup "georges-seurat.jpg"))
 
+(defn setup-deep-space []
+  (setup "deep-space.jpg"))
+
 (defn update-state [state]
   (if (:image state)
     (if (> (.-width (:image state)) 0)
