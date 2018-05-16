@@ -33,9 +33,17 @@ simultaneously, and the discrete moment at which this happens is sometimes calle
 (in other words, each generation is a pure function of the preceding one). The rules continue
 to be applied repeatedly to create further generations.
 
-#### Tentacles
+### Tentacles
 
 A paintbrush that kind of looks like a tentacle. Paths can be improved by calculating a curve then accessing points along the curve.
+
+### Pointillism
+
+### Primitive
+
+https://github.com/fogleman/primitive
+
+The algorithm tries to find the single most optimal shape that can be drawn to minimize the error between the target image and the drawn image. It repeats this process, adding one shape at a time. Around 50 to 200 shapes are needed to reach a result that is recognizable yet artistic and abstract.
 
 ## Notes
 
@@ -92,4 +100,4 @@ lein cljsbuild once optimized
   - Game of Life
     - Allow user to input start state or select from a few options
   - Pointillism
-    - Average color of area under point instead of specific pixel's color
+    - Consider stop updating at a max iterations

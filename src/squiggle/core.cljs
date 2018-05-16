@@ -5,7 +5,8 @@
             [squiggle.solar-system :as solar-system]
             [squiggle.game-of-life :as game-of-life]
             [squiggle.tentacles :as tentacles]
-            [squiggle.pointillism :as pointillism]))
+            [squiggle.pointillism :as pointillism]
+            [squiggle.primitive :as primitive]))
 
 ; This function is called in index.html
 (defn ^:export run-sketch []
@@ -64,6 +65,13 @@
     :setup pointillism/setup-georges-seurat
     :update pointillism/update-state
     :draw pointillism/draw-state
+    :middleware [m/fun-mode])
+  (q/defsketch sketch-primitive-starry-night
+    :host "primitive-starry-night"
+    :size [300 300]
+    :setup primitive/setup-starry-night
+    :update primitive/update-state
+    :draw primitive/draw-state
     :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:
