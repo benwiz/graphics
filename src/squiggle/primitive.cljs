@@ -2,7 +2,7 @@
   (:require [quil.core :as q :include-macros true]))
 
 (defn error [t p]
-  (- p t))
+  (Math/pow (- p t) 2))
 
 (defn mse [target prediction]
   "(From 1 to N (prediction_i - target_i)^2) / N"

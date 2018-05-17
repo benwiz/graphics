@@ -3,7 +3,7 @@ goog.provide('squiggle.primitive');
 goog.require('cljs.core');
 goog.require('quil.core');
 squiggle.primitive.error = (function squiggle$primitive$error(t,p){
-return (p - t);
+return Math.pow((p - t),(2));
 });
 squiggle.primitive.mse = (function squiggle$primitive$mse(target,prediction){
 
@@ -29,4 +29,4 @@ squiggle.primitive.draw_state = (function squiggle$primitive$draw_state(state){
 return null;
 });
 
-//# sourceMappingURL=primitive.js.map?rel=1526517603062
+//# sourceMappingURL=primitive.js.map?rel=1526517670100
