@@ -1,7 +1,8 @@
 (ns squiggle.primitive
   (:require [quil.core :as q :include-macros true]))
 
-(def max-i 600)
+; (def max-i (* (q/width) (q/height) (q/width) (q/height) 255 255 255))
+(def max-i 100)
 
 (defn error [t p]
   (Math/pow (- p t) 2))
@@ -17,8 +18,8 @@
   (q/ellipse (get shape 0) (get shape 1) (get shape 2) (get shape 3)))
 
 (defn setup [filename]
-  (q/frame-rate 60)
-  (q/background 255 255 255)
+  (q/frame-rate 1000)
+  (q/background 0 0 0)
   (let [path (if (= (.-hostname (.-location js/window)) "benwiz.io")
                  (str "/squiggle/assets/images/" filename)
                  (str "/assets/images/" filename))]
@@ -44,11 +45,12 @@
         mse (mse
               (q/pixels (:target-image state))
               prediction-pixels)]
+    (println "count:" (count (:shapes state)))
     { :i (if (< (:i state) max-i) (inc (:i state)) 0)
       :target-image (:target-image state)
       :prediction-pixels prediction-pixels
-      :shapes (if (< (:i state) 0) (:shapes state) (conj (:shapes state) (:best-shape state)))
-      :next-shape [(rand-int (q/width)) (rand-int (q/height)) 10 10 100 0 0]
+      :shapes (if (< (:i state) max-i) (:shapes state) (conj (:shapes state) (:best-shape state)))
+      :next-shape [(rand-int (q/width)) (rand-int (q/height)) (rand-int (q/width)) (rand-int (q/height)) (rand-int 255) (rand-int 255) (rand-int 255)]
       :best-shape (if (< mse (:best-mse state)) (:next-shape state) (:best-shape state))
       :best-mse (if (< (:i state) max-i)
                     (if (< mse (:best-mse state)) mse (:best-mse state))
@@ -56,7 +58,7 @@
 
 (defn draw-state [state]
   ; Clear background and set color
-  (q/background 255 255 255)
+  (q/background 0 0 0)
   (q/no-stroke)
   ; Draw all confirmed shapes
   (dorun (map draw-shape (:shapes state)))

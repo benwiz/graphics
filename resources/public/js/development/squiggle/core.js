@@ -12,64 +12,64 @@ goog.require('squiggle.primitive');
 squiggle.core.run_sketch = (function squiggle$core$run_sketch(){
 squiggle.core.sketch_ten_print_remake = (function squiggle$core$run_sketch_$_sketch_ten_print_remake(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"ten-print-remake",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.ten_print_remake.update_state))?(function() { 
-var G__46053__delegate = function (args){
+var G__47415__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.ten_print_remake.update_state,args);
 };
-var G__46053 = function (var_args){
+var G__47415 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46054__i = 0, G__46054__a = new Array(arguments.length -  0);
-while (G__46054__i < G__46054__a.length) {G__46054__a[G__46054__i] = arguments[G__46054__i + 0]; ++G__46054__i;}
-  args = new cljs.core.IndexedSeq(G__46054__a,0,null);
+var G__47416__i = 0, G__47416__a = new Array(arguments.length -  0);
+while (G__47416__i < G__47416__a.length) {G__47416__a[G__47416__i] = arguments[G__47416__i + 0]; ++G__47416__i;}
+  args = new cljs.core.IndexedSeq(G__47416__a,0,null);
 } 
-return G__46053__delegate.call(this,args);};
-G__46053.cljs$lang$maxFixedArity = 0;
-G__46053.cljs$lang$applyTo = (function (arglist__46055){
-var args = cljs.core.seq(arglist__46055);
-return G__46053__delegate(args);
+return G__47415__delegate.call(this,args);};
+G__47415.cljs$lang$maxFixedArity = 0;
+G__47415.cljs$lang$applyTo = (function (arglist__47417){
+var args = cljs.core.seq(arglist__47417);
+return G__47415__delegate(args);
 });
-G__46053.cljs$core$IFn$_invoke$arity$variadic = G__46053__delegate;
-return G__46053;
+G__47415.cljs$core$IFn$_invoke$arity$variadic = G__47415__delegate;
+return G__47415;
 })()
 :squiggle.ten_print_remake.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.ten_print_remake.setup))?(function() { 
-var G__46056__delegate = function (args){
+var G__47418__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.ten_print_remake.setup,args);
 };
-var G__46056 = function (var_args){
+var G__47418 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46057__i = 0, G__46057__a = new Array(arguments.length -  0);
-while (G__46057__i < G__46057__a.length) {G__46057__a[G__46057__i] = arguments[G__46057__i + 0]; ++G__46057__i;}
-  args = new cljs.core.IndexedSeq(G__46057__a,0,null);
+var G__47419__i = 0, G__47419__a = new Array(arguments.length -  0);
+while (G__47419__i < G__47419__a.length) {G__47419__a[G__47419__i] = arguments[G__47419__i + 0]; ++G__47419__i;}
+  args = new cljs.core.IndexedSeq(G__47419__a,0,null);
 } 
-return G__46056__delegate.call(this,args);};
-G__46056.cljs$lang$maxFixedArity = 0;
-G__46056.cljs$lang$applyTo = (function (arglist__46058){
-var args = cljs.core.seq(arglist__46058);
-return G__46056__delegate(args);
+return G__47418__delegate.call(this,args);};
+G__47418.cljs$lang$maxFixedArity = 0;
+G__47418.cljs$lang$applyTo = (function (arglist__47420){
+var args = cljs.core.seq(arglist__47420);
+return G__47418__delegate(args);
 });
-G__46056.cljs$core$IFn$_invoke$arity$variadic = G__46056__delegate;
-return G__46056;
+G__47418.cljs$core$IFn$_invoke$arity$variadic = G__47418__delegate;
+return G__47418;
 })()
 :squiggle.ten_print_remake.setup),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.ten_print_remake.draw_state))?(function() { 
-var G__46059__delegate = function (args){
+var G__47421__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.ten_print_remake.draw_state,args);
 };
-var G__46059 = function (var_args){
+var G__47421 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46060__i = 0, G__46060__a = new Array(arguments.length -  0);
-while (G__46060__i < G__46060__a.length) {G__46060__a[G__46060__i] = arguments[G__46060__i + 0]; ++G__46060__i;}
-  args = new cljs.core.IndexedSeq(G__46060__a,0,null);
+var G__47422__i = 0, G__47422__a = new Array(arguments.length -  0);
+while (G__47422__i < G__47422__a.length) {G__47422__a[G__47422__i] = arguments[G__47422__i + 0]; ++G__47422__i;}
+  args = new cljs.core.IndexedSeq(G__47422__a,0,null);
 } 
-return G__46059__delegate.call(this,args);};
-G__46059.cljs$lang$maxFixedArity = 0;
-G__46059.cljs$lang$applyTo = (function (arglist__46061){
-var args = cljs.core.seq(arglist__46061);
-return G__46059__delegate(args);
+return G__47421__delegate.call(this,args);};
+G__47421.cljs$lang$maxFixedArity = 0;
+G__47421.cljs$lang$applyTo = (function (arglist__47423){
+var args = cljs.core.seq(arglist__47423);
+return G__47421__delegate(args);
 });
-G__46059.cljs$core$IFn$_invoke$arity$variadic = G__46059__delegate;
-return G__46059;
+G__47421.cljs$core$IFn$_invoke$arity$variadic = G__47421__delegate;
+return G__47421;
 })()
 :squiggle.ten_print_remake.draw_state));
 });
@@ -84,64 +84,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_solar_system = (function squiggle$core$run_sketch_$_sketch_solar_system(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"solar-system",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.solar_system.update_state))?(function() { 
-var G__46062__delegate = function (args){
+var G__47424__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.solar_system.update_state,args);
 };
-var G__46062 = function (var_args){
+var G__47424 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46063__i = 0, G__46063__a = new Array(arguments.length -  0);
-while (G__46063__i < G__46063__a.length) {G__46063__a[G__46063__i] = arguments[G__46063__i + 0]; ++G__46063__i;}
-  args = new cljs.core.IndexedSeq(G__46063__a,0,null);
+var G__47425__i = 0, G__47425__a = new Array(arguments.length -  0);
+while (G__47425__i < G__47425__a.length) {G__47425__a[G__47425__i] = arguments[G__47425__i + 0]; ++G__47425__i;}
+  args = new cljs.core.IndexedSeq(G__47425__a,0,null);
 } 
-return G__46062__delegate.call(this,args);};
-G__46062.cljs$lang$maxFixedArity = 0;
-G__46062.cljs$lang$applyTo = (function (arglist__46064){
-var args = cljs.core.seq(arglist__46064);
-return G__46062__delegate(args);
+return G__47424__delegate.call(this,args);};
+G__47424.cljs$lang$maxFixedArity = 0;
+G__47424.cljs$lang$applyTo = (function (arglist__47426){
+var args = cljs.core.seq(arglist__47426);
+return G__47424__delegate(args);
 });
-G__46062.cljs$core$IFn$_invoke$arity$variadic = G__46062__delegate;
-return G__46062;
+G__47424.cljs$core$IFn$_invoke$arity$variadic = G__47424__delegate;
+return G__47424;
 })()
 :squiggle.solar_system.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.solar_system.setup))?(function() { 
-var G__46065__delegate = function (args){
+var G__47427__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.solar_system.setup,args);
 };
-var G__46065 = function (var_args){
+var G__47427 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46066__i = 0, G__46066__a = new Array(arguments.length -  0);
-while (G__46066__i < G__46066__a.length) {G__46066__a[G__46066__i] = arguments[G__46066__i + 0]; ++G__46066__i;}
-  args = new cljs.core.IndexedSeq(G__46066__a,0,null);
+var G__47428__i = 0, G__47428__a = new Array(arguments.length -  0);
+while (G__47428__i < G__47428__a.length) {G__47428__a[G__47428__i] = arguments[G__47428__i + 0]; ++G__47428__i;}
+  args = new cljs.core.IndexedSeq(G__47428__a,0,null);
 } 
-return G__46065__delegate.call(this,args);};
-G__46065.cljs$lang$maxFixedArity = 0;
-G__46065.cljs$lang$applyTo = (function (arglist__46067){
-var args = cljs.core.seq(arglist__46067);
-return G__46065__delegate(args);
+return G__47427__delegate.call(this,args);};
+G__47427.cljs$lang$maxFixedArity = 0;
+G__47427.cljs$lang$applyTo = (function (arglist__47429){
+var args = cljs.core.seq(arglist__47429);
+return G__47427__delegate(args);
 });
-G__46065.cljs$core$IFn$_invoke$arity$variadic = G__46065__delegate;
-return G__46065;
+G__47427.cljs$core$IFn$_invoke$arity$variadic = G__47427__delegate;
+return G__47427;
 })()
 :squiggle.solar_system.setup),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.solar_system.draw_state))?(function() { 
-var G__46068__delegate = function (args){
+var G__47430__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.solar_system.draw_state,args);
 };
-var G__46068 = function (var_args){
+var G__47430 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46069__i = 0, G__46069__a = new Array(arguments.length -  0);
-while (G__46069__i < G__46069__a.length) {G__46069__a[G__46069__i] = arguments[G__46069__i + 0]; ++G__46069__i;}
-  args = new cljs.core.IndexedSeq(G__46069__a,0,null);
+var G__47431__i = 0, G__47431__a = new Array(arguments.length -  0);
+while (G__47431__i < G__47431__a.length) {G__47431__a[G__47431__i] = arguments[G__47431__i + 0]; ++G__47431__i;}
+  args = new cljs.core.IndexedSeq(G__47431__a,0,null);
 } 
-return G__46068__delegate.call(this,args);};
-G__46068.cljs$lang$maxFixedArity = 0;
-G__46068.cljs$lang$applyTo = (function (arglist__46070){
-var args = cljs.core.seq(arglist__46070);
-return G__46068__delegate(args);
+return G__47430__delegate.call(this,args);};
+G__47430.cljs$lang$maxFixedArity = 0;
+G__47430.cljs$lang$applyTo = (function (arglist__47432){
+var args = cljs.core.seq(arglist__47432);
+return G__47430__delegate(args);
 });
-G__46068.cljs$core$IFn$_invoke$arity$variadic = G__46068__delegate;
-return G__46068;
+G__47430.cljs$core$IFn$_invoke$arity$variadic = G__47430__delegate;
+return G__47430;
 })()
 :squiggle.solar_system.draw_state));
 });
@@ -156,64 +156,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_game_of_life = (function squiggle$core$run_sketch_$_sketch_game_of_life(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"game-of-life",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.game_of_life.update_state))?(function() { 
-var G__46071__delegate = function (args){
+var G__47433__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.game_of_life.update_state,args);
 };
-var G__46071 = function (var_args){
+var G__47433 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46072__i = 0, G__46072__a = new Array(arguments.length -  0);
-while (G__46072__i < G__46072__a.length) {G__46072__a[G__46072__i] = arguments[G__46072__i + 0]; ++G__46072__i;}
-  args = new cljs.core.IndexedSeq(G__46072__a,0,null);
+var G__47434__i = 0, G__47434__a = new Array(arguments.length -  0);
+while (G__47434__i < G__47434__a.length) {G__47434__a[G__47434__i] = arguments[G__47434__i + 0]; ++G__47434__i;}
+  args = new cljs.core.IndexedSeq(G__47434__a,0,null);
 } 
-return G__46071__delegate.call(this,args);};
-G__46071.cljs$lang$maxFixedArity = 0;
-G__46071.cljs$lang$applyTo = (function (arglist__46073){
-var args = cljs.core.seq(arglist__46073);
-return G__46071__delegate(args);
+return G__47433__delegate.call(this,args);};
+G__47433.cljs$lang$maxFixedArity = 0;
+G__47433.cljs$lang$applyTo = (function (arglist__47435){
+var args = cljs.core.seq(arglist__47435);
+return G__47433__delegate(args);
 });
-G__46071.cljs$core$IFn$_invoke$arity$variadic = G__46071__delegate;
-return G__46071;
+G__47433.cljs$core$IFn$_invoke$arity$variadic = G__47433__delegate;
+return G__47433;
 })()
 :squiggle.game_of_life.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.game_of_life.setup))?(function() { 
-var G__46074__delegate = function (args){
+var G__47436__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.game_of_life.setup,args);
 };
-var G__46074 = function (var_args){
+var G__47436 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46075__i = 0, G__46075__a = new Array(arguments.length -  0);
-while (G__46075__i < G__46075__a.length) {G__46075__a[G__46075__i] = arguments[G__46075__i + 0]; ++G__46075__i;}
-  args = new cljs.core.IndexedSeq(G__46075__a,0,null);
+var G__47437__i = 0, G__47437__a = new Array(arguments.length -  0);
+while (G__47437__i < G__47437__a.length) {G__47437__a[G__47437__i] = arguments[G__47437__i + 0]; ++G__47437__i;}
+  args = new cljs.core.IndexedSeq(G__47437__a,0,null);
 } 
-return G__46074__delegate.call(this,args);};
-G__46074.cljs$lang$maxFixedArity = 0;
-G__46074.cljs$lang$applyTo = (function (arglist__46076){
-var args = cljs.core.seq(arglist__46076);
-return G__46074__delegate(args);
+return G__47436__delegate.call(this,args);};
+G__47436.cljs$lang$maxFixedArity = 0;
+G__47436.cljs$lang$applyTo = (function (arglist__47438){
+var args = cljs.core.seq(arglist__47438);
+return G__47436__delegate(args);
 });
-G__46074.cljs$core$IFn$_invoke$arity$variadic = G__46074__delegate;
-return G__46074;
+G__47436.cljs$core$IFn$_invoke$arity$variadic = G__47436__delegate;
+return G__47436;
 })()
 :squiggle.game_of_life.setup),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.game_of_life.draw_state))?(function() { 
-var G__46077__delegate = function (args){
+var G__47439__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.game_of_life.draw_state,args);
 };
-var G__46077 = function (var_args){
+var G__47439 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46078__i = 0, G__46078__a = new Array(arguments.length -  0);
-while (G__46078__i < G__46078__a.length) {G__46078__a[G__46078__i] = arguments[G__46078__i + 0]; ++G__46078__i;}
-  args = new cljs.core.IndexedSeq(G__46078__a,0,null);
+var G__47440__i = 0, G__47440__a = new Array(arguments.length -  0);
+while (G__47440__i < G__47440__a.length) {G__47440__a[G__47440__i] = arguments[G__47440__i + 0]; ++G__47440__i;}
+  args = new cljs.core.IndexedSeq(G__47440__a,0,null);
 } 
-return G__46077__delegate.call(this,args);};
-G__46077.cljs$lang$maxFixedArity = 0;
-G__46077.cljs$lang$applyTo = (function (arglist__46079){
-var args = cljs.core.seq(arglist__46079);
-return G__46077__delegate(args);
+return G__47439__delegate.call(this,args);};
+G__47439.cljs$lang$maxFixedArity = 0;
+G__47439.cljs$lang$applyTo = (function (arglist__47441){
+var args = cljs.core.seq(arglist__47441);
+return G__47439__delegate(args);
 });
-G__46077.cljs$core$IFn$_invoke$arity$variadic = G__46077__delegate;
-return G__46077;
+G__47439.cljs$core$IFn$_invoke$arity$variadic = G__47439__delegate;
+return G__47439;
 })()
 :squiggle.game_of_life.draw_state));
 });
@@ -228,64 +228,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_tentacles = (function squiggle$core$run_sketch_$_sketch_tentacles(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"tentacles",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.tentacles.update_state))?(function() { 
-var G__46080__delegate = function (args){
+var G__47442__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.tentacles.update_state,args);
 };
-var G__46080 = function (var_args){
+var G__47442 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46081__i = 0, G__46081__a = new Array(arguments.length -  0);
-while (G__46081__i < G__46081__a.length) {G__46081__a[G__46081__i] = arguments[G__46081__i + 0]; ++G__46081__i;}
-  args = new cljs.core.IndexedSeq(G__46081__a,0,null);
+var G__47443__i = 0, G__47443__a = new Array(arguments.length -  0);
+while (G__47443__i < G__47443__a.length) {G__47443__a[G__47443__i] = arguments[G__47443__i + 0]; ++G__47443__i;}
+  args = new cljs.core.IndexedSeq(G__47443__a,0,null);
 } 
-return G__46080__delegate.call(this,args);};
-G__46080.cljs$lang$maxFixedArity = 0;
-G__46080.cljs$lang$applyTo = (function (arglist__46082){
-var args = cljs.core.seq(arglist__46082);
-return G__46080__delegate(args);
+return G__47442__delegate.call(this,args);};
+G__47442.cljs$lang$maxFixedArity = 0;
+G__47442.cljs$lang$applyTo = (function (arglist__47444){
+var args = cljs.core.seq(arglist__47444);
+return G__47442__delegate(args);
 });
-G__46080.cljs$core$IFn$_invoke$arity$variadic = G__46080__delegate;
-return G__46080;
+G__47442.cljs$core$IFn$_invoke$arity$variadic = G__47442__delegate;
+return G__47442;
 })()
 :squiggle.tentacles.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.tentacles.setup))?(function() { 
-var G__46083__delegate = function (args){
+var G__47445__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.tentacles.setup,args);
 };
-var G__46083 = function (var_args){
+var G__47445 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46084__i = 0, G__46084__a = new Array(arguments.length -  0);
-while (G__46084__i < G__46084__a.length) {G__46084__a[G__46084__i] = arguments[G__46084__i + 0]; ++G__46084__i;}
-  args = new cljs.core.IndexedSeq(G__46084__a,0,null);
+var G__47446__i = 0, G__47446__a = new Array(arguments.length -  0);
+while (G__47446__i < G__47446__a.length) {G__47446__a[G__47446__i] = arguments[G__47446__i + 0]; ++G__47446__i;}
+  args = new cljs.core.IndexedSeq(G__47446__a,0,null);
 } 
-return G__46083__delegate.call(this,args);};
-G__46083.cljs$lang$maxFixedArity = 0;
-G__46083.cljs$lang$applyTo = (function (arglist__46085){
-var args = cljs.core.seq(arglist__46085);
-return G__46083__delegate(args);
+return G__47445__delegate.call(this,args);};
+G__47445.cljs$lang$maxFixedArity = 0;
+G__47445.cljs$lang$applyTo = (function (arglist__47447){
+var args = cljs.core.seq(arglist__47447);
+return G__47445__delegate(args);
 });
-G__46083.cljs$core$IFn$_invoke$arity$variadic = G__46083__delegate;
-return G__46083;
+G__47445.cljs$core$IFn$_invoke$arity$variadic = G__47445__delegate;
+return G__47445;
 })()
 :squiggle.tentacles.setup),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.tentacles.draw_state))?(function() { 
-var G__46086__delegate = function (args){
+var G__47448__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.tentacles.draw_state,args);
 };
-var G__46086 = function (var_args){
+var G__47448 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46087__i = 0, G__46087__a = new Array(arguments.length -  0);
-while (G__46087__i < G__46087__a.length) {G__46087__a[G__46087__i] = arguments[G__46087__i + 0]; ++G__46087__i;}
-  args = new cljs.core.IndexedSeq(G__46087__a,0,null);
+var G__47449__i = 0, G__47449__a = new Array(arguments.length -  0);
+while (G__47449__i < G__47449__a.length) {G__47449__a[G__47449__i] = arguments[G__47449__i + 0]; ++G__47449__i;}
+  args = new cljs.core.IndexedSeq(G__47449__a,0,null);
 } 
-return G__46086__delegate.call(this,args);};
-G__46086.cljs$lang$maxFixedArity = 0;
-G__46086.cljs$lang$applyTo = (function (arglist__46088){
-var args = cljs.core.seq(arglist__46088);
-return G__46086__delegate(args);
+return G__47448__delegate.call(this,args);};
+G__47448.cljs$lang$maxFixedArity = 0;
+G__47448.cljs$lang$applyTo = (function (arglist__47450){
+var args = cljs.core.seq(arglist__47450);
+return G__47448__delegate(args);
 });
-G__46086.cljs$core$IFn$_invoke$arity$variadic = G__46086__delegate;
-return G__46086;
+G__47448.cljs$core$IFn$_invoke$arity$variadic = G__47448__delegate;
+return G__47448;
 })()
 :squiggle.tentacles.draw_state));
 });
@@ -300,64 +300,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_pointillism_starry_night = (function squiggle$core$run_sketch_$_sketch_pointillism_starry_night(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"pointillism-starry-night",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.update_state))?(function() { 
-var G__46089__delegate = function (args){
+var G__47451__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.update_state,args);
 };
-var G__46089 = function (var_args){
+var G__47451 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46090__i = 0, G__46090__a = new Array(arguments.length -  0);
-while (G__46090__i < G__46090__a.length) {G__46090__a[G__46090__i] = arguments[G__46090__i + 0]; ++G__46090__i;}
-  args = new cljs.core.IndexedSeq(G__46090__a,0,null);
+var G__47452__i = 0, G__47452__a = new Array(arguments.length -  0);
+while (G__47452__i < G__47452__a.length) {G__47452__a[G__47452__i] = arguments[G__47452__i + 0]; ++G__47452__i;}
+  args = new cljs.core.IndexedSeq(G__47452__a,0,null);
 } 
-return G__46089__delegate.call(this,args);};
-G__46089.cljs$lang$maxFixedArity = 0;
-G__46089.cljs$lang$applyTo = (function (arglist__46091){
-var args = cljs.core.seq(arglist__46091);
-return G__46089__delegate(args);
+return G__47451__delegate.call(this,args);};
+G__47451.cljs$lang$maxFixedArity = 0;
+G__47451.cljs$lang$applyTo = (function (arglist__47453){
+var args = cljs.core.seq(arglist__47453);
+return G__47451__delegate(args);
 });
-G__46089.cljs$core$IFn$_invoke$arity$variadic = G__46089__delegate;
-return G__46089;
+G__47451.cljs$core$IFn$_invoke$arity$variadic = G__47451__delegate;
+return G__47451;
 })()
 :squiggle.pointillism.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.setup_starry_night))?(function() { 
-var G__46092__delegate = function (args){
+var G__47454__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.setup_starry_night,args);
 };
-var G__46092 = function (var_args){
+var G__47454 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46093__i = 0, G__46093__a = new Array(arguments.length -  0);
-while (G__46093__i < G__46093__a.length) {G__46093__a[G__46093__i] = arguments[G__46093__i + 0]; ++G__46093__i;}
-  args = new cljs.core.IndexedSeq(G__46093__a,0,null);
+var G__47455__i = 0, G__47455__a = new Array(arguments.length -  0);
+while (G__47455__i < G__47455__a.length) {G__47455__a[G__47455__i] = arguments[G__47455__i + 0]; ++G__47455__i;}
+  args = new cljs.core.IndexedSeq(G__47455__a,0,null);
 } 
-return G__46092__delegate.call(this,args);};
-G__46092.cljs$lang$maxFixedArity = 0;
-G__46092.cljs$lang$applyTo = (function (arglist__46094){
-var args = cljs.core.seq(arglist__46094);
-return G__46092__delegate(args);
+return G__47454__delegate.call(this,args);};
+G__47454.cljs$lang$maxFixedArity = 0;
+G__47454.cljs$lang$applyTo = (function (arglist__47456){
+var args = cljs.core.seq(arglist__47456);
+return G__47454__delegate(args);
 });
-G__46092.cljs$core$IFn$_invoke$arity$variadic = G__46092__delegate;
-return G__46092;
+G__47454.cljs$core$IFn$_invoke$arity$variadic = G__47454__delegate;
+return G__47454;
 })()
 :squiggle.pointillism.setup_starry_night),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.draw_state))?(function() { 
-var G__46095__delegate = function (args){
+var G__47457__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.draw_state,args);
 };
-var G__46095 = function (var_args){
+var G__47457 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46096__i = 0, G__46096__a = new Array(arguments.length -  0);
-while (G__46096__i < G__46096__a.length) {G__46096__a[G__46096__i] = arguments[G__46096__i + 0]; ++G__46096__i;}
-  args = new cljs.core.IndexedSeq(G__46096__a,0,null);
+var G__47458__i = 0, G__47458__a = new Array(arguments.length -  0);
+while (G__47458__i < G__47458__a.length) {G__47458__a[G__47458__i] = arguments[G__47458__i + 0]; ++G__47458__i;}
+  args = new cljs.core.IndexedSeq(G__47458__a,0,null);
 } 
-return G__46095__delegate.call(this,args);};
-G__46095.cljs$lang$maxFixedArity = 0;
-G__46095.cljs$lang$applyTo = (function (arglist__46097){
-var args = cljs.core.seq(arglist__46097);
-return G__46095__delegate(args);
+return G__47457__delegate.call(this,args);};
+G__47457.cljs$lang$maxFixedArity = 0;
+G__47457.cljs$lang$applyTo = (function (arglist__47459){
+var args = cljs.core.seq(arglist__47459);
+return G__47457__delegate(args);
 });
-G__46095.cljs$core$IFn$_invoke$arity$variadic = G__46095__delegate;
-return G__46095;
+G__47457.cljs$core$IFn$_invoke$arity$variadic = G__47457__delegate;
+return G__47457;
 })()
 :squiggle.pointillism.draw_state));
 });
@@ -372,64 +372,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_pointillism_girl_with_pearl_earing = (function squiggle$core$run_sketch_$_sketch_pointillism_girl_with_pearl_earing(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"pointillism-girl-with-pearl-earing",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.update_state))?(function() { 
-var G__46098__delegate = function (args){
+var G__47460__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.update_state,args);
 };
-var G__46098 = function (var_args){
+var G__47460 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46099__i = 0, G__46099__a = new Array(arguments.length -  0);
-while (G__46099__i < G__46099__a.length) {G__46099__a[G__46099__i] = arguments[G__46099__i + 0]; ++G__46099__i;}
-  args = new cljs.core.IndexedSeq(G__46099__a,0,null);
+var G__47461__i = 0, G__47461__a = new Array(arguments.length -  0);
+while (G__47461__i < G__47461__a.length) {G__47461__a[G__47461__i] = arguments[G__47461__i + 0]; ++G__47461__i;}
+  args = new cljs.core.IndexedSeq(G__47461__a,0,null);
 } 
-return G__46098__delegate.call(this,args);};
-G__46098.cljs$lang$maxFixedArity = 0;
-G__46098.cljs$lang$applyTo = (function (arglist__46100){
-var args = cljs.core.seq(arglist__46100);
-return G__46098__delegate(args);
+return G__47460__delegate.call(this,args);};
+G__47460.cljs$lang$maxFixedArity = 0;
+G__47460.cljs$lang$applyTo = (function (arglist__47462){
+var args = cljs.core.seq(arglist__47462);
+return G__47460__delegate(args);
 });
-G__46098.cljs$core$IFn$_invoke$arity$variadic = G__46098__delegate;
-return G__46098;
+G__47460.cljs$core$IFn$_invoke$arity$variadic = G__47460__delegate;
+return G__47460;
 })()
 :squiggle.pointillism.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.setup_girl_with_pearl_earing))?(function() { 
-var G__46101__delegate = function (args){
+var G__47463__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.setup_girl_with_pearl_earing,args);
 };
-var G__46101 = function (var_args){
+var G__47463 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46102__i = 0, G__46102__a = new Array(arguments.length -  0);
-while (G__46102__i < G__46102__a.length) {G__46102__a[G__46102__i] = arguments[G__46102__i + 0]; ++G__46102__i;}
-  args = new cljs.core.IndexedSeq(G__46102__a,0,null);
+var G__47464__i = 0, G__47464__a = new Array(arguments.length -  0);
+while (G__47464__i < G__47464__a.length) {G__47464__a[G__47464__i] = arguments[G__47464__i + 0]; ++G__47464__i;}
+  args = new cljs.core.IndexedSeq(G__47464__a,0,null);
 } 
-return G__46101__delegate.call(this,args);};
-G__46101.cljs$lang$maxFixedArity = 0;
-G__46101.cljs$lang$applyTo = (function (arglist__46103){
-var args = cljs.core.seq(arglist__46103);
-return G__46101__delegate(args);
+return G__47463__delegate.call(this,args);};
+G__47463.cljs$lang$maxFixedArity = 0;
+G__47463.cljs$lang$applyTo = (function (arglist__47465){
+var args = cljs.core.seq(arglist__47465);
+return G__47463__delegate(args);
 });
-G__46101.cljs$core$IFn$_invoke$arity$variadic = G__46101__delegate;
-return G__46101;
+G__47463.cljs$core$IFn$_invoke$arity$variadic = G__47463__delegate;
+return G__47463;
 })()
 :squiggle.pointillism.setup_girl_with_pearl_earing),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.draw_state))?(function() { 
-var G__46104__delegate = function (args){
+var G__47466__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.draw_state,args);
 };
-var G__46104 = function (var_args){
+var G__47466 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46105__i = 0, G__46105__a = new Array(arguments.length -  0);
-while (G__46105__i < G__46105__a.length) {G__46105__a[G__46105__i] = arguments[G__46105__i + 0]; ++G__46105__i;}
-  args = new cljs.core.IndexedSeq(G__46105__a,0,null);
+var G__47467__i = 0, G__47467__a = new Array(arguments.length -  0);
+while (G__47467__i < G__47467__a.length) {G__47467__a[G__47467__i] = arguments[G__47467__i + 0]; ++G__47467__i;}
+  args = new cljs.core.IndexedSeq(G__47467__a,0,null);
 } 
-return G__46104__delegate.call(this,args);};
-G__46104.cljs$lang$maxFixedArity = 0;
-G__46104.cljs$lang$applyTo = (function (arglist__46106){
-var args = cljs.core.seq(arglist__46106);
-return G__46104__delegate(args);
+return G__47466__delegate.call(this,args);};
+G__47466.cljs$lang$maxFixedArity = 0;
+G__47466.cljs$lang$applyTo = (function (arglist__47468){
+var args = cljs.core.seq(arglist__47468);
+return G__47466__delegate(args);
 });
-G__46104.cljs$core$IFn$_invoke$arity$variadic = G__46104__delegate;
-return G__46104;
+G__47466.cljs$core$IFn$_invoke$arity$variadic = G__47466__delegate;
+return G__47466;
 })()
 :squiggle.pointillism.draw_state));
 });
@@ -444,64 +444,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_pointillism_picasso_face = (function squiggle$core$run_sketch_$_sketch_pointillism_picasso_face(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"pointillism-picasso-face",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.update_state))?(function() { 
-var G__46107__delegate = function (args){
+var G__47469__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.update_state,args);
 };
-var G__46107 = function (var_args){
+var G__47469 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46108__i = 0, G__46108__a = new Array(arguments.length -  0);
-while (G__46108__i < G__46108__a.length) {G__46108__a[G__46108__i] = arguments[G__46108__i + 0]; ++G__46108__i;}
-  args = new cljs.core.IndexedSeq(G__46108__a,0,null);
+var G__47470__i = 0, G__47470__a = new Array(arguments.length -  0);
+while (G__47470__i < G__47470__a.length) {G__47470__a[G__47470__i] = arguments[G__47470__i + 0]; ++G__47470__i;}
+  args = new cljs.core.IndexedSeq(G__47470__a,0,null);
 } 
-return G__46107__delegate.call(this,args);};
-G__46107.cljs$lang$maxFixedArity = 0;
-G__46107.cljs$lang$applyTo = (function (arglist__46109){
-var args = cljs.core.seq(arglist__46109);
-return G__46107__delegate(args);
+return G__47469__delegate.call(this,args);};
+G__47469.cljs$lang$maxFixedArity = 0;
+G__47469.cljs$lang$applyTo = (function (arglist__47471){
+var args = cljs.core.seq(arglist__47471);
+return G__47469__delegate(args);
 });
-G__46107.cljs$core$IFn$_invoke$arity$variadic = G__46107__delegate;
-return G__46107;
+G__47469.cljs$core$IFn$_invoke$arity$variadic = G__47469__delegate;
+return G__47469;
 })()
 :squiggle.pointillism.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.setup_picasso_face))?(function() { 
-var G__46110__delegate = function (args){
+var G__47472__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.setup_picasso_face,args);
 };
-var G__46110 = function (var_args){
+var G__47472 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46111__i = 0, G__46111__a = new Array(arguments.length -  0);
-while (G__46111__i < G__46111__a.length) {G__46111__a[G__46111__i] = arguments[G__46111__i + 0]; ++G__46111__i;}
-  args = new cljs.core.IndexedSeq(G__46111__a,0,null);
+var G__47473__i = 0, G__47473__a = new Array(arguments.length -  0);
+while (G__47473__i < G__47473__a.length) {G__47473__a[G__47473__i] = arguments[G__47473__i + 0]; ++G__47473__i;}
+  args = new cljs.core.IndexedSeq(G__47473__a,0,null);
 } 
-return G__46110__delegate.call(this,args);};
-G__46110.cljs$lang$maxFixedArity = 0;
-G__46110.cljs$lang$applyTo = (function (arglist__46112){
-var args = cljs.core.seq(arglist__46112);
-return G__46110__delegate(args);
+return G__47472__delegate.call(this,args);};
+G__47472.cljs$lang$maxFixedArity = 0;
+G__47472.cljs$lang$applyTo = (function (arglist__47474){
+var args = cljs.core.seq(arglist__47474);
+return G__47472__delegate(args);
 });
-G__46110.cljs$core$IFn$_invoke$arity$variadic = G__46110__delegate;
-return G__46110;
+G__47472.cljs$core$IFn$_invoke$arity$variadic = G__47472__delegate;
+return G__47472;
 })()
 :squiggle.pointillism.setup_picasso_face),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.draw_state))?(function() { 
-var G__46113__delegate = function (args){
+var G__47475__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.draw_state,args);
 };
-var G__46113 = function (var_args){
+var G__47475 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46114__i = 0, G__46114__a = new Array(arguments.length -  0);
-while (G__46114__i < G__46114__a.length) {G__46114__a[G__46114__i] = arguments[G__46114__i + 0]; ++G__46114__i;}
-  args = new cljs.core.IndexedSeq(G__46114__a,0,null);
+var G__47476__i = 0, G__47476__a = new Array(arguments.length -  0);
+while (G__47476__i < G__47476__a.length) {G__47476__a[G__47476__i] = arguments[G__47476__i + 0]; ++G__47476__i;}
+  args = new cljs.core.IndexedSeq(G__47476__a,0,null);
 } 
-return G__46113__delegate.call(this,args);};
-G__46113.cljs$lang$maxFixedArity = 0;
-G__46113.cljs$lang$applyTo = (function (arglist__46115){
-var args = cljs.core.seq(arglist__46115);
-return G__46113__delegate(args);
+return G__47475__delegate.call(this,args);};
+G__47475.cljs$lang$maxFixedArity = 0;
+G__47475.cljs$lang$applyTo = (function (arglist__47477){
+var args = cljs.core.seq(arglist__47477);
+return G__47475__delegate(args);
 });
-G__46113.cljs$core$IFn$_invoke$arity$variadic = G__46113__delegate;
-return G__46113;
+G__47475.cljs$core$IFn$_invoke$arity$variadic = G__47475__delegate;
+return G__47475;
 })()
 :squiggle.pointillism.draw_state));
 });
@@ -516,64 +516,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_pointillism_georges_seurat = (function squiggle$core$run_sketch_$_sketch_pointillism_georges_seurat(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"pointillism-georges-seurat",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.update_state))?(function() { 
-var G__46116__delegate = function (args){
+var G__47478__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.update_state,args);
 };
-var G__46116 = function (var_args){
+var G__47478 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46117__i = 0, G__46117__a = new Array(arguments.length -  0);
-while (G__46117__i < G__46117__a.length) {G__46117__a[G__46117__i] = arguments[G__46117__i + 0]; ++G__46117__i;}
-  args = new cljs.core.IndexedSeq(G__46117__a,0,null);
+var G__47479__i = 0, G__47479__a = new Array(arguments.length -  0);
+while (G__47479__i < G__47479__a.length) {G__47479__a[G__47479__i] = arguments[G__47479__i + 0]; ++G__47479__i;}
+  args = new cljs.core.IndexedSeq(G__47479__a,0,null);
 } 
-return G__46116__delegate.call(this,args);};
-G__46116.cljs$lang$maxFixedArity = 0;
-G__46116.cljs$lang$applyTo = (function (arglist__46118){
-var args = cljs.core.seq(arglist__46118);
-return G__46116__delegate(args);
+return G__47478__delegate.call(this,args);};
+G__47478.cljs$lang$maxFixedArity = 0;
+G__47478.cljs$lang$applyTo = (function (arglist__47480){
+var args = cljs.core.seq(arglist__47480);
+return G__47478__delegate(args);
 });
-G__46116.cljs$core$IFn$_invoke$arity$variadic = G__46116__delegate;
-return G__46116;
+G__47478.cljs$core$IFn$_invoke$arity$variadic = G__47478__delegate;
+return G__47478;
 })()
 :squiggle.pointillism.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(604),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.setup_georges_seurat))?(function() { 
-var G__46119__delegate = function (args){
+var G__47481__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.setup_georges_seurat,args);
 };
-var G__46119 = function (var_args){
+var G__47481 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46120__i = 0, G__46120__a = new Array(arguments.length -  0);
-while (G__46120__i < G__46120__a.length) {G__46120__a[G__46120__i] = arguments[G__46120__i + 0]; ++G__46120__i;}
-  args = new cljs.core.IndexedSeq(G__46120__a,0,null);
+var G__47482__i = 0, G__47482__a = new Array(arguments.length -  0);
+while (G__47482__i < G__47482__a.length) {G__47482__a[G__47482__i] = arguments[G__47482__i + 0]; ++G__47482__i;}
+  args = new cljs.core.IndexedSeq(G__47482__a,0,null);
 } 
-return G__46119__delegate.call(this,args);};
-G__46119.cljs$lang$maxFixedArity = 0;
-G__46119.cljs$lang$applyTo = (function (arglist__46121){
-var args = cljs.core.seq(arglist__46121);
-return G__46119__delegate(args);
+return G__47481__delegate.call(this,args);};
+G__47481.cljs$lang$maxFixedArity = 0;
+G__47481.cljs$lang$applyTo = (function (arglist__47483){
+var args = cljs.core.seq(arglist__47483);
+return G__47481__delegate(args);
 });
-G__46119.cljs$core$IFn$_invoke$arity$variadic = G__46119__delegate;
-return G__46119;
+G__47481.cljs$core$IFn$_invoke$arity$variadic = G__47481__delegate;
+return G__47481;
 })()
 :squiggle.pointillism.setup_georges_seurat),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.pointillism.draw_state))?(function() { 
-var G__46122__delegate = function (args){
+var G__47484__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.pointillism.draw_state,args);
 };
-var G__46122 = function (var_args){
+var G__47484 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46123__i = 0, G__46123__a = new Array(arguments.length -  0);
-while (G__46123__i < G__46123__a.length) {G__46123__a[G__46123__i] = arguments[G__46123__i + 0]; ++G__46123__i;}
-  args = new cljs.core.IndexedSeq(G__46123__a,0,null);
+var G__47485__i = 0, G__47485__a = new Array(arguments.length -  0);
+while (G__47485__i < G__47485__a.length) {G__47485__a[G__47485__i] = arguments[G__47485__i + 0]; ++G__47485__i;}
+  args = new cljs.core.IndexedSeq(G__47485__a,0,null);
 } 
-return G__46122__delegate.call(this,args);};
-G__46122.cljs$lang$maxFixedArity = 0;
-G__46122.cljs$lang$applyTo = (function (arglist__46124){
-var args = cljs.core.seq(arglist__46124);
-return G__46122__delegate(args);
+return G__47484__delegate.call(this,args);};
+G__47484.cljs$lang$maxFixedArity = 0;
+G__47484.cljs$lang$applyTo = (function (arglist__47486){
+var args = cljs.core.seq(arglist__47486);
+return G__47484__delegate(args);
 });
-G__46122.cljs$core$IFn$_invoke$arity$variadic = G__46122__delegate;
-return G__46122;
+G__47484.cljs$core$IFn$_invoke$arity$variadic = G__47484__delegate;
+return G__47484;
 })()
 :squiggle.pointillism.draw_state));
 });
@@ -588,64 +588,64 @@ quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArrayMap(n
 
 squiggle.core.sketch_primitive_starry_night = (function squiggle$core$run_sketch_$_sketch_primitive_starry_night(){
 return quil.sketch.sketch.call(null,new cljs.core.Keyword(null,"host","host",-1558485167),"primitive-starry-night",new cljs.core.Keyword(null,"update","update",1045576396),((cljs.core.fn_QMARK_.call(null,squiggle.primitive.update_state))?(function() { 
-var G__46125__delegate = function (args){
+var G__47487__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.primitive.update_state,args);
 };
-var G__46125 = function (var_args){
+var G__47487 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46126__i = 0, G__46126__a = new Array(arguments.length -  0);
-while (G__46126__i < G__46126__a.length) {G__46126__a[G__46126__i] = arguments[G__46126__i + 0]; ++G__46126__i;}
-  args = new cljs.core.IndexedSeq(G__46126__a,0,null);
+var G__47488__i = 0, G__47488__a = new Array(arguments.length -  0);
+while (G__47488__i < G__47488__a.length) {G__47488__a[G__47488__i] = arguments[G__47488__i + 0]; ++G__47488__i;}
+  args = new cljs.core.IndexedSeq(G__47488__a,0,null);
 } 
-return G__46125__delegate.call(this,args);};
-G__46125.cljs$lang$maxFixedArity = 0;
-G__46125.cljs$lang$applyTo = (function (arglist__46127){
-var args = cljs.core.seq(arglist__46127);
-return G__46125__delegate(args);
+return G__47487__delegate.call(this,args);};
+G__47487.cljs$lang$maxFixedArity = 0;
+G__47487.cljs$lang$applyTo = (function (arglist__47489){
+var args = cljs.core.seq(arglist__47489);
+return G__47487__delegate(args);
 });
-G__46125.cljs$core$IFn$_invoke$arity$variadic = G__46125__delegate;
-return G__46125;
+G__47487.cljs$core$IFn$_invoke$arity$variadic = G__47487__delegate;
+return G__47487;
 })()
 :squiggle.primitive.update_state),new cljs.core.Keyword(null,"size","size",1098693007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(300),(300)], null),new cljs.core.Keyword(null,"setup","setup",1987730512),((cljs.core.fn_QMARK_.call(null,squiggle.primitive.setup_starry_night))?(function() { 
-var G__46128__delegate = function (args){
+var G__47490__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.primitive.setup_starry_night,args);
 };
-var G__46128 = function (var_args){
+var G__47490 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46129__i = 0, G__46129__a = new Array(arguments.length -  0);
-while (G__46129__i < G__46129__a.length) {G__46129__a[G__46129__i] = arguments[G__46129__i + 0]; ++G__46129__i;}
-  args = new cljs.core.IndexedSeq(G__46129__a,0,null);
+var G__47491__i = 0, G__47491__a = new Array(arguments.length -  0);
+while (G__47491__i < G__47491__a.length) {G__47491__a[G__47491__i] = arguments[G__47491__i + 0]; ++G__47491__i;}
+  args = new cljs.core.IndexedSeq(G__47491__a,0,null);
 } 
-return G__46128__delegate.call(this,args);};
-G__46128.cljs$lang$maxFixedArity = 0;
-G__46128.cljs$lang$applyTo = (function (arglist__46130){
-var args = cljs.core.seq(arglist__46130);
-return G__46128__delegate(args);
+return G__47490__delegate.call(this,args);};
+G__47490.cljs$lang$maxFixedArity = 0;
+G__47490.cljs$lang$applyTo = (function (arglist__47492){
+var args = cljs.core.seq(arglist__47492);
+return G__47490__delegate(args);
 });
-G__46128.cljs$core$IFn$_invoke$arity$variadic = G__46128__delegate;
-return G__46128;
+G__47490.cljs$core$IFn$_invoke$arity$variadic = G__47490__delegate;
+return G__47490;
 })()
 :squiggle.primitive.setup_starry_night),new cljs.core.Keyword(null,"middleware","middleware",1462115504),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [quil.middleware.fun_mode], null),new cljs.core.Keyword(null,"draw","draw",1358331674),((cljs.core.fn_QMARK_.call(null,squiggle.primitive.draw_state))?(function() { 
-var G__46131__delegate = function (args){
+var G__47493__delegate = function (args){
 return cljs.core.apply.call(null,squiggle.primitive.draw_state,args);
 };
-var G__46131 = function (var_args){
+var G__47493 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__46132__i = 0, G__46132__a = new Array(arguments.length -  0);
-while (G__46132__i < G__46132__a.length) {G__46132__a[G__46132__i] = arguments[G__46132__i + 0]; ++G__46132__i;}
-  args = new cljs.core.IndexedSeq(G__46132__a,0,null);
+var G__47494__i = 0, G__47494__a = new Array(arguments.length -  0);
+while (G__47494__i < G__47494__a.length) {G__47494__a[G__47494__i] = arguments[G__47494__i + 0]; ++G__47494__i;}
+  args = new cljs.core.IndexedSeq(G__47494__a,0,null);
 } 
-return G__46131__delegate.call(this,args);};
-G__46131.cljs$lang$maxFixedArity = 0;
-G__46131.cljs$lang$applyTo = (function (arglist__46133){
-var args = cljs.core.seq(arglist__46133);
-return G__46131__delegate(args);
+return G__47493__delegate.call(this,args);};
+G__47493.cljs$lang$maxFixedArity = 0;
+G__47493.cljs$lang$applyTo = (function (arglist__47495){
+var args = cljs.core.seq(arglist__47495);
+return G__47493__delegate(args);
 });
-G__46131.cljs$core$IFn$_invoke$arity$variadic = G__46131__delegate;
-return G__46131;
+G__47493.cljs$core$IFn$_invoke$arity$variadic = G__47493__delegate;
+return G__47493;
 })()
 :squiggle.primitive.draw_state));
 });
@@ -662,4 +662,4 @@ return quil.sketch.add_sketch_to_init_list.call(null,new cljs.core.PersistentArr
 goog.exportSymbol('squiggle.core.run_sketch', squiggle.core.run_sketch);
 squiggle.core.run_sketch.call(null);
 
-//# sourceMappingURL=core.js.map?rel=1526522341710
+//# sourceMappingURL=core.js.map?rel=1526523043418
