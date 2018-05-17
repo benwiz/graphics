@@ -39,6 +39,8 @@ A paintbrush that kind of looks like a tentacle. Paths can be improved by calcul
 
 ### Pointillism
 
+Draw dots based on color of pixel.
+
 ### Primitive
 
 https://github.com/fogleman/primitive
@@ -79,6 +81,7 @@ lein cljsbuild once optimized
     - Try all locations, orientations, sizes, colors for a rectangle
     - Measure mse for each
     - Select that with the lowest mse
+    - Possible to draw with alpha channel for transparency?
 
 - Next
   - Delaunay Ripple
