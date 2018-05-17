@@ -13,7 +13,8 @@
     (count prediction)))
 
 (defn draw-shape [shape]
-  (apply q/ellipse shape))
+  (q/fill (get shape 4) (get shape 5) (get shape 6))
+  (q/ellipse (get shape 0) (get shape 1) (get shape 2) (get shape 3)))
 
 (defn setup [filename]
   (q/frame-rate 60)
@@ -25,7 +26,7 @@
     :target-image (q/load-image path)
     :prediction-pixels (q/pixels)
     :shapes []
-    :next-shape [150 150 10 10]
+    :next-shape [0 0 0 0]
     :best-shape nil
     :best-mse 9007199254740991
     :try-count 0}))
@@ -47,7 +48,7 @@
       :target-image (:target-image state)
       :prediction-pixels prediction-pixels
       :shapes (if (< (:i state) 0) (:shapes state) (conj (:shapes state) (:best-shape state)))
-      :next-shape [(rand-int (q/width)) (rand-int (q/height)) 10 10]
+      :next-shape [(rand-int (q/width)) (rand-int (q/height)) 10 10 100 0 0]
       :best-shape (if (< mse (:best-mse state)) (:next-shape state) (:best-shape state))
       :best-mse (if (< (:i state) max-i)
                     (if (< mse (:best-mse state)) mse (:best-mse state))
@@ -57,7 +58,6 @@
   ; Clear background and set color
   (q/background 255 255 255)
   (q/no-stroke)
-  (q/fill (rand-int 255) (rand-int 255) (rand-int 255))
   ; Draw all confirmed shapes
   (dorun (map draw-shape (:shapes state)))
   ; Draw next test shape
