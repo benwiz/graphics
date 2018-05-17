@@ -23,9 +23,9 @@
   (setup "starry-night.jpg"))
 
 (defn update-state [state]
-  (println (mse
+  (mse
     (q/pixels (:target-image state))
-    (:prediction-pixels state)))
+    (:prediction-pixels state))
   state)
 
 (defn draw-state [state]

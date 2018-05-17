@@ -21,7 +21,7 @@ squiggle.primitive.setup_starry_night = (function squiggle$primitive$setup_starr
 return squiggle.primitive.setup.call(null,"starry-night.jpg");
 });
 squiggle.primitive.update_state = (function squiggle$primitive$update_state(state){
-cljs.core.println.call(null,squiggle.primitive.mse.call(null,quil.core.pixels.call(null,new cljs.core.Keyword(null,"target-image","target-image",1796431459).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"prediction-pixels","prediction-pixels",-506822864).cljs$core$IFn$_invoke$arity$1(state)));
+squiggle.primitive.mse.call(null,quil.core.pixels.call(null,new cljs.core.Keyword(null,"target-image","target-image",1796431459).cljs$core$IFn$_invoke$arity$1(state)),new cljs.core.Keyword(null,"prediction-pixels","prediction-pixels",-506822864).cljs$core$IFn$_invoke$arity$1(state));
 
 return state;
 });
@@ -29,4 +29,4 @@ squiggle.primitive.draw_state = (function squiggle$primitive$draw_state(state){
 return null;
 });
 
-//# sourceMappingURL=primitive.js.map?rel=1526517670100
+//# sourceMappingURL=primitive.js.map?rel=1526517817506
