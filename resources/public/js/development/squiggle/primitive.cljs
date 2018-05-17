@@ -2,7 +2,7 @@
   (:require [quil.core :as q :include-macros true]))
 
 ; (def max-i (* (q/width) (q/height) (q/width) (q/height) 255 255 255))
-(def max-i 100)
+(def max-i 1000)
 
 (defn error [t p]
   (Math/pow (- p t) 2))
@@ -50,7 +50,7 @@
       :target-image (:target-image state)
       :prediction-pixels prediction-pixels
       :shapes (if (< (:i state) max-i) (:shapes state) (conj (:shapes state) (:best-shape state)))
-      :next-shape [(rand-int (q/width)) (rand-int (q/height)) (rand-int (q/width)) (rand-int (q/height)) (rand-int 255) (rand-int 255) (rand-int 255)]
+      :next-shape [(rand-int (q/width)) (rand-int (q/height)) (Math/max (rand-int (q/width)) 10) (Math/max (rand-int (q/height)) 10) (rand-int 255) (rand-int 255) (rand-int 255)]
       :best-shape (if (< mse (:best-mse state)) (:next-shape state) (:best-shape state))
       :best-mse (if (< (:i state) max-i)
                     (if (< mse (:best-mse state)) mse (:best-mse state))
