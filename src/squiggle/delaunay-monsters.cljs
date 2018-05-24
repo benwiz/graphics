@@ -24,12 +24,14 @@
   (q/ellipse (:x point) (:y point) 10 10))
 
 (defn draw-edges [triangle]
-  (let [a (get triangle 0)
-        b (get triangle 1)
-        c (get triangle 2)]
-    (q/line (get a 0) (get a 1) (get b 0) (get b 1))
-    (q/line (get b 0) (get b 1) (get c 0) (get c 1))
-    (q/line (get c 0) (get c 1) (get a 0) (get a 1))))
+  ; Only draw edge if this roll is successful
+  (if (= (rand-int 8) 0)
+      (let [a (get triangle 0)
+            b (get triangle 1)
+            c (get triangle 2)]
+        (q/line (get a 0) (get a 1) (get b 0) (get b 1))
+        (q/line (get b 0) (get b 1) (get c 0) (get c 1))
+        (q/line (get c 0) (get c 1) (get a 0) (get a 1)))))
 
 (defn draw-triangles [triangle]
   ; Only draw triangle if this roll is successful
