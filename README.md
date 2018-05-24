@@ -61,6 +61,8 @@ Build for prod
 lein cljsbuild once optimized
 ```
 
+https://www.openprocessing.org
+
 ## Ideas
 
 - Flashing, twinkling shapes
@@ -80,12 +82,16 @@ lein cljsbuild once optimized
   - Delaunay Ripple
     - Setup
       - Create some amount of points (state)
+        - health
+        - x
+        - y
+        - d(irection)
       - Init an empty list of triangles (state)
     - Update
-      - Move points
+      - Move points. Decrement health. Spawn a few random points.
       - Calculate triangles
     - Draw
-      - Draw some lines. Draw some fills. Use one color with different saturation and value.
+      - Draw some lines. Draw some fills. Use one hue at a time with different saturation and value.
 
 - Next
   - Stretch Pixels

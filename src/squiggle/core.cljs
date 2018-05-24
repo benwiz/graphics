@@ -66,13 +66,14 @@
     :update pointillism/update-state
     :draw pointillism/draw-state
     :middleware [m/fun-mode])
-  (q/defsketch sketch-primitive-starry-night
-    :host "primitive-starry-night"
-    :size [300 300]
-    :setup primitive/setup-starry-night
-    :update primitive/update-state
-    :draw primitive/draw-state
-    :middleware [m/fun-mode]))
+  ; (q/defsketch sketch-primitive-starry-night
+  ;   :host "primitive-starry-night"
+  ;   :size [300 300]
+  ;   :setup primitive/setup-starry-night
+  ;   :update primitive/update-state
+  ;   :draw primitive/draw-state
+  ;   :middleware [m/fun-mode])
+    )
 
 ; uncomment this line to reset the sketch:
 (run-sketch)
