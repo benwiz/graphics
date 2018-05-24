@@ -6,7 +6,8 @@
             [squiggle.game-of-life :as game-of-life]
             [squiggle.tentacles :as tentacles]
             [squiggle.pointillism :as pointillism]
-            [squiggle.primitive :as primitive]))
+            ; [squiggle.primitive :as primitive]
+            [squiggle.delaunay-monsters :as delaunay-monsters]))
 
 ; This function is called in index.html
 (defn ^:export run-sketch []
@@ -73,7 +74,14 @@
   ;   :update primitive/update-state
   ;   :draw primitive/draw-state
   ;   :middleware [m/fun-mode])
-    )
+  (q/defsketch sketch-delaunay-monsters
+    :host "delaunay-monsters"
+    :size [300 300]
+    :setup delaunay-monsters/setup
+    :update delaunay-monsters/update-state
+    :draw delaunay-monsters/draw-state
+    :middleware [m/fun-mode])
+)
 
 ; uncomment this line to reset the sketch:
 (run-sketch)
