@@ -77,13 +77,6 @@ lein cljsbuild once optimized
 ## To Do
 
 - Now
-  - Primitive
-    - Try all locations, orientations, sizes, colors for a rectangle
-    - Measure mse for each
-    - Select that with the lowest mse
-    - Possible to draw with alpha channel for transparency?
-
-- Next
   - Delaunay Ripple
     - Setup
       - Create some amount of points (state)
@@ -93,6 +86,11 @@ lein cljsbuild once optimized
       - Calculate triangles
     - Draw
       - Draw some lines. Draw some fills. Use one color with different saturation and value.
+
+- Next
+  - Stretch Pixels
+    - Figure out how to draw once
+    - https://www.behance.net/gallery/65894481/-color_palettesjpg
 
 - Later
   - Tentacles
@@ -107,3 +105,8 @@ lein cljsbuild once optimized
     - Allow user to input start state or select from a few options
   - Pointillism
     - Consider stop updating at a max iterations
+  - Primitive
+    - Try all locations, orientations, sizes, colors for a rectangle
+    - Measure mse for each
+    - Select that with the lowest mse
+    - Possible to draw with alpha channel for transparency?
