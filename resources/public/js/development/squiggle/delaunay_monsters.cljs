@@ -23,13 +23,24 @@
 (defn draw-point [point]
   (q/ellipse (:x point) (:y point) 10 10))
 
-(defn draw-triangle [triangle]
+(defn draw-edges [triangle]
   (let [a (get triangle 0)
         b (get triangle 1)
         c (get triangle 2)]
     (q/line (get a 0) (get a 1) (get b 0) (get b 1))
     (q/line (get b 0) (get b 1) (get c 0) (get c 1))
     (q/line (get c 0) (get c 1) (get a 0) (get a 1))))
+
+(defn draw-triangles [triangle]
+  ; Only draw triangle if this roll is successful
+  (if (= (rand-int 10) 0)
+      ; Draw triangle
+      (let [a (get triangle 0)
+            b (get triangle 1)
+            c (get triangle 2)]
+        (q/triangle (get a 0) (get a 1)
+                    (get b 0) (get b 1)
+                    (get c 0) (get c 1)))))
 
 (defn setup []
   (q/stroke 255 0 0)
@@ -55,4 +66,5 @@
   (q/background 0 0 0)
   ; Draw points. Remove this eventually.
   (mapv draw-point (:points state))
-  (mapv draw-triangle (:triangles state)))
+  (mapv draw-edges (:triangles state))
+  (mapv draw-triangles (:triangles state)))
