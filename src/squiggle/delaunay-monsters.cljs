@@ -29,6 +29,7 @@
       (let [a (get triangle 0)
             b (get triangle 1)
             c (get triangle 2)]
+        (q/stroke (Math/max (rand-int 255) 50) 0 0)
         (q/line (get a 0) (get a 1) (get b 0) (get b 1))
         (q/line (get b 0) (get b 1) (get c 0) (get c 1))
         (q/line (get c 0) (get c 1) (get a 0) (get a 1)))))
@@ -47,8 +48,6 @@
                     (get c 0) (get c 1)))))
 
 (defn setup []
-  (q/stroke 255 0 0)
-  (q/fill 255 0 0)
   { :triangles []
     :points (repeatedly 5 point)})
 
