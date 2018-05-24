@@ -29,12 +29,13 @@ goog.addDependency("../cljs/spec/alpha.js", ['cljs.spec.alpha'], ['cljs.core', '
 goog.addDependency("../cljs/repl.js", ['cljs.repl'], ['cljs.core', 'cljs.spec.alpha']);
 goog.addDependency("../figwheel/client.js", ['figwheel.client'], ['goog.userAgent.product', 'goog.Uri', 'cljs.core', 'goog.object', 'cljs.core.async', 'figwheel.client.file_reloading', 'figwheel.client.utils', 'cljs.repl', 'figwheel.client.heads_up', 'figwheel.client.socket', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../figwheel/connect.js", ['figwheel.connect'], ['cljs.core', 'figwheel.client']);
+goog.addDependency("../squiggle/delaunay.js", ['squiggle.delaunay'], ['cljs.core', 'clojure.set']);
 goog.addDependency("../processing.js", ['org.processingjs.Processing'], [], {'foreign-lib': true});
 goog.addDependency("../quil/middlewares/deprecated_options.js", ['quil.middlewares.deprecated_options'], ['cljs.core']);
 goog.addDependency("../quil/util.js", ['quil.util'], ['cljs.core', 'clojure.string']);
 goog.addDependency("../quil/sketch.js", ['quil.sketch'], ['goog.dom', 'cljs.core', 'quil.middlewares.deprecated_options', 'goog.events.EventType', 'goog.style', 'goog.events', 'quil.util']);
 goog.addDependency("../quil/core.js", ['quil.core'], ['org.processingjs.Processing', 'quil.sketch', 'cljs.core', 'clojure.string', 'quil.util']);
-goog.addDependency("../squiggle/delaunay_monsters.js", ['squiggle.delaunay_monsters'], ['cljs.core', 'quil.core']);
+goog.addDependency("../squiggle/delaunay_monsters.js", ['squiggle.delaunay_monsters'], ['cljs.core', 'squiggle.delaunay', 'quil.core']);
 goog.addDependency("../squiggle/ten_print_remake.js", ['squiggle.ten_print_remake'], ['cljs.core', 'quil.core']);
 goog.addDependency("../squiggle/pointillism.js", ['squiggle.pointillism'], ['cljs.core', 'quil.core']);
 goog.addDependency("../clojure/core/matrix/impl/mathsops.js", ['clojure.core.matrix.impl.mathsops'], ['cljs.core']);
