@@ -34,6 +34,8 @@ if(cljs.core._EQ_.call(null,cljs.core.rand_int.call(null,(10)),(0))){
 var a = cljs.core.get.call(null,triangle,(0));
 var b = cljs.core.get.call(null,triangle,(1));
 var c = cljs.core.get.call(null,triangle,(2));
+quil.core.fill.call(null,cljs.core.rand_int.call(null,(255)),(0),(0));
+
 return quil.core.triangle.call(null,cljs.core.get.call(null,a,(0)),cljs.core.get.call(null,a,(1)),cljs.core.get.call(null,b,(0)),cljs.core.get.call(null,b,(1)),cljs.core.get.call(null,c,(0)),cljs.core.get.call(null,c,(1)));
 } else {
 return null;
@@ -60,11 +62,9 @@ return cljs.core.PersistentVector.EMPTY;
 squiggle.delaunay_monsters.draw_state = (function squiggle$delaunay_monsters$draw_state(state){
 quil.core.background.call(null,(0),(0),(0));
 
-cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_point,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state));
-
 cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_edges,new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(state));
 
 return cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_triangles,new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527204563180
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527204667118

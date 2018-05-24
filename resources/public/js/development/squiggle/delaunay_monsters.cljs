@@ -34,10 +34,12 @@
 (defn draw-triangles [triangle]
   ; Only draw triangle if this roll is successful
   (if (= (rand-int 10) 0)
-      ; Draw triangle
+      ; Get edges
       (let [a (get triangle 0)
             b (get triangle 1)
             c (get triangle 2)]
+        ; Set color and draw triangle
+        (q/fill (rand-int 255) 0 0)
         (q/triangle (get a 0) (get a 1)
                     (get b 0) (get b 1)
                     (get c 0) (get c 1)))))
@@ -64,7 +66,6 @@
 
 (defn draw-state [state]
   (q/background 0 0 0)
-  ; Draw points. Remove this eventually.
-  (mapv draw-point (:points state))
+  ; (mapv draw-point (:points state))
   (mapv draw-edges (:triangles state))
   (mapv draw-triangles (:triangles state)))
