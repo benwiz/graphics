@@ -10,6 +10,7 @@
 (defn update-point [point]
   (if (<= (:h point) 0)
       nil
+      ; TODO: Move x, y, and d according to d (and according to health?)
       { :x (:x point)
         :y (:y point)
         :d (:d point)
@@ -19,16 +20,22 @@
   (q/ellipse (:x point) (:y point) 10 10))
 
 (defn setup []
-  { :points (repeatedly 5 point)
-  })
+  { :triangles []
+    :points (repeatedly 5 point)})
 
 (defn update-state [state]
-  { :points (lazy-cat
-              (remove nil? (map update-point (:points state)))
+  { ; Calculate triangles to draw from previous state
+    :triangles []
+    ; Generate points for next state
+    :points (lazy-cat
+              ; Kill points
+              (remove nil?
+                ; Move points (maybe I should kill first, then move that subset... doesn't really matter unless movements start considering other points)
+                (map update-point (:points state)))
+              ; Birth point
               (if (= (rand-int 10) 0)
                   [(point)]
-                  []))
-  })
+                  []))})
 
 (defn draw-state [state]
   (q/background 0 0 0)

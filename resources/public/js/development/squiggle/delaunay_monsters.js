@@ -16,10 +16,10 @@ squiggle.delaunay_monsters.draw_point = (function squiggle$delaunay_monsters$dra
 return quil.core.ellipse.call(null,new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point),(10),(10));
 });
 squiggle.delaunay_monsters.setup = (function squiggle$delaunay_monsters$setup(){
-return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.repeatedly.call(null,(5),squiggle.delaunay_monsters.point)], null);
+return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),cljs.core.PersistentVector.EMPTY,new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.repeatedly.call(null,(5),squiggle.delaunay_monsters.point)], null);
 });
 squiggle.delaunay_monsters.update_state = (function squiggle$delaunay_monsters$update_state(state){
-return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.concat.call(null,(new cljs.core.LazySeq(null,(function (){
+return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),cljs.core.PersistentVector.EMPTY,new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.concat.call(null,(new cljs.core.LazySeq(null,(function (){
 return cljs.core.remove.call(null,cljs.core.nil_QMARK_,cljs.core.map.call(null,squiggle.delaunay_monsters.update_point,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state)));
 }),null,null)),(new cljs.core.LazySeq(null,(function (){
 if(cljs.core._EQ_.call(null,cljs.core.rand_int.call(null,(10)),(0))){
@@ -35,4 +35,4 @@ quil.core.background.call(null,(0),(0),(0));
 return cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_point,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527203207437
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527203393491
