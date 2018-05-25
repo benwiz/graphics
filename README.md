@@ -102,8 +102,6 @@ https://www.openprocessing.org
     - Create nice looking layout for the website – keep it very basic
   - Game of Life
     - Allow user to input start state or select from a few options
-  - Pointillism
-    - Consider stop updating at a max iterations
   - Primitive
     - Try all locations, orientations, sizes, colors for a rectangle
     - Measure mse for each
