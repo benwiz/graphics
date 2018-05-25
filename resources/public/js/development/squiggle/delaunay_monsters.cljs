@@ -1,7 +1,10 @@
 (ns squiggle.delaunay-monsters
   (:require [quil.core :as q :include-macros true]
             [squiggle.delaunay :as delaunay]
-            [squiggle.listen :as listen]))
+            [squiggle.listen :as listen]
+            [cljs.core.async :as async])
+  (:require-macros
+    [cljs.core.async.macros :refer [go]]))
 
 (def step 0.5)
 (def edge-rate 4)
@@ -56,9 +59,13 @@
 (defn setup []
   (q/frame-rate 25)
   { :triangles []
-    :points (repeatedly 10 point)})
+    :points (repeatedly 10 point)
+    :audio-channel (listen/audio)
+  })
 
 (defn update-state [state]
+  ; (println (:audio-channel state))
+  ; (go (println (async/<! (:audio-channel state))))
   { ; Calculate triangles to draw from previous state
     :triangles (:triangles (delaunay/triangulate (map coords (:points state))))
     ; Generate points for next state

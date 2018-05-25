@@ -4,6 +4,7 @@ goog.require('cljs.core');
 goog.require('quil.core');
 goog.require('squiggle.delaunay');
 goog.require('squiggle.listen');
+goog.require('cljs.core.async');
 squiggle.delaunay_monsters.step = 0.5;
 squiggle.delaunay_monsters.edge_rate = (4);
 squiggle.delaunay_monsters.triangle_rate = (10);
@@ -57,7 +58,7 @@ return null;
 squiggle.delaunay_monsters.setup = (function squiggle$delaunay_monsters$setup(){
 quil.core.frame_rate.call(null,(25));
 
-return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),cljs.core.PersistentVector.EMPTY,new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.repeatedly.call(null,(10),squiggle.delaunay_monsters.point)], null);
+return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),cljs.core.PersistentVector.EMPTY,new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.repeatedly.call(null,(10),squiggle.delaunay_monsters.point),new cljs.core.Keyword(null,"audio-channel","audio-channel",-751707293),squiggle.listen.audio.call(null)], null);
 });
 squiggle.delaunay_monsters.update_state = (function squiggle$delaunay_monsters$update_state(state){
 return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(squiggle.delaunay.triangulate.call(null,cljs.core.map.call(null,squiggle.delaunay_monsters.coords,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state)))),new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.concat.call(null,(new cljs.core.LazySeq(null,(function (){
@@ -80,4 +81,4 @@ cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_edges,new cljs.core.Key
 return cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_triangles,new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527207118102
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527209156322
