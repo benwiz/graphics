@@ -81,7 +81,7 @@
 
 (defn draw-state [state]
   (q/background 0 0 0)
-  (mapv draw-point (:points state))
+  ; (mapv draw-point (:points state))
   (mapv draw-edges (:triangles state))
   (mapv draw-triangles (:triangles state))
   )

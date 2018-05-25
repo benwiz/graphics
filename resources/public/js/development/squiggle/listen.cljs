@@ -12,11 +12,9 @@
         (js/console.error error)
         (do
           (async/put! audio-chan :start)
-          ; Print first 5 frames to console
-          (loop [counter 4]
+          ; Infinitely consume frames and print to console. TODO: Figure out how to get this data not here but in delaunay-monsters
+          (loop []
             (.log js/console (async/<! audio-chan))
-            (if (zero? counter)
-              (async/put! audio-chan :pause)
-              (recur (dec counter)))))))))
+            (recur)))))))
 
 ; (go (println (async/<! audio-chan)))

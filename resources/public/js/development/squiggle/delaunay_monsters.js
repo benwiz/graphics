@@ -74,11 +74,9 @@ return cljs.core.PersistentVector.EMPTY;
 squiggle.delaunay_monsters.draw_state = (function squiggle$delaunay_monsters$draw_state(state){
 quil.core.background.call(null,(0),(0),(0));
 
-cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_point,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state));
-
 cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_edges,new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(state));
 
 return cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_triangles,new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527209156322
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527257809500
