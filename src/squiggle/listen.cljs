@@ -6,7 +6,6 @@
 
 (defn audio []
   (go
-    ; This will work while browser runs
     (let [{:keys [audio-chan error]} (async/<! (capture-audio (async/sliding-buffer 10)))]
       (if error
         (js/console.error error)
