@@ -74,13 +74,13 @@
   ;   :update primitive/update-state
   ;   :draw primitive/draw-state
   ;   :middleware [m/fun-mode])
-  (q/defsketch sketch-delaunay-monsters
-    :host "delaunay-monsters"
-    :size [300 300]
-    :setup delaunay-monsters/setup
-    :update delaunay-monsters/update-state
-    :draw delaunay-monsters/draw-state
-    :middleware [m/fun-mode])
+  ; (q/defsketch sketch-delaunay-monsters
+  ;   :host "delaunay-monsters"
+  ;   :size [300 300]
+  ;   :setup delaunay-monsters/setup
+  ;   :update delaunay-monsters/update-state
+  ;   :draw delaunay-monsters/draw-state
+  ;   :middleware [m/fun-mode])
 )
 
 ; uncomment this line to reset the sketch:

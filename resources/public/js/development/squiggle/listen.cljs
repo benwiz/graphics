@@ -13,7 +13,7 @@
           (async/put! audio-chan :start)
           ; Infinitely consume frames and print to console. TODO: Figure out how to get this data not here but in delaunay-monsters
           (loop []
-            (.log js/console (async/<! audio-chan))
+            ; (.log js/console (async/<! audio-chan))
             (recur)))))))
 
 ; (go (println (async/<! audio-chan)))
