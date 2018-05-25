@@ -20,13 +20,13 @@ quil.core.fill.call(null,new cljs.core.Keyword(null,"color","color",1011675173).
 var angle = new cljs.core.Keyword(null,"angle","angle",1622094254).cljs$core$IFn$_invoke$arity$1(state);
 var x = ((150) * quil.core.cos.call(null,angle));
 var y = ((150) * quil.core.sin.call(null,angle));
-var tr__22080__auto__ = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(quil.core.width.call(null) / (2)),(quil.core.height.call(null) / (2))], null);
+var tr__22079__auto__ = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(quil.core.width.call(null) / (2)),(quil.core.height.call(null) / (2))], null);
 quil.core.push_matrix.call(null);
 
-try{quil.core.translate.call(null,tr__22080__auto__);
+try{quil.core.translate.call(null,tr__22079__auto__);
 
 return quil.core.ellipse.call(null,x,y,(100),(100));
 }finally {quil.core.pop_matrix.call(null);
 }});
 
-//# sourceMappingURL=example.js.map?rel=1525954279881
+//# sourceMappingURL=example.js.map?rel=1527207103785

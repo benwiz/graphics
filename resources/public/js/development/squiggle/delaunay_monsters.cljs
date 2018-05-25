@@ -1,6 +1,7 @@
 (ns squiggle.delaunay-monsters
   (:require [quil.core :as q :include-macros true]
-            [squiggle.delaunay :as delaunay]))
+            [squiggle.delaunay :as delaunay]
+            [squiggle.listen :as listen]))
 
 (def step 0.5)
 (def edge-rate 4)

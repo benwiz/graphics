@@ -3,6 +3,7 @@ goog.provide('squiggle.delaunay_monsters');
 goog.require('cljs.core');
 goog.require('quil.core');
 goog.require('squiggle.delaunay');
+goog.require('squiggle.listen');
 squiggle.delaunay_monsters.step = 0.5;
 squiggle.delaunay_monsters.edge_rate = (4);
 squiggle.delaunay_monsters.triangle_rate = (10);
@@ -79,4 +80,4 @@ cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_edges,new cljs.core.Key
 return cljs.core.mapv.call(null,squiggle.delaunay_monsters.draw_triangles,new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(state));
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527206798122
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527207118102

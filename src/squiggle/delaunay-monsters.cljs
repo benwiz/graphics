@@ -59,7 +59,6 @@
     :points (repeatedly 10 point)})
 
 (defn update-state [state]
-  (println (listen/hi))
   { ; Calculate triangles to draw from previous state
     :triangles (:triangles (delaunay/triangulate (map coords (:points state))))
     ; Generate points for next state
