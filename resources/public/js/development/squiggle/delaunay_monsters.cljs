@@ -64,8 +64,10 @@
   })
 
 (defn update-state [state]
+  ; TODO: Somehow need to consume the lastest frame and discard all older frames in the channel. Just process latest.
   ; (println (:audio-channel state))
   ; (go (println (async/<! (:audio-channel state))))
+
   { ; Calculate triangles to draw from previous state
     :triangles (:triangles (delaunay/triangulate (map coords (:points state))))
     ; Generate points for next state
