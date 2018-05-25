@@ -85,6 +85,7 @@ https://www.openprocessing.org
       - Monster must have overall angle of movement
       - Overall health of monster needs to be considered. Each monster's life is finite, do not spawn infinite points. Do spawn infinite monsters.
       - Multiple monsters
+    - Look into `push-style` and `pop-style`
 
 - Next
   - Stretch Pixels
