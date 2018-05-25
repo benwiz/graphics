@@ -1,7 +1,7 @@
 (ns squiggle.delaunay-monsters
   (:require [quil.core :as q :include-macros true]
             [squiggle.delaunay :as delaunay]
-            ; [squiggle.listen :as listen]
+            [squiggle.listen :as listen]
             [cljs.core.async :as async])
   (:require-macros
     [cljs.core.async.macros :refer [go]]))
@@ -25,7 +25,7 @@
       nil
       { :x (+ (:x point) (* step (q/cos (:a point))))
         :y (+ (:y point) (* step (q/sin (:a point))))
-        :a (:a point) ; TODO: Reflect angle if hit wall? Or maybe not because it looks good out of screen. Maybe just rotate it occationally.
+        :a (:a point) ; TODO: Reflect angle if hit wall? The wall should not actually be border, but 100 pixels outside all borders.
         :h (dec (:h point))}))
 
 (defn draw-point [point]
@@ -58,10 +58,10 @@
 
 (defn setup []
   (q/frame-rate 25)
-  (q/no-loop)
+  ; (q/no-loop)
   { :triangles []
     :points (repeatedly 10 point)
-    ; :audio-channel (listen/audio)
+    :audio-channel (listen/audio)
   })
 
 (defn update-state [state]
@@ -90,5 +90,9 @@
 
 (defn mouse-clicked [state event]
   (println "click")
+  ; This is an experiment for sound frames. Depending on how those work may be able to use (q/no-loop) in setup
+  (if (= 0.5 step)
+      (def step 10.0)
+      (def step 0.5))
   (q/redraw)
   state)
