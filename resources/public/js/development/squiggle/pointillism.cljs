@@ -1,6 +1,8 @@
 (ns squiggle.pointillism
   (:require [quil.core :as q :include-macros true]))
 
+(def max-frames 10000)
+
 (defn setup [filename]
   (let [path (if (= (.-hostname (.-location js/window)) "benwiz.io")
                  (str "/squiggle/assets/images/" filename)
@@ -36,22 +38,23 @@
   (setup "andromeda.jpg"))
 
 (defn update-state [state]
-  (if (not (:finished? state))
-    (if (:image state)
-      (if (> (.-width (:image state)) 0)
-        (let [x (rand-int (q/width))
-              y (rand-int (q/height))
-              rgb (q/get-pixel (:image state) x y)]
-          { :i (inc (:i state))
-            :x x
-            :y y
-            :c rgb
-            ; Every 2000 iterations reduce the max size by 1 with a minimum max size of 6
-            :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 3000))) 6))
-            :image (:image state)
-            :finished? (>= (q/frame-count) 10000)})
-        state)
-      state)))
+  ; Exit if max frames reached
+  (if (= (q/frame-count) max-frames) (q/exit))
+  ; If image, update state
+  (if (:image state)
+    (if (> (.-width (:image state)) 0)
+      (let [x (rand-int (q/width))
+            y (rand-int (q/height))
+            rgb (q/get-pixel (:image state) x y)]
+        { :i (inc (:i state))
+          :x x
+          :y y
+          :c rgb
+          ; Every 2000 iterations reduce the max size by 1 with a minimum max size of 6
+          :size (rand-int (Math/max (- 10 (Math/floor (/ (:i state) 3000))) 6))
+          :image (:image state)})
+      state)
+    state))
 
 (defn draw-state [state]
   (q/stroke (:c state))
