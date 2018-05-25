@@ -79,19 +79,11 @@ https://www.openprocessing.org
 ## To Do
 
 - Now
-  - Delaunay Ripple
-    - Setup
-      - Create some amount of points (state)
-        - health
-        - x
-        - y
-        - d(irection)
-      - Init an empty list of triangles (state)
-    - Update
-      - Move points. Decrement health. Spawn a few random points.
-      - Calculate triangles
-    - Draw
-      - Draw some lines. Draw some fills. Use one hue at a time with different saturation and value.
+  - Delaunay Monsters
+    - Make frame rate dynamic but smooth. Probably needs to go in state.
+    - General movement of the monster as a whole
+    - Overall health of monster needs to be considered
+    - Multiple monsters
 
 - Next
   - Stretch Pixels
