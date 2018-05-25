@@ -80,10 +80,10 @@ https://www.openprocessing.org
 
 - Now
   - Delaunay Monsters
-    - Make frame rate dynamic but smooth. Probably needs to go in state.
-    - General movement of the monster as a whole
-    - Overall health of monster needs to be considered
-    - Multiple monsters
+    - Monster construct
+      - Monster must have overall angle of movement
+      - Overall health of monster needs to be considered. Each monster's life is finite, do not spawn infinite points. Do spawn infinite monsters.
+      - Multiple monsters
 
 - Next
   - Stretch Pixels
