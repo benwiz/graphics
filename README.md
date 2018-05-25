@@ -80,6 +80,7 @@ https://www.openprocessing.org
 
 - Now
   - Delaunay Monsters
+    - Decible of sound input affects frame rate or step rate... probably step rate
     - Monster construct
       - Monster must have overall angle of movement
       - Overall health of monster needs to be considered. Each monster's life is finite, do not spawn infinite points. Do spawn infinite monsters.

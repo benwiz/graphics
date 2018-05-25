@@ -1,6 +1,7 @@
 (ns squiggle.delaunay-monsters
   (:require [quil.core :as q :include-macros true]
-            [squiggle.delaunay :as delaunay]))
+            [squiggle.delaunay :as delaunay]
+            [squiggle.listen :as listen]))
 
 (def step 0.5)
 (def edge-rate 4)
@@ -58,6 +59,7 @@
     :points (repeatedly 10 point)})
 
 (defn update-state [state]
+  (println (listen/hi))
   { ; Calculate triangles to draw from previous state
     :triangles (:triangles (delaunay/triangulate (map coords (:points state))))
     ; Generate points for next state
