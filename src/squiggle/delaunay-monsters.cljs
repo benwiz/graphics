@@ -1,7 +1,7 @@
 (ns squiggle.delaunay-monsters
   (:require [quil.core :as q :include-macros true]
             [squiggle.delaunay :as delaunay]
-            ; [squiggle.listen :as listen]
+            [squiggle.listen :as listen]
             [cljs.core.async :as async])
   (:require-macros
     [cljs.core.async.macros :refer [go]]))
@@ -84,9 +84,7 @@
   })
 
 (defn update-state [state]
-  ; TODO: Somehow need to consume the lastest frame and discard all older frames in the channel. Just process latest.
-  ; (println (:audio-channel state))
-  ; (go (println (async/<! (:audio-channel state))))
+  ; (println listen/current-frame) ; use this : http://funcool.github.io/octet/latest/
 
   { ; Calculate triangles to draw from previous state
     :triangles (:triangles (delaunay/triangulate (map coords (:points state))))
@@ -99,7 +97,8 @@
               ; Birth point
               (if (= (rand-int birth-rate) 0)
                   [(point)]
-                  []))})
+                  []))
+    :audio-channel (:audio-channel state)})
 
 (defn draw-state [state]
   (q/background 0 0 0)

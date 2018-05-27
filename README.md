@@ -85,6 +85,7 @@ https://www.openprocessing.org
 - Now
   - Delaunay Monsters
     - Decible of sound input affects frame rate or step rate... probably step rate
+  - Look into generating music using https://github.com/ctford/cljs-bach
 
 - Next
   - Stretch Pixels

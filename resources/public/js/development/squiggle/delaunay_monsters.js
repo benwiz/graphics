@@ -3,6 +3,7 @@ goog.provide('squiggle.delaunay_monsters');
 goog.require('cljs.core');
 goog.require('quil.core');
 goog.require('squiggle.delaunay');
+goog.require('squiggle.listen');
 goog.require('cljs.core.async');
 squiggle.delaunay_monsters.num_points = (10);
 squiggle.delaunay_monsters.step = (2);
@@ -69,7 +70,7 @@ quil.core.frame_rate.call(null,(30));
 return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),cljs.core.PersistentVector.EMPTY,new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.repeatedly.call(null,squiggle.delaunay_monsters.num_points,squiggle.delaunay_monsters.point)], null);
 });
 squiggle.delaunay_monsters.update_state = (function squiggle$delaunay_monsters$update_state(state){
-return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(squiggle.delaunay.triangulate.call(null,cljs.core.map.call(null,squiggle.delaunay_monsters.coords,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state)))),new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.concat.call(null,(new cljs.core.LazySeq(null,(function (){
+return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(squiggle.delaunay.triangulate.call(null,cljs.core.map.call(null,squiggle.delaunay_monsters.coords,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state)))),new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.concat.call(null,(new cljs.core.LazySeq(null,(function (){
 return cljs.core.remove.call(null,cljs.core.nil_QMARK_,cljs.core.map.call(null,squiggle.delaunay_monsters.update_point,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state)));
 }),null,null)),(new cljs.core.LazySeq(null,(function (){
 if(cljs.core._EQ_.call(null,cljs.core.rand_int.call(null,squiggle.delaunay_monsters.birth_rate),(0))){
@@ -77,7 +78,7 @@ return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMP
 } else {
 return cljs.core.PersistentVector.EMPTY;
 }
-}),null,null)))], null);
+}),null,null))),new cljs.core.Keyword(null,"audio-channel","audio-channel",-751707293),new cljs.core.Keyword(null,"audio-channel","audio-channel",-751707293).cljs$core$IFn$_invoke$arity$1(state)], null);
 });
 squiggle.delaunay_monsters.draw_state = (function squiggle$delaunay_monsters$draw_state(state){
 quil.core.background.call(null,(0),(0),(0));
@@ -100,4 +101,4 @@ quil.core.redraw.call(null);
 return state;
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527388869378
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527391067512
