@@ -4,7 +4,8 @@ goog.require('cljs.core');
 goog.require('quil.core');
 goog.require('squiggle.delaunay');
 goog.require('cljs.core.async');
-squiggle.delaunay_monsters.step = 0.5;
+squiggle.delaunay_monsters.num_points = (10);
+squiggle.delaunay_monsters.step = (2);
 squiggle.delaunay_monsters.edge_rate = (4);
 squiggle.delaunay_monsters.triangle_rate = (10);
 squiggle.delaunay_monsters.birth_rate = (15);
@@ -15,10 +16,18 @@ squiggle.delaunay_monsters.coords = (function squiggle$delaunay_monsters$coords(
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point),new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point)], null);
 });
 squiggle.delaunay_monsters.update_point = (function squiggle$delaunay_monsters$update_point(point){
+var min_x = (-100);
+var max_x = (quil.core.width.call(null) + (100));
+var min_y = (-100);
+var max_y = (quil.core.height.call(null) + (100));
 if((new cljs.core.Keyword(null,"h","h",1109658740).cljs$core$IFn$_invoke$arity$1(point) <= (0))){
 return null;
 } else {
+if((((new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point) < min_x)) || ((new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point) > max_x)) || ((new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point) < min_y)) || ((new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point) > max_y)))){
+return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"x","x",2099068185),(((new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point) < min_x))?min_x:(((new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point) > max_x))?max_x:(new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point) + (squiggle.delaunay_monsters.step * quil.core.cos.call(null,new cljs.core.Keyword(null,"a","a",-2123407586).cljs$core$IFn$_invoke$arity$1(point)))))),new cljs.core.Keyword(null,"y","y",-1757859776),(((new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point) < min_y))?min_y:(((new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point) > max_y))?max_y:(new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point) + (squiggle.delaunay_monsters.step * quil.core.sin.call(null,new cljs.core.Keyword(null,"a","a",-2123407586).cljs$core$IFn$_invoke$arity$1(point)))))),new cljs.core.Keyword(null,"a","a",-2123407586),((new cljs.core.Keyword(null,"a","a",-2123407586).cljs$core$IFn$_invoke$arity$1(point) + Math.PI) + (cljs.core.rand.call(null,Math.PI) - (Math.PI / (2)))),new cljs.core.Keyword(null,"h","h",1109658740),(new cljs.core.Keyword(null,"h","h",1109658740).cljs$core$IFn$_invoke$arity$1(point) - (1))], null);
+} else {
 return new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"x","x",2099068185),(new cljs.core.Keyword(null,"x","x",2099068185).cljs$core$IFn$_invoke$arity$1(point) + (squiggle.delaunay_monsters.step * quil.core.cos.call(null,new cljs.core.Keyword(null,"a","a",-2123407586).cljs$core$IFn$_invoke$arity$1(point)))),new cljs.core.Keyword(null,"y","y",-1757859776),(new cljs.core.Keyword(null,"y","y",-1757859776).cljs$core$IFn$_invoke$arity$1(point) + (squiggle.delaunay_monsters.step * quil.core.sin.call(null,new cljs.core.Keyword(null,"a","a",-2123407586).cljs$core$IFn$_invoke$arity$1(point)))),new cljs.core.Keyword(null,"a","a",-2123407586),new cljs.core.Keyword(null,"a","a",-2123407586).cljs$core$IFn$_invoke$arity$1(point),new cljs.core.Keyword(null,"h","h",1109658740),(new cljs.core.Keyword(null,"h","h",1109658740).cljs$core$IFn$_invoke$arity$1(point) - (1))], null);
+}
 }
 });
 squiggle.delaunay_monsters.draw_point = (function squiggle$delaunay_monsters$draw_point(point){
@@ -57,7 +66,7 @@ return null;
 squiggle.delaunay_monsters.setup = (function squiggle$delaunay_monsters$setup(){
 quil.core.frame_rate.call(null,(30));
 
-return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),cljs.core.PersistentVector.EMPTY,new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.repeatedly.call(null,(10),squiggle.delaunay_monsters.point)], null);
+return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),cljs.core.PersistentVector.EMPTY,new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.repeatedly.call(null,squiggle.delaunay_monsters.num_points,squiggle.delaunay_monsters.point)], null);
 });
 squiggle.delaunay_monsters.update_state = (function squiggle$delaunay_monsters$update_state(state){
 return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"triangles","triangles",-1525417058),new cljs.core.Keyword(null,"triangles","triangles",-1525417058).cljs$core$IFn$_invoke$arity$1(squiggle.delaunay.triangulate.call(null,cljs.core.map.call(null,squiggle.delaunay_monsters.coords,new cljs.core.Keyword(null,"points","points",-1486596883).cljs$core$IFn$_invoke$arity$1(state)))),new cljs.core.Keyword(null,"points","points",-1486596883),cljs.core.concat.call(null,(new cljs.core.LazySeq(null,(function (){
@@ -91,4 +100,4 @@ quil.core.redraw.call(null);
 return state;
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527386708731
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527388513381

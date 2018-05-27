@@ -6,7 +6,8 @@
   (:require-macros
     [cljs.core.async.macros :refer [go]]))
 
-(def step 0.5)
+(def num-points 10)
+(def step 2)
 (def edge-rate 4)
 (def triangle-rate 10)
 (def birth-rate 15)
@@ -21,12 +22,30 @@
   [(:x point) (:y point)])
 
 (defn update-point [point]
-  (if (<= (:h point) 0)
-      nil
-      { :x (+ (:x point) (* step (q/cos (:a point))))
-        :y (+ (:y point) (* step (q/sin (:a point))))
-        :a (:a point) ; TODO: Reflect angle if hit wall? The wall should not actually be border, but 100 pixels outside all borders.
-        :h (dec (:h point))}))
+  (let [min-x -100
+        max-x (+ (q/width) 100)
+        min-y -100
+        max-y (+ (q/height) 100)]
+    (if (<= (:h point) 0)
+        nil
+        (if (or (< (:x point) min-x) (> (:x point) max-x) (< (:y point) min-y) (> (:y point) max-y))
+            ; If outside bounds
+            { :x (if (< (:x point) min-x) min-x
+                     (if (> (:x point) max-x) max-x
+                     (+ (:x point) (* step (q/cos (:a point))))))
+              :y (if (< (:y point) min-y) min-y
+                     (if (> (:y point) max-y) max-y
+                     (+ (:y point) (* step (q/sin (:a point))))))
+              :a (+ (:a point) (.-PI js/Math) (- (rand (.-PI js/Math)) (/ (.-PI js/Math) 2)))
+              ; :a (if (< (:x point) min-x) min-x
+              ;        (if (> (:x point) max-x) max-x
+              ;        (+ (:x point) (* step (q/cos (:a point))))))
+              :h (dec (:h point))}
+            ; Else, inside bounds
+            { :x (+ (:x point) (* step (q/cos (:a point))))
+              :y (+ (:y point) (* step (q/sin (:a point))))
+              :a (:a point)
+              :h (dec (:h point))}))))
 
 (defn draw-point [point]
   (q/fill 255 0 0)
@@ -60,7 +79,7 @@
   (q/frame-rate 30)
   ; (q/no-loop)
   { :triangles []
-    :points (repeatedly 10 point)
+    :points (repeatedly num-points point)
     ; :audio-channel (listen/audio)
   })
 
