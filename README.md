@@ -47,6 +47,10 @@ https://github.com/fogleman/primitive
 
 The algorithm tries to find the single most optimal shape that can be drawn to minimize the error between the target image and the drawn image. It repeats this process, adding one shape at a time. Around 50 to 200 shapes are needed to reach a result that is recognizable yet artistic and abstract.
 
+### Delaynay Monsters
+
+A set of points make up a monster. Randomly draw edges and fill of triangle in each monster. Audio impacts shape of monster.
+
 ## Notes
 
 Dev
@@ -80,12 +84,7 @@ https://www.openprocessing.org
 
 - Now
   - Delaunay Monsters
-    - Use angle of reflection
     - Decible of sound input affects frame rate or step rate... probably step rate
-    - Monster construct
-      - Monster must have overall angle of movement
-      - Overall health of monster needs to be considered. Each monster's life is finite, do not spawn infinite points. Do spawn infinite monsters
-    - Look into `push-style` and `pop-style`
 
 - Next
   - Stretch Pixels
@@ -108,3 +107,9 @@ https://www.openprocessing.org
     - Measure mse for each
     - Select that with the lowest mse
     - Possible to draw with alpha channel for transparency?
+  - Delaunay Monsters
+    - Improve point movement
+    - Improve audio impact on points, edges, and triangles
+    - Monster construct
+      - Monster must have overall angle of movement
+      - Overall health of monster needs to be considered. Each monster's life is finite, do not spawn infinite points. Do spawn infinite monsters

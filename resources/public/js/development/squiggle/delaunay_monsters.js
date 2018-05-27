@@ -100,4 +100,4 @@ quil.core.redraw.call(null);
 return state;
 });
 
-//# sourceMappingURL=delaunay_monsters.js.map?rel=1527388513381
+//# sourceMappingURL=delaunay_monsters.js.map?rel=1527388869378
