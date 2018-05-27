@@ -67,21 +67,21 @@
     :update pointillism/update-state
     :draw pointillism/draw-state
     :middleware [m/fun-mode])
-  (q/defsketch sketch-primitive-starry-night
-    :host "primitive-starry-night"
-    :size [300 300]
-    :setup primitive/setup-starry-night
-    :update primitive/update-state
-    :draw primitive/draw-state
-    :middleware [m/fun-mode])
-  (q/defsketch sketch-delaunay-monsters
-    :host "delaunay-monsters"
-    :size [300 300]
-    :setup delaunay-monsters/setup
-    :update delaunay-monsters/update-state
-    :draw delaunay-monsters/draw-state
-    :mouse-clicked delaunay-monsters/mouse-clicked
-    :middleware [m/fun-mode])
+  ; (q/defsketch sketch-primitive-starry-night
+  ;   :host "primitive-starry-night"
+  ;   :size [300 300]
+  ;   :setup primitive/setup-starry-night
+  ;   :update primitive/update-state
+  ;   :draw primitive/draw-state
+  ;   :middleware [m/fun-mode])
+  ; (q/defsketch sketch-delaunay-monsters
+  ;   :host "delaunay-monsters"
+  ;   :size [300 300]
+  ;   :setup delaunay-monsters/setup
+  ;   :update delaunay-monsters/update-state
+  ;   :draw delaunay-monsters/draw-state
+  ;   :mouse-clicked delaunay-monsters/mouse-clicked
+  ;   :middleware [m/fun-mode])
   )
 
 ; uncomment this line to reset the sketch:
