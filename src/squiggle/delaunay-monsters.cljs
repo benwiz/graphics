@@ -1,7 +1,7 @@
 (ns squiggle.delaunay-monsters
   (:require [quil.core :as q :include-macros true]
             [squiggle.delaunay :as delaunay]
-            [squiggle.listen :as listen]
+            ; [squiggle.listen :as listen]
             [cljs.core.async :as async])
   (:require-macros
     [cljs.core.async.macros :refer [go]]))
@@ -57,11 +57,11 @@
                     (get c 0) (get c 1)))))
 
 (defn setup []
-  (q/frame-rate 25)
+  (q/frame-rate 30)
   ; (q/no-loop)
   { :triangles []
     :points (repeatedly 10 point)
-    :audio-channel (listen/audio)
+    ; :audio-channel (listen/audio)
   })
 
 (defn update-state [state]
@@ -84,7 +84,7 @@
 
 (defn draw-state [state]
   (q/background 0 0 0)
-  (mapv draw-point (:points state))
+  ; (mapv draw-point (:points state))
   (mapv draw-edges (:triangles state))
   (mapv draw-triangles (:triangles state)))
 

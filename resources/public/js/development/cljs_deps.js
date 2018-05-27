@@ -29,15 +29,13 @@ goog.addDependency("../cljs/spec/alpha.js", ['cljs.spec.alpha'], ['cljs.core', '
 goog.addDependency("../cljs/repl.js", ['cljs.repl'], ['cljs.core', 'cljs.spec.alpha']);
 goog.addDependency("../figwheel/client.js", ['figwheel.client'], ['goog.userAgent.product', 'goog.Uri', 'cljs.core', 'goog.object', 'cljs.core.async', 'figwheel.client.file_reloading', 'figwheel.client.utils', 'cljs.repl', 'figwheel.client.heads_up', 'figwheel.client.socket', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../figwheel/connect.js", ['figwheel.connect'], ['cljs.core', 'figwheel.client']);
-goog.addDependency("../cljs_audiocapture/core.js", ['cljs_audiocapture.core'], ['cljs.core', 'cljs.core.async', 'cljs.core.async.impl.protocols']);
-goog.addDependency("../squiggle/listen.js", ['squiggle.listen'], ['cljs.core', 'cljs.core.async', 'cljs_audiocapture.core']);
 goog.addDependency("../squiggle/delaunay.js", ['squiggle.delaunay'], ['cljs.core', 'clojure.set']);
 goog.addDependency("../processing.js", ['org.processingjs.Processing'], [], {'foreign-lib': true});
 goog.addDependency("../quil/middlewares/deprecated_options.js", ['quil.middlewares.deprecated_options'], ['cljs.core']);
 goog.addDependency("../quil/util.js", ['quil.util'], ['cljs.core', 'clojure.string']);
 goog.addDependency("../quil/sketch.js", ['quil.sketch'], ['goog.dom', 'cljs.core', 'quil.middlewares.deprecated_options', 'goog.events.EventType', 'goog.style', 'goog.events', 'quil.util']);
 goog.addDependency("../quil/core.js", ['quil.core'], ['org.processingjs.Processing', 'quil.sketch', 'cljs.core', 'clojure.string', 'quil.util']);
-goog.addDependency("../squiggle/delaunay_monsters.js", ['squiggle.delaunay_monsters'], ['squiggle.listen', 'cljs.core', 'cljs.core.async', 'squiggle.delaunay', 'quil.core']);
+goog.addDependency("../squiggle/delaunay_monsters.js", ['squiggle.delaunay_monsters'], ['cljs.core', 'cljs.core.async', 'squiggle.delaunay', 'quil.core']);
 goog.addDependency("../squiggle/ten_print_remake.js", ['squiggle.ten_print_remake'], ['cljs.core', 'quil.core']);
 goog.addDependency("../squiggle/pointillism.js", ['squiggle.pointillism'], ['cljs.core', 'quil.core']);
 goog.addDependency("../clojure/core/matrix/impl/mathsops.js", ['clojure.core.matrix.impl.mathsops'], ['cljs.core']);
@@ -61,4 +59,6 @@ goog.addDependency("../squiggle/solar_system.js", ['squiggle.solar_system'], ['c
 goog.addDependency("../squiggle/tentacles.js", ['squiggle.tentacles'], ['cljs.core', 'quil.core']);
 goog.addDependency("../squiggle/core.js", ['squiggle.core'], ['squiggle.delaunay_monsters', 'cljs.core', 'squiggle.ten_print_remake', 'squiggle.pointillism', 'squiggle.game_of_life', 'quil.core', 'quil.middleware', 'squiggle.solar_system', 'squiggle.tentacles']);
 goog.addDependency("../squiggle/primitive.js", ['squiggle.primitive'], ['cljs.core', 'quil.core']);
+goog.addDependency("../cljs_audiocapture/core.js", ['cljs_audiocapture.core'], ['cljs.core', 'cljs.core.async', 'cljs.core.async.impl.protocols']);
+goog.addDependency("../squiggle/listen.js", ['squiggle.listen'], ['cljs.core', 'cljs.core.async', 'cljs_audiocapture.core']);
 goog.addDependency("../squiggle/example.js", ['squiggle.example'], ['cljs.core', 'quil.core']);
