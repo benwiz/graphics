@@ -1,12 +1,10 @@
-# lowpoly
+# fragment
 
-Take an image and output a low-poly version.
+Take an image and output a fragmented (low-poly) version.
 
 Inspired by [this project](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py).
 
-[OpenCV clojure tutorial](https://docs.opencv.org/3.1.0/d7/d1e/tutorial_clojure_dev_intro.html)
-
-## Useful commands
+## Unorganized useful commands (this section to be incorporated into "Getting Started")
 
 Run worker.
 
@@ -26,6 +24,39 @@ Zip.
 zip -r9 py-detect-features.zip *
 ```
 
+Run jekyll site locally
+
+```bash
+bundle exec jekyll serve
+```
+
+## Getting Started
+
+### py-detect-features
+
+#### Run Locally
+
+Create and activate a Python2 virtualenv in the root dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` workin `py-detect-features`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
+
+```bash
+virtualenv --python=$(which python2) venv
+source venv/bin/activate
+```
+
+Install requirements.
+
+```bash
+pip install -r requirements.txt
+```
+
+or
+
+```bash
+pip install boto3 numpy opencv-contrib-python
+```
+
+I had the following notes about install AWS Lambda compatible packages. Fortunately, I have committed these packages to github so I should not have to deal with them again.
+
 Pip packages path.
 
 ```bash
@@ -43,11 +74,9 @@ easy_install pip
 /local/bin/pip install numpy -t libs/
 ```
 
-Run jekyll site locally
+#### Deploy
 
-```bash
-bundle exec jekyll serve
-```
+TODO
 
 ## Initial Plan
 
@@ -83,7 +112,9 @@ bundle exec jekyll serve
 
 ### Feature Detection
 
-Clojure AWS Lambda function that uses OpenCV to identify key points.
+~~Clojure AWS Lambda function that uses OpenCV to identify key points.~~
+
+The clojure OpenCV library I was using was too large for Lambda functions. I've switched to Python2.
 
 ### Partition
 
@@ -97,19 +128,14 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 
 ## To Do
 
-- Randomly sample to speed up
-  - Compress image. Resizing is not what I'm looking for. Or maybe my algorithms need to be better.
-- Ensure that all borders are covered. Maybe as simple as placing points in each of the 4 corners
-
 - Python install instructions `pip install opencv-contrib-python` in docker container (really, not much)
-- remove `opencv-install` dir after confident all works
 
-- UI
-  - Allow people to take webcam pics on desktop
 - Feature detect
   - Look into using Key Points `size` and `?` parameters to reduce number of points
 - Partition
   - Clojure delaunay triangulation not working on some point sets
+- UI
+  - Allow people to take webcam pics on desktop
 
 ### Later
 
