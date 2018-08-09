@@ -24,4 +24,4 @@ mv opencv_contrib_python-3.4.0.12.dist-info libs/
 aws s3 cp py-detect-features.zip s3://lowpoly/py-detect-features.zip --profile personal
 
 # Update lambda function code by pointing to S3 artifact
-aws lambda update-function-code --function-name lowpoly-py-detect-features --s3-bucket lowpoly --s3-key py-detect-features.zip --profile personal
+aws lambda update-function-code --function-name lowpoly-py-detect-features --s3-bucket lowpoly --s3-key py-detect-features.zip
