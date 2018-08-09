@@ -63,6 +63,42 @@ def identify_points_by_grid(img, N):
 # plt.show()
 
 
+def distance(a, b):
+    """
+    Calculate the distance between points a and b.
+    """
+
+    x1 = a[0]
+    x2 = b[0]
+    y1 = a[1]
+    y2 = b[1]
+
+    x = (x1 - x2) ** 2
+    y = (y1 - y2) ** 2
+
+    d = (x + y) ** 0.5
+    return d
+
+
+def filter_points(points, radius):
+    """
+    Filter points to reduce the total number of points. Do this by randomly
+    iterating through every point. Remove all neighboring points within the
+    provided radius. Do this until there are no points left to remove.
+    """
+
+    # TODO: Outer loop that tracks if any points were removed (doesn't seem
+    # essential)
+
+    for base_point in points:  # TODO: Loop randomly (doesn't seem essential)
+        for compare_point in points:
+            dist = distance(base_point, compare_point)
+            if dist < radius:
+                points.remove(compare_point)
+
+    return points
+
+
 def identify_points_by_key_points(img):
     """
     Method: Key points.
@@ -70,13 +106,24 @@ def identify_points_by_key_points(img):
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     sift = cv2.xfeatures2d.SIFT_create()
-    kp = sift.detect(gray, None)
+    key_points = sift.detect(gray, None)
+
+    # # Get desciptors but not sure what that helps with
+    # key_points, descriptors = sift.compute(gray, key_points)
+
+    # # Old code, this is an alternative (probably not working)
     # orb = cv2.ORB_create()
-    # kp, _ = orb.detectAndCompute(gray, None)
+    # key_points, _ = orb.detectAndCompute(gray, None)
+
     points = map(
         lambda point: (int(point.pt[0]), int(point.pt[1])),
-        kp
+        key_points
     )
+
+    print "start:", len(points)
+    points = filter_points(points, 5)
+    print "end:", len(points)
+
     return points
 
 

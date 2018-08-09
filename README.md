@@ -36,7 +36,7 @@ bundle exec jekyll serve
 
 #### Run Locally
 
-Create and activate a Python2 virtualenv in the root dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` workin `py-detect-features`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
+Create and activate a Python2 virtualenv in the roobt dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` workin `py-detect-features`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
 
 ```bash
 virtualenv --python=$(which python2) venv
@@ -127,8 +127,6 @@ https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawLine(int,%2
 Clojure AWS Lambda function that colors each triangle according to some algorithm. For now that is the average color.
 
 ## To Do
-
-- Python install instructions `pip install opencv-contrib-python` in docker container (really, not much)
 
 - Feature detect
   - Look into using Key Points `size` and `?` parameters to reduce number of points
