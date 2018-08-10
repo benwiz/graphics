@@ -96,7 +96,7 @@ def filter_points(points, radius):
     return points
 
 
-def identify_points_by_key_points(img):
+def identify_points_by_key_points(img, radius):
     """
     Method: Key points.
     """
@@ -117,18 +117,18 @@ def identify_points_by_key_points(img):
         key_points
     )
 
-    points = filter_points(points, 5)
+    points = filter_points(points, radius)
 
     return points
 
 
-def identify_points(img):
+def identify_points(img, radius):
     """
     Use a method to identify points
     """
 
     # points = identify_points_by_grid(img, 25)
-    points = identify_points_by_key_points(img)
+    points = identify_points_by_key_points(img, radius)
 
     # Add points for every corner
     height, width, channels = img.shape
@@ -147,13 +147,10 @@ def lambda_handler(event, context):
 
     # print "Event:\n", json.dumps(event)
     # print "Context:\n", context
-    # print dir(cv2)
-    # print cv2.__version__
 
     # Consume S3 create event
     key = event['Records'][0]['s3']['object']['key']
     session_id, filename = key.split('/')
-    # print key
 
     # Download image
     s3 = boto3.resource('s3', region_name='us-east-1')
@@ -167,7 +164,8 @@ def lambda_handler(event, context):
                        cv2.IMREAD_UNCHANGED)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-    points = identify_points(img)
+    radius = 10
+    points = identify_points(img, radius)
 
     # Draw on img
     for point in points:

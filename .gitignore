@@ -15,3 +15,5 @@ _site/
 opencv-install/
 venv
 **/*__pycache__
+\#*
+.#*
