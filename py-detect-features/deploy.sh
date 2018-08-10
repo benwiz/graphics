@@ -5,7 +5,7 @@
 # Move libs
 mv libs/cv2 .
 mv libs/numpy .
-mv libs/numpy-1.14.2.dist-info .
+mv libs/numpy-1.15.0.dist-info .
 mv libs/opencv_contrib_python-3.4.0.12.dist-info .
 
 # Remove old zip
@@ -17,7 +17,7 @@ zip -r9 py-detect-features.zip * -x *.zip -x deploy.sh
 # Replace libs
 mv cv2 libs/
 mv numpy libs/
-mv numpy-1.14.2.dist-info libs/
+mv numpy-1.15.0.dist-info libs/
 mv opencv_contrib_python-3.4.0.12.dist-info libs/
 
 # Upload zip to S3

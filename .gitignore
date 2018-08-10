@@ -14,3 +14,4 @@ py-detect-features.zip
 _site/
 opencv-install/
 venv
+**/*__pycache__

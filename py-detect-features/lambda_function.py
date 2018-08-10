@@ -1,8 +1,6 @@
 """
 Consume an S3 create event, download the file, run some analysis, return the
 key points.
-
-sudo yum -y install
 """
 
 import io
@@ -11,7 +9,6 @@ import json
 import boto3
 import cv2
 import numpy
-
 
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
@@ -44,7 +41,7 @@ def identify_points_by_grid(img, N):
     return points
 
 #
-# Other future point identification algorithms:
+# Other feature point identification algorithms:
 #
 # Method: Canny edge detection and display
 # edges = cv2.Canny(img, 300, 500)
@@ -120,9 +117,7 @@ def identify_points_by_key_points(img):
         key_points
     )
 
-    print "start:", len(points)
     points = filter_points(points, 5)
-    print "end:", len(points)
 
     return points
 

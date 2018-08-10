@@ -129,7 +129,7 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 ## To Do
 
 - Feature detect
-  - Look into using Key Points `size` and `?` parameters to reduce number of points
+  - Make radius configurable
 - Partition
   - Clojure delaunay triangulation not working on some point sets
 - UI
