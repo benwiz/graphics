@@ -133,7 +133,7 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
 - Partition
   - Clojure delaunay triangulation not working on some point sets
 - UI
-  - Allow people to take webcam pics on desktop
+  - Upload a config file
 
 ### Later
 
