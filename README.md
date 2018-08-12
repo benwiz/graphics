@@ -133,7 +133,8 @@ Clojure AWS Lambda function that colors each triangle according to some algorith
   - Sort out image rotation (maybe iPhone specific)
   - Handle timeouts correctly (right now, each step has a 3 min timeout)
 - Feature detect
-  - Consume config file
+  - Consume config file for radius property
+  - Try different algorithms
 - Color
   - It appears to never return and always time out
   - Faster? Maybe by looking at fewer points. Will need to use logs to measure execution time.
