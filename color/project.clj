@@ -17,8 +17,7 @@
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.1"]]}
    :uberjar {:aot :all}}
-  :lambda {:credentials {:region "us-east-1"
-                         :profile "personal"}
+  :lambda {:credentials {:region "us-east-1"}
            :function {:name "lowpoly-color"
                       :handler "color.lambda.LambdaFn"}
            :api-gateway {:name "color"}
