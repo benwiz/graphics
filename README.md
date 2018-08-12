@@ -18,12 +18,6 @@ Deploy.
 lein lambda deploy production
 ```
 
-Zip.
-
-```bash
-zip -r9 py-detect-features.zip *
-```
-
 Run jekyll site locally
 
 ```bash
@@ -76,7 +70,11 @@ easy_install pip
 
 #### Deploy
 
-TODO
+In `py-detect-features` dir run the following command ensuring that the default aws configs are for my personal aws account.
+
+```bash
+./deploy.sh
+```
 
 ## Initial Plan
 
