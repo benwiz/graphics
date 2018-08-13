@@ -123,7 +123,6 @@ lein lambda deploy production
   - Handle timeouts correctly (right now, each step has a 3 min timeout)
 - Feature detect
   - Consume config file for number of points
-  - Figure out a max `max_points`
   - Set reasonable memory and timeout settings
 - Partition
   - Set reasonable memory and timeout settings
