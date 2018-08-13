@@ -102,7 +102,7 @@ def identify_points_by_key_points(img, radius):
     """
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    sift = cv2.xfeatures2d.SIFT_create()
+    sift = cv2.xfeatures2d.SIFT_create(1000)
     key_points = sift.detect(gray, None)
 
     # # Get desciptors but not sure what that helps with
@@ -117,7 +117,8 @@ def identify_points_by_key_points(img, radius):
         key_points
     )
 
-    points = filter_points(points, radius)
+    # points = filter_points(points, radius)
+    print "NUM POINTS:", len(points)
 
     return points
 
