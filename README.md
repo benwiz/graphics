@@ -28,6 +28,8 @@ bundle exec jekyll serve
 
 ### py-detect-features
 
+Use Python to identify key the features (points) within the image that will be used to partition the image into fragments. I initially tried to use an OpenCV2 wrapper in Clojure but it turned out to be too large for AWS Lambda.
+
 #### Run Locally
 
 Create and activate a Python2 virtualenv in the roobt dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` workin `py-detect-features`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
@@ -49,15 +51,9 @@ or
 pip install boto3 numpy opencv-contrib-python
 ```
 
-I had the following notes about install AWS Lambda compatible packages. Fortunately, I have committed these packages to github so I should not have to deal with them again.
+#### Deploy
 
-Pip packages path.
-
-```bash
-/usr/local/Cellar/python@2/2.7.14_3/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages
-```
-
-Install pip libraries
+The `libs` directory is committed to GitHub so should never need to be re-installed. But using Docker to set up the Lambda server environment is important for numpy. Use something like the below.
 
 ```bash
 docker run -it -v $(pwd):/home/proj lambci/lambda:build bash
@@ -68,12 +64,34 @@ easy_install pip
 /local/bin/pip install numpy -t libs/
 ```
 
-#### Deploy
-
 In `py-detect-features` dir run the following command ensuring that the default aws configs are for my personal aws account.
 
 ```bash
 ./deploy.sh
+```
+
+### Partition
+
+#### Run Locally
+
+TODO
+
+#### Deploy
+
+```bash
+lein lambda deploy production
+```
+
+### Color
+
+#### Run Locally
+
+TODO
+
+#### Deploy
+
+```bash
+lein lambda deploy production
 ```
 
 ## Initial Plan
@@ -97,32 +115,6 @@ In `py-detect-features` dir run the following command ensuring that the default 
     - trianges.json
     - triangles.jpg
     - lowpoly.jpg
-
-### UI
-
-- Github pages static site
-
-#### Image Upload
-
-- [Image upload](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html)
-
-#### Results display and download
-
-### Feature Detection
-
-~~Clojure AWS Lambda function that uses OpenCV to identify key points.~~
-
-The clojure OpenCV library I was using was too large for Lambda functions. I've switched to Python2.
-
-### Partition
-
-Clojure AWS Lambda function that performs Delaunay triangulation given a set of points.
-
-https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawLine(int,%20int,%20int,%20int)
-
-### Color
-
-Clojure AWS Lambda function that colors each triangle according to some algorithm. For now that is the average color.
 
 ## To Do
 
