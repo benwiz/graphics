@@ -22,7 +22,7 @@
   (println "NUM POINTS:" (count points))
   (let [{:keys [_ _ triangles]} (delaunay/triangulate points)]
     ; TODO: Clean to make all coordinates integers
-    (println "NUM TRIANGLES:" (cout triangles))
+    (println "NUM TRIANGLES:" (count triangles))
     triangles))
 
 (defn draw
