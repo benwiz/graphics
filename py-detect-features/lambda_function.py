@@ -77,13 +77,13 @@ def distance(a, b):
     return d
 
 
-def identify_points_by_key_points(img, radius):
+def identify_points_by_key_points(img, max_points):
     """
     Method: Key points.
     """
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    sift = cv2.xfeatures2d.SIFT_create(1000)
+    sift = cv2.xfeatures2d.SIFT_create(max_points)
     key_points = sift.detect(gray, None)
 
     # # Get desciptors but not sure what that helps with
@@ -101,13 +101,13 @@ def identify_points_by_key_points(img, radius):
     return points
 
 
-def identify_points(img, radius):
+def identify_points(img, max_points):
     """
     Use a method to identify points
     """
 
     # points = identify_points_by_grid(img, 25)
-    points = identify_points_by_key_points(img, radius)
+    points = identify_points_by_key_points(img, max_points)
 
     # Add points for every corner
     height, width, channels = img.shape
@@ -143,8 +143,8 @@ def lambda_handler(event, context):
                        cv2.IMREAD_UNCHANGED)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-    radius = 10
-    points = identify_points(img, radius)
+    max_points = 2000
+    points = identify_points(img, max_points)
 
     # Draw on img
     for point in points:
