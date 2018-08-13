@@ -143,7 +143,7 @@ def lambda_handler(event, context):
                        cv2.IMREAD_UNCHANGED)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-    max_points = 1500
+    max_points = 1000
     points = identify_points(img, max_points)
 
     # Draw on img
