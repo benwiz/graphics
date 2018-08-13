@@ -129,15 +129,10 @@ lein lambda deploy production
   - Set reasonable memory and timeout settings
 - Color
   - It appears to never return and always time out
-  - Faster? Maybe by looking at fewer points. Will need to use logs to measure execution time.
+  - Figure out a reasonable number of points to look at (right now, hardcoded to every 10 pixels). Possibly make this configurable.
   - Set reasonable memory and timeout settings
 
 ### Later
 
-- Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized.
-- The `lein lambda-api` thing I'm using for `partition` is bloated for a non-api based event.
-  - https://medium.com/@jamesleonis/clojure-and-aws-serverless-basic-lambda-201b60183d6d
-- Selectable detect features algorithm
-- Figure out how to make _clj-detect-features_ small enough for Lambda.
-- Handle more extensions. Developed against _.jpg_.
-- Implement other partitioning algorithms like Voronio Diagrams
+- Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized. This will affect `partition` and `color`.
+- Voronoi
