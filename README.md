@@ -99,9 +99,8 @@ lein lambda deploy production
 - Pre-process the input image to remove noise and reduce image size (OpenCV)
 - Detect edges in the input image (OpenCV)
 - If the image contains humans faces, detect facial features as well (DLib)
-- Choose a random subset of the above detected points / edges
-- Triangulate using Delaunay Triangulation
-- Fill the triangles with the mean value of all pixels contained by it (in parallel for faster computation)
+- Triangulate using Delaunay Triangulation or create a Voronoi diagram
+- Fill the ~triangles~ polygons with the mean value of all pixels contained by it (in parallel for faster computation)
 
 ## Parts
 
@@ -123,7 +122,7 @@ lein lambda deploy production
   - Sort out image rotation (maybe iPhone specific)
   - Handle timeouts correctly (right now, each step has a 3 min timeout)
 - Feature detect
-  - Consume config file for radius property
+  - Consume config file for number of points
 - Color
   - It appears to never return and always time out
   - Faster? Maybe by looking at fewer points. Will need to use logs to measure execution time.
