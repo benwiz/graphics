@@ -76,27 +76,6 @@ def distance(a, b):
     d = (x + y) ** 0.5
     return d
 
-# # This function has been commented out since I discovered the `nfeatures`
-# # argument for `SIFT_create(nfeatures)`. This function should probably be
-# # delted in the near future. (8/13/2018)
-# def filter_points(points, radius):
-#     """
-#     Filter points to reduce the total number of points. Do this by randomly
-#     iterating through every point. Remove all neighboring points within the
-#     provided radius. Do this until there are no points left to remove.
-#     """
-
-#     # TODO: Outer loop that tracks if any points were removed (doesn't seem
-#     # essential)
-
-#     for base_point in points:  # TODO: Loop randomly (doesn't seem essential)
-#         for compare_point in points:
-#             dist = distance(base_point, compare_point)
-#             if dist < radius:
-#                 points.remove(compare_point)
-
-#     return points
-
 
 def identify_points_by_key_points(img, radius):
     """
