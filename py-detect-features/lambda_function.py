@@ -3,16 +3,23 @@ Consume an S3 create event, download the file, run some analysis, return the
 key points.
 """
 
+import os
 import io
 import json
 
 import boto3
 import cv2
 import numpy
+import dlib
 
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
 UPLOAD_ANYWAY = False
+
+predictor_path = os.path.join(
+    os.path.dirname(__file__),
+    'shape_predictor_68_face_landmarks.dat'
+)
 
 
 def create_opencv_image_from_stringio(img_stream, cv2_img_flag=0):
@@ -60,23 +67,6 @@ def identify_points_by_grid(img, N):
 # plt.show()
 
 
-def distance(a, b):
-    """
-    Calculate the distance between points a and b.
-    """
-
-    x1 = a[0]
-    x2 = b[0]
-    y1 = a[1]
-    y2 = b[1]
-
-    x = (x1 - x2) ** 2
-    y = (y1 - y2) ** 2
-
-    d = (x + y) ** 0.5
-    return d
-
-
 def identify_points_by_key_points(img, max_points):
     """
     Method: Key points.
@@ -89,14 +79,35 @@ def identify_points_by_key_points(img, max_points):
     # # Get desciptors but not sure what that helps with
     # key_points, descriptors = sift.compute(gray, key_points)
 
-    # # Old code, this is an alternative (probably not working)
-    # orb = cv2.ORB_create()
-    # key_points, _ = orb.detectAndCompute(gray, None)
-
     points = map(
         lambda point: (int(point.pt[0]), int(point.pt[1])),
         key_points
     )
+
+    return points
+
+
+def identify_facial_landmarks(img):
+    """
+    Use dlib to identify facial landmarks.
+    """
+
+    points = []
+
+    detector = dlib.get_frontal_face_detector()
+    predictor = dlib.shape_predictor(predictor_path)
+
+    faces = detector(img, 1)
+    for face in faces:
+        print face
+        shape = predictor(img, face)
+        landmarks = []
+        for i in range(shape.num_parts):
+            part = shape.part(i)
+            x = int(part.x)
+            y = int(part.y)
+            landmark = (x, y)
+            points.append(landmark)
 
     return points
 
@@ -107,7 +118,11 @@ def identify_points(img, max_points):
     """
 
     # points = identify_points_by_grid(img, 25)
-    points = identify_points_by_key_points(img, max_points)
+    key_points = identify_points_by_key_points(img, max_points)
+    landmarks = identify_facial_landmarks(img)
+
+    points = key_points + landmarks
+    print 'length:', len(points)
 
     # Add points for every corner
     height, width, channels = img.shape
@@ -176,7 +191,7 @@ def lambda_handler(event, context):
 if __name__ == "__main__":
     IS_LOCAL = True
     UPLOAD_ANYWAY = True
-    uuid = 'cat'
+    uuid = 'face'
     event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': uuid + u'/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly',
                                                                                                                                                                                                                                                                                                                                                                                               u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
     lambda_handler(event, None)

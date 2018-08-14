@@ -113,20 +113,29 @@ lein lambda deploy production
 
 ## To Do
 
-- UI
-  - Create and post config file
-  - Sort out image rotation (maybe iPhone specific)
-  - Handle timeouts correctly (right now, each step has a 3 min timeout)
-- Feature detect
-  - Consume config file for max number of points
-  - DLib facial point detection
-  - Consider moving away from SIFT Key Point detection to using edge detection. Canny detection specifically. Maybe there is some fusion where we find points along edges? Also consider adding random points in?
-  - Reduce noise in image using cv::cuda::fastNlMeansDenoisingColored
-- Partition
-  - Voronoi option (pre-requisite: Prepare all services to handle polygons instead of triangles... this is a significant amount of work)
-- Color
-  - It appears to never return and always time out
-  - Figure out a reasonable number of points to look at (right now, hardcoded to every 10 pixels). Possibly make this configurable.
-  - If variance in a polygon is too large, split it into two?
-- Email service
-  - New service that will email a link or even the file when coloring is complete if an email was provided
+- Now
+  - Incorporate DLib facial detection and implement it with a flag
+    - Will need to install it in the libs... maybe this can be done from ElementaryOS without having to boot up the Lambda docker container.
+  - Sort out image rotation
+  - Add edge detection strategy
+  - Add feature to allow user to select algorithms
+  - Split polygons (triangles) with too great a color variance
+
+- Later
+  - UI
+    - Create and post config file
+    - Sort out image rotation (maybe iPhone specific)
+    - Handle timeouts correctly (2, 1, 1)
+  - Feature detect
+    - Consume config file for max number of points
+    - DLib facial point detection
+    - Consider moving away from SIFT Key Point detection to using edge detection. Canny detection specifically. Maybe there is some fusion where we find points along edges? Also consider adding random points in - then we may be able to make gifs.
+    - Reduce noise in image using cv::cuda::fastNlMeansDenoisingColored
+  - Partition
+    - Voronoi option (pre-requisite: Prepare all services to handle polygons instead of triangles... this is a significant amount of work)
+  - Color
+    - It appears to never return and always time out
+    - Figure out a reasonable number of points to look at (right now, hardcoded to every 10 pixels). Possibly make this configurable.
+    - If variance in a polygon is too large, split it into two?
+  - Email service
+    - New service that will email a link or even the file when coloring is complete if an email was provided
