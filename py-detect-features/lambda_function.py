@@ -11,7 +11,6 @@ import boto3
 import cv2
 import numpy
 import dlib
-print dlib.__version__
 
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
@@ -99,8 +98,8 @@ def identify_facial_landmarks(img):
     predictor = dlib.shape_predictor(predictor_path)
 
     faces = detector(img, 1)
+    face_bounds = []  # Calculate face bounds from landmarks, not face detector
     for face in faces:
-        print face
         shape = predictor(img, face)
         landmarks = []
         for i in range(shape.num_parts):
@@ -108,9 +107,17 @@ def identify_facial_landmarks(img):
             x = int(part.x)
             y = int(part.y)
             landmark = (x, y)
-            points.append(landmark)
+            landmarks.append(landmark)
+            points += landmarks
 
-    return points
+        # https://www.pyimagesearch.com/wp-content/uploads/2017/04/facial_landmarks_68markup-768x619.jpg
+        # TODO: Just get the MAX|MIN x, y for all points
+        upper_left = (landmarks[0][0], landmarks[19][1])
+        bottom_right = (landmarks[16][0], landmarks[8][1])
+        face_bound = [upper_left, bottom_right]
+        face_bounds.append(face_bound)
+
+    return points, face_bounds
 
 
 def identify_points(img, max_points):
@@ -120,7 +127,7 @@ def identify_points(img, max_points):
 
     # points = identify_points_by_grid(img, 25)
     key_points = identify_points_by_key_points(img, max_points)
-    landmarks = identify_facial_landmarks(img)
+    landmarks, face_bounds = identify_facial_landmarks(img)
 
     points = key_points + landmarks
     print 'length:', len(points)
@@ -132,7 +139,7 @@ def identify_points(img, max_points):
     points.append((width - 1, 0))
     points.append((width - 1, height - 1))
 
-    return points
+    return points, face_bounds
 
 
 def lambda_handler(event, context):
@@ -162,7 +169,7 @@ def lambda_handler(event, context):
     # Much above 1000 takes too long for delaunay triangulation
     some_input_from_config_file = 1000
     max_points = min(some_input_from_config_file, 1000)
-    points = identify_points(img, max_points)
+    points, face_bounds = identify_points(img, max_points)
 
     # Draw on img
     for point in points:
@@ -170,6 +177,9 @@ def lambda_handler(event, context):
         radius = 2
         color = (255, 0, 255)
         cv2.circle(img, center, radius, color, -1)
+    for face_bound in face_bounds:
+        color = (0, 255, 255)
+        cv2.rectangle(img, face_bound[0], face_bound[1], color)
 
     # If testing locally write image to file system then exit
     if IS_LOCAL:
