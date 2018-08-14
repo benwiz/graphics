@@ -11,6 +11,7 @@ import boto3
 import cv2
 import numpy
 import dlib
+print dlib.__version__
 
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False

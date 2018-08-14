@@ -7,7 +7,7 @@ mv libs/cv2 .
 mv libs/numpy .
 mv libs/numpy-1.15.0.dist-info .
 mv libs/opencv_contrib_python-3.4.0.12.dist-info .
-mv libs/dlib-19.15.0.dist-info .
+mv libs/dlib-19.15.0.egg-info .
 mv libs/dlib.so .
 
 # Remove old zip
@@ -21,7 +21,7 @@ mv cv2 libs/
 mv numpy libs/
 mv numpy-1.15.0.dist-info libs/
 mv opencv_contrib_python-3.4.0.12.dist-info libs/
-mv dlib-19.15.0.dist-info libs/
+mv dlib-19.15.0.egg-info libs/
 mv dlib.so libs/
 
 # Upload zip to S3

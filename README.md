@@ -54,6 +54,7 @@ cd /home/proj
 export PYTHONPATH=/local/lib/python2.7/site-packages/
 easy_install pip
 /local/bin/pip install numpy -t libs/
+/local/bin/pip install dlib -t libs/
 ```
 
 In `py-detect-features` dir run the following command ensuring that the default aws configs are for my personal aws account.
