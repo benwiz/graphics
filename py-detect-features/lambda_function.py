@@ -111,15 +111,13 @@ def identify_facial_landmarks(img):
             points += landmarks
 
         # https://www.pyimagesearch.com/wp-content/uploads/2017/04/facial_landmarks_68markup-768x619.jpg
-        # TODO: Just get the MAX|MIN x, y for all points
-        max_x = max(landmarks, key=lambda point: point[0])
-        max_y = max(landmarks, key=lambda point: point[1])
-        min_x = min(landmarks, key=lambda point: point[0])
-        min_y = min(landmarks, key=lambda point: point[1])
+        max_x = max(landmarks, key=lambda point: point[0])[0]
+        max_y = max(landmarks, key=lambda point: point[1])[1]
+        min_x = min(landmarks, key=lambda point: point[0])[0]
+        min_y = min(landmarks, key=lambda point: point[1])[1]
         upper_left = (min_x, min_y)
         bottom_right = (max_x, max_y)
         face_bound = [upper_left, bottom_right]
-        print face_bound
         face_bounds.append(face_bound)
 
     return points, face_bounds
