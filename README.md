@@ -57,6 +57,12 @@ easy_install pip
 /local/bin/pip install dlib -t libs/
 ```
 
+Then
+
+```bash
+sudo chmod 777 libs/*
+```
+
 In `py-detect-features` dir run the following command ensuring that the default aws configs are for my personal aws account.
 
 ```bash
