@@ -4,27 +4,19 @@ Take an image and output a fragmented (low-poly) version.
 
 Inspired by [this project](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py).
 
-## Unorganized useful commands (this section to be incorporated into "Getting Started")
+## Getting Started
 
-Run worker.
+### docs (UI)
 
-```bash
-lein run
-```
-
-Deploy.
-
-```bash
-lein lambda deploy production
-```
-
-Run jekyll site locally
+#### Run Locally
 
 ```bash
 bundle exec jekyll serve
 ```
 
-## Getting Started
+#### Deploy
+
+Just push to master branch.
 
 ### py-detect-features
 
@@ -74,7 +66,9 @@ In `py-detect-features` dir run the following command ensuring that the default 
 
 #### Run Locally
 
-TODO
+```bash
+lein run
+```
 
 #### Deploy
 
@@ -86,7 +80,9 @@ lein lambda deploy production
 
 #### Run Locally
 
-TODO
+```bash
+lein run
+```
 
 #### Deploy
 
@@ -122,16 +118,15 @@ lein lambda deploy production
   - Sort out image rotation (maybe iPhone specific)
   - Handle timeouts correctly (right now, each step has a 3 min timeout)
 - Feature detect
-  - Consume config file for number of points
-  - Set reasonable memory and timeout settings
+  - Consume config file for max number of points
+  - DLib facial point detection
+  - Consider moving away from SIFT Key Point detection to using edge detection. Canny detection specifically. Maybe there is some fusion where we find points along edges? Also consider adding random points in?
+  - Reduce noise in image using cv::cuda::fastNlMeansDenoisingColored
 - Partition
-  - Set reasonable memory and timeout settings
+  - Voronoi option (pre-requisite: Prepare all services to handle polygons instead of triangles... this is a significant amount of work)
 - Color
   - It appears to never return and always time out
   - Figure out a reasonable number of points to look at (right now, hardcoded to every 10 pixels). Possibly make this configurable.
-  - Set reasonable memory and timeout settings
-
-### Later
-
-- Replace references to `triangles` with `polygons`. Anything that expects a triangle should be generalized. This will affect `partition` and `color`.
-- Voronoi
+  - If variance in a polygon is too large, split it into two?
+- Email service
+  - New service that will email a link or even the file when coloring is complete if an email was provided
