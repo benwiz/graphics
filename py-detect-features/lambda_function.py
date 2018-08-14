@@ -47,25 +47,6 @@ def identify_points_by_grid(img, N):
 
     return points
 
-#
-# Other feature point identification algorithms:
-#
-# Method: Canny edge detection and display
-# edges = cv2.Canny(img, 300, 500)
-# print len(edges[10])
-# from matplotlib import pyplot as plt
-# plt.subplot(121)
-# plt.imshow(img, cmap='gray')
-# plt.title('Original Image')
-# plt.xticks([])
-# plt.yticks([])
-# plt.subplot(122)
-# plt.imshow(edges, cmap='gray')
-# plt.title('Edge Image')
-# plt.xticks([])
-# plt.yticks([])
-# plt.show()
-
 
 def identify_points_by_key_points(img, max_points):
     """
@@ -85,6 +66,31 @@ def identify_points_by_key_points(img, max_points):
     )
 
     return points
+
+
+def identify_points_by_canny_edge_detection(img):
+    """
+    Method: canny edge detection
+    """
+
+    # TODO: Pretty sure the img is supposed to be grayscale
+
+    # Here is where we can explore how canny is used https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py#L135
+
+    edges = cv2.Canny(img, 300, 500)
+
+    from matplotlib import pyplot as plt
+    plt.subplot(121)
+    plt.imshow(img, cmap='gray')
+    plt.title('Original Image')
+    plt.xticks([])
+    plt.yticks([])
+    plt.subplot(122)
+    plt.imshow(edges, cmap='gray')
+    plt.title('Edge Image')
+    plt.xticks([])
+    plt.yticks([])
+    plt.show()
 
 
 def identify_facial_landmarks(img):
@@ -131,6 +137,7 @@ def identify_points(img, max_points):
     # points = identify_points_by_grid(img, 25)
     key_points = identify_points_by_key_points(img, max_points)
     landmarks, face_bounds = identify_facial_landmarks(img)
+    edges = identify_points_by_canny_edge_detection(img)
 
     # Remove any key_points within any face_bound
     for key_point in key_points:

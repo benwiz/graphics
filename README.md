@@ -123,12 +123,9 @@ lein lambda deploy production
 - Now
   - Incorporate DLib facial detection
     - Put it on a config flag
-    - Remove key_points from face based on face bounding
-  - ElementaryOS without having to boot up the Lambda docker container.
+  - Canny edge detection
   - Sort out image rotation
-  - Add edge detection strategy
   - Add feature to allow user to select algorithms
-  - Split polygons (triangles) with too great a color variance
 
 - Later
   - UI
