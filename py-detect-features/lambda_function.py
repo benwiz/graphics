@@ -6,10 +6,11 @@ key points.
 import os
 import io
 import json
+import pdb
 
 import boto3
 import cv2
-import numpy
+import numpy as np
 import dlib
 
 BUCKET_NAME = 'lowpoly'
@@ -79,18 +80,59 @@ def identify_points_by_canny_edge_detection(img):
 
     edges = cv2.Canny(img, 300, 500)
 
-    from matplotlib import pyplot as plt
-    plt.subplot(121)
-    plt.imshow(img, cmap='gray')
-    plt.title('Original Image')
-    plt.xticks([])
-    plt.yticks([])
-    plt.subplot(122)
-    plt.imshow(edges, cmap='gray')
-    plt.title('Edge Image')
-    plt.xticks([])
-    plt.yticks([])
-    plt.show()
+    # from matplotlib import pyplot as plt
+    # plt.subplot(121)
+    # plt.imshow(img, cmap='gray')
+    # plt.title('Original Image')
+    # plt.xticks([])
+    # plt.yticks([])
+    # plt.subplot(122)
+    # plt.imshow(edges, cmap='gray')
+    # plt.title('Edge Image')
+    # plt.xticks([])
+    # plt.yticks([])
+    # plt.show()
+
+    #
+    # The following was copied from lowpolify. I am going to rewrite it, but
+    # trying to understand it.
+    #
+
+    a = 50
+    b = 55
+    c = 0.15
+
+    # Set number of points for low-poly edge vertices. This is a subset of all
+    # points.
+    num_points = int(np.where(edges)[0].size * c)
+    # Return the indices of the elements that are non-zero.
+    # 'nonzero' returns a tuple of arrays, one for each dimension of a,
+    # containing the indices of the non-zero elements in that dimension.
+    row_indices, col_indices = np.nonzero(edges)
+    # row_indices.shape, returns count of all points that belong to an edge as
+    # a tuple. So 'np.zeros(row_indices.shape)' an array of this size, with all
+    # zeros. 'rnd' is thus an array of this size, with all values as 'False'.
+    # In other words, this is a weird way of getting a Numpy array that looks
+    # like [False, False, ..., False] where length is `row_indices.shape[0]`.
+    rnd = np.zeros(row_indices.shape) == 1
+    # Mark indices from beginning to 'num_points - 1' as True. This is not
+    # all items in `rnd`.
+    rnd[:num_points] = True
+    # Shuffle
+    np.random.shuffle(rnd)
+    # Randomly select a subset of the points to use. The ordered pairs are
+    # being maintained because we are getting `rnd` from both lists. The result
+    # is still a list of indices since `rnd`` is a list of booleans.
+    row_indices = row_indices[rnd]
+    col_indices = col_indices[rnd]
+    # Number of rows and columns in image
+    shape = img.shape
+    row_max = shape[0]
+    col_max = shape[1]
+    # Co-ordinates of all randomly chosen points
+    points = np.vstack([row_indices, col_indices]).T
+    print points, type(points), type(points[0]), type(points[0][0])
+    pdb.set_trace()
 
 
 def identify_facial_landmarks(img):
@@ -129,15 +171,26 @@ def identify_facial_landmarks(img):
     return points, face_bounds
 
 
-def identify_points(img, max_points):
+def identify_points(img, options):
     """
     Use a method to identify points
     """
 
-    # points = identify_points_by_grid(img, 25)
-    key_points = identify_points_by_key_points(img, max_points)
-    landmarks, face_bounds = identify_facial_landmarks(img)
-    edges = identify_points_by_canny_edge_detection(img)
+    grid_points = []
+    key_points = []
+    facial_landmarks = []
+    face_bouds = []
+    edges = []
+
+    if options['grid_points']:
+        grid_points = identify_points_by_grid(img, 25)
+    if options['key_points']:
+        max_key_points = min(options['max_key_points'], 1000)
+        key_points = identify_points_by_key_points(img, max_key_points)
+    if options['facial_landmarks']:
+        facial_landmarks, face_bounds = identify_facial_landmarks(img)
+    if options['canny']:
+        canny_edges = identify_points_by_canny_edge_detection(img)
 
     # Remove any key_points within any face_bound
     for key_point in key_points:
@@ -152,7 +205,7 @@ def identify_points(img, max_points):
                 key_points.remove(key_point)
 
     # Aggregate points
-    points = key_points + landmarks
+    points = grid_points + key_points + facial_landmarks  # + canny_edges
 
     # Add points for every corner
     height, width, channels = img.shape
@@ -183,15 +236,20 @@ def lambda_handler(event, context):
     ext = filename.split('.')[1]
     image_object = bucket.Object(key)
     # image_buffer = io.BytesIO(image_object.get()['Body'].read())
-    img = cv2.imdecode(numpy.fromstring(image_object.get()['Body'].read(),
-                                        numpy.uint8),
+    img = cv2.imdecode(np.fromstring(image_object.get()['Body'].read(),
+                                     np.uint8),
                        cv2.IMREAD_UNCHANGED)
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
     # Much above 1000 takes too long for delaunay triangulation
-    some_input_from_config_file = 1000
-    max_points = min(some_input_from_config_file, 1000)
-    points, face_bounds = identify_points(img, max_points)
+    options = {
+        'grid_points': False,
+        'key_points': True,
+        'facial_landmarks': True,
+        'canny': True,
+        'max_key_points': 1000,
+    }
+    points, face_bounds = identify_points(img, options)
 
     # Draw on img
     for point in points:
