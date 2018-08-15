@@ -134,10 +134,9 @@ def identify_points_by_canny_edge_detection(img, max_points):
     # Turn into python list, tuples, and ints
     points = []
     for p in numpy_points:
-        point = (int(p[0]), int(p[1]))
+        point = (int(p[1]), int(p[0]))
         points.append(point)
 
-    print len(points)
     return points
 
 
