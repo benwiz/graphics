@@ -121,6 +121,7 @@ lein lambda deploy production
 ## To Do
 
 - Now
+  - Re-incorporate removal of points within a radius
   - Sort out image rotation
   - Variance division
 
