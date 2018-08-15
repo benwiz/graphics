@@ -121,7 +121,6 @@ lein lambda deploy production
 ## To Do
 
 - Now
-  - Fill gaps
   - Sort out image rotation
   - Variance division
 
