@@ -121,15 +121,14 @@ lein lambda deploy production
 ## To Do
 
 - Now
-  - Incorporate DLib facial detection
-    - Put it on a config flag
-  - Canny edge detection
   - Sort out image rotation
-  - Add feature to allow user to select algorithms
+  - Variance division
 
 - Later
   - UI
     - Create and post config file
+      - Max point selection
+      - Algorithm selection
     - Sort out image rotation (maybe iPhone specific)
     - Handle timeouts correctly (2, 1, 1)
   - Feature detect
