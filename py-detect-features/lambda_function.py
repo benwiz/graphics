@@ -1,6 +1,9 @@
 """
 Consume an S3 create event, download the file, run some analysis, return the
 key points.
+
+NOTE: Could probably use Numpy arrays rather than lists and tuples for a slight
+speed increase.
 """
 
 import os
@@ -69,7 +72,7 @@ def identify_points_by_key_points(img, max_points):
     return points
 
 
-def identify_points_by_canny_edge_detection(img):
+def identify_points_by_canny_edge_detection(img, max_points):
     """
     Method: canny edge detection
     """
@@ -98,13 +101,10 @@ def identify_points_by_canny_edge_detection(img):
     # trying to understand it.
     #
 
-    a = 50
-    b = 55
-    c = 0.15
-
     # Set number of points for low-poly edge vertices. This is a subset of all
     # points.
-    num_points = int(np.where(edges)[0].size * c)
+    num_points = int(np.where(edges)[0].size * 0.15)
+    num_points = min(num_points, max_points)
     # Return the indices of the elements that are non-zero.
     # 'nonzero' returns a tuple of arrays, one for each dimension of a,
     # containing the indices of the non-zero elements in that dimension.
@@ -130,9 +130,15 @@ def identify_points_by_canny_edge_detection(img):
     row_max = shape[0]
     col_max = shape[1]
     # Co-ordinates of all randomly chosen points
-    points = np.vstack([row_indices, col_indices]).T
-    print points, type(points), type(points[0]), type(points[0][0])
-    pdb.set_trace()
+    numpy_points = np.vstack([row_indices, col_indices]).T
+    # Turn into python list, tuples, and ints
+    points = []
+    for p in numpy_points:
+        point = (int(p[0]), int(p[1]))
+        points.append(point)
+
+    print len(points)
+    return points
 
 
 def identify_facial_landmarks(img):
@@ -182,17 +188,18 @@ def identify_points(img, options):
     face_bouds = []
     edges = []
 
+    max_points = options['max_points']
+
     if options['grid_points']:
         grid_points = identify_points_by_grid(img, 25)
     if options['key_points']:
-        max_key_points = min(options['max_key_points'], 1000)
-        key_points = identify_points_by_key_points(img, max_key_points)
+        key_points = identify_points_by_key_points(img, max_points)
     if options['facial_landmarks']:
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
-        canny_edges = identify_points_by_canny_edge_detection(img)
+        canny_edges = identify_points_by_canny_edge_detection(img, max_points)
 
-    # Remove any key_points within any face_bound
+    # Remove any key_points within any face_boundTrue
     for key_point in key_points:
         for face_bound in face_bounds:
             x = key_point[0]
@@ -205,7 +212,7 @@ def identify_points(img, options):
                 key_points.remove(key_point)
 
     # Aggregate points
-    points = grid_points + key_points + facial_landmarks  # + canny_edges
+    points = grid_points + key_points + facial_landmarks + canny_edges
 
     # Add points for every corner
     height, width, channels = img.shape
@@ -244,10 +251,10 @@ def lambda_handler(event, context):
     # Much above 1000 takes too long for delaunay triangulation
     options = {
         'grid_points': False,
-        'key_points': True,
+        'key_points': False,
         'facial_landmarks': True,
         'canny': True,
-        'max_key_points': 1000,
+        'max_points': 1000,  # Will need to restrict max here.
     }
     points, face_bounds = identify_points(img, options)
 
