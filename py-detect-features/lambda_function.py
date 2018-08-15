@@ -199,20 +199,23 @@ def identify_points(img, options):
     if options['canny']:
         canny_edges = identify_points_by_canny_edge_detection(img, max_points)
 
-    # Remove any key_points within any face_boundTrue
-    for key_point in key_points:
+    # Aggregate points
+    points = grid_points + key_points + canny_edges
+
+    # Remove any points within any face_bound
+    for point in points:
         for face_bound in face_bounds:
-            x = key_point[0]
-            y = key_point[1]
+            x = point[0]
+            y = point[1]
             min_x = face_bound[0][0]
             min_y = face_bound[0][1]
             max_x = face_bound[1][0]
             max_y = face_bound[1][1]
             if min_x <= x and x <= max_x and min_y <= y and y <= max_y:
-                key_points.remove(key_point)
+                points.remove(point)
 
-    # Aggregate points
-    points = grid_points + key_points + facial_landmarks + canny_edges
+    # Add facial landmarks to aggregate
+    points += facial_landmarks
 
     # Add points for every corner
     height, width, channels = img.shape
