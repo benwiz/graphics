@@ -72,7 +72,7 @@ def identify_points_by_key_points(img, max_points):
     return points
 
 
-def identify_points_by_canny_edge_detection(img, max_points):
+def identify_points_by_canny_edge_detection(img, max_points, min_points):
     """
     Method: canny edge detection
     """
@@ -104,7 +104,8 @@ def identify_points_by_canny_edge_detection(img, max_points):
     # Set number of points for low-poly edge vertices. This is a subset of all
     # points.
     num_points = int(np.where(edges)[0].size * 0.15)
-    num_points = min(num_points, max_points)
+    num_points = min(num_points, max_points)  # I want no more than max_points
+    num_points = max(num_points, min_points)  # I want no fewer than min_points
     # Return the indices of the elements that are non-zero.
     # 'nonzero' returns a tuple of arrays, one for each dimension of a,
     # containing the indices of the non-zero elements in that dimension.
@@ -188,6 +189,7 @@ def identify_points(img, options):
     edges = []
 
     max_points = options['max_points']
+    min_points = options['min_points']
 
     if options['grid_points']:
         grid_points = identify_points_by_grid(img, 25)
@@ -196,7 +198,8 @@ def identify_points(img, options):
     if options['facial_landmarks']:
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
-        canny_edges = identify_points_by_canny_edge_detection(img, max_points)
+        canny_edges = identify_points_by_canny_edge_detection(
+            img, max_points, min_points)
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
@@ -257,6 +260,7 @@ def lambda_handler(event, context):
         'facial_landmarks': True,
         'canny': True,
         'max_points': 1000,  # Will need to restrict max here.
+        'min_points': 100,
     }
     points, face_bounds = identify_points(img, options)
 
