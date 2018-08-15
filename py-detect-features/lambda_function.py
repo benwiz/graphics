@@ -9,6 +9,7 @@ speed increase.
 import os
 import io
 import json
+import random
 import pdb
 
 import boto3
@@ -177,6 +178,25 @@ def identify_facial_landmarks(img):
     return points, face_bounds
 
 
+def identify_filler_points(img, current_points):
+    """
+    For now we generate 10% len(current_points) randomly. Later, we
+    intelligently choose where we need more points.
+    """
+
+    height, width, _ = img.shape
+
+    num_points = int(0.10 * len(current_points))
+    points = []
+    for i in range(num_points):
+        x = random.randint(0, width - 1)
+        y = random.randint(0, height - 1)
+        point = (x, y)
+        points.append(point)
+
+    return points
+
+
 def identify_points(img, options):
     """
     Use a method to identify points
@@ -203,6 +223,11 @@ def identify_points(img, options):
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
+
+    # Generate points to fill in gaps
+    if options['random']:
+        random_points = identify_filler_points(img, points)
+        points += random_points
 
     # Remove any points within any face_bound
     for point in points:
@@ -259,10 +284,12 @@ def lambda_handler(event, context):
         'key_points': False,
         'facial_landmarks': True,
         'canny': True,
+        'random': True,
         'max_points': 1000,  # Will need to restrict max here.
         'min_points': 100,
     }
     points, face_bounds = identify_points(img, options)
+    print 'num_points:', len(points)
 
     # Draw on img
     for point in points:

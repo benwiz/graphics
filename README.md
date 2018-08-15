@@ -121,7 +121,7 @@ lein lambda deploy production
 ## To Do
 
 - Now
-  - Make sure all coordinates are within bounds
+  - Fill gaps
   - Sort out image rotation
   - Variance division
 
