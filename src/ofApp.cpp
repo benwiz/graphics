@@ -11,16 +11,15 @@ void ofApp::setup() {
   ofBackground(255);
 
   // Init variables
-  numCircles = 15;
+  numCircles = 1;
   circlesCreated = 0;
 }
 
 //--------------------------------------------------------------
-ofPath ofApp::createArc(int radius, int thickness, int arcLength, ofColor color) {
+ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength, ofColor color) {
   ofPath arc;
 
   ofPoint point(0, 0);
-  int start = ofRandom(360);
   int end = start + arcLength;
   int smallRadius = radius - thickness;
 
@@ -38,13 +37,35 @@ ofPath ofApp::createArc(int radius, int thickness, int arcLength, ofColor color)
 vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor color) {
   vector<ofPath> arcsForCircle;
 
-  // TODO: Either eliminate the overlap of arcs within the same circle or ensure that a min gap exists between each arc.
-  int numArcs = ofRandom(1, 5);
+  // Draw arcs
+  int angle = 0;
+  int firstAngle = 360;
+  bool isFirstLoop = true;
+  while (angle < 360) {
+    // Insert a gap between arcs
+    angle += ofRandom(60);
 
-  for (int i=0; i<numArcs; i++) {
-    int arcLength = ofRandom(110);
-    ofPath arc = createArc(radius, thickness, arcLength, color);
+    // Exit if we will start overlapping the first angle
+    if (isFirstLoop == false && angle >= firstAngle) {
+      break;
+    }
+
+    // Select an arc length
+    int maxArcLength = std::min(firstAngle - angle, 270);
+    int arcLength = ofRandom(10, maxArcLength);
+
+    // Create the arc
+    ofPath arc = createArc(radius, thickness, angle, arcLength, color);
     arcsForCircle.push_back(arc);
+
+    // Record first angle on top of 360
+    if (isFirstLoop) {
+      firstAngle += angle;
+      isFirstLoop = false;
+    }
+
+    // Update the angle to the end of the arc
+    angle += arcLength;
   }
 
   return arcsForCircle;

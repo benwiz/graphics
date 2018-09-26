@@ -21,7 +21,7 @@ public:
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
-  ofPath createArc(int radius, int thickness, int arcLength, ofColor color);
+  ofPath createArc(int radius, int thickness, int arcLength, int start, ofColor color);
   vector<ofPath> createArcsForCircle(int radius, int thickness, ofColor color);
   vector<ofPath> arcs;
   int numCircles;
