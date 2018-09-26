@@ -11,7 +11,7 @@ void ofApp::setup() {
   ofBackground(255);
 
   // Init variables
-  numCircles = 1;
+  numCircles = 10;
   circlesCreated = 0;
 }
 
@@ -19,15 +19,18 @@ void ofApp::setup() {
 ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength, ofColor color) {
   ofPath arc;
 
+  // Calculate parameters of the arc
   ofPoint point(0, 0);
   int end = start + arcLength;
   int smallRadius = radius - thickness;
 
+  // Create the arc
   arc.arc(point, radius, radius, start, end);
   arc.arcNegative(point, smallRadius, smallRadius, end, start);
   arc.close();
   arc.setCircleResolution(100);
 
+  // Set the coloring
   arc.setFillColor(color);
   arc.setFilled(true);
 
@@ -90,11 +93,6 @@ void ofApp::draw() {
   for (auto arc : arcs) {
     arc.draw();
   }
-
-//  for (int i=0; i<arcs.size(); i++) {
-//    ofPath arc = arcs[i];
-//    arc.draw();
-//  }
 
   ofPopMatrix();
 }
