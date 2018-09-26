@@ -11,7 +11,7 @@ void ofApp::setup() {
   ofBackground(255);
 
   // Init variables
-  numCircles = 1;
+  numCircles = 15;
   circlesCreated = 0;
 }
 
@@ -38,18 +38,24 @@ ofPath ofApp::createArc(int radius, int thickness, int arcLength, ofColor color)
 vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor color) {
   vector<ofPath> arcsForCircle;
 
-  // For now create one arc, later create a few. Later will have to consider placement of arcs to avoid overlapping.
-  int arcLength = ofRandom(270);
-  ofPath arc = createArc(radius, thickness, arcLength, color);
-  arcsForCircle.push_back(arc);
+  // TODO: Either eliminate the overlap of arcs within the same circle or ensure that a min gap exists between each arc.
+  int numArcs = ofRandom(1, 5);
+
+  for (int i=0; i<numArcs; i++) {
+    int arcLength = ofRandom(110);
+    ofPath arc = createArc(radius, thickness, arcLength, color);
+    arcsForCircle.push_back(arc);
+  }
 
   return arcsForCircle;
 }
 
 void ofApp::update() {
   while (circlesCreated < numCircles) {
-    ofColor color(0, 100, 200, 127);
-    vector<ofPath> arcsForCircle = createArcsForCircle(100, 10, color);
+    ofColor color(0, ofRandom(30, 100), ofRandom(80, 200), 127); // TODO: Use a color palette
+    int radius = ofRandom(20, 200); // TODO: Ensure that there is only some overlap between circles
+    int thickness = ofRandom(5, 15);
+    vector<ofPath> arcsForCircle = createArcsForCircle(radius, thickness, color);
     arcs.insert(arcs.end(), arcsForCircle.begin(), arcsForCircle.end());
     circlesCreated++;
   }
