@@ -146,7 +146,7 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor col
 void ofApp::update() {
   int radius = ofRandom(50, 100);
   while (circlesCreated < numCircles) {
-    ofColor color = colors[circlesCreated % colors.size()];
+    ofColor color = colors[circlesCreated % colors.size()]; // TODO: Maybe this is better of as random int for inde
     int a = 5;
     radius += ofRandom(a, 12);
     int thickness = ofRandom(a, 15);
