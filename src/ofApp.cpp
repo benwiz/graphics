@@ -1,6 +1,72 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
+vector<ofColor> ofApp::createColorPaletteDynamically(int numColors) {
+  vector<ofColor> colors;
+  for (int i = 0; i < numColors; i++) {
+    int r = ofRandom(0, 20);
+    int g = ofRandom(30, 100);
+    int b = ofRandom(80, 200);
+    int a = ofRandom(100, 200);
+    ofColor color(r, g, b, a);
+    colors.push_back(color);
+  }
+
+  return colors;
+}
+
+vector<ofColor> ofApp::createColorPaletteManually() {
+  vector<ofColor> colors;
+
+  int r, g, b, a;
+  ofColor color;
+
+  r = 0;
+  g = 200;
+  b = 0;
+  a = 127;
+  color = ofColor(r, g, b, a);
+  colors.push_back(color);
+
+  r = 200;
+  g = 0;
+  b = 0;
+  a = 127;
+  color = ofColor(r, g, b, a);
+  colors.push_back(color);
+
+  r = 0;
+  g = 0;
+  b = 200;
+  a = 127;
+  color = ofColor(r, g, b, a);
+  colors.push_back(color);
+
+  r = 0;
+  g = 200;
+  b = 200;
+  a = 127;
+  color = ofColor(r, g, b, a);
+  colors.push_back(color);
+
+  r = 200;
+  g = 200;
+  b = 0;
+  a = 127;
+  color = ofColor(r, g, b, a);
+  colors.push_back(color);
+
+  return colors;
+}
+
+vector<ofColor> ofApp::createColorPalette(int numColors) {
+  if (numColors > 0) {
+    return createColorPaletteDynamically(numColors);
+  } else {
+    return createColorPaletteManually();
+  }
+}
+
 void ofApp::setup() {
   // Window size
   int width = 500;
@@ -13,6 +79,8 @@ void ofApp::setup() {
   // Init variables
   numCircles = 11;
   circlesCreated = 0;
+  numColors = 0; // if greater than 0, randomly generate colors else use hardcoded palette
+  colors = createColorPalette(numColors);
 }
 
 //--------------------------------------------------------------
@@ -38,8 +106,7 @@ ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength,
   return arc;
 }
 
-vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness,
-                                          ofColor color) {
+vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor color) {
   vector<ofPath> arcsForCircle;
 
   // Draw arcs
@@ -77,10 +144,9 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness,
 }
 
 void ofApp::update() {
-  int radius = 100;
+  int radius = ofRandom(50, 100);
   while (circlesCreated < numCircles) {
-    ofColor color(0, ofRandom(30, 100), ofRandom(80, 200),
-                  127); // TODO: Use a color palette
+    ofColor color = colors[circlesCreated % colors.size()];
     int a = 5;
     radius += ofRandom(a, 12);
     int thickness = ofRandom(a, 15);
@@ -106,16 +172,14 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
   if (key == ' ') {
-    // Clear screen
+    // Clear screen by emptying arcs, resetting counter, and creating a new
+    // color palette
     arcs.clear();
-    ofBackground(255);
     circlesCreated = 0;
+    if (numColors > 0)
+      colors = createColorPalette(numColors);
   } else if (key == 's') {
-    // It's strange that we can compare the int key to a character like `s`,
-    // right?  Well, the super short
-    // explanation is that characters are represented by numbers in programming.
-    // `s` and 115 are the same
-    // thing.
+    // Save screen
     ofSaveScreen("concentricGears_" + ofGetTimestampString() + ".png");
   }
 }
