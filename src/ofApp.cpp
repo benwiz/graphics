@@ -11,12 +11,13 @@ void ofApp::setup() {
   ofBackground(255);
 
   // Init variables
-  numCircles = 10;
+  numCircles = 11;
   circlesCreated = 0;
 }
 
 //--------------------------------------------------------------
-ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength, ofColor color) {
+ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength,
+                        ofColor color) {
   ofPath arc;
 
   // Calculate parameters of the arc
@@ -37,7 +38,8 @@ ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength, ofC
   return arc;
 }
 
-vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor color) {
+vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness,
+                                          ofColor color) {
   vector<ofPath> arcsForCircle;
 
   // Draw arcs
@@ -46,7 +48,7 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor col
   bool isFirstLoop = true;
   while (angle < 360) {
     // Insert a gap between arcs
-    angle += ofRandom(60);
+    angle += ofRandom(40);
 
     // Exit if we will start overlapping the first angle
     if (isFirstLoop == false && angle >= firstAngle) {
@@ -75,11 +77,15 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor col
 }
 
 void ofApp::update() {
+  int radius = 100;
   while (circlesCreated < numCircles) {
-    ofColor color(0, ofRandom(30, 100), ofRandom(80, 200), 127); // TODO: Use a color palette
-    int radius = ofRandom(20, 200); // TODO: Ensure that there is only some overlap between circles
-    int thickness = ofRandom(5, 15);
-    vector<ofPath> arcsForCircle = createArcsForCircle(radius, thickness, color);
+    ofColor color(0, ofRandom(30, 100), ofRandom(80, 200),
+                  127); // TODO: Use a color palette
+    int a = 5;
+    radius += ofRandom(a, 12);
+    int thickness = ofRandom(a, 15);
+    vector<ofPath> arcsForCircle =
+        createArcsForCircle(radius, thickness, color);
     arcs.insert(arcs.end(), arcsForCircle.begin(), arcsForCircle.end());
     circlesCreated++;
   }
@@ -98,7 +104,21 @@ void ofApp::draw() {
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {}
+void ofApp::keyPressed(int key) {
+  if (key == ' ') {
+    // Clear screen
+    arcs.clear();
+    ofBackground(255);
+    circlesCreated = 0;
+  } else if (key == 's') {
+    // It's strange that we can compare the int key to a character like `s`,
+    // right?  Well, the super short
+    // explanation is that characters are represented by numbers in programming.
+    // `s` and 115 are the same
+    // thing.
+    ofSaveScreen("concentricGears_" + ofGetTimestampString() + ".png");
+  }
+}
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {}
