@@ -79,13 +79,14 @@ void ofApp::setup() {
   // Init variables
   numCircles = 11;
   circlesCreated = 0;
-  numColors = 0; // if greater than 0, randomly generate colors else use hardcoded palette
+  numColors = 0; // if greater than 0, randomly generate colors else use
+                 // hardcoded palette
   colors = createColorPalette(numColors);
 }
 
 //--------------------------------------------------------------
-ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength,
-                        ofColor color) {
+vector<ofPath> ofApp::createArc(int radius, int thickness, int start,
+                                int arcLength, ofColor color) {
   ofPath arc;
 
   // Calculate parameters of the arc
@@ -103,10 +104,34 @@ ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength,
   arc.setFillColor(color);
   arc.setFilled(true);
 
-  return arc;
+  //
+  // Now, do nearly identical calculations so that we can get another arc that
+  // will be the border
+  //
+  ofPath borderArc;
+
+  // Calculate the parameters of the border arc
+  radius = radius + 1;
+  smallRadius = smallRadius - 1;
+
+  // Create the border arc
+  borderArc.arc(point, radius, radius, start, end);
+  borderArc.arcNegative(point, smallRadius, smallRadius, end, start);
+  borderArc.close();
+  borderArc.setCircleResolution(100);
+
+  // Set the coloring
+  borderArc.setColor(255);
+  borderArc.setFilled(false);
+
+  // Return both arcs. This is probably not a very good C or C++ way of
+  // returning two vectors.
+  vector<ofPath> arcs = {arc, borderArc};
+  return arcs;
 }
 
-vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor color) {
+vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness,
+                                          ofColor color) {
   vector<ofPath> arcsForCircle;
 
   // Draw arcs
@@ -127,8 +152,8 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor col
     int arcLength = ofRandom(10, maxArcLength);
 
     // Create the arc
-    ofPath arc = createArc(radius, thickness, angle, arcLength, color);
-    arcsForCircle.push_back(arc);
+    vector<ofPath> arcs = createArc(radius, thickness, angle, arcLength, color);
+    arcsForCircle.push_back(arcs[0]);
 
     // Record first angle on top of 360
     if (isFirstLoop) {
@@ -146,7 +171,9 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness, ofColor col
 void ofApp::update() {
   int radius = ofRandom(50, 100);
   while (circlesCreated < numCircles) {
-    ofColor color = colors[circlesCreated % colors.size()]; // TODO: Maybe this is better of as random int for inde
+    ofColor color =
+        colors[circlesCreated % colors.size()]; // TODO: Maybe this is better of
+                                                // as random int for inde
     int a = 5;
     radius += ofRandom(a, 12);
     int thickness = ofRandom(a, 15);
