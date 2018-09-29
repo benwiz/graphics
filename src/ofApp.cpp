@@ -199,10 +199,6 @@ void ofApp::draw() {
   ofPushMatrix();
   ofTranslate(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
 
-  //  for (auto arc : arcs) {
-  //    arc.draw();
-  //  }
-
   // Draw arcs
   for (int i = 0; i < arcs.size(); i += 2) {
     ofPath arc = arcs[i];
