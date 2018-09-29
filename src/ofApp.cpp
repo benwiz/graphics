@@ -101,8 +101,8 @@ ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength,
   arc.setCircleResolution(255);
 
   // Set the coloring
-  arc.setFillColor(color);
   arc.setFilled(true);
+  arc.setFillColor(color);
 
   return arc;
 }
@@ -116,11 +116,10 @@ ofPath ofApp::createBorderArc(int radius, int thickness, int start,
   int end = start + arcLength;
   int smallRadius = radius - thickness;
 
-  //  // Adjust for borders
-  //  start--;
-  //  end++;
-  //  radius++;
-  //  smallRadius--;
+  // Move the drawing point to the first point
+  float x = radius * cos(ofDegToRad(start));
+  float y = radius * sin(ofDegToRad(start));
+  arc.moveTo(x, y);
 
   // Create the arc
   arc.arc(point, radius, radius, start, end);
@@ -129,9 +128,9 @@ ofPath ofApp::createBorderArc(int radius, int thickness, int start,
   arc.setCircleResolution(255);
 
   // Set the coloring
-  //  arc.setFillColor(ofColor::white);
   arc.setFilled(false);
   arc.setStrokeWidth(1);
+  arc.setStrokeColor(ofColor::white);
 
   return arc;
 }
