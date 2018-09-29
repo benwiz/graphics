@@ -69,8 +69,8 @@ vector<ofColor> ofApp::createColorPalette(int numColors) {
 
 void ofApp::setup() {
   // Window size
-  int width = 500;
-  int height = 500;
+  int width = 1000;
+  int height = 1000;
   ofSetWindowShape(width, height);
 
   // Background
@@ -85,8 +85,8 @@ void ofApp::setup() {
 }
 
 //--------------------------------------------------------------
-vector<ofPath> ofApp::createArc(int radius, int thickness, int start,
-                                int arcLength, ofColor color) {
+ofPath ofApp::createArc(int radius, int thickness, int start, int arcLength,
+                        ofColor color) {
   ofPath arc;
 
   // Calculate parameters of the arc
@@ -98,36 +98,42 @@ vector<ofPath> ofApp::createArc(int radius, int thickness, int start,
   arc.arc(point, radius, radius, start, end);
   arc.arcNegative(point, smallRadius, smallRadius, end, start);
   arc.close();
-  arc.setCircleResolution(100);
+  arc.setCircleResolution(255);
 
   // Set the coloring
   arc.setFillColor(color);
   arc.setFilled(true);
 
-  //
-  // Now, do nearly identical calculations so that we can get another arc that
-  // will be the border
-  //
-  ofPath borderArc;
+  return arc;
+}
 
-  // Calculate the parameters of the border arc
-  radius = radius + 1;
-  smallRadius = smallRadius - 1;
+ofPath ofApp::createBorderArc(int radius, int thickness, int start,
+                              int arcLength, ofColor color) {
+  ofPath arc;
 
-  // Create the border arc
-  borderArc.arc(point, radius, radius, start, end);
-  borderArc.arcNegative(point, smallRadius, smallRadius, end, start);
-  borderArc.close();
-  borderArc.setCircleResolution(100);
+  // Calculate parameters of the arc
+  ofPoint point(0, 0);
+  int end = start + arcLength;
+  int smallRadius = radius - thickness;
+
+  //  // Adjust for borders
+  //  start--;
+  //  end++;
+  //  radius++;
+  //  smallRadius--;
+
+  // Create the arc
+  arc.arc(point, radius, radius, start, end);
+  arc.arcNegative(point, smallRadius, smallRadius, end, start);
+  arc.close();
+  arc.setCircleResolution(255);
 
   // Set the coloring
-  borderArc.setColor(255);
-  borderArc.setFilled(false);
+  //  arc.setFillColor(ofColor::white);
+  arc.setFilled(false);
+  arc.setStrokeWidth(1);
 
-  // Return both arcs. This is probably not a very good C or C++ way of
-  // returning two vectors.
-  vector<ofPath> arcs = {arc, borderArc};
-  return arcs;
+  return arc;
 }
 
 vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness,
@@ -152,8 +158,13 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness,
     int arcLength = ofRandom(10, maxArcLength);
 
     // Create the arc
-    vector<ofPath> arcs = createArc(radius, thickness, angle, arcLength, color);
-    arcsForCircle.push_back(arcs[0]);
+    ofPath arc = createArc(radius, thickness, angle, arcLength, color);
+    arcsForCircle.push_back(arc);
+
+    // Create the border arc
+    ofPath borderArc =
+        createBorderArc(radius, thickness, angle, arcLength, color);
+    arcsForCircle.push_back(borderArc);
 
     // Record first angle on top of 360
     if (isFirstLoop) {
@@ -173,10 +184,9 @@ void ofApp::update() {
   while (circlesCreated < numCircles) {
     ofColor color =
         colors[circlesCreated % colors.size()]; // TODO: Maybe this is better of
-                                                // as random int for inde
-    int a = 5;
-    radius += ofRandom(a, 12);
-    int thickness = ofRandom(a, 15);
+                                                // as random int for index
+    radius += ofRandom(ofGetWidth() / 100, ofGetWidth() / 30);
+    int thickness = ofRandom(ofGetWidth() / 100, ofGetWidth() / 25);
     vector<ofPath> arcsForCircle =
         createArcsForCircle(radius, thickness, color);
     arcs.insert(arcs.end(), arcsForCircle.begin(), arcsForCircle.end());
@@ -189,7 +199,19 @@ void ofApp::draw() {
   ofPushMatrix();
   ofTranslate(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
 
-  for (auto arc : arcs) {
+  //  for (auto arc : arcs) {
+  //    arc.draw();
+  //  }
+
+  // Draw arcs
+  for (int i = 0; i < arcs.size(); i += 2) {
+    ofPath arc = arcs[i];
+    arc.draw();
+  }
+
+  // Draw border arcs
+  for (int i = 1; i < arcs.size(); i += 2) {
+    ofPath arc = arcs[i];
     arc.draw();
   }
 

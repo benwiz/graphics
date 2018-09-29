@@ -24,7 +24,8 @@ public:
   vector<ofColor> createColorPalette(int numColors);
   vector<ofColor> createColorPaletteDynamically(int numColors);
   vector<ofColor> createColorPaletteManually();
-  vector<ofPath> createArc(int radius, int thickness, int arcLength, int start, ofColor color);
+  ofPath createArc(int radius, int thickness, int arcLength, int start, ofColor color);
+  ofPath createBorderArc(int radius, int thickness, int arcLength, int start, ofColor color);
   vector<ofPath> createArcsForCircle(int radius, int thickness, ofColor color);
 
   vector<ofColor> colors;
