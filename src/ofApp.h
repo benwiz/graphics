@@ -29,6 +29,7 @@ public:
   vector<ofPath> createArcsForCircle(int radius, int thickness, ofColor color);
 
   vector<ofColor> colors;
+  bool selectRandomColors;
   int numColors;
   vector<ofPath> arcs;
   vector<ofPath> borderArcs;

@@ -18,43 +18,12 @@ vector<ofColor> ofApp::createColorPaletteDynamically(int numColors) {
 vector<ofColor> ofApp::createColorPaletteManually() {
   vector<ofColor> colors;
 
-  int r, g, b, a;
-  ofColor color;
-
-  r = 0;
-  g = 200;
-  b = 0;
-  a = 127;
-  color = ofColor(r, g, b, a);
-  colors.push_back(color);
-
-  r = 200;
-  g = 0;
-  b = 0;
-  a = 127;
-  color = ofColor(r, g, b, a);
-  colors.push_back(color);
-
-  r = 0;
-  g = 0;
-  b = 200;
-  a = 127;
-  color = ofColor(r, g, b, a);
-  colors.push_back(color);
-
-  r = 0;
-  g = 200;
-  b = 200;
-  a = 127;
-  color = ofColor(r, g, b, a);
-  colors.push_back(color);
-
-  r = 200;
-  g = 200;
-  b = 0;
-  a = 127;
-  color = ofColor(r, g, b, a);
-  colors.push_back(color);
+  //
+  colors.push_back(ofColor(0, 200, 0, 128));
+  colors.push_back(ofColor(200, 0, 0, 128));
+  colors.push_back(ofColor(0, 0, 200, 128));
+  colors.push_back(ofColor(0, 200, 200, 128));
+  colors.push_back(ofColor(200, 200, 0, 128));
 
   return colors;
 }
@@ -82,6 +51,7 @@ void ofApp::setup() {
   numColors = 0; // if greater than 0, randomly generate colors else use
                  // hardcoded palette
   colors = createColorPalette(numColors);
+  selectRandomColors = true; // select random colors from palette
 }
 
 //--------------------------------------------------------------
@@ -181,9 +151,12 @@ vector<ofPath> ofApp::createArcsForCircle(int radius, int thickness,
 void ofApp::update() {
   int radius = ofRandom(50, 100);
   while (circlesCreated < numCircles) {
-    ofColor color =
-        colors[circlesCreated % colors.size()]; // TODO: Maybe this is better of
-                                                // as random int for index
+    ofColor color;
+    if (selectRandomColors) {
+      color = colors[ofRandom(colors.size())];
+    } else {
+      color = colors[circlesCreated % colors.size()];
+    }
     radius += ofRandom(ofGetWidth() / 100, ofGetWidth() / 30);
     int thickness = ofRandom(ofGetWidth() / 100, ofGetWidth() / 25);
     vector<ofPath> arcsForCircle =
