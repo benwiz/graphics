@@ -1,3 +1,5 @@
+
+
 #include "ofApp.h"
 
 //--------------------------------------------------------------
@@ -16,14 +18,66 @@ vector<ofColor> ofApp::createColorPaletteDynamically(int numColors) {
 }
 
 vector<ofColor> ofApp::createColorPaletteManually() {
-  vector<ofColor> colors;
+  vector<ofColor> colors = {
+      //      // Initial
+      //      ofColor(0, 200, 0, 128), ofColor(200, 0, 0, 128), ofColor(0, 0,
+      //      200, 128),
+      //      ofColor(0, 200, 200, 128), ofColor(200, 200, 0, 128),
 
-  //
-  colors.push_back(ofColor(0, 200, 0, 128));
-  colors.push_back(ofColor(200, 0, 0, 128));
-  colors.push_back(ofColor(0, 0, 200, 128));
-  colors.push_back(ofColor(0, 200, 200, 128));
-  colors.push_back(ofColor(200, 200, 0, 128));
+      // Rainbow
+
+//      // Royal
+//    ofColor(230, 57, 70, 128),
+//    ofColor(241, 250, 238, 128),
+//    ofColor(168, 218, 220, 128),
+//    ofColor(69, 123, 157, 128),
+//    ofColor(29, 53, 87),
+
+//    // Idk
+//    ofColor(100, 200, 139, 128),
+//    ofColor(253, 100, 252, 128),
+//    ofColor(46, 196, 182, 128),
+//    ofColor(231, 29, 54, 128),
+//    ofColor(255, 159, 28, 128),
+
+//    // Green-Purple
+//    ofColor(188, 231, 132, 128),
+//    ofColor(93, 211, 58, 128),
+//    ofColor(52, 138, 167, 128),
+//    ofColor(82, 81, 200, 128),
+//    ofColor(102, 50, 123, 128),
+
+//    // Blues
+//    ofColor(0, 0, 255, 128),
+//    ofColor(0, 15, 240, 128),
+//    ofColor(0, 30, 225, 128),
+//    ofColor(3, 55, 200, 128),
+//    ofColor(5, 80, 175, 128),
+//    ofColor(10, 100, 155, 128),
+
+//    // Greens?
+//    ofColor(0, 255, 0, 128),
+//    ofColor(0, 255, 100, 128),
+//    ofColor(0, 255, 150, 128),
+//    ofColor(70, 255, 50, 128),
+//    ofColor(50, 200, 14, 128),
+//    ofColor(100, 255, 100, 128),
+
+    // Rainbow
+    ofColor(255, 0, 0, 128),
+    ofColor(255, 165, 0, 128),
+    ofColor(255, 255, 0, 128),
+    ofColor(0, 255, 0, 128),
+    ofColor(0, 0, 255, 128),
+    ofColor(75, 0, 130, 128),
+    ofColor(238, 130, 238, 128),
+  };
+
+  //  colors.push_back(ofColor(0, 200, 0, 128));
+  //  colors.push_back(ofColor(200, 0, 0, 128));
+  //  colors.push_back(ofColor(0, 0, 200, 128));
+  //  colors.push_back(ofColor(0, 200, 200, 128));
+  //  colors.push_back(ofColor(200, 200, 0, 128));
 
   return colors;
 }
@@ -46,12 +100,12 @@ void ofApp::setup() {
   ofBackground(255);
 
   // Init variables
-  numCircles = 11;
+  numCircles = 12;
   circlesCreated = 0;
   numColors = 0; // if greater than 0, randomly generate colors else use
                  // hardcoded palette
   colors = createColorPalette(numColors);
-  selectRandomColors = true; // select random colors from palette
+  selectRandomColors = false; // select random colors from palette
 }
 
 //--------------------------------------------------------------

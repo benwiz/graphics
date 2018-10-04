@@ -2,7 +2,6 @@
 
 ## To Do
 
-- Simple way of creating and selecting color palettes... maybe a YAML file
 - Refine the spacing of circles and arcs
 - Select 3 of my favorites and post to Instagram... maybe China colors, Indonesia colors, Korea colors?
 
