@@ -102,14 +102,22 @@ ofPath ofApp::createRectangle(ofColor color) {
 }
 
 vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
-  //  // I need to first find all vertices. Then use those to select rects to
-  //  fill.
-  //  for (int i=0; i<lines.size(); i++) {
-  //    ofPath line = lines[i];
-  //
-  //  }
-  // TODO: Figure out how to get all intersections of all lines. Then it will
-  // be fairly simple to get all rectangles.
+  // For each line
+  for (int i = 0; i < lines.size(); i++) {
+    ofPath line = lines[i];
+    ofPoint start = line.getOutline()[0].getVertices()[0];
+    ofPoint end = line.getOutline()[0].getVertices()[1];
+
+    // Find intersection with each other line
+    for (int j = 0; j < lines.size(); j++) {
+      if (i == j) continue;
+
+      // TODO: Set equations equal to each other
+      // TODO: Solve for X
+      // TODO: Plug in X into original equation and solve for Y.
+      // Don't forget lines may be parallel and have no intersection.
+    }
+  }
 
   vector<ofPath> newRectangles;
 
@@ -207,4 +215,4 @@ void ofApp::windowResized(int w, int h) {}
 void ofApp::gotMessage(ofMessage msg) {}
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){}
+void ofApp::dragEvent(ofDragInfo dragInfo) {}
