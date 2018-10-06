@@ -21,13 +21,19 @@ public:
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
+  ofPath createBackgroundRectangle(ofColor color);
+  vector<ofPath> createBackgroundRectangles(int n);
   ofPath createLine();
   vector<ofPath> createLines(int n);
   ofPath createRectangle(ofColor color);
-  vector<ofPath> createRectangles(int n, vector<ofPath> rectangles);
+  vector<ofPath> createRectangles(int n, vector<ofPath> lines);
 
   bool done;
   int strokeWidth;
+  int numLines;
+  int numRectangles;
+  int numBackgroundRectangles;
   vector<ofPath> lines;
   vector<ofPath> rectangles;
+  vector<ofPath> backgroundRectangles;
 };

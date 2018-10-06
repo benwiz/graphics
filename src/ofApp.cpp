@@ -1,3 +1,5 @@
+
+
 #include "ofApp.h"
 
 //--------------------------------------------------------------
@@ -13,9 +15,38 @@ void ofApp::setup() {
   // Globals
   done = false;
   strokeWidth = 5;
+  numLines = 10;
+  numRectangles = 0;
+  numBackgroundRectangles = ofRandom(2);
 }
 
 //--------------------------------------------------------------
+ofPath ofApp::createBackgroundRectangle(ofColor color) {
+  ofPath rectangle;
+
+  int x = ofRandom(ofGetWidth());
+  int y = ofRandom(ofGetHeight());
+  int w = ofRandom(120, 300);
+  int h = ofRandom(20, 80);
+  rectangle.rectangle(x, y, w, h);
+
+  rectangle.setFilled(true);
+  rectangle.setFillColor(color);
+
+  return rectangle;
+}
+
+vector<ofPath> ofApp::createBackgroundRectangles(int n) {
+  vector<ofPath> newBackgroundRectangles;
+
+  for (int i = 0; i < n; i++) {
+    ofPath rectangle = createBackgroundRectangle(ofColor::lightBlue);
+    newBackgroundRectangles.push_back(rectangle);
+  }
+
+  return newBackgroundRectangles;
+}
+
 ofPath ofApp::createLine() {
   // Select horizontal or vertical
   bool horizontal = int(ofRandom(2)) == 0;
@@ -59,8 +90,8 @@ ofPath ofApp::createRectangle(ofColor color) {
   ofPath rectangle;
 
   rectangle.moveTo(300, 300);
-  rectangle.lineTo(500, 300);
-  rectangle.lineTo(500, 500);
+  rectangle.lineTo(600, 300);
+  rectangle.lineTo(600, 500);
   rectangle.lineTo(300, 500);
   rectangle.close();
 
@@ -71,9 +102,18 @@ ofPath ofApp::createRectangle(ofColor color) {
 }
 
 vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
+  //  // I need to first find all vertices. Then use those to select rects to
+  //  fill.
+  //  for (int i=0; i<lines.size(); i++) {
+  //    ofPath line = lines[i];
+  //
+  //  }
+  // TODO: Figure out how to get all intersections of all lines. Then it will
+  // be fairly simple to get all rectangles.
+
   vector<ofPath> newRectangles;
 
-  for (int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     ofPath rectangle = createRectangle(ofColor::blue);
     newRectangles.push_back(rectangle);
   }
@@ -83,12 +123,19 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
 
 void ofApp::update() {
   if (!done) {
+    // Create background rectangles
+    vector<ofPath> newBackgroundRectangles =
+        createBackgroundRectangles(numBackgroundRectangles);
+    backgroundRectangles.insert(backgroundRectangles.end(),
+                                newBackgroundRectangles.begin(),
+                                newBackgroundRectangles.end());
+
     // Create lines
-    vector<ofPath> newLines = createLines(10);
+    vector<ofPath> newLines = createLines(numLines);
     lines.insert(lines.end(), newLines.begin(), newLines.end());
 
     // Create rectangles
-    vector<ofPath> newRectangles = createRectangles(1, lines);
+    vector<ofPath> newRectangles = createRectangles(numRectangles, lines);
     rectangles.insert(rectangles.end(), newRectangles.begin(),
                       newRectangles.end());
 
@@ -98,6 +145,12 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+  // Draw background rectangles
+  for (int i = 0; i < backgroundRectangles.size(); i++) {
+    ofPath backgroundRectangle = backgroundRectangles[i];
+    backgroundRectangle.draw();
+  }
+
   // Draw lines
   for (int i = 0; i < lines.size(); i++) {
     ofPath line = lines[i];
@@ -105,7 +158,7 @@ void ofApp::draw() {
   }
 
   // Draw rectangles
-  for (int i = 0; i< rectangles.size(); i++) {
+  for (int i = 0; i < rectangles.size(); i++) {
     ofPath rectangle = rectangles[i];
     rectangle.draw();
   }
@@ -114,8 +167,11 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
   if (key == ' ') {
-    // Clear screen by emptying lines and resetting the "done" boolean
+    // Clear screen by emptying vectors and resetting the "done" boolean
+    backgroundRectangles.clear();
     lines.clear();
+    rectangles.clear();
+    numBackgroundRectangles = ofRandom(2);
     done = false;
   } else if (key == 's') {
     // Save screen
@@ -151,4 +207,4 @@ void ofApp::windowResized(int w, int h) {}
 void ofApp::gotMessage(ofMessage msg) {}
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo) {}
+void ofApp::dragEvent(ofDragInfo dragInfo){}
