@@ -21,8 +21,13 @@ public:
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
 
+  ofPath createLine();
   vector<ofPath> createLines(int n);
+  ofPath createRectangle(ofColor color);
+  vector<ofPath> createRectangles(int n, vector<ofPath> rectangles);
 
   bool done;
+  int strokeWidth;
   vector<ofPath> lines;
+  vector<ofPath> rectangles;
 };
