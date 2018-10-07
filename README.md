@@ -6,10 +6,7 @@ Next project: recursiveMondrian
 
 ## To Do
 
-- Background rectangle
-- Get all points from line intersections
-- Get rectangles from these points
-- Color some in randomly as long as there is not already an underlying, background rectangle
+- Placement of background rectangle can be improved
 
 ### To Do Never
 
