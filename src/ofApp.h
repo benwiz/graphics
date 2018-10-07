@@ -36,4 +36,6 @@ public:
   vector<ofPath> lines;
   vector<ofPath> rectangles;
   vector<ofPath> backgroundRectangles;
+
+  vector<ofPoint> tmp;
 };

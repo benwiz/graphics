@@ -111,6 +111,10 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
     ofPoint start1 = line1.getOutline()[0].getVertices()[0];
     ofPoint end1 = line1.getOutline()[0].getVertices()[1];
 
+    // Add the start and end points
+    intersections.push_back(start1);
+    intersections.push_back(end1);
+
     // Find intersection with each other line
     for (int j = 0; j < lines.size(); j++) {
       if (i == j) continue;
@@ -168,9 +172,9 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
   // Loop through intersection points and create all possible rectangles
   for (int i = 0; i < intersections.size(); i++) {
     ofPoint intersection = intersections[i];
-
-
   }
+
+  tmp = intersections;
 
   return allRectangles;
 }
@@ -215,6 +219,13 @@ void ofApp::draw() {
   for (int i = 0; i < rectangles.size(); i++) {
     ofPath rectangle = rectangles[i];
     rectangle.draw();
+  }
+
+  // Temporarily draw points
+  ofSetColor(ofColor::red);
+  for (int i = 0; i < tmp.size(); i++) {
+    ofPoint p = tmp[i];
+    ofDrawCircle(p.x, p.y, 5);
   }
 }
 
