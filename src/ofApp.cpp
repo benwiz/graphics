@@ -86,7 +86,9 @@ vector<ofPath> ofApp::createLines(int n) {
   return newLines;
 }
 
-ofPath ofApp::createRectangle(ofPoint upperLeft, ofPoint upperRight, ofPoint lowerRight, ofPoint lowerLeft, ofColor color) {
+ofPath ofApp::createRectangle(ofPoint upperLeft, ofPoint upperRight,
+                              ofPoint lowerRight, ofPoint lowerLeft,
+                              ofColor color) {
   ofPath rectangle;
 
   rectangle.moveTo(upperLeft);
@@ -117,7 +119,8 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
 
     // Find intersection with each other line
     for (int j = 0; j < lines.size(); j++) {
-      if (i == j) continue;
+      if (i == j)
+        continue;
 
       ofPath line2 = lines[j];
       ofPoint start2 = line2.getOutline()[0].getVertices()[0];
@@ -147,24 +150,32 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
     }
   }
 
-  // Check if 4 corners have been added, if not, add them.
-  bool has_0_0, has_0_max, has_max_0, has_max_max;
-  for (int i = 0; i < intersections.size(); i++) {
-    ofPoint intersection = intersections[i];
-    if (intersection.x == 0 && intersection.y == 0) {
-      has_0_0 = true;
-    } else if (intersection.x == 0 && intersection.y == ofGetHeight()) {
-      has_0_max = true;
-    } else if (intersection.x == ofGetWidth() && intersection.y == 0) {
-      has_max_0 = true;
-    } else if (intersection.x == ofGetWidth() && intersection.y == ofGetHeight()) {
-      has_max_max = true;
-    }
-  }
-  if (!has_0_0) intersections.push_back(ofPoint(0, 0));
-  if (!has_0_max) intersections.push_back(ofPoint(0, ofGetHeight()));
-  if (!has_max_0) intersections.push_back(ofPoint(ofGetWidth(), 0));
-  if (!has_max_max) intersections.push_back(ofPoint(ofGetWidth(), ofGetHeight()));
+  //  // Check if 4 corners have been added, if not, add them.
+  //  bool has_0_0, has_0_max, has_max_0, has_max_max;
+  //  for (int i = 0; i < intersections.size(); i++) {
+  //    ofPoint intersection = intersections[i];
+  //    if (intersection.x == 0 && intersection.y == 0) {
+  //      has_0_0 = true;
+  //    } else if (intersection.x == 0 && intersection.y == ofGetHeight()) {
+  //      has_0_max = true;
+  //    } else if (intersection.x == ofGetWidth() && intersection.y == 0) {
+  //      has_max_0 = true;
+  //    } else if (intersection.x == ofGetWidth() && intersection.y ==
+  //    ofGetHeight()) {
+  //      has_max_max = true;
+  //    }
+  //  }
+  //  printf("%d %d %d %d\n", has_0_0, has_0_max, has_max_0, has_max_max);
+  //  if (!has_0_0) intersections.push_back(ofPoint(0, 0));
+  //  if (!has_0_max) intersections.push_back(ofPoint(0, ofGetHeight()));
+  //  if (!has_max_0) intersections.push_back(ofPoint(ofGetWidth(), 0));
+  //  if (!has_max_max) intersections.push_back(ofPoint(ofGetWidth(),
+  //  ofGetHeight()));
+
+  intersections.push_back(ofPoint(0, 0));
+  intersections.push_back(ofPoint(0, ofGetHeight()));
+  intersections.push_back(ofPoint(ofGetWidth(), 0));
+  intersections.push_back(ofPoint(ofGetWidth(), ofGetHeight()));
 
   // Store all rectangles, whether they will be filled with white or color
   vector<ofPath> allRectangles;
@@ -181,7 +192,8 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
     // larger x-value.
     int x = INT_MAX;
     for (int j = 0; j < intersections.size(); j++) {
-      if (i == j) continue;
+      if (i == j)
+        continue;
       ofPoint point = intersections[j];
       if (upperLeft.y == point.y && upperLeft.x < point.x) {
         if (point.x < x) {
@@ -197,7 +209,8 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
     // smallest larger y-value.
     int y = INT_MAX;
     for (int j = 0; j < intersections.size(); j++) {
-      if (i == j) continue;
+      if (i == j)
+        continue;
       ofPoint point = intersections[j];
       if (upperRight.x == point.x && upperRight.y < point.y) {
         if (point.y < y) {
@@ -213,11 +226,13 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
     lowerLeft.y = lowerRight.y;
 
     // 4: Create the rectangle
-    ofPath rectangle = createRectangle(upperLeft, upperRight, lowerRight, lowerLeft, ofColor::lightGrey);
+    vector<ofColor> colors{ofColor::red, ofColor::blue, ofColor::blue,
+                           ofColor::white};
+    ofColor color = colors[ofRandom(colors.size())];
+    ofPath rectangle =
+        createRectangle(upperLeft, upperRight, lowerRight, lowerLeft, color);
     allRectangles.push_back(rectangle);
   }
-
-  tmp = intersections;
 
   return allRectangles;
 }
@@ -252,23 +267,16 @@ void ofApp::draw() {
     backgroundRectangle.draw();
   }
 
-  // Draw lines
-  for (int i = 0; i < lines.size(); i++) {
-    ofPath line = lines[i];
-    line.draw();
-  }
-
   // Draw rectangles
   for (int i = 0; i < rectangles.size(); i++) {
     ofPath rectangle = rectangles[i];
     rectangle.draw();
   }
 
-  // Temporarily draw points
-  ofSetColor(ofColor::red);
-  for (int i = 0; i < tmp.size(); i++) {
-    ofPoint p = tmp[i];
-    ofDrawCircle(p.x, p.y, 5);
+  // Draw lines
+  for (int i = 0; i < lines.size(); i++) {
+    ofPath line = lines[i];
+    line.draw();
   }
 }
 
