@@ -86,13 +86,13 @@ vector<ofPath> ofApp::createLines(int n) {
   return newLines;
 }
 
-ofPath ofApp::createRectangle(ofColor color) {
+ofPath ofApp::createRectangle(ofPoint upperLeft, ofPoint upperRight, ofPoint lowerRight, ofPoint lowerLeft, ofColor color) {
   ofPath rectangle;
 
-  rectangle.moveTo(300, 300);
-  rectangle.lineTo(600, 300);
-  rectangle.lineTo(600, 500);
-  rectangle.lineTo(300, 500);
+  rectangle.moveTo(upperLeft);
+  rectangle.lineTo(upperRight);
+  rectangle.lineTo(lowerRight);
+  rectangle.lineTo(lowerLeft);
   rectangle.close();
 
   rectangle.setFilled(true);
@@ -192,7 +192,29 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
     upperRight.x = x;
     upperRight.y = upperLeft.y;
 
-    // 2
+    // 2: Find the lower right intersection point. Only check points with the
+    // same x-value and greater y-value than the upper right point. Find the
+    // smallest larger y-value.
+    int y = INT_MAX;
+    for (int j = 0; j < intersections.size(); j++) {
+      if (i == j) continue;
+      ofPoint point = intersections[j];
+      if (upperRight.x == point.x && upperRight.y < point.y) {
+        if (point.y < y) {
+          y = point.y;
+        }
+      }
+    }
+    lowerRight.x = upperRight.x;
+    lowerRight.y = y;
+
+    // 3: Find/create the lower left intersection points.
+    lowerLeft.x = upperLeft.x;
+    lowerLeft.y = lowerRight.y;
+
+    // 4: Create the rectangle
+    ofPath rectangle = createRectangle(upperLeft, upperRight, lowerRight, lowerLeft, ofColor::lightGrey);
+    allRectangles.push_back(rectangle);
   }
 
   tmp = intersections;

@@ -25,7 +25,7 @@ public:
   vector<ofPath> createBackgroundRectangles(int n);
   ofPath createLine();
   vector<ofPath> createLines(int n);
-  ofPath createRectangle(ofColor color);
+  ofPath createRectangle(ofPoint upperLeft, ofPoint upperRight, ofPoint lowerRight, ofPoint lowerLeft, ofColor color);
   vector<ofPath> createRectangles(int n, vector<ofPath> lines);
 
   bool done;
