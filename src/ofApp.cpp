@@ -102,31 +102,77 @@ ofPath ofApp::createRectangle(ofColor color) {
 }
 
 vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
+  // Store intersection points
+  vector<ofPoint> intersections;
+
   // For each line
   for (int i = 0; i < lines.size(); i++) {
-    ofPath line = lines[i];
-    ofPoint start = line.getOutline()[0].getVertices()[0];
-    ofPoint end = line.getOutline()[0].getVertices()[1];
+    ofPath line1 = lines[i];
+    ofPoint start1 = line1.getOutline()[0].getVertices()[0];
+    ofPoint end1 = line1.getOutline()[0].getVertices()[1];
 
     // Find intersection with each other line
     for (int j = 0; j < lines.size(); j++) {
       if (i == j) continue;
 
-      // TODO: Set equations equal to each other
-      // TODO: Solve for X
-      // TODO: Plug in X into original equation and solve for Y.
-      // Don't forget lines may be parallel and have no intersection.
+      ofPath line2 = lines[j];
+      ofPoint start2 = line2.getOutline()[0].getVertices()[0];
+      ofPoint end2 = line2.getOutline()[0].getVertices()[1];
+
+      // Confirm one line is vertical and the other is horizontal. To do this,
+      // check that one line has matching y-values and the other line has
+      // matching y-values.
+      // 1 is vertical, 2 is horizontal
+      bool test1 = start1.x == end1.x && start2.y == end2.y;
+      // 1 is horizontal, 2 is vertical
+      bool test2 = start1.y == end1.y && start2.x == end2.x;
+
+      // Find intersection
+      ofPoint intersection;
+      if (test1) {
+        intersection.x = start1.x;
+        intersection.y = start2.y;
+      } else if (test2) {
+        intersection.x = start2.x;
+        intersection.y = start1.y;
+      } else {
+        continue;
+      }
+
+      intersections.push_back(intersection);
     }
   }
 
-  vector<ofPath> newRectangles;
+  // Check if 4 corners have been added, if not, add them.
+  bool has_0_0, has_0_max, has_max_0, has_max_max;
+  for (int i = 0; i < intersections.size(); i++) {
+    ofPoint intersection = intersections[i];
+    if (intersection.x == 0 && intersection.y == 0) {
+      has_0_0 = true;
+    } else if (intersection.x == 0 && intersection.y == ofGetHeight()) {
+      has_0_max = true;
+    } else if (intersection.x == ofGetWidth() && intersection.y == 0) {
+      has_max_0 = true;
+    } else if (intersection.x == ofGetWidth() && intersection.y == ofGetHeight()) {
+      has_max_max = true;
+    }
+  }
+  if (!has_0_0) intersections.push_back(ofPoint(0, 0));
+  if (!has_0_max) intersections.push_back(ofPoint(0, ofGetHeight()));
+  if (!has_max_0) intersections.push_back(ofPoint(ofGetWidth(), 0));
+  if (!has_max_max) intersections.push_back(ofPoint(ofGetWidth(), ofGetHeight()));
 
-  for (int i = 0; i < n; i++) {
-    ofPath rectangle = createRectangle(ofColor::blue);
-    newRectangles.push_back(rectangle);
+  // Store all rectangles, whether they will be filled with white or color
+  vector<ofPath> allRectangles;
+
+  // Loop through intersection points and create all possible rectangles
+  for (int i = 0; i < intersections.size(); i++) {
+    ofPoint intersection = intersections[i];
+
+
   }
 
-  return newRectangles;
+  return allRectangles;
 }
 
 void ofApp::update() {
