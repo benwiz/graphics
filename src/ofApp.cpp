@@ -171,7 +171,28 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
 
   // Loop through intersection points and create all possible rectangles
   for (int i = 0; i < intersections.size(); i++) {
-    ofPoint intersection = intersections[i];
+    ofPoint upperLeft = intersections[i];
+    ofPoint upperRight;
+    ofPoint lowerRight;
+    ofPoint lowerLeft;
+
+    // 1: Find the intersection point to the right of this point. Only check
+    // points with the same y-value and with greater x-value. Find the smallest
+    // larger x-value.
+    int x = INT_MAX;
+    for (int j = 0; j < intersections.size(); j++) {
+      if (i == j) continue;
+      ofPoint point = intersections[j];
+      if (upperLeft.y == point.y && upperLeft.x < point.x) {
+        if (point.x < x) {
+          x = point.x;
+        }
+      }
+    }
+    upperRight.x = x;
+    upperRight.y = upperLeft.y;
+
+    // 2
   }
 
   tmp = intersections;
