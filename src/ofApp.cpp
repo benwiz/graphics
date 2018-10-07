@@ -226,8 +226,12 @@ vector<ofPath> ofApp::createRectangles(int n, vector<ofPath> lines) {
     lowerLeft.y = lowerRight.y;
 
     // 4: Create the rectangle
-    vector<ofColor> colors{ofColor::red, ofColor::blue, ofColor::blue,
-                           ofColor::white};
+    vector<ofColor> whites{ofColor::white, ofColor::white, ofColor::white,
+                           ofColor::white, ofColor::white, ofColor::white,
+                           ofColor::white, ofColor::white, ofColor::white};
+    vector<ofColor> colors{ofColor::red, ofColor::blue, ofColor::yellow};
+//    vector<ofColor> colors{ofColor::cyan, ofColor::magenta, ofColor::yellow};
+    colors.insert(colors.end(), whites.begin(), whites.end());
     ofColor color = colors[ofRandom(colors.size())];
     ofPath rectangle =
         createRectangle(upperLeft, upperRight, lowerRight, lowerLeft, color);
@@ -261,16 +265,16 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-  // Draw background rectangles
-  for (int i = 0; i < backgroundRectangles.size(); i++) {
-    ofPath backgroundRectangle = backgroundRectangles[i];
-    backgroundRectangle.draw();
-  }
-
   // Draw rectangles
   for (int i = 0; i < rectangles.size(); i++) {
     ofPath rectangle = rectangles[i];
     rectangle.draw();
+  }
+
+  // Draw background rectangles
+  for (int i = 0; i < backgroundRectangles.size(); i++) {
+    ofPath backgroundRectangle = backgroundRectangles[i];
+    backgroundRectangle.draw();
   }
 
   // Draw lines
