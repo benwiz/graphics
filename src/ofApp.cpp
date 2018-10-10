@@ -1,13 +1,24 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup() {}
+void ofApp::setup() {
+  int width = 700;
+  int height = 700;
+  ofSetWindowShape(width, height);
+  ofBackground(ofColor::cornsilk);
+
+  snakes.setup(10);
+}
 
 //--------------------------------------------------------------
-void ofApp::update() {}
+void ofApp::update() {
+  snakes.update();
+}
 
 //--------------------------------------------------------------
-void ofApp::draw() {}
+void ofApp::draw() {
+  snakes.draw();
+}
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {}
