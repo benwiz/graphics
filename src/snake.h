@@ -13,7 +13,7 @@ class Snake {
 public:
   Snake();
 
-  void setup();
+  void setup(int x, int y);
   void update();
   void draw();
 

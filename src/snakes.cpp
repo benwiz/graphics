@@ -15,10 +15,10 @@ void Snakes::setup(int n) {
   // Create each snake
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
-      int x = i * width;
-      int y = j * height;
+      int x = i * width / n;
+      int y = j * height / n;
       Snake snake;
-      snake.setup();
+      snake.setup(x, y);
       snakes.push_back(snake);
     }
   }
@@ -38,6 +38,7 @@ void Snakes::draw() {
   background.setFillColor(ofColor::mintCream);
   background.draw();
 
+  // Draw snakes
   for (Snake &snake : snakes) {
     snake.draw();
   }
