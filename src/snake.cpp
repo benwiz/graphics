@@ -11,10 +11,13 @@ Snake::Snake() {}
 
 void Snake::setup(int x, int y, int maxWidth, int maxHeight) {
   // Set up path
-  path.moveTo(x, y);
-  path.lineTo(x + maxWidth * 0.9, y + maxHeight * 0.9);
   path.setStrokeWidth(1);
   path.setStrokeColor(ofColor::black);
+  path.moveTo(x, y);
+
+  x += maxWidth * 0.9;
+  y += maxHeight * 0.9;
+  path.lineTo(x, y);
 
   // Set up dot
   dotDirection = ofRandom(-1, 1);
