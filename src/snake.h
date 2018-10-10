@@ -13,12 +13,14 @@ class Snake {
 public:
   Snake();
 
-  void setup(int x, int y);
+  void setup(int x, int y, int maxWidth, int maxHeight);
   void update();
   void draw();
 
   ofPath path;
   ofPoint dot;
+  float dotPercent;
+  int dotDirection;
 };
 
 

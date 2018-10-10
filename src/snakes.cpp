@@ -18,27 +18,22 @@ void Snakes::setup(int n) {
       int x = i * width / n;
       int y = j * height / n;
       Snake snake;
-      snake.setup(x, y);
+      snake.setup(x, y, width / n, height / n);
       snakes.push_back(snake);
     }
   }
 }
 
 void Snakes::update() {
-
+  for (Snake &snake : snakes) {
+    snake.update();
+  }
 }
 
 void Snakes::draw() {
   ofPushMatrix();
   ofTranslate(0.1 * ofGetWidth(), 0.1 * ofGetHeight());
 
-  // Draw background for testing
-  ofPath background;
-  background.rectangle(0, 0, 0.8 * ofGetWidth(), 0.8 * ofGetHeight());
-  background.setFillColor(ofColor::mintCream);
-  background.draw();
-
-  // Draw snakes
   for (Snake &snake : snakes) {
     snake.draw();
   }
