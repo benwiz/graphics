@@ -40,3 +40,9 @@ void Snakes::draw() {
 
   ofPopMatrix();
 }
+
+void Snakes::reset() {
+  int n = sqrt(snakes.size());
+  snakes.clear();
+  setup(n);
+}

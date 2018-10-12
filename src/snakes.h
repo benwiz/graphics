@@ -17,6 +17,7 @@ public:
   void setup(int n);
   void update();
   void draw();
+  void reset();
 
   vector<Snake> snakes;
 };

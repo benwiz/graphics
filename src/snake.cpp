@@ -10,13 +10,21 @@
 Snake::Snake() {}
 
 void Snake::setup(int x, int y, int maxWidth, int maxHeight) {
+  // Redice max dimensions
+//  maxWidth *= 0.9;
+//  maxHeight *= 0.9;
+
   // Set up path
   path.setStrokeWidth(1);
   path.setStrokeColor(ofColor::black);
   path.moveTo(x, y);
 
-  x += maxWidth * 0.9;
-  y += maxHeight * 0.9;
+  // First line segment
+  if (ofRandom(-1, 1) < 0) {
+    x += maxWidth;
+  } else {
+    y += maxHeight;
+  }
   path.lineTo(x, y);
 
   // Set up dot

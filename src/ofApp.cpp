@@ -21,7 +21,16 @@ void ofApp::draw() {
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {}
+void ofApp::keyPressed(int key) {
+  if (key == ' ') {
+    snakes.reset();
+  } else if (key == 's') {
+//    // Save screen
+//    std::string filename = ofGetTimestampString() + ".png";
+//    ofSaveScreen(filename);
+//    cout << "Saved file: " << filename << endl;
+  }
+}
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {}
