@@ -15,13 +15,13 @@ public:
 
   void setup(int x, int y, int maxWidth, int maxHeight);
   void update();
-  void draw();
+  void drawPath();
+  void drawDot();
 
+private:
   ofPath path;
   ofPoint dot;
   float dotSpeed;
   float dotPercent;
   int dotDirection;
 };
-
-

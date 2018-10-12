@@ -10,8 +10,10 @@
 Snakes::Snakes() {}
 
 void Snakes::setup(int n) {
-  int width = 0.8 * ofGetWidth();
-  int height = 0.8 * ofGetHeight();
+  float ratio = 0.9;
+  int width = ratio * ofGetWidth();
+  int height = ratio * ofGetHeight();
+
   // Create each snake
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
@@ -35,7 +37,10 @@ void Snakes::draw() {
   ofTranslate(0.1 * ofGetWidth(), 0.1 * ofGetHeight());
 
   for (Snake &snake : snakes) {
-    snake.draw();
+    snake.drawPath();
+  }
+  for (Snake &snake : snakes) {
+    snake.drawDot();
   }
 
   ofPopMatrix();

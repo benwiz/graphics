@@ -11,21 +11,32 @@ Snake::Snake() {}
 
 void Snake::setup(int x, int y, int maxWidth, int maxHeight) {
   // Reduce max dimensions
-//  maxWidth *= 0.9;
-//  maxHeight *= 0.9;
+  float ratio = 0.8;
+  maxWidth *= ratio;
+  maxHeight *= ratio;
 
   // Set up path
+  int numSegments = 4;
+  path.setFilled(false);
   path.setStrokeWidth(1);
   path.setStrokeColor(ofColor::black);
   path.moveTo(x, y);
-
-  // First line segment
-  if (ofRandom(-1, 1) < 0) {
-    x += maxWidth;
-  } else {
-    y += maxHeight;
+  for (int i = 0; i < numSegments; i++) {
+    if (ofRandom(-1, 1) < 0) {
+      if (ofRandom(-1, 1) < 0) {
+        x += maxWidth;
+      } else {
+        x -= maxWidth;
+      }
+    } else {
+      if (ofRandom(-1, 1) < 0) {
+        y += maxHeight;
+      } else {
+        y -= maxHeight;
+      }
+    }
+    path.lineTo(x, y);
   }
-  path.lineTo(x, y);
 
   // Set up dot
   dotSpeed = ofRandom(0.005, 0.02);
@@ -51,11 +62,9 @@ void Snake::update() {
   }
 }
 
-void Snake::draw() {
-  // Draw path
-  path.draw();
+void Snake::drawPath() { path.draw(); }
 
-  // Draw dot
+void Snake::drawDot() {
   ofFill();
   ofSetColor(ofColor::black);
   ofDrawCircle(dot, 2);
