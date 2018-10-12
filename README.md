@@ -2,7 +2,6 @@
 
 ## To Do
 
-- Consider having all dots move at slightly differing speeds
 - More complex paths (probably allow overlapping)
 
 ## Other similar project ideas

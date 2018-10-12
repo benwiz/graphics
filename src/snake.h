@@ -19,6 +19,7 @@ public:
 
   ofPath path;
   ofPoint dot;
+  float dotSpeed;
   float dotPercent;
   int dotDirection;
 };

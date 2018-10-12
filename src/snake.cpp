@@ -10,7 +10,7 @@
 Snake::Snake() {}
 
 void Snake::setup(int x, int y, int maxWidth, int maxHeight) {
-  // Redice max dimensions
+  // Reduce max dimensions
 //  maxWidth *= 0.9;
 //  maxHeight *= 0.9;
 
@@ -28,6 +28,7 @@ void Snake::setup(int x, int y, int maxWidth, int maxHeight) {
   path.lineTo(x, y);
 
   // Set up dot
+  dotSpeed = ofRandom(0.005, 0.02);
   dotDirection = ofRandom(-1, 1);
   if (dotDirection < 0) {
     dotDirection = -1;
@@ -40,7 +41,7 @@ void Snake::setup(int x, int y, int maxWidth, int maxHeight) {
 
 void Snake::update() {
   // Move point along path
-  dotPercent += dotDirection * 0.01;
+  dotPercent += dotDirection * dotSpeed;
   dot = path.getOutline()[0].getPointAtPercent(dotPercent);
 
   if (dotPercent <= 0) {
