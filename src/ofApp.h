@@ -34,6 +34,7 @@ private:
   // The distance between each point along the polyline to use for scraping
   float step;
 
-  // The angle to draw the scrape
+  // The angle and length of scrape
   float scrapeAngle;
+  float scrapeLength;
 };
