@@ -19,7 +19,7 @@ void ofApp::draw() {
 
   // Stage 0: Draw the polyline
   if (stage == 0) {
-
+    polyline.draw();
   }
 }
 
@@ -27,6 +27,7 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
   if (key == ' ') {
     // Reset
+    polyline.clear();
     img.draw(0, 0);
     stage = 0;
   } else if (key == 'z') {
@@ -44,8 +45,8 @@ void ofApp::mouseMoved(int x, int y) {}
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
-  ofPoint point(x, y);
-  polyline.curve
+  // Add point to polyline
+  polyline.curveTo(x, y);
 }
 
 //--------------------------------------------------------------
@@ -68,3 +69,4 @@ void ofApp::gotMessage(ofMessage msg) {}
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo) {}
+
