@@ -22,7 +22,18 @@ public:
   void gotMessage(ofMessage msg);
 
 private:
+  // The background image we are manipulating
   ofImage img;
+
+  // The stage in the drawing process
   int stage;
+
+  // The polyline used to indicate where scraping begins
   ofPolyline polyline;
+
+  // The distance between each point along the polyline to use for scraping
+  float step;
+
+  // The angle to draw the scrape
+  float scrapeAngle;
 };

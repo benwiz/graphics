@@ -6,6 +6,8 @@ void ofApp::setup() {
 
   img.load("/Users/benwiz/Desktop/david.jpg");
   stage = 0;
+  step = 1;
+  scrapeAngle = 0;
 }
 
 //--------------------------------------------------------------
@@ -19,7 +21,34 @@ void ofApp::draw() {
 
   // Stage 0: Draw the polyline
   if (stage == 0) {
+    ofSetColor(ofColor::magenta);
     polyline.draw();
+
+  }
+  // Stage 1: Draw the scrape
+  else if (stage == 1) {
+    float currLength = 0;
+    ofPoint point = polyline.getPointAtLength(currLength);
+    ofPoint finalPoint = polyline.getPointAtPercent(1.0);
+    // Loop until we reach the last point
+    while (point != finalPoint) {
+      // Get the current point and its color
+      point = polyline.getPointAtLength(currLength);
+      ofColor color = img.getColor(point.x, point.y);
+      ofSetColor(color);
+
+      // Draw all points in the scrapeAngle direction
+      float x = point.x;
+      float y = point.y;
+      while (x >= 0 && x <= img.getWidth() && y >= 0 && y <= img.getHeight()) {
+        ofDrawCircle(x, y, 1);
+        x += cos(ofDegToRad(scrapeAngle));
+        y += sin(ofDegToRad(scrapeAngle));
+      }
+
+      // Increment the length
+      currLength += step;
+    }
   }
 }
 
@@ -69,4 +98,3 @@ void ofApp::gotMessage(ofMessage msg) {}
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo) {}
-
