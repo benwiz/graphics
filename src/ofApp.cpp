@@ -4,7 +4,23 @@
 void ofApp::setup() {
   ofBackground(ofColor::white);
 
-  img.load("/Users/benwiz/Desktop/david.jpg");
+  // Load and resize image if too large
+  img.load("/Users/benwiz/Desktop/gw.jpg");
+  float width = img.getWidth();
+  float height = img.getHeight();
+  if (width > ofGetWidth() || height > ofGetHeight()) {
+    float aspectRatio = width / height;
+    if (width > height) {
+      width = ofGetWidth();
+      height = width / aspectRatio;
+    } else {
+      height = ofGetHeight();
+      width = height * aspectRatio;
+    }
+    img.resize(width, height);
+  }
+
+  // Set key variables
   stage = 0;
   step = 1;
   scrapeAngle = 0;
@@ -40,10 +56,16 @@ void ofApp::draw() {
       // Draw all points in the scrapeAngle direction
       float x = point.x;
       float y = point.y;
-      while (x >= 0 && x <= img.getWidth() && y >= 0 && y <= img.getHeight()) {
+      float z = 1;
+      float maxLength = ofRandom(200, 250);
+      float dist = 0;
+      while (
+          /*x >= 0 && x <= img.getWidth() && y >= 0 && y <= img.getHeight() &&*/
+          dist < maxLength) {
         ofDrawCircle(x, y, 1);
         x += cos(ofDegToRad(scrapeAngle));
         y += sin(ofDegToRad(scrapeAngle));
+        dist += 1;
       }
 
       // Increment the length
