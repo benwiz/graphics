@@ -22,6 +22,6 @@ private:
   float y;
   float w;
   float h;
-  bool doRotate;
+  float rotation;
 };
 

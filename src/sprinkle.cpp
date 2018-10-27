@@ -13,7 +13,7 @@ Sprinkle::Sprinkle(float x, float y, float w, float h, ofColor color) {
   this->y = y;
   this->w = w;
   this->h = h;
-  this->doRotate = ofRandom(-1, 1) < 0;
+  this->rotation = ofRandom(360);
 }
 
 void Sprinkle::update() {}
@@ -26,10 +26,8 @@ void Sprinkle::draw() {
   ofPushMatrix();
   ofTranslate(x, y);
 
-  // Possible rotation
-  if (doRotate) {
-    ofRotateDeg(90);
-  }
+  // Rotation
+  ofRotateDeg(rotation);
 
   // Draw rectangle
   ofDrawRectangle(0, 0, w, h);
