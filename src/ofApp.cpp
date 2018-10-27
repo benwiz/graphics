@@ -42,6 +42,10 @@ void ofApp::keyPressed(int key) {
   if (key == ' ') {
     sprinkles.clear();
     setup();
+  } else if (key == 's') {
+    // Save screen
+    std::string filename = ofGetTimestampString() + ".png";
+    ofSaveScreen(filename);
   }
 }
 
