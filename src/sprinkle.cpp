@@ -26,10 +26,17 @@ void Sprinkle::draw() {
   ofPushMatrix();
   ofTranslate(x, y);
 
+  // Possible rotation
   if (doRotate) {
     ofRotateDeg(90);
   }
+
+  // Draw rectangle
   ofDrawRectangle(0, 0, w, h);
+
+  // Draw end caps
+  ofDrawCircle(0, h / 2, h / 2);
+  ofDrawCircle(w, h / 2, h / 2);
 
   ofPopMatrix();
 }

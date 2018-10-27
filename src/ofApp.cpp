@@ -2,10 +2,10 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-  backgroundColor = ofColor(ofColor::mintCream);
+  backgroundColor = ofColor(ofColor::aquamarine);
 
   vector<ofColor> palette{
-      ofColor::red,   ofColor::cyan, ofColor::green,  ofColor::yellow,
+      ofColor::red,   ofColor::blue, ofColor::green,  ofColor::yellow,
       ofColor::white, ofColor::pink, ofColor::orange,
   };
 
@@ -19,7 +19,7 @@ void ofApp::setup() {
     float x = ofRandom(minX, maxX);
     float y = ofRandom(minY, maxY);
     float w = 20;
-    float h = 5;
+    float h = 4;
     ofColor color = palette[int(ofRandom(palette.size()))];
     Sprinkle sprinkle(x, y, w, h, color);
     sprinkles.push_back(sprinkle);
