@@ -1,3 +1,3 @@
 # ofSprinkles
 
-Check branch 2D or 3D
+Check branch 2d or 3d
