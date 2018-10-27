@@ -1,16 +1,49 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup() {}
+void ofApp::setup() {
+  backgroundColor = ofColor(ofColor::mintCream);
+
+  vector<ofColor> palette{
+      ofColor::red,   ofColor::cyan, ofColor::green,  ofColor::yellow,
+      ofColor::white, ofColor::pink, ofColor::orange,
+  };
+
+  float minX = 0.1 * ofGetWidth();
+  float minY = 0.1 * ofGetHeight();
+  float maxX = 0.9 * ofGetWidth();
+  float maxY = 0.9 * ofGetHeight();
+
+  int n = 500;
+  for (int i = 0; i < n; i++) {
+    float x = ofRandom(minX, maxX);
+    float y = ofRandom(minY, maxY);
+    float w = 20;
+    float h = 5;
+    ofColor color = palette[int(ofRandom(palette.size()))];
+    Sprinkle sprinkle(x, y, w, h, color);
+    sprinkles.push_back(sprinkle);
+  }
+}
 
 //--------------------------------------------------------------
 void ofApp::update() {}
 
 //--------------------------------------------------------------
-void ofApp::draw() {}
+void ofApp::draw() {
+  ofBackground(backgroundColor);
+  for (Sprinkle &sprinkle : sprinkles) {
+    sprinkle.draw();
+  }
+}
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {}
+void ofApp::keyPressed(int key) {
+  if (key == ' ') {
+    sprinkles.clear();
+    setup();
+  }
+}
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {}
