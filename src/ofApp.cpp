@@ -36,7 +36,9 @@ void ofApp::keyPressed(int key) {
     lines.reset();
     this->setup();
   } else if (key == 's') {
-    // TODO: Save image
+    // Save image
+    string filename = ofGetTimestampString() + ".png";
+    ofSaveScreen(filename);
   }
 }
 

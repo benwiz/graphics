@@ -19,6 +19,12 @@ public:
   void reset();
 
 private:
+  vector<ofPolyline> createLines(int n, float x, float y, float w, float gap, int frame);
+
   vector<ofPolyline> lines;
+  float x;
+  float y;
+  float w;
+  float gap;
 };
 
