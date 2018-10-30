@@ -21,6 +21,8 @@ public:
 private:
   string type;
   float fillRatio;
+  int fillRatioChange; // -1 = waning, 0 = static, 1 = waxing
+  float fillRatioStep;
 
   ofPoint center;
   float velocity;

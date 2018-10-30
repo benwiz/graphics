@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C60C23A2187FDF900FB7DE7 /* dotfield.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C60C2382187FDF900FB7DE7 /* dotfield.cpp */; };
 		0CB64681217DCF5F0064AEFE /* shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CB6467F217DCF5F0064AEFE /* shape.cpp */; };
 		0CB64684217DCFE50064AEFE /* shapes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CB64682217DCFE50064AEFE /* shapes.cpp */; };
 		0CB64688217E05FA0064AEFE /* lines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CB64686217E05FA0064AEFE /* lines.cpp */; };
@@ -46,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C60C2382187FDF900FB7DE7 /* dotfield.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dotfield.cpp; sourceTree = "<group>"; };
+		0C60C2392187FDF900FB7DE7 /* dotfield.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dotfield.h; sourceTree = "<group>"; };
 		0CB6467F217DCF5F0064AEFE /* shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shape.cpp; sourceTree = "<group>"; };
 		0CB64680217DCF5F0064AEFE /* shape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shape.h; sourceTree = "<group>"; };
 		0CB64682217DCFE50064AEFE /* shapes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shapes.cpp; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 				0CB64687217E05FA0064AEFE /* lines.h */,
 				0CB64689217E14850064AEFE /* wavearea.cpp */,
 				0CB6468A217E14850064AEFE /* wavearea.h */,
+				0C60C2382187FDF900FB7DE7 /* dotfield.cpp */,
+				0C60C2392187FDF900FB7DE7 /* dotfield.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -242,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB64688217E05FA0064AEFE /* lines.cpp in Sources */,
+				0C60C23A2187FDF900FB7DE7 /* dotfield.cpp in Sources */,
 				0CB6468B217E14850064AEFE /* wavearea.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				0CB64681217DCF5F0064AEFE /* shape.cpp in Sources */,

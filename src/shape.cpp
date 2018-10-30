@@ -16,7 +16,16 @@ void Shape::setup(string type) {
   // Set fill ratio
   bool isFilled = ofRandom(-1, 1) < 0;
   if (isFilled) {
-    fillRatio = ofRandom(0.2, 0.9);
+    fillRatio = ofRandom(0.1, 0.9);
+  }
+  fillRatioStep = ofRandom(0.001, 0.005);
+
+  // Set fill ratio change
+  if (isFilled) {
+    int options[3] = {-1, 0, 1};
+    fillRatioChange = options[int(ofRandom(sizeof(options)))];
+  } else {
+    fillRatioChange = 0;
   }
 
   // Select center. Constrained to inner 80%.
@@ -69,22 +78,26 @@ void Shape::setup(string type) {
 }
 
 void Shape::update() {
-  // TODO (later): Change the size and rotation of the same. And, in the case of the triangle, the corners.
-
   // Move the center around
   center.x += velocity * cos(ofDegToRad(direction));
   center.y += velocity * sin(ofDegToRad(direction));
 
-  // Update direction if touching edge of window
-//  if (center.x <= 0 && 90 < direction && direction < 270) {
-//    direction = 180 - direction;
-//  }
+  // Bounce off walls
   if (center.x <= 0 || ofGetWidth() <= center.x) {
     direction = 180 - direction;
   } else if (center.y <= 0 || ofGetHeight() <= center.y) {
     direction = 0 - direction;
   }
 
+  // Change fillRatio
+  fillRatio += fillRatioChange * fillRatioStep;
+  if (fillRatio <= 0.05) {
+    fillRatioChange = 1;
+    fillRatio = 0.05;
+  } else if (fillRatio >= 0.95) {
+    fillRatioChange = -1;
+    fillRatio = 0.95;
+  }
 }
 
 void Shape::draw() {

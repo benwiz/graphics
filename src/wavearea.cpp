@@ -40,14 +40,12 @@ void WaveArea::setup(int n) {
   y = 100;
   w = 100;
   gap = 15;
-  float frame = ofMap(ofGetFrameNum() % 100, 0, 99, 0, 1);
-  lines = createLines(n, x, y, w, gap, frame);
+  lines = createLines(n, x, y, w, gap, 0);
 }
 
 void WaveArea::update() {
-  for (ofPolyline &line : lines) {
-
-  }
+  float frame = ofGetFrameNum() / PI; // I'd like to understand how to slow down the oscillations
+  lines = createLines(lines.size(), x, y, w, gap, frame);
 }
 
 void WaveArea::draw() {

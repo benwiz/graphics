@@ -4,6 +4,7 @@
 #include "shapes.h"
 #include "lines.h"
 #include "wavearea.h"
+#include "dotfield.h"
 
 class ofApp : public ofBaseApp {
 
@@ -30,4 +31,5 @@ private:
   Shapes shapes;
   Lines lines;
   WaveArea wavearea;
+  DotField dotfield;
 };

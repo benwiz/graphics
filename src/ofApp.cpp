@@ -8,6 +8,7 @@ void ofApp::setup() {
   shapes.setup(5);
   lines.setup(shapes.getShapes());
   wavearea.setup(8);
+  dotfield.setup(8, 12);
 }
 
 //--------------------------------------------------------------
@@ -15,6 +16,7 @@ void ofApp::update() {
   shapes.update();
   lines.update(shapes.getShapes());
   wavearea.update();
+  dotfield.update();
 }
 
 //--------------------------------------------------------------
@@ -25,6 +27,7 @@ void ofApp::draw() {
   shapes.draw();
   wavearea.draw();
   lines.draw();
+  dotfield.draw();
 }
 
 //--------------------------------------------------------------
@@ -34,6 +37,8 @@ void ofApp::keyPressed(int key) {
     ofBackground(255);
     shapes.reset();
     lines.reset();
+    wavearea.reset();
+    dotfield.reset();
     this->setup();
   } else if (key == 's') {
     // Save image
