@@ -5,7 +5,7 @@ void ofApp::setup() {
   ofBackground(255);
   ofSetCircleResolution(100);
 
-  shapes.setup(5);
+  shapes.setup(4);
   lines.setup(shapes.getShapes());
   wavearea.setup(8);
   dotfield.setup(8, 12);

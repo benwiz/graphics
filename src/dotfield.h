@@ -20,6 +20,7 @@ public:
 
 private:
   vector<ofPoint> createDots(int cols, int rows, float x, float y, float w, int frame);
+  vector<ofPoint> updateDots(vector<ofPoint> dots, int frame);
 
   vector<ofPoint> dots;
   int cols;
@@ -28,5 +29,7 @@ private:
   float y;
   float w;
   float gap;
+  int rotation;
+  float xChange = 1;
+  float yChange = 1;
 };
-
