@@ -27,13 +27,14 @@ void ofApp::createFaces() {
     ofPolyline face;
     while (graph_edge) {
       // Collect edges into aggregate edges vector
-      ofPoint p1((double)graph_edge->pos[0].x, (double)graph_edge->pos[0].y);
-      ofPoint p2((double)graph_edge->pos[1].x, (double)graph_edge->pos[1].y);
+      ofPoint p1(graph_edge->pos[0].x, graph_edge->pos[0].y);
+      ofPoint p2(graph_edge->pos[1].x, graph_edge->pos[1].y);
       vector<ofPoint> edge{p1, p2};
       edges.push_back(edge);
 
       // Polygon polyline face stuff
       face.addVertex(p1.x, p1.x);
+      cout << p1.x << "\t" << p1.y << endl;
 
       // Iterate
       graph_edge = graph_edge->next;
@@ -83,15 +84,16 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-  ofBackground(0);
   img.draw(0, 0);
 
-  //  // Draw edges
-  //  for (vector<ofPoint> &edge : edges) {
-  //    ofDrawLine(edge[0], edge[1]);
-  //  }
+  ofSetColor(ofColor::lightBlue);
+    // Draw edges
+    for (vector<ofPoint> &edge : edges) {
+      ofDrawLine(edge[0], edge[1]);
+    }
 
-//  // Draw faces
+  ofSetColor(ofColor::white);
+  // Draw faces
   for (ofPolyline &face : faces) {
     face.draw();
   }
