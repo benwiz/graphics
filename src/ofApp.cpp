@@ -33,8 +33,8 @@ void ofApp::createFaces() {
       edges.push_back(edge);
 
       // Polygon polyline face stuff
-      face.addVertex(p1.x, p1.x);
-      cout << p1.x << "\t" << p1.y << endl;
+      face.addVertex(p1.x, p1.y);
+      // cout << p1.x << "\t" << p1.y << endl;
 
       // Iterate
       graph_edge = graph_edge->next;
@@ -42,7 +42,6 @@ void ofApp::createFaces() {
     // Close shape
     face.close();
     faces.push_back(face);
-    break;
   }
 
   // Free diagram
@@ -93,7 +92,6 @@ void ofApp::draw() {
       ofDrawLine(edge[0], edge[1]);
     }
 
-  cout << faces.size() << "\t" << faces[0].getVertices().size() << endl;
   ofSetColor(ofColor::white);
   // Draw faces
   for (ofPolyline &face : faces) {
