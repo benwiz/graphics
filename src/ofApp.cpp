@@ -42,6 +42,7 @@ void ofApp::createFaces() {
     // Close shape
     face.close();
     faces.push_back(face);
+    break;
   }
 
   // Free diagram
@@ -92,6 +93,7 @@ void ofApp::draw() {
       ofDrawLine(edge[0], edge[1]);
     }
 
+  cout << faces.size() << "\t" << faces[0].getVertices().size() << endl;
   ofSetColor(ofColor::white);
   // Draw faces
   for (ofPolyline &face : faces) {
