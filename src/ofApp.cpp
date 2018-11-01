@@ -11,15 +11,12 @@ ofColor ofApp::getAverageColor(ofPath face) {
   float b = 0;
   // Get bounding box
   ofPolyline outline = face.getOutline()[0];
-  cout << face.getOutline().size() << endl;
   ofRectangle boundingBox = outline.getBoundingBox();
-  //printf("---- (%f, %f)\t(%f, %f) ----\n", boundingBox.getLeft(), boundingBox.getTop(), boundingBox.getRight(), boundingBox.getBottom());
   // Iterate through each point
   for (float x = boundingBox.getLeft(); x < boundingBox.getRight(); x++) {
-    for (float y = boundingBox.getRight(); y < boundingBox.getBottom(); y++) {
+    for (float y = boundingBox.getTop(); y < boundingBox.getBottom(); y++) {
       // Check if the point is inside the face, if so account for its RGB values
       bool isInside = outline.inside(x, y);
-      //printf("(%f, %f) %d\n", x, y, isInside);
       if (isInside) {
         ofColor color = img.getColor(x, y);
         r += color.r;
@@ -32,7 +29,6 @@ ofColor ofApp::getAverageColor(ofPath face) {
 
   // tmp block
   if (counter == 0) {
-    //cout << "COUNTER == 0" << endl;
     ofSetColor(ofColor::white);
     ofNoFill();
     ofDrawRectangle(boundingBox);
@@ -42,7 +38,6 @@ ofColor ofApp::getAverageColor(ofPath face) {
   r /= counter;
   g /= counter;
   b /= counter;
-  //cout << r << "\t" << g << "\t" << b << "|" << counter << endl;
   ofColor color(r, g, b);
   return color;
 }
@@ -89,23 +84,20 @@ void ofApp::createFaces() {
       // Polygon ofPath face stuff
       face.lineTo(p1.x, p1.y);
 
-      // Calculate color and store in a vector that matches the faces vector
-      ofColor color = getColor(face);
-      face.setColor(color);
-
       // Iterate
       graph_edge = graph_edge->next;
     }
     // Close shape
     face.close();
+
+    // Calculate color
+    ofColor color = getColor(face);
+    face.setColor(color);
+
+    // Record the face globally
     faces.push_back(face);
 
     tmp = faces.size(); // Used for get random color, was tmp, but maybe stays
-
-    // tmp
-    if (faces.size() > 3) {
-      break;
-    }
   }
 
   // Free diagram
@@ -114,6 +106,10 @@ void ofApp::createFaces() {
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+  if (ofGetFrameNum() > 0) {
+    return;
+  }
+
   // Load image
   // img.load("marg.jpg");
   img.load("starry-night.jpg");
@@ -157,7 +153,6 @@ void ofApp::draw() {
   // Draw faces
   for (int i = 0; i < faces.size(); i++) {
     ofPath face = faces[i];
-    face.setFilled(false); // tmp
     face.setStrokeColor(ofColor::cyan); // tmp
     face.setStrokeWidth(2); // tpm
     face.draw();
