@@ -58,8 +58,6 @@ void ofApp::createFaces() {
     Site mySite = mySites[i];
     points[i].x = mySite.x;
     points[i].y = mySite.y;
-    //cout << points[i].x << "\t" << points[i].y << endl;
-    //cout << mySite.x << "\t" << mySite.y << endl;
   }
 
   // Init jc_voronoi
@@ -139,7 +137,6 @@ void ofApp::setup() {
   for (int i = 0; i < NPOINT; i++) {
     float x = ofRandom(ofGetWidth());
     float y = ofRandom(ofGetHeight());
-    cout << x << "\t" << y << endl;
     Site mySite(x, y);
     mySites.push_back(mySite);
   }
@@ -147,7 +144,9 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-  // TODO: Move points
+  for (Site &site : mySites) {
+    site.update();
+  }
   createFaces();
 }
 
@@ -162,6 +161,11 @@ void ofApp::draw() {
     face.setStrokeColor(ofColor::white);
     face.setStrokeWidth(2);
     face.draw();
+  }
+
+  // Draw sites
+  for (Site &site : mySites) {
+    site.draw();
   }
 }
 

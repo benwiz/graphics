@@ -17,5 +17,5 @@ Site::Site(float x, float y) {
 void Site::update() {}
 
 void Site::draw() {
-  ofDrawCircle(x, y, 5);
+  ofDrawCircle(x, y, 3);
 }
