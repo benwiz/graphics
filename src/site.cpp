@@ -10,11 +10,14 @@
 Site::Site(float x, float y) {
   this->x = x;
   this->y = y;
-  speed = ofRandom(1);
+  speed = ofRandom(2);
   angle = ofRandom(360);
 }
 
-void Site::update() {}
+void Site::update() {
+  x += speed * cos(ofDegToRad(angle));
+  y += speed * sin(ofDegToRad(angle));
+}
 
 void Site::draw() {
   ofDrawCircle(x, y, 3);

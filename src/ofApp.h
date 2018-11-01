@@ -29,7 +29,7 @@ private:
   ofColor getRandomColor();
 
   ofImage img;
-  int NPOINT = 100;
+  int NPOINT = 500;
   vector<Site> mySites; // prepended "my" to avoid conflict with some code in
                         // createFaces()... can be cleaned up
   vector<vector<ofPoint>> edges;
