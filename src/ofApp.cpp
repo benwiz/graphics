@@ -163,10 +163,10 @@ void ofApp::draw() {
     face.draw();
   }
 
-  // Draw sites
-  for (Site &site : mySites) {
-    site.draw();
-  }
+  //  // Draw sites
+  //  for (Site &site : mySites) {
+  //    site.draw();
+  //  }
 }
 
 //--------------------------------------------------------------

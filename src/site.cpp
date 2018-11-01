@@ -17,6 +17,19 @@ Site::Site(float x, float y) {
 void Site::update() {
   x += speed * cos(ofDegToRad(angle));
   y += speed * sin(ofDegToRad(angle));
+
+  // Ensure that sites cannot be behind border
+  if (x < 0) x = 0;
+  else if (x > ofGetWidth()) x = ofGetWidth();
+  if (y < 0) y = 0;
+  else if (y > ofGetHeight()) y = ofGetHeight();
+
+  // Reflect off walls
+  if (x <= 0 || ofGetWidth() <= x) {
+    angle = 180 - angle;
+  } else if (y <= 0 || ofGetHeight() <= y) {
+    angle = 0 - angle;
+  }
 }
 
 void Site::draw() {
