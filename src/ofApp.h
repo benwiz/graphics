@@ -29,12 +29,15 @@ private:
   ofColor getRandomColor();
 
   ofImage img;
-  int NPOINT = 3000;
   vector<Site> mySites; // prepended "my" to avoid conflict with some code in
                         // createFaces()... can be cleaned up
   vector<vector<ofPoint>> edges;
   vector<ofPath> faces;
 
   int tmp = 0;
+
+  // Configs
+  int NPOINT = 3000;
+  int strokeWidth = 0;
 };
 

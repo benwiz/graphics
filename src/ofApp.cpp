@@ -159,7 +159,7 @@ void ofApp::draw() {
   for (int i = 0; i < faces.size(); i++) {
     ofPath face = faces[i];
     face.setStrokeColor(ofColor::white);
-    face.setStrokeWidth(2);
+    face.setStrokeWidth(strokeWidth);
     face.draw();
   }
 
