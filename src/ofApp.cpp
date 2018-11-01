@@ -170,7 +170,13 @@ void ofApp::draw() {
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {}
+void ofApp::keyPressed(int key) {
+  if (key == 's') {
+    // Save image
+    string filename = ofGetTimestampString() + ".png";
+    ofSaveScreen(filename);
+  }
+}
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {}

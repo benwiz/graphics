@@ -38,6 +38,6 @@ private:
 
   // Configs
   int NPOINT = 3000;
-  int strokeWidth = 0;
+  int strokeWidth = 1;
 };
 
