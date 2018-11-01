@@ -24,11 +24,16 @@ public:
 
 private:
   void createFaces();
+  ofColor getColor(ofPath face);
+  ofColor getAverageColor(ofPath face);
+  ofColor getRandomColor();
 
   ofImage img;
   int NPOINT = 100;
   jcv_point points[100];
   vector<vector<ofPoint>> edges;
-  vector<ofPolyline> faces;
+  vector<ofPath> faces;
+
+  int tmp = 0;
 };
 
