@@ -1,6 +1,7 @@
 #define JC_VORONOI_IMPLEMENTATION
 
 #include "ofApp.h"
+#include "jc_voronoi.h"
 
 //--------------------------------------------------------------
 ofColor ofApp::getAverageColor(ofPath face) {
@@ -42,9 +43,7 @@ ofColor ofApp::getAverageColor(ofPath face) {
   return color;
 }
 
-ofColor ofApp::getRandomColor() {
-  return ofColor::fromHsb(tmp, 128, 128);
-}
+ofColor ofApp::getRandomColor() { return ofColor::fromHsb(tmp, 128, 128); }
 
 ofColor ofApp::getColor(ofPath face) {
   //  return getRandomColor();
@@ -53,6 +52,16 @@ ofColor ofApp::getColor(ofPath face) {
 
 //--------------------------------------------------------------
 void ofApp::createFaces() {
+  // Create the points array
+  jcv_point points[mySites.size()];
+  for (int i = 0; i < mySites.size(); i++) {
+    Site mySite = mySites[i];
+    points[i].x = mySite.x;
+    points[i].y = mySite.y;
+    //cout << points[i].x << "\t" << points[i].y << endl;
+    //cout << mySite.x << "\t" << mySite.y << endl;
+  }
+
   // Init jc_voronoi
   int i;
   jcv_rect bounding_box = {{0.0f, 0.0f},
@@ -106,10 +115,6 @@ void ofApp::createFaces() {
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-  if (ofGetFrameNum() > 0) {
-    return;
-  }
-
   // Load image
   // img.load("marg.jpg");
   img.load("starry-night.jpg");
@@ -130,17 +135,20 @@ void ofApp::setup() {
   img.resize(width, height);
   ofSetWindowShape(width, height);
 
-  // Create initial points
+  // Create initial sites
   for (int i = 0; i < NPOINT; i++) {
-    points[i].x = ofRandom(ofGetWidth());
-    points[i].y = ofRandom(ofGetHeight());
+    float x = ofRandom(ofGetWidth());
+    float y = ofRandom(ofGetHeight());
+    cout << x << "\t" << y << endl;
+    Site mySite(x, y);
+    mySites.push_back(mySite);
   }
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
   // TODO: Move points
-  //createFaces();
+  createFaces();
 }
 
 //--------------------------------------------------------------
@@ -148,13 +156,11 @@ void ofApp::draw() {
   ofSetColor(ofColor::white);
   img.draw(0, 0);
 
-  createFaces(); // tmp
-
   // Draw faces
   for (int i = 0; i < faces.size(); i++) {
     ofPath face = faces[i];
-    face.setStrokeColor(ofColor::cyan); // tmp
-    face.setStrokeWidth(2); // tpm
+    face.setStrokeColor(ofColor::white);
+    face.setStrokeWidth(2);
     face.draw();
   }
 }

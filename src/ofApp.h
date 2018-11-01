@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "jc_voronoi.h"
+#include "site.h"
 
 class ofApp : public ofBaseApp {
 
@@ -30,7 +30,7 @@ private:
 
   ofImage img;
   int NPOINT = 100;
-  jcv_point points[100];
+  vector<Site> mySites;
   vector<vector<ofPoint>> edges;
   vector<ofPath> faces;
 
