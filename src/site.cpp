@@ -10,7 +10,7 @@
 Site::Site(float x, float y) {
   this->x = x;
   this->y = y;
-  speed = ofRandom(2);
+  speed = ofRandom(1);
   angle = ofRandom(360);
 }
 

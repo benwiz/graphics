@@ -114,8 +114,8 @@ void ofApp::createFaces() {
 //--------------------------------------------------------------
 void ofApp::setup() {
   // Load image
-  // img.load("marg.jpg");
-  img.load("starry-night.jpg");
+  img.load("marg.jpg");
+  //  img.load("starry-night.jpg");
 
   // Adjust image and window to be large but within initial configs
   float width = img.getWidth();

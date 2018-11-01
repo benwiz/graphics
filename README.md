@@ -4,10 +4,6 @@ Draw a voronoi diagram around a set of points. Fill each cell with some color. M
 
 ## To Do
 
-- Create points
-- Create voronoi
-- Move points
-- Update voronoi
-- Create fill
+- Better configs control... even if that is just moving some stuff to the header.
 - Mess with fill, texture, monochrome, gaps, etc. Should be able to do something really interesting using ofMesh.
 - Consider introducing computer vision
