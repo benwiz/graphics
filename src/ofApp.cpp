@@ -114,7 +114,7 @@ void ofApp::createFaces() {
 //--------------------------------------------------------------
 void ofApp::setup() {
   // Load image
-  img.load("marg.jpg");
+  img.load(imageName);
   //  img.load("starry-night.jpg");
 
   // Adjust image and window to be large but within initial configs
@@ -175,6 +175,18 @@ void ofApp::keyPressed(int key) {
     // Save image
     string filename = ofGetTimestampString() + ".png";
     ofSaveScreen(filename);
+  } else if (key == '[') {
+    if (strokeWidth > 0) {
+      strokeWidth--;
+    }
+  } else if (key == ']') {
+    strokeWidth++;
+  } else if (key == '-') {
+    if (NPOINT > 0) {
+      NPOINT -= 100;
+    }
+  } else if (key == '=') {
+    NPOINT += 100;
   }
 }
 

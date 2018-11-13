@@ -37,7 +37,8 @@ private:
   int tmp = 0;
 
   // Configs
-  int NPOINT = 3000;
+  string imageName = "/Users/benwiz/Downloads/bike.jpg";
+  int NPOINT = 5000;
   int strokeWidth = 1;
 };
 
