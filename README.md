@@ -1,6 +1,6 @@
 # fragment
 
-Take an image and output a fragmented (low-poly) version.
+Take an image and output a fragmented (low-poly) version. It works by using OpenCV to detect "key points" then connets those key points with delaunay triangulation. Then it fills each triangle with the average color of the pixels within that triangle.
 
 Inspired by [this project](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py).
 
