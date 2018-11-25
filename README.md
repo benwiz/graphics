@@ -120,6 +120,8 @@ lein lambda deploy production
 
 ## To Do
 
+NOV. 2018: (1) Review what currently exists. (2) Perform the processing and cv steps in py-detect-features. May need to introduce DLib for facial feature detection. (-) Also use numpy arrays instead of lists.
+
 - Now
   - Re-incorporate removal of points within a radius
   - Sort out image rotation
