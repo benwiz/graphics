@@ -24,7 +24,7 @@ Use Python to identify key the features (points) within the image that will be u
 
 #### Run Locally
 
-Create and activate a Python2 virtualenv in the roobt dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` workin `py-detect-features`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
+Create and activate a Python2 virtualenv in the root dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` work within `py-detect-features/`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
 
 ```bash
 virtualenv --python=$(which python2) venv
@@ -120,12 +120,8 @@ lein lambda deploy production
 
 ## To Do
 
-NOV. 2018: (1) Review what currently exists. (2) Perform the processing and cv steps in py-detect-features. May need to introduce DLib for facial feature detection. (-) Also use numpy arrays instead of lists.
-
 - Now
-  - Re-incorporate removal of points within a radius
-  - Sort out image rotation
-  - Variance division
+  - Do the necessary pre-processing before running Canny Edge Detection (maybe this is the same pre-processing for DLib, but probably different)
 
 - Later
   - UI

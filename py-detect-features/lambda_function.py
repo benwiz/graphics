@@ -15,7 +15,7 @@ import pdb
 import boto3
 import cv2
 import numpy as np
-import dlib
+# import dlib
 
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
@@ -148,32 +148,32 @@ def identify_facial_landmarks(img):
     """
 
     points = []
-
-    detector = dlib.get_frontal_face_detector()
-    predictor = dlib.shape_predictor(predictor_path)
-
-    faces = detector(img, 1)
     face_bounds = []  # Calculate face bounds from landmarks, not face detector
-    for face in faces:
-        shape = predictor(img, face)
-        landmarks = []
-        for i in range(shape.num_parts):
-            part = shape.part(i)
-            x = int(part.x)
-            y = int(part.y)
-            landmark = (x, y)
-            landmarks.append(landmark)
-        points += landmarks
 
-        # https://www.pyimagesearch.com/wp-content/uploads/2017/04/facial_landmarks_68markup-768x619.jpg
-        max_x = max(landmarks, key=lambda point: point[0])[0]
-        max_y = max(landmarks, key=lambda point: point[1])[1]
-        min_x = min(landmarks, key=lambda point: point[0])[0]
-        min_y = min(landmarks, key=lambda point: point[1])[1]
-        upper_left = (min_x, min_y)
-        bottom_right = (max_x, max_y)
-        face_bound = [upper_left, bottom_right]
-        face_bounds.append(face_bound)
+    # detector = dlib.get_frontal_face_detector()
+    # predictor = dlib.shape_predictor(predictor_path)
+
+    # faces = detector(img, 1)
+    # for face in faces:
+    #     shape = predictor(img, face)
+    #     landmarks = []
+    #     for i in range(shape.num_parts):
+    #         part = shape.part(i)
+    #         x = int(part.x)
+    #         y = int(part.y)
+    #         landmark = (x, y)
+    #         landmarks.append(landmark)
+    #     points += landmarks
+
+    #     # https://www.pyimagesearch.com/wp-content/uploads/2017/04/facial_landmarks_68markup-768x619.jpg
+    #     max_x = max(landmarks, key=lambda point: point[0])[0]
+    #     max_y = max(landmarks, key=lambda point: point[1])[1]
+    #     min_x = min(landmarks, key=lambda point: point[0])[0]
+    #     min_y = min(landmarks, key=lambda point: point[1])[1]
+    #     upper_left = (min_x, min_y)
+    #     bottom_right = (max_x, max_y)
+    #     face_bound = [upper_left, bottom_right]
+    #     face_bounds.append(face_bound)
 
     return points, face_bounds
 
@@ -325,4 +325,5 @@ if __name__ == "__main__":
     uuid = 'face'
     event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': uuid + u'/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly',
                                                                                                                                                                                                                                                                                                                                                                                               u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
+    event['Records'][0]['s3']['object']['key'] = '1/start.jpg'
     lambda_handler(event, None)
