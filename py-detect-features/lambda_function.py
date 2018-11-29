@@ -20,7 +20,7 @@ import numpy as np
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
 UPLOAD_ANYWAY = False
-SHOW = False
+SHOW = True
 
 predictor_path = os.path.join(
     os.path.dirname(__file__),
@@ -203,7 +203,13 @@ def preprocess_img(img):
         img = img.dstack([img, img, img])
         # TODO: Not sure this actually works, for now may just want to abort
 
-    # TODO: Consider re-sizing the image. https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py#L222
+    # # Resize image. This helps detect fewer
+    # NOTE: This requires re-sizing the points later back to initial size.
+    # newSize = 750
+    # if newSize < np.max(img.shape[:2]):
+    #     scale = newSize / float(np.max(img.shape[:2]))
+    #     img = cv2.resize(img, (0, 0), fx=scale, fy=scale,
+    #                      interpolation=cv2.INTER_AREA)
 
     # Reduce noise
     noiseless_img = cv2.fastNlMeansDenoisingColored(img, None, 10, 10, 7, 21)
@@ -228,7 +234,7 @@ def preprocess_img(img):
             ycbcr_img[x][y] = ycbcr_img[x][y][0]
     ycbcr_img = ycbcr_img[:, :, 0]
     if SHOW:
-        compare = np.hstack([gray_img, ycbcr_img])
+        # compare = np.hstack([gray_img, ycbcr_img])
         cv2.imshow('YCbCr', ycbcr_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -237,7 +243,7 @@ def preprocess_img(img):
     high_thresh, thresh_img = cv2.threshold(
         ycbcr_img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     low_thresh = 0.5 * high_thresh
-    if SHOW:  # tmp False
+    if SHOW:
         cv2.imshow('Threshold Image', thresh_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -246,8 +252,8 @@ def preprocess_img(img):
     blurred_gray_img = cv2.GaussianBlur(gray_img, (0, 0), 3)
     sharp_gray_img = cv2.addWeighted(gray_img, 2.5, blurred_gray_img, -1, 0)
     if SHOW:
-        compare = np.hstack([blurred_gray_img, sharp_gray_img])
-        cv2.imshow('Sharp gray image', compare)
+        # compare = np.hstack([blurred_gray_img, sharp_gray_img])
+        cv2.imshow('Sharp gray image', sharp_gray_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
@@ -279,6 +285,7 @@ def identify_points(img, gray_img, options):
     points = grid_points + key_points + canny_edges
 
     # TODO: Optionally add noise to canny/all points and move them a little bit
+    # TODO: Optionally keep only one point within a given radius
 
     # Generate points to fill in gaps
     if options['random']:
@@ -344,7 +351,7 @@ def lambda_handler(event, context):
         'random': True,
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
-        'canny_percent': 0.05,
+        'canny_percent': 0.15,
     }
     points, face_bounds = identify_points(img, sharp_gray_img, options)
     print 'count:', len(points)
