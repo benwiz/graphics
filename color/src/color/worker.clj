@@ -37,9 +37,13 @@
   "Get color for every y-value in the x column"
   [x y1 y2]
   (map (fn [y]
-      (println "(" x ", " y ")"))
-    (range (min y1 y2) (inc (max y1 y2))))
-)
+      (println "(" x ", " y ")")
+      ; [(.getRed (Color. (.getRGB bi x y)))
+      ;  (.getGreen (Color. (.getRGB bi x y)))
+      ;  (.getBlue (Color. (.getRGB bi x y)))
+      ;  (.getAlpha (Color. (.getRGB bi x y)))]
+      [255 0 0 127])
+    (range (min y1 y2) (inc (max y1 y2)))))
 
 (defn get-colors
   "Get each pixel's color for the given triangle. Input triangle is sorted by x-value."
@@ -63,6 +67,8 @@
                       y-bot (/ (- (* -1 A2 x) C2 1) (if (= (+ B2 1) 0.0) -1.0 (+ B2 1)))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
                   (get-colors-for-x x y-bot y-top)))
               x-range)
+          ; TODO: I think I need to flatten the result of the map
+          ; (println "done")
   )
 )
 
