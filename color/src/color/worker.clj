@@ -37,23 +37,23 @@
   "Get each pixel's color for the given triangle. Input triangle is sorted by x-value."
   ; https://stackoverflow.com/questions/8957028/getting-a-list-of-locations-within-a-triangle-in-the-form-of-x-y-positions
   [triangle]
-  (let [x1 (get (get triangle 0) 0)
-        y1 (get (get triangle 0) 1)
-        x2 (get (get triangle 1) 0)
-        y2 (get (get triangle 1) 1)
-        x3 (get (get triangle 2) 0)
-        y3 (get (get triangle 2) 1)]
-        (let [A1 (- y2 y1)
-              B1 (- x1 x2)
-              C1 ((- (* x2 y1) (* x1 y2)))
-              A2 (- y3 y2)
-              B2 (- x2 x3)
-              C2 ((- (* x3 y2) (* x2 y3)))
-              range1 (range x1 x2)
-              range2 (range x2 x3)]
-              (println range1)
-              (println range2)
-              ))
+  (let [x1 (get (nth triangle 0) 0)
+        y1 (get (nth triangle 0) 1)
+        x2 (get (nth triangle 1) 0)
+        y2 (get (nth triangle 1) 1)
+        x3 (get (nth triangle 2) 0)
+        y3 (get (nth triangle 2) 1)
+        A1 (- y2 y1)
+        B1 (- x1 x2)
+        C1 (- (* x2 y1) (* x1 y2))
+        A2 (- y3 y2)
+        B2 (- x2 x3)
+        C2 (- (* x3 y2) (* x2 y3))
+        range1 (range x1 x2)
+        range2 (range (inc x2) (inc x3))]
+          (println range1)
+          (println range2)
+  )
 )
 
 (defn draw
