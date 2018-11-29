@@ -58,8 +58,8 @@
         C2 (- (* x3 y2) (* x2 y3))
         x-range (concat (range x1 x2) (range (inc x2) (inc x3)))] ; [x1, x2), (x2, x3]
           (map (fn [x]
-                (let [y-top (/ (- (* -1 A1 x) C1) B1)
-                      y-bot (/ (- (* -1 A2 x) C2 1) (+ B2 1))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
+                (let [y-top (/ (- (* -1 A1 x) C1) (if (= B1 0.0) 1.0 B1)) ; The if statement is a messy hack for avoiding divide by 0
+                      y-bot (/ (- (* -1 A2 x) C2 1) (if (= (+ B2 1) 0.0) 1.0 (+ B2 1)))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
                   (get-colors-for-x x y-bot y-top)))
               x-range)
   )
