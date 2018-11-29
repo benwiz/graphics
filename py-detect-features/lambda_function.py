@@ -183,7 +183,7 @@ def identify_facial_landmarks(img):
     return points, face_bounds
 
 
-def identify_filler_points(img, current_points):
+def identify_filler_points(img, current_points, percent=0.10):
     """
     For now we generate 10% len(current_points) randomly. Later, we
     intelligently choose where we need more points.
@@ -191,7 +191,7 @@ def identify_filler_points(img, current_points):
 
     height, width, _ = img.shape
 
-    num_points = int(0.10 * len(current_points))
+    num_points = int(percent * len(current_points))
     points = []
     for i in range(num_points):
         x = random.randint(0, width - 1)
@@ -285,7 +285,7 @@ def identify_points(img, gray_img, options):
 
     # Generate points to fill in gaps
     if options['random']:
-        random_points = identify_filler_points(img, points)
+        random_points = identify_filler_points(img, points, 0.10)
         points += random_points
 
     # Remove any points within any face_bound
@@ -346,7 +346,7 @@ def lambda_handler(event, context):
         'key_points': False,
         'facial_landmarks': True,  # Code is commented out in the
         'canny': True,
-        'random': False,
+        'random': True,
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
     }
