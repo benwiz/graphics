@@ -33,6 +33,13 @@
          (get point2 0)))
    (get point2 1)))
 
+(defn get-colors-for-x
+  "Get color for every y-value in the x column"
+  [x y-bot y-top]
+  (println x y-bot y-top)
+  ;(range y-bot y-top)
+)
+
 (defn get-colors
   "Get each pixel's color for the given triangle. Input triangle is sorted by x-value."
   ; https://stackoverflow.com/questions/8957028/getting-a-list-of-locations-within-a-triangle-in-the-form-of-x-y-positions
@@ -49,10 +56,12 @@
         A2 (- y3 y2)
         B2 (- x2 x3)
         C2 (- (* x3 y2) (* x2 y3))
-        range1 (range x1 x2)
-        range2 (range (inc x2) (inc x3))]
-          (map println
-               range1)
+        x-range (concat (range x1 x2) (range (inc x2) (inc x3)))] ; [x1, x2), (x2, x3]
+          (map (fn [x]
+                (let [y-top (/ (- (* -1 A1 x) C1) B1)
+                      y-bot (/ (- (* -1 A2 x) C2 1) (+ B2 1))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
+                  (get-colors-for-x x y-bot y-top)))
+              x-range)
   )
 )
 
