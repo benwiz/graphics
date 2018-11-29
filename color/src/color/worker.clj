@@ -33,6 +33,29 @@
          (get point2 0)))
    (get point2 1)))
 
+(defn get-colors
+  "Get each pixel's color for the given triangle. Input triangle is sorted by x-value."
+  ; https://stackoverflow.com/questions/8957028/getting-a-list-of-locations-within-a-triangle-in-the-form-of-x-y-positions
+  [triangle]
+  (let [x1 (get (get triangle 0) 0)
+        y1 (get (get triangle 0) 1)
+        x2 (get (get triangle 1) 0)
+        y2 (get (get triangle 1) 1)
+        x3 (get (get triangle 2) 0)
+        y3 (get (get triangle 2) 1)]
+        (let [A1 (- y2 y1)
+              B1 (- x1 x2)
+              C1 ((- (* x2 y1) (* x1 y2)))
+              A2 (- y3 y2)
+              B2 (- x2 x3)
+              C2 ((- (* x3 y2) (* x2 y3)))
+              range1 (range x1 x2)
+              range2 (range x2 x3)]
+              (println range1)
+              (println range2)
+              ))
+)
+
 (defn draw
   "Get average color of each triangles then make the whole triangle that color.
   In the future do something more interesting than average color. HSV is a good starting place."
@@ -66,67 +89,27 @@
                   ; Get max Y
                   ; Create points for each Y between min and max
 
-                (let [x1 (get (get triangle 0) 0)
-                      y1 (get (get triangle 0) 1)
-                      x2 (get (get triangle 1) 0)
-                      y2 (get (get triangle 1) 1)
-                      x3 (get (get triangle 2) 0)
-                      y3 (get (get triangle 2) 1)
-                      x-range (range
-                               (apply min (map (fn [point] (get point 0)) triangle))
-                               (apply max (map (fn [point] (get point 0)) triangle)))
-                      y-range (range
-                               (apply min (map (fn [point] (get point 1)) triangle))
-                               (apply max (map (fn [point] (get point 1)) triangle)))
-                      colors (apply concat (map (fn [x]
-                                                  (filter identity (map (fn [y]
-                                                                          (if
-                                                                           (= (Math/abs
-                                                                               (+
-                                                                                (* x1 (- y2 y3))
-                                                                                (* x2 (- y3 y1))
-                                                                                (* x3 (- y1 y2))))
-                                                                              (+ (Math/abs
-                                                                                  (+
-                                                                                   (* x1 (- y2 y))
-                                                                                   (* x2 (- y y1))
-                                                                                   (* x (- y1 y2))))
-                                                                                 (Math/abs
-                                                                                  (+
-                                                                                   (* x1 (- y y3))
-                                                                                   (* x (- y3 y1))
-                                                                                   (* x3 (- y1 y))))
-                                                                                 (Math/abs
-                                                                                  (+
-                                                                                   (* x (- y2 y3))
-                                                                                   (* x2 (- y3 y))
-                                                                                   (* x3 (- y y2))))))
-                                                                            [(.getRed (Color. (.getRGB bi x y)))
-                                                                             (.getGreen (Color. (.getRGB bi x y)))
-                                                                             (.getBlue (Color. (.getRGB bi x y)))
-                                                                             (.getAlpha (Color. (.getRGB bi x y)))]
-                                                                            nil))
-                                                                        (take-nth 10 y-range))))
-                                                (take-nth 10 x-range)))]
+                (let [colors (get-colors (sort-by first triangle))]
                   (if (not (empty? colors))
                     (let [total-rgb (apply map + colors)
                           average-color-map (map
                                              (fn [value] (int (/ value (count colors))))
                                              total-rgb)
                           average-color (vec average-color-map)]; (println "colors:" colors)
-                  ; (println "sum:" (apply map + colors))
-                  ; (println "avg:" (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))
-                  ; (println triangle average-color)
-                  ; Fill polygon with a color
-                      (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
-                      ;(.setColor g (Color. 255 0 0))
+                      ; (println "sum:" (apply map + colors))
+                      ; (println "avg:" (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))
+                      ; (println triangle average-color)
+                      ; Fill polygon with a color
+                      ;(.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
+                      (.setColor g (Color. 0 200 0))
                       (.fillPolygon g
                                     (int-array (map (fn [point] (get point 0)) triangle))
                                     (int-array (map (fn [point] (get point 1)) triangle))
-                                    (count triangle))))
+                                    (count triangle)))
+                      (println "There was a triangle where no pixel colors could be collected. Oh no!"))
                   bi))
               ; Reduce won't handle the last element so we add an additional element.
-              (conj triangles [0 0])))))
+              (conj triangles [[0 0] [0 0] [0 0]])))))
 
 (defn run
   "Run."

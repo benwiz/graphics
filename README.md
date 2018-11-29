@@ -123,7 +123,8 @@ lein lambda deploy production
 NOTE: Do not run a `pip freeze`
 
 - Now
-  - Look into why partitioning or coloring is skipping some triangles
+  - Coloring is skipping some triangles
+  - Finish the nearly-complete lowpolyify rewrite in python
   - Turn on DLib
   - Consider adding noise to canny points (maybe other points)
   - Use Numpy arrays instead of Lists
