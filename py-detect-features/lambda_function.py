@@ -20,6 +20,7 @@ import numpy as np
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
 UPLOAD_ANYWAY = False
+SHOW = True
 
 predictor_path = os.path.join(
     os.path.dirname(__file__),
@@ -73,16 +74,14 @@ def identify_points_by_key_points(img, max_points):
     return points
 
 
-def identify_points_by_canny_edge_detection(img, max_points, min_points):
+def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percent=0.15):
     """
-    Method: canny edge detection
+    Method: canny edge detection. `img` should be grayscale.
     """
-
-    # TODO: Pretty sure the img is supposed to be grayscale
 
     # Here is where we can explore how canny is used https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py#L135
 
-    edges = cv2.Canny(img, 300, 500)
+    edges = cv2.Canny(img, low_thresh, high_thresh)
 
     # from matplotlib import pyplot as plt
     # plt.subplot(121)
@@ -98,15 +97,15 @@ def identify_points_by_canny_edge_detection(img, max_points, min_points):
     # plt.show()
 
     #
-    # The following was copied from lowpolify. I am going to rewrite it, but
-    # trying to understand it.
+    # The following was largely copied from lowpolify. I am going to rewrite
+    # it, but when I have the time to understand it first.
+    # TODO: Understand and rewrite the rest of this function.
     #
 
     # Set number of points for low-poly edge vertices. This is a subset of all
     # points.
-    num_points = int(np.where(edges)[0].size * 0.15)
-    num_points = min(num_points, max_points)  # I want no more than max_points
-    num_points = max(num_points, min_points)  # I want no fewer than min_points
+    num_points = int(np.where(edges)[0].size * percent)
+    print 'num_points:', num_points
     # Return the indices of the elements that are non-zero.
     # 'nonzero' returns a tuple of arrays, one for each dimension of a,
     # containing the indices of the non-zero elements in that dimension.
@@ -127,12 +126,17 @@ def identify_points_by_canny_edge_detection(img, max_points, min_points):
     # is still a list of indices since `rnd`` is a list of booleans.
     row_indices = row_indices[rnd]
     col_indices = col_indices[rnd]
-    # Number of rows and columns in image
-    shape = img.shape
-    row_max = shape[0]
-    col_max = shape[1]
+    # # Number of rows and columns in image
+    # shape = img.shape
+    # row_max = shape[0]
+    # col_max = shape[1]
     # Co-ordinates of all randomly chosen points
     numpy_points = np.vstack([row_indices, col_indices]).T
+
+    #
+    # This addtion is me. I should probably move everything toward numpy, away
+    # from lists.
+    #
     # Turn into python list, tuples, and ints
     points = []
     for p in numpy_points:
@@ -149,6 +153,8 @@ def identify_facial_landmarks(img):
 
     points = []
     face_bounds = []  # Calculate face bounds from landmarks, not face detector
+
+    # TODO: Uncomment all this for a working DLib
 
     # detector = dlib.get_frontal_face_detector()
     # predictor = dlib.shape_predictor(predictor_path)
@@ -197,7 +203,64 @@ def identify_filler_points(img, current_points):
     return points
 
 
-def identify_points(img, options):
+def preprocess_img(img):
+    """
+    Process the image to prepare it for computer vision. This entails handling
+    single-channel images as well as sharpening color images in grayscale.
+    """
+
+    # Make single-channel image into three-channel image
+    if img.shape[2] == 1:
+        img = img.dstack([img, img, img])
+        # TODO: Not sure this actually works, for now may just want to abort
+
+    # TODO: Consider re-sizing the image. https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py#L222
+
+    # Reduce noise
+    noiseless_img = cv2.fastNlMeansDenoisingColored(img, None, 10, 10, 7, 21)
+
+    # Create a grayscale image
+    gray_img = cv2.cvtColor(noiseless_img, cv2.COLOR_BGR2GRAY)
+
+    # # Consider normalizing the gray_img
+    # clahe = cv2.createCLAHE()
+    # normalized_gray_img = clahe.apply(gray_img)
+    # # Display a window to compare normalized gray image
+    # if SHOW:
+    #     compare = np.hstack([gray_img, normalized_gray_img])
+    #     cv2.imshow('gray images', compare)
+    #     cv2.waitKey(0)
+    #     cv2.destroyAllWindows()
+
+    # Use YCbCr color model then grab first dimension. Needed for thresholds.
+    ycbcr_img = cv2.cvtColor(noiseless_img, cv2.COLOR_RGB2YCrCb)
+    for x in range(ycbcr_img.shape[0]):
+        for y in range(ycbcr_img.shape[1]):
+            ycbcr_img[x][y] = ycbcr_img[x][y][0]
+    ycbcr_img = ycbcr_img[:, :, 0]
+
+    # Calculate thresholds
+    high_thresh, thresh_img = cv2.threshold(
+        ycbcr_img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    low_thresh = 0.5 * high_thresh
+    if SHOW and False:  # tmp False
+        cv2.imshow('Threshold Image', thresh_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    # Sharpen a blurred image. This helps define the edges.
+    blurred_gray_img = cv2.GaussianBlur(gray_img, (0, 0), 3)
+    sharp_gray_img = cv2.addWeighted(gray_img, 2.5, blurred_gray_img, -1, 0)
+    if SHOW and False:
+        compare = np.hstack([blurred_gray_img, sharp_gray_img])
+        cv2.imshow('Sharp gray image', compare)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    return img, sharp_gray_img, low_thresh, high_thresh
+
+
+def identify_points(img, gray_img, options):
     """
     Use a method to identify points
     """
@@ -219,7 +282,7 @@ def identify_points(img, options):
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
         canny_edges = identify_points_by_canny_edge_detection(
-            img, max_points, min_points)
+            gray_img, options['low_thresh'], options['high_thresh'])
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
@@ -279,17 +342,20 @@ def lambda_handler(event, context):
 
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
     # Much above 1000 takes too long for delaunay triangulation
+    img, sharp_gray_img, low_thresh, high_thresh = preprocess_img(img)
     options = {
         'grid_points': False,
         'key_points': False,
-        'facial_landmarks': True,
+        'facial_landmarks': True,  # Code is commented out in the
         'canny': True,
         'random': True,
-        'max_points': 1000,  # Will need to restrict max here.
+        'max_points': 9999,
         'min_points': 100,
+        'low_thresh': low_thresh,
+        'high_thresh': high_thresh,
     }
-    points, face_bounds = identify_points(img, options)
-    print 'num_points:', len(points)
+    points, face_bounds = identify_points(img, sharp_gray_img, options)
+    print 'count:', len(points)
 
     # Draw on img
     for point in points:

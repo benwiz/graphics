@@ -121,7 +121,9 @@ lein lambda deploy production
 ## To Do
 
 - Now
-  - Do the necessary pre-processing before running Canny Edge Detection (maybe this is the same pre-processing for DLib, but probably different)
+  - Pre-processing
+  - Turn on DLib
+  - Use Numpy arrays instead of Lists
 
 - Later
   - UI
