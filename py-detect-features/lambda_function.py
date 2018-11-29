@@ -273,7 +273,7 @@ def identify_points(img, gray_img, options):
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
         canny_edges = identify_points_by_canny_edge_detection(
-            gray_img, options['low_thresh'], options['high_thresh'])
+            gray_img, options['low_thresh'], options['high_thresh'], options['canny_percent'])
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
@@ -316,7 +316,7 @@ def lambda_handler(event, context):
     """
 
     # print "Event:\n", json.dumps(event)
-    # print "Context:\n", context
+    # print "Context:\n", conpertext
 
     # Consume S3 create event
     key = event['Records'][0]['s3']['object']['key']
@@ -336,8 +336,6 @@ def lambda_handler(event, context):
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
     # Much above 1000 takes too long for delaunay triangulation
     img, sharp_gray_img, low_thresh, high_thresh = preprocess_img(img)
-    print 'low_thresh:', low_thresh
-    print 'high_thresh:', high_thresh
     options = {
         'grid_points': False,
         'key_points': False,
@@ -346,6 +344,7 @@ def lambda_handler(event, context):
         'random': True,
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
+        'canny_percent': 0.05,
     }
     points, face_bounds = identify_points(img, sharp_gray_img, options)
     print 'count:', len(points)
