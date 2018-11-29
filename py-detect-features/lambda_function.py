@@ -11,6 +11,7 @@ import io
 import json
 import random
 import pdb
+import math
 
 import boto3
 import cv2
@@ -20,12 +21,19 @@ import numpy as np
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
 UPLOAD_ANYWAY = False
-SHOW = True
+SHOW = False
 
 predictor_path = os.path.join(
     os.path.dirname(__file__),
     'shape_predictor_68_face_landmarks.dat'
 )
+
+
+def distance(p0, p1):
+    """
+    Calculate the distance between two points.
+    """
+    return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
 
 
 def create_opencv_image_from_stringio(img_stream, cv2_img_flag=0):
@@ -203,9 +211,9 @@ def preprocess_img(img):
         # TODO: Not sure this actually works, for now may just want to abort
 
     # # Resize image. This helps detect fewer
-    # NOTE: This requires re-sizing the points later back to initial size.
+    # # NOTE: This requires re-sizing the points later back to initial size.
     # newSize = 750
-    # if newSize < np.max(img.shape[:2]):
+    # if newSize < np.max(img.cshape[:2]):
     #     scale = newSize / float(np.max(img.shape[:2]))
     #     img = cv2.resize(img, (0, 0), fx=scale, fy=scale,
     #                      interpolation=cv2.INTER_AREA)
@@ -279,18 +287,30 @@ def identify_points(img, gray_img, options):
     if options['canny']:
         canny_edges = identify_points_by_canny_edge_detection(
             gray_img, options['low_thresh'], options['high_thresh'], options['canny_percent'])
-        print 'len(canny_edges):', len(canny_edges)
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
 
     # TODO: Optionally add noise to canny/all points and move them a little bit
-    # TODO: Optionally keep only one point within a given radius
 
     # Generate points to fill in gaps
     if options['random']:
         random_points = identify_filler_points(img, points, 0.10)
         points += random_points
+
+    # Iterate through points, remove all points within the given radius
+    indices_to_delete = set()
+    for i in range(len(points)):
+        # Compare this point to all other points
+        p0 = points[i]
+        for j in range(len(points)):
+            if i == j:
+                continue
+            p1 = points[j]
+            if distance(p0, p1) < options['radius']:
+                indices_to_delete.add(j)
+    for index in sorted(indices_to_delete, reverse=True):
+        del points[index]
 
     # Remove any points within any face_bound
     for point in points:
@@ -352,6 +372,7 @@ def lambda_handler(event, context):
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
         'canny_percent': 0.05,
+        'radius': 5,
     }
     points, face_bounds = identify_points(img, sharp_gray_img, options)
 
@@ -389,5 +410,5 @@ if __name__ == "__main__":
     uuid = 'face'
     event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': uuid + u'/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly',
                                                                                                                                                                                                                                                                                                                                                                                               u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
-    event['Records'][0]['s3']['object']['key'] = '2/start.jpg'
+    event['Records'][0]['s3']['object']['key'] = '1/start.jpg'
     lambda_handler(event, None)
