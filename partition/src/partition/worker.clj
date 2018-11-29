@@ -30,6 +30,10 @@
   Supposed to take a generate-random-map{,-perc} mapping.
   https://stackoverflow.com/questions/6973290/generate-and-save-a-png-image-in-clojure"
   [image triangles]
+  ; Reduce won't handle the last element so we add an additional element.
+  (println "triangle:" (get triangles 0))
+  (conj triangles [0 0])
+  ; Do the main stuff
   (let [bi (ImageIO/read (io/input-stream image))
         g (.createGraphics bi)]
     (do
@@ -38,9 +42,13 @@
                               (int-array (map (fn [point] (get point 0)) triangle))
                               (int-array (map (fn [point] (get point 1)) triangle))
                               (count triangle))
+
+                ; (.setColor g (Color. (rand-int 255) (rand-int 255) (rand-int 255)))
+                ; (.fillPolygon g
+                ;               (int-array (map (fn [point] (get point 0)) triangle))
+                ;               (int-array (map (fn [point] (get point 1)) triangle))
+                ;               (count triangle))
                 bi)
-              ; Reduce won't handle the last element so we add an additional element.
-              ; (conj triangles [0 0])))))
               triangles))))
 
 (defn run
