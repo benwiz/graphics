@@ -119,6 +119,7 @@
                   ; (println triangle average-color)
                   ; Fill polygon with a color
                       (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
+                      ;(.setColor g (Color. 255 0 0))
                       (.fillPolygon g
                                     (int-array (map (fn [point] (get point 0)) triangle))
                                     (int-array (map (fn [point] (get point 1)) triangle))
