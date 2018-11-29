@@ -36,8 +36,8 @@
 (defn get-colors-for-x
   "Get color for every y-value in the x column"
   [x y-bot y-top]
-  (println x y-bot y-top)
-  ;(range y-bot y-top)
+  (map (fn [y] (println y))
+    (range y-bot (inc y-top)))
 )
 
 (defn get-colors
