@@ -20,7 +20,7 @@ import numpy as np
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
 UPLOAD_ANYWAY = False
-SHOW = True
+SHOW = False
 
 predictor_path = os.path.join(
     os.path.dirname(__file__),
@@ -79,21 +79,11 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     Method: canny edge detection. `img` should be grayscale.
     """
 
-    # Here is where we can explore how canny is used https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py#L135
     edges = cv2.Canny(img, low_thresh, high_thresh)
-
-    # from matplotlib import pyplot as plt
-    # plt.subplot(121)
-    # plt.imshow(img, cmap='gray')
-    # plt.title('Original Image')
-    # plt.xticks([])
-    # plt.yticks([])
-    # plt.subplot(122)
-    # plt.imshow(edges, cmap='gray')
-    # plt.title('Edge Image')
-    # plt.xticks([])
-    # plt.yticks([])
-    # plt.show()
+    if SHOW:
+        cv2.imshow('Edges', edges)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
     #
     # The following was largely copied from lowpolify. I am going to rewrite
@@ -104,7 +94,6 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     # Set number of points for low-poly edge vertices. This is a subset of all
     # points.
     num_points = int(np.where(edges)[0].size * percent)
-    print 'num_points:', num_points
     # Return the indices of the elements that are non-zero.
     # 'nonzero' returns a tuple of arrays, one for each dimension of a,
     # containing the indices of the non-zero elements in that dimension.
@@ -122,7 +111,7 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     np.random.shuffle(rnd)
     # Randomly select a subset of the points to use. The ordered pairs are
     # being maintained because we are getting `rnd` from both lists. The result
-    # is still a list of indices since `rnd`` is a list of booleans.
+    # is still a list of indices since `rnd` is a list of booleans.
     row_indices = row_indices[rnd]
     col_indices = col_indices[rnd]
     # # Number of rows and columns in image
@@ -130,7 +119,7 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     # row_max = shape[0]
     # col_max = shape[1]
     # Co-ordinates of all randomly chosen points
-    numpy_points = np.vstack([row_indices, col_indices]).T
+    pts = np.vstack([row_indices, col_indices]).T
 
     #
     # This addtion is me. I should probably move everything toward numpy, away
@@ -138,10 +127,11 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     #
     # Turn into python list, tuples, and ints
     points = []
-    for p in numpy_points:
+    for p in pts:
         point = (int(p[1]), int(p[0]))
         points.append(point)
 
+    print 'len(pts):', len(pts)
     return points
 
 
@@ -221,7 +211,7 @@ def preprocess_img(img):
     # Create a grayscale image
     gray_img = cv2.cvtColor(noiseless_img, cv2.COLOR_BGR2GRAY)
 
-    # # Consider normalizing the gray_img
+    # # Consider normalizing the gray_img, it does make a visible change
     # clahe = cv2.createCLAHE()
     # normalized_gray_img = clahe.apply(gray_img)
     # # Display a window to compare normalized gray image
@@ -231,18 +221,23 @@ def preprocess_img(img):
     #     cv2.waitKey(0)
     #     cv2.destroyAllWindows()
 
-    # Use YCbCr color model then grab first dimension. Needed for thresholds.
+    # Use YCbCr color model then grab first channel. Needed for thresholds.
     ycbcr_img = cv2.cvtColor(noiseless_img, cv2.COLOR_RGB2YCrCb)
     for x in range(ycbcr_img.shape[0]):
         for y in range(ycbcr_img.shape[1]):
             ycbcr_img[x][y] = ycbcr_img[x][y][0]
     ycbcr_img = ycbcr_img[:, :, 0]
+    if SHOW:
+        compare = np.hstack([gray_img, ycbcr_img])
+        cv2.imshow('YCbCr', ycbcr_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
     # Calculate thresholds
     high_thresh, thresh_img = cv2.threshold(
         ycbcr_img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     low_thresh = 0.5 * high_thresh
-    if SHOW and False:  # tmp False
+    if SHOW:  # tmp False
         cv2.imshow('Threshold Image', thresh_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -250,7 +245,7 @@ def preprocess_img(img):
     # Sharpen a blurred image. This helps define the edges.
     blurred_gray_img = cv2.GaussianBlur(gray_img, (0, 0), 3)
     sharp_gray_img = cv2.addWeighted(gray_img, 2.5, blurred_gray_img, -1, 0)
-    if SHOW and False:
+    if SHOW:
         compare = np.hstack([blurred_gray_img, sharp_gray_img])
         cv2.imshow('Sharp gray image', compare)
         cv2.waitKey(0)
@@ -282,6 +277,8 @@ def identify_points(img, gray_img, options):
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
+
+    # TODO: Optionally add noise to canny/all points and move them a little bit
 
     # Generate points to fill in gaps
     if options['random']:

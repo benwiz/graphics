@@ -120,9 +120,12 @@ lein lambda deploy production
 
 ## To Do
 
+NOTE: Do not run a `pip freeze`
+
 - Now
   - Pre-processing
   - Turn on DLib
+  - Consider adding noise to canny points (maybe other points)
   - Use Numpy arrays instead of Lists
 
 - Later
