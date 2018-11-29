@@ -35,9 +35,10 @@
 
 (defn get-colors-for-x
   "Get color for every y-value in the x column"
-  [x y-bot y-top]
+  [x y1 y2]
+  (println "-------" x ":" (min y1 y2) (max y1 y2) "-------")
   (map (fn [y] (println y))
-    (range y-bot (inc y-top)))
+    (range (min y1 y2) (inc (max y1 y2))))
 )
 
 (defn get-colors
