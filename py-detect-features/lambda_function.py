@@ -80,7 +80,6 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     """
 
     # Here is where we can explore how canny is used https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py#L135
-
     edges = cv2.Canny(img, low_thresh, high_thresh)
 
     # from matplotlib import pyplot as plt
@@ -271,13 +270,10 @@ def identify_points(img, gray_img, options):
     face_bouds = []
     edges = []
 
-    max_points = options['max_points']
-    min_points = options['min_points']
-
     if options['grid_points']:
         grid_points = identify_points_by_grid(img, 25)
     if options['key_points']:
-        key_points = identify_points_by_key_points(img, max_points)
+        key_points = identify_points_by_key_points(img, 1000)
     if options['facial_landmarks']:
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
@@ -343,14 +339,14 @@ def lambda_handler(event, context):
     # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
     # Much above 1000 takes too long for delaunay triangulation
     img, sharp_gray_img, low_thresh, high_thresh = preprocess_img(img)
+    print 'low_thresh:', low_thresh
+    print 'high_thresh:', high_thresh
     options = {
         'grid_points': False,
         'key_points': False,
         'facial_landmarks': True,  # Code is commented out in the
         'canny': True,
-        'random': True,
-        'max_points': 9999,
-        'min_points': 100,
+        'random': False,
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
     }
@@ -391,5 +387,5 @@ if __name__ == "__main__":
     uuid = 'face'
     event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': uuid + u'/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly',
                                                                                                                                                                                                                                                                                                                                                                                               u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
-    event['Records'][0]['s3']['object']['key'] = '1/start.jpg'
+    event['Records'][0]['s3']['object']['key'] = '2/start.jpg'
     lambda_handler(event, None)
