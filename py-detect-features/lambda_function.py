@@ -131,7 +131,6 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
         point = (int(p[1]), int(p[0]))
         points.append(point)
 
-    print 'len(pts):', len(pts)
     return points
 
 
@@ -244,7 +243,7 @@ def preprocess_img(img):
         ycbcr_img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     low_thresh = 0.5 * high_thresh
     if SHOW:
-        cv2.imshow('Threshold Image', thresh_img)
+        cv2.imshow('Otsu\'s Threshold Image', thresh_img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
@@ -280,6 +279,7 @@ def identify_points(img, gray_img, options):
     if options['canny']:
         canny_edges = identify_points_by_canny_edge_detection(
             gray_img, options['low_thresh'], options['high_thresh'], options['canny_percent'])
+        print 'len(canny_edges):', len(canny_edges)
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
@@ -354,7 +354,6 @@ def lambda_handler(event, context):
         'canny_percent': 0.15,
     }
     points, face_bounds = identify_points(img, sharp_gray_img, options)
-    print 'count:', len(points)
 
     # Draw on img
     for point in points:
