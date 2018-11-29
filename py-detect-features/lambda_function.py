@@ -74,7 +74,7 @@ def identify_points_by_key_points(img, max_points):
     return points
 
 
-def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percent=0.15):
+def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percent):
     """
     Method: canny edge detection. `img` should be grayscale.
     """
@@ -351,7 +351,7 @@ def lambda_handler(event, context):
         'random': True,
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
-        'canny_percent': 0.15,
+        'canny_percent': 0.05,
     }
     points, face_bounds = identify_points(img, sharp_gray_img, options)
 
