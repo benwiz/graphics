@@ -366,7 +366,7 @@ def lambda_handler(event, context):
     options = {
         'grid_points': False,
         'key_points': False,
-        'facial_landmarks': True,  # Code is commented out in the
+        'facial_landmarks': True,  # Code is commented out in the function
         'canny': True,
         'random': True,
         'low_thresh': low_thresh,
