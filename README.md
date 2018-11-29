@@ -123,7 +123,7 @@ lein lambda deploy production
 NOTE: Do not run a `pip freeze`
 
 - Now
-  - Maybe try drawing the dots on the lowpolify.py image to see what's going on behind the scenes. Also consider the radius removal strategy.
+  - Look into why partitioning or coloring is skipping some triangles
   - Turn on DLib
   - Consider adding noise to canny points (maybe other points)
   - Use Numpy arrays instead of Lists
