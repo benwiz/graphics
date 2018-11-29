@@ -51,8 +51,8 @@
         C2 (- (* x3 y2) (* x2 y3))
         range1 (range x1 x2)
         range2 (range (inc x2) (inc x3))]
-          (println range1)
-          (println range2)
+          (map println
+               range1)
   )
 )
 
