@@ -2,7 +2,9 @@
 
 Take an image and output a fragmented (low-poly) version. It works by using OpenCV to detect "key points" then connets those key points with delaunay triangulation. Then it fills each triangle with the average color of the pixels within that triangle.
 
-Inspired by [this project](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py).
+Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide and inspiration.
+
+It works okay. Maybe with the new release of AWS Lambda Layers I can the Clojure OpenCV library and have it all be in Clojure, which was my original intention.
 
 ## Getting Started
 
@@ -127,7 +129,7 @@ NOTE: Do not run a `pip freeze`, there is stuff installed on the _venv_ on Marg'
 - Now
   - Deploy and test the updated `color` function
   - Deploy and test the updated `py-detect-features`
-  - Put an end to this project. Any further fragment work will be in a new project.
+  - Put an end to this project. The only time I should be touching this project is if I finish `clj-detect-features` using AWS Lambda Layers and get rid of `py-detect-features`.
 
 - Later
   - UI
