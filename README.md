@@ -1,5 +1,7 @@
 # fragment
 
+NOVEMBER 30, 2018: I broke py-detect-features when playing with AWS Lambda Layers. The website will not work until I sort out this Numpy issue.
+
 Take an image and output a fragmented (low-poly) version. It works by using OpenCV to detect "key points" then connets those key points with delaunay triangulation. Then it fills each triangle with the average color of the pixels within that triangle.
 
 Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide and inspiration.
