@@ -122,12 +122,10 @@ lein lambda deploy production
 
 ## To Do
 
-NOTE: Do not run a `pip freeze`
+NOTE: Do not run a `pip freeze`, there is stuff installed on the _venv_ on Marg's Mac I don't want or need
 
 - Now
   - Deploy and test the updated `color` function
-  - Finish the nearly-complete lowpolyify rewrite in python
-  - Turn on DLib
   - Deploy and test the updated `py-detect-features`
   - Put an end to this project. Any further fragment work will be in a new project.
 
