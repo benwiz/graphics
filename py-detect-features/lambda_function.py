@@ -87,6 +87,7 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     Method: canny edge detection. `img` should be grayscale.
     """
 
+    # Detect edges (really, the points that make up the edges)
     edges = cv2.Canny(img, low_thresh, high_thresh)
     if SHOW:
         cv2.imshow('Edges', edges)
