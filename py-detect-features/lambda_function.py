@@ -14,8 +14,8 @@ import pdb
 import math
 
 import boto3
-import cv2
 import numpy as np
+import cv2
 import dlib
 
 BUCKET_NAME = 'lowpoly'
