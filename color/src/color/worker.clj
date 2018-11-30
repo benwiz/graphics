@@ -65,6 +65,8 @@
             (map (fn [x]
                 (let [y-top (int (/ (- (* -1 A1 x) C1) (if (= B1 0.0) -1.0 B1))) ; The if statement is a messy hack for avoiding divide by 0
                       y-bot (int (/ (- (* -1 A2 x) C2 1) (if (= (+ B2 1) 0.0) -1.0 (+ B2 1))))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
+                  ; TODO: These constrains are probably causing incorrect averages for edge triangles. It would be better to just skip the
+                  ; points that are out-of-bounds.
                   (get-colors-for-x bi
                                     (min (.getWidth bi) x)
                                     (min (.getHeight bi) (max 0 y-bot))
