@@ -1,10 +1,12 @@
 # fragment
 
-NOVEMBER 30, 2018: I broke `py-detect-features` when playing with AWS Lambda Layers. The website will not work until I sort out this Numpy issue.
+NOVEMBER 30, 2018: I broke py-detect-features when playing with AWS Lambda Layers. The website will not work until I sort out this Numpy issue.
 
 Take an image and output a fragmented (low-poly) version. It works by using OpenCV to detect "key points" then connets those key points with delaunay triangulation. Then it fills each triangle with the average color of the pixels within that triangle.
 
-Inspired by [this project](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py).
+Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide and inspiration.
+
+It works okay. Maybe with the new release of AWS Lambda Layers I can use the Clojure OpenCV library and have it all be in Clojure, which was my original intention.
 
 ## Getting Started
 
@@ -26,7 +28,7 @@ Use Python to identify key the features (points) within the image that will be u
 
 #### Run Locally
 
-Create and activate a Python2 virtualenv in the roobt dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` workin `py-detect-features`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
+Create and activate a Python2 virtualenv in the root dir. For some inexplicable reason I am getting virtualenv errors when trying to create the virtualenv within the `py-detect-features` dir. Nor will `pip install` work within `py-detect-features/`. I have not dug into this issue but it is probably some sort of weird permissions issue on my fresh install of ElementaryOS.
 
 ```bash
 virtualenv --python=$(which python2) venv
@@ -44,6 +46,8 @@ or
 ```bash
 pip install boto3 numpy opencv-contrib-python
 ```
+
+NOTE: Requires Java 8
 
 #### Deploy
 
@@ -122,12 +126,12 @@ lein lambda deploy production
 
 ## To Do
 
-NOV. 2018: (1) Review what currently exists. (2) Perform the processing and cv steps in py-detect-features. May need to introduce DLib for facial feature detection. (-) Also use numpy arrays instead of lists.
+NOTE: Do not run a `pip freeze`, there is stuff installed on the _venv_ on Marg's Mac I don't want or need
 
 - Now
-  - Re-incorporate removal of points within a radius
-  - Sort out image rotation
-  - Variance division
+  - Deploy and test the updated `color` function
+  - Deploy and test the updated `py-detect-features`
+  - Put an end to this project. The only time I should be touching this project is if I finish `clj-detect-features` using AWS Lambda Layers and get rid of `py-detect-features`.
 
 - Later
   - UI
@@ -138,9 +142,8 @@ NOV. 2018: (1) Review what currently exists. (2) Perform the processing and cv s
     - Handle timeouts correctly (2, 1, 1)
   - Feature detect
     - Consume config file for max number of points
-    - DLib facial point detection
-    - Consider moving away from SIFT Key Point detection to using edge detection. Canny detection specifically. Maybe there is some fusion where we find points along edges? Also consider adding random points in - then we may be able to make gifs.
-    - Reduce noise in image using cv::cuda::fastNlMeansDenoisingColored
+    - Use Numpy arrays
+    - Consider adding noise to canny points (maybe other points too, not facial)
   - Partition
     - Voronoi option (pre-requisite: Prepare all services to handle polygons instead of triangles... this is a significant amount of work)
   - Color

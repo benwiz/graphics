@@ -11,20 +11,29 @@ import io
 import json
 import random
 import pdb
+import math
 
 import boto3
-import cv2
 import numpy as np
+import cv2
 import dlib
 
 BUCKET_NAME = 'lowpoly'
 IS_LOCAL = False
 UPLOAD_ANYWAY = False
+SHOW = False
 
 predictor_path = os.path.join(
     os.path.dirname(__file__),
     'shape_predictor_68_face_landmarks.dat'
 )
+
+
+def distance(p0, p1):
+    """
+    Calculate the distance between two points.
+    """
+    return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
 
 
 def create_opencv_image_from_stringio(img_stream, cv2_img_flag=0):
@@ -73,69 +82,48 @@ def identify_points_by_key_points(img, max_points):
     return points
 
 
-def identify_points_by_canny_edge_detection(img, max_points, min_points):
+def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percent):
     """
-    Method: canny edge detection
+    Method: canny edge detection. `img` should be grayscale.
     """
 
-    # TODO: Pretty sure the img is supposed to be grayscale
+    # Detect edges (really, the points that make up the edges)
+    edges = cv2.Canny(img, low_thresh, high_thresh)
+    if SHOW:
+        cv2.imshow('Edges', edges)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
-    # Here is where we can explore how canny is used https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py#L135
+    # Next, we basically select a random subset of points in an odd way
 
-    edges = cv2.Canny(img, 300, 500)
+    # Number of points to keep of all detected points
+    num_points = int(np.where(edges)[0].size * percent)
 
-    # from matplotlib import pyplot as plt
-    # plt.subplot(121)
-    # plt.imshow(img, cmap='gray')
-    # plt.title('Original Image')
-    # plt.xticks([])
-    # plt.yticks([])
-    # plt.subplot(122)
-    # plt.imshow(edges, cmap='gray')
-    # plt.title('Edge Image')
-    # plt.xticks([])
-    # plt.yticks([])
-    # plt.show()
-
-    #
-    # The following was copied from lowpolify. I am going to rewrite it, but
-    # trying to understand it.
-    #
-
-    # Set number of points for low-poly edge vertices. This is a subset of all
-    # points.
-    num_points = int(np.where(edges)[0].size * 0.15)
-    num_points = min(num_points, max_points)  # I want no more than max_points
-    num_points = max(num_points, min_points)  # I want no fewer than min_points
-    # Return the indices of the elements that are non-zero.
-    # 'nonzero' returns a tuple of arrays, one for each dimension of a,
-    # containing the indices of the non-zero elements in that dimension.
+    # Get the indices of non-zero edge points
     row_indices, col_indices = np.nonzero(edges)
-    # row_indices.shape, returns count of all points that belong to an edge as
-    # a tuple. So 'np.zeros(row_indices.shape)' an array of this size, with all
-    # zeros. 'rnd' is thus an array of this size, with all values as 'False'.
-    # In other words, this is a weird way of getting a Numpy array that looks
+
+    # This is a weird way of getting a Numpy array that looks
     # like [False, False, ..., False] where length is `row_indices.shape[0]`.
     rnd = np.zeros(row_indices.shape) == 1
+
     # Mark indices from beginning to 'num_points - 1' as True. This is not
     # all items in `rnd`.
     rnd[:num_points] = True
-    # Shuffle
+    # Shuffle, so that the `True` values are distributed
     np.random.shuffle(rnd)
+
     # Randomly select a subset of the points to use. The ordered pairs are
     # being maintained because we are getting `rnd` from both lists. The result
-    # is still a list of indices since `rnd`` is a list of booleans.
+    # is still a list of indices since `rnd` is a list of booleans.
     row_indices = row_indices[rnd]
     col_indices = col_indices[rnd]
-    # Number of rows and columns in image
-    shape = img.shape
-    row_max = shape[0]
-    col_max = shape[1]
+
     # Co-ordinates of all randomly chosen points
-    numpy_points = np.vstack([row_indices, col_indices]).T
+    pts = np.vstack([row_indices, col_indices]).T
+
     # Turn into python list, tuples, and ints
     points = []
-    for p in numpy_points:
+    for p in pts:
         point = (int(p[1]), int(p[0]))
         points.append(point)
 
@@ -148,12 +136,12 @@ def identify_facial_landmarks(img):
     """
 
     points = []
+    face_bounds = []  # Calculate face bounds from landmarks, not face detector
 
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor(predictor_path)
 
     faces = detector(img, 1)
-    face_bounds = []  # Calculate face bounds from landmarks, not face detector
     for face in faces:
         shape = predictor(img, face)
         landmarks = []
@@ -178,7 +166,7 @@ def identify_facial_landmarks(img):
     return points, face_bounds
 
 
-def identify_filler_points(img, current_points):
+def identify_filler_points(img, current_points, percent=0.10):
     """
     For now we generate 10% len(current_points) randomly. Later, we
     intelligently choose where we need more points.
@@ -186,7 +174,7 @@ def identify_filler_points(img, current_points):
 
     height, width, _ = img.shape
 
-    num_points = int(0.10 * len(current_points))
+    num_points = int(percent * len(current_points))
     points = []
     for i in range(num_points):
         x = random.randint(0, width - 1)
@@ -197,7 +185,75 @@ def identify_filler_points(img, current_points):
     return points
 
 
-def identify_points(img, options):
+def preprocess_img(img):
+    """
+    Process the image to prepare it for computer vision. This entails handling
+    single-channel images as well as sharpening color images in grayscale.
+    """
+
+    # Make single-channel image into three-channel image
+    if img.shape[2] == 1:
+        img = img.dstack([img, img, img])
+        # TODO: Not sure this actually works, for now may just want to abort
+
+    # # Resize image. This helps detect fewer
+    # # NOTE: This requires re-sizing the points later back to initial size.
+    # newSize = 750
+    # if newSize < np.max(img.cshape[:2]):
+    #     scale = newSize / float(np.max(img.shape[:2]))
+    #     img = cv2.resize(img, (0, 0), fx=scale, fy=scale,
+    #                      interpolation=cv2.INTER_AREA)
+
+    # Reduce noise
+    noiseless_img = cv2.fastNlMeansDenoisingColored(img, None, 10, 10, 7, 21)
+
+    # Create a grayscale image
+    gray_img = cv2.cvtColor(noiseless_img, cv2.COLOR_BGR2GRAY)
+
+    # # Consider normalizing the gray_img, it does make a visible change
+    # clahe = cv2.createCLAHE()
+    # normalized_gray_img = clahe.apply(gray_img)
+    # # Display a window to compare normalized gray image
+    # if SHOW:
+    #     compare = np.hstack([gray_img, normalized_gray_img])
+    #     cv2.imshow('gray images', compare)
+    #     cv2.waitKey(0)
+    #     cv2.destroyAllWindows()
+
+    # Use YCbCr color model then grab first channel. Needed for thresholds.
+    ycbcr_img = cv2.cvtColor(noiseless_img, cv2.COLOR_RGB2YCrCb)
+    for x in range(ycbcr_img.shape[0]):
+        for y in range(ycbcr_img.shape[1]):
+            ycbcr_img[x][y] = ycbcr_img[x][y][0]
+    ycbcr_img = ycbcr_img[:, :, 0]
+    if SHOW:
+        # compare = np.hstack([gray_img, ycbcr_img])
+        cv2.imshow('YCbCr', ycbcr_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    # Calculate thresholds
+    high_thresh, thresh_img = cv2.threshold(
+        ycbcr_img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    low_thresh = 0.5 * high_thresh
+    if SHOW:
+        cv2.imshow('Otsu\'s Threshold Image', thresh_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    # Sharpen a blurred image. This helps define the edges.
+    blurred_gray_img = cv2.GaussianBlur(gray_img, (0, 0), 3)
+    sharp_gray_img = cv2.addWeighted(gray_img, 2.5, blurred_gray_img, -1, 0)
+    if SHOW:
+        # compare = np.hstack([blurred_gray_img, sharp_gray_img])
+        cv2.imshow('Sharp gray image', sharp_gray_img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    return img, sharp_gray_img, low_thresh, high_thresh
+
+
+def identify_points(img, gray_img, options):
     """
     Use a method to identify points
     """
@@ -208,26 +264,41 @@ def identify_points(img, options):
     face_bouds = []
     edges = []
 
-    max_points = options['max_points']
-    min_points = options['min_points']
-
     if options['grid_points']:
         grid_points = identify_points_by_grid(img, 25)
     if options['key_points']:
-        key_points = identify_points_by_key_points(img, max_points)
+        key_points = identify_points_by_key_points(img, 1000)
     if options['facial_landmarks']:
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
         canny_edges = identify_points_by_canny_edge_detection(
-            img, max_points, min_points)
+            gray_img, options['low_thresh'],
+            options['high_thresh'],
+            options['canny_percent'])
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
 
+    # TODO: Optionally add noise to canny/all points and move them a little bit
+
     # Generate points to fill in gaps
     if options['random']:
-        random_points = identify_filler_points(img, points)
+        random_points = identify_filler_points(img, points, 0.10)
         points += random_points
+
+    # Iterate through points, remove all points within the given radius
+    indices_to_delete = set()
+    for i in range(len(points)):
+        # Compare this point to all other points
+        p0 = points[i]
+        for j in range(len(points)):
+            if i == j:
+                continue
+            p1 = points[j]
+            if distance(p0, p1) < options['radius']:
+                indices_to_delete.add(j)
+    for index in sorted(indices_to_delete, reverse=True):
+        del points[index]
 
     # Remove any points within any face_bound
     for point in points:
@@ -260,7 +331,7 @@ def lambda_handler(event, context):
     """
 
     # print "Event:\n", json.dumps(event)
-    # print "Context:\n", context
+    # print "Context:\n", conpertext
 
     # Consume S3 create event
     key = event['Records'][0]['s3']['object']['key']
@@ -277,19 +348,20 @@ def lambda_handler(event, context):
                                      np.uint8),
                        cv2.IMREAD_UNCHANGED)
 
-    # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-    # Much above 1000 takes too long for delaunay triangulation
+    # Analyze image
+    img, sharp_gray_img, low_thresh, high_thresh = preprocess_img(img)
     options = {
         'grid_points': False,
         'key_points': False,
-        'facial_landmarks': True,
+        'facial_landmarks': True,  # Code is commented out in the function
         'canny': True,
         'random': True,
-        'max_points': 1000,  # Will need to restrict max here.
-        'min_points': 100,
+        'low_thresh': low_thresh,
+        'high_thresh': high_thresh,
+        'canny_percent': 0.05,
+        'radius': 5,
     }
-    points, face_bounds = identify_points(img, options)
-    print 'num_points:', len(points)
+    points, face_bounds = identify_points(img, sharp_gray_img, options)
 
     # Draw on img
     for point in points:
@@ -325,4 +397,5 @@ if __name__ == "__main__":
     uuid = 'face'
     event = {u'Records': [{u'eventVersion': u'2.0', u'eventTime': u'2018-03-11T14:50:46.631Z', u'requestParameters': {u'sourceIPAddress': u'98.163.206.197'}, u's3': {u'configurationId': u'367c003d-db1a-4a71-9e34-b47f90c71a86', u'object': {u'eTag': u'fa02ebd6d522c72806a428c309d13756', u'sequencer': u'005AA54246862A53B6', u'key': uuid + u'/start.jpg', u'size': 162446}, u'bucket': {u'arn': u'arn:aws:s3:::lowpoly',
                                                                                                                                                                                                                                                                                                                                                                                               u'name': u'lowpoly', u'ownerIdentity': {u'principalId': u'AX2FA51TPHMAJ'}}, u's3SchemaVersion': u'1.0'}, u'responseElements': {u'x-amz-id-2': u'xhK79IlgCRf1wX7Xh8imG7+xSbtZfl9AQJIPVkzUazYyetsFVKI2MSz4aC7q3moZSzZyvE4WYNM=', u'x-amz-request-id': u'F4A63ED2826C8B0D'}, u'awsRegion': u'us-east-1', u'eventName': u'ObjectCreated:Put', u'userIdentity': {u'principalId': u'AX2FA51TPHMAJ'}, u'eventSource': u'aws:s3'}]}
+    event['Records'][0]['s3']['object']['key'] = '1/start.jpg'
     lambda_handler(event, None)

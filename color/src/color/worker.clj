@@ -33,6 +33,48 @@
          (get point2 0)))
    (get point2 1)))
 
+(defn get-colors-for-x
+  "Get color for every y-value in the x column"
+  [bi x y1 y2]
+  ; (println x ": " (min y1 y2) "to" (max y1 y2))
+  (map (fn [y]
+      [(.getRed (Color. (.getRGB bi x y)))
+       (.getGreen (Color. (.getRGB bi x y)))
+       (.getBlue (Color. (.getRGB bi x y)))
+       (.getAlpha (Color. (.getRGB bi x y)))])
+    (range (min y1 y2) (max y1 y2))))
+
+(defn get-colors
+  "Get each pixel's color for the given triangle. Input triangle is sorted by x-value. (i.e. rasterize)"
+  ; https://stackoverflow.com/questions/8957028/getting-a-list-of-locations-within-a-triangle-in-the-form-of-x-y-positions
+  [bi triangle]
+  (let [x1 (get (nth triangle 0) 0)
+        y1 (get (nth triangle 0) 1)
+        x2 (get (nth triangle 1) 0)
+        y2 (get (nth triangle 1) 1)
+        x3 (get (nth triangle 2) 0)
+        y3 (get (nth triangle 2) 1)
+        A1 (- y2 y1)
+        B1 (- x1 x2)
+        C1 (- (* x2 y1) (* x1 y2))
+        A2 (- y3 y2)
+        B2 (- x2 x3)
+        C2 (- (* x3 y2) (* x2 y3))
+        x-range (concat (range x1 x2) (range (inc x2) (inc x3)))] ; [x1, x2), (x2, x3]
+          (apply concat
+            (map (fn [x]
+                (let [y-top (int (/ (- (* -1 A1 x) C1) (if (= B1 0.0) -1.0 B1))) ; The if statement is a messy hack for avoiding divide by 0
+                      y-bot (int (/ (- (* -1 A2 x) C2 1) (if (= (+ B2 1) 0.0) -1.0 (+ B2 1))))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
+                  ; TODO: These constrains are probably causing incorrect averages for edge triangles. It would be better to just skip the
+                  ; points that are out-of-bounds.
+                  (get-colors-for-x bi
+                                    (min (.getWidth bi) x)
+                                    (min (.getHeight bi) (max 0 y-bot))
+                                    (min (.getHeight bi) (max 0 y-top)))))
+              x-range))
+  )
+)
+
 (defn draw
   "Get average color of each triangles then make the whole triangle that color.
   In the future do something more interesting than average color. HSV is a good starting place."
@@ -41,24 +83,6 @@
         g (.createGraphics bi)]
     (do
       (reduce (fn [idk-what-this-is triangle]
-                ; TODO: Get average color of each triangle and make it that color.
-                  ; TODO: Get all points within polygon
-                  ; TODO: For each point, sum RGB values
-                  ; TODO: Take average of RGB values
-
-                ; https://stackoverflow.com/questions/11075505/get-all-points-within-a-triangle
-
-                ; The general idea was to get the triangle's edges (y-Wise) for every x in it's range,
-                ; and then you have all the y's that exist within the triangle for every single x,
-                ; which with simple conversion turns into all points within the triangle.
-                ; You can look at it as if you cut the triangle into stripes, each being of width 1.
-
-                ; So for X=0, on the line between A and B, the Y is 6, and on the line between A and C,
-                ; the Y is -2, so you can see that the stripe of X=0 is between -2 and 6. Therefore,
-                ; you can tell that (0, -2) (0, -1) (0, 0) ... (0, 5) (0, 6) are all in the triangle.
-                ; Doing that for X's between the smallest and the largest within the triangle,
-                ; and you have all the points in the triangle!
-
                 ; Get min X
                 ; Get max X
                 ; For each X between min and max
@@ -66,66 +90,26 @@
                   ; Get max Y
                   ; Create points for each Y between min and max
 
-                (let [x1 (get (get triangle 0) 0)
-                      y1 (get (get triangle 0) 1)
-                      x2 (get (get triangle 1) 0)
-                      y2 (get (get triangle 1) 1)
-                      x3 (get (get triangle 2) 0)
-                      y3 (get (get triangle 2) 1)
-                      x-range (range
-                               (apply min (map (fn [point] (get point 0)) triangle))
-                               (apply max (map (fn [point] (get point 0)) triangle)))
-                      y-range (range
-                               (apply min (map (fn [point] (get point 1)) triangle))
-                               (apply max (map (fn [point] (get point 1)) triangle)))
-                      colors (apply concat (map (fn [x]
-                                                  (filter identity (map (fn [y]
-                                                                          (if
-                                                                           (= (Math/abs
-                                                                               (+
-                                                                                (* x1 (- y2 y3))
-                                                                                (* x2 (- y3 y1))
-                                                                                (* x3 (- y1 y2))))
-                                                                              (+ (Math/abs
-                                                                                  (+
-                                                                                   (* x1 (- y2 y))
-                                                                                   (* x2 (- y y1))
-                                                                                   (* x (- y1 y2))))
-                                                                                 (Math/abs
-                                                                                  (+
-                                                                                   (* x1 (- y y3))
-                                                                                   (* x (- y3 y1))
-                                                                                   (* x3 (- y1 y))))
-                                                                                 (Math/abs
-                                                                                  (+
-                                                                                   (* x (- y2 y3))
-                                                                                   (* x2 (- y3 y))
-                                                                                   (* x3 (- y y2))))))
-                                                                            [(.getRed (Color. (.getRGB bi x y)))
-                                                                             (.getGreen (Color. (.getRGB bi x y)))
-                                                                             (.getBlue (Color. (.getRGB bi x y)))
-                                                                             (.getAlpha (Color. (.getRGB bi x y)))]
-                                                                            nil))
-                                                                        (take-nth 10 y-range))))
-                                                (take-nth 10 x-range)))]
-                  (if (not (empty? colors))
+                (let [colors (get-colors bi (sort-by first triangle))]
+
+                  (if (not (empty? colors)) ; This should never be false, if it is we will have an uncolored triangle
                     (let [total-rgb (apply map + colors)
                           average-color-map (map
                                              (fn [value] (int (/ value (count colors))))
                                              total-rgb)
-                          average-color (vec average-color-map)]; (println "colors:" colors)
-                  ; (println "sum:" (apply map + colors))
-                  ; (println "avg:" (map (fn [value] (int (/ value (count colors)))) (apply map + colors)))
-                  ; (println triangle average-color)
-                  ; Fill polygon with a color
+                          average-color (vec average-color-map)]
+
+                      ; Fill polygon with color
                       (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
+                      ; (.setColor g (Color. 0 200 0))
                       (.fillPolygon g
                                     (int-array (map (fn [point] (get point 0)) triangle))
                                     (int-array (map (fn [point] (get point 1)) triangle))
-                                    (count triangle))))
+                                    (count triangle)))
+                    (println "There was a triangle where no pixel colors could be collected. Oh no!"))
                   bi))
               ; Reduce won't handle the last element so we add an additional element.
-              (conj triangles [0 0])))))
+              (conj triangles [[0 0] [0 0] [0 0]])))))
 
 (defn run
   "Run."
