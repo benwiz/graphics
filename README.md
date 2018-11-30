@@ -4,7 +4,7 @@ Take an image and output a fragmented (low-poly) version. It works by using Open
 
 Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide and inspiration.
 
-It works okay. Maybe with the new release of AWS Lambda Layers I can the Clojure OpenCV library and have it all be in Clojure, which was my original intention.
+It works okay. Maybe with the new release of AWS Lambda Layers I can use the Clojure OpenCV library and have it all be in Clojure, which was my original intention.
 
 ## Getting Started
 
