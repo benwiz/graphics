@@ -43,6 +43,8 @@ or
 pip install boto3 numpy opencv-contrib-python
 ```
 
+NOTE: Requires Java 8
+
 #### Deploy
 
 The `libs` directory is committed to GitHub so should never need to be re-installed. But using Docker to set up the Lambda server environment is important for numpy. Use something like the below.
