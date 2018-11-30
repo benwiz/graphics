@@ -93,12 +93,6 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-    #
-    # The following was largely copied from lowpolify. I am going to rewrite
-    # it, but when I have the time to understand it first.
-    # TODO: Understand and rewrite the rest of this function.
-    #
-
     # Number of points to keep of all detected points
     num_points = int(np.where(edges)[0].size * percent)
 
