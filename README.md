@@ -126,9 +126,7 @@ NOTE: Do not run a `pip freeze`
   - Coloring is skipping some triangles
   - Finish the nearly-complete lowpolyify rewrite in python
   - Turn on DLib
-  - Consider adding noise to canny points (maybe other points)
-  - Use Numpy arrays instead of Lists
-  - BUG: If you force the drawing to all be a single color, some edges don't have triangles so aren't colored
+  - Deploy
 
 - Later
   - UI
@@ -139,9 +137,8 @@ NOTE: Do not run a `pip freeze`
     - Handle timeouts correctly (2, 1, 1)
   - Feature detect
     - Consume config file for max number of points
-    - DLib facial point detection
-    - Consider moving away from SIFT Key Point detection to using edge detection. Canny detection specifically. Maybe there is some fusion where we find points along edges? Also consider adding random points in - then we may be able to make gifs.
-    - Reduce noise in image using cv::cuda::fastNlMeansDenoisingColored
+    - Use Numpy arrays
+    - Consider adding noise to canny points (maybe other points too, not facial)
   - Partition
     - Voronoi option (pre-requisite: Prepare all services to handle polygons instead of triangles... this is a significant amount of work)
   - Color
