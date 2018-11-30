@@ -93,6 +93,8 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+    # Next, we basically select a random subset of points in an odd way
+
     # Number of points to keep of all detected points
     num_points = int(np.where(edges)[0].size * percent)
 
