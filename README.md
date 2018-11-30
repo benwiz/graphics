@@ -128,6 +128,7 @@ NOTE: Do not run a `pip freeze`
   - Turn on DLib
   - Consider adding noise to canny points (maybe other points)
   - Use Numpy arrays instead of Lists
+  - BUG: If you force the drawing to all be a single color, some edges don't have triangles so aren't colored
 
 - Later
   - UI

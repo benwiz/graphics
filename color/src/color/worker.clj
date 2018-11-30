@@ -35,20 +35,19 @@
 
 (defn get-colors-for-x
   "Get color for every y-value in the x column"
-  [x y1 y2]
+  [bi x y1 y2]
+  ; (println x ": " (min y1 y2) "to" (max y1 y2))
   (map (fn [y]
-      ; (println "(" x ", " y ")")
-      ; [(.getRed (Color. (.getRGB bi x y)))
-      ;  (.getGreen (Color. (.getRGB bi x y)))
-      ;  (.getBlue (Color. (.getRGB bi x y)))
-      ;  (.getAlpha (Color. (.getRGB bi x y)))]
-      [255 0 0 127])
-    (range (min y1 y2) (inc (max y1 y2)))))
+      [(.getRed (Color. (.getRGB bi x y)))
+       (.getGreen (Color. (.getRGB bi x y)))
+       (.getBlue (Color. (.getRGB bi x y)))
+       (.getAlpha (Color. (.getRGB bi x y)))])
+    (range (min y1 y2) (max y1 y2))))
 
 (defn get-colors
   "Get each pixel's color for the given triangle. Input triangle is sorted by x-value. (i.e. rasterize)"
   ; https://stackoverflow.com/questions/8957028/getting-a-list-of-locations-within-a-triangle-in-the-form-of-x-y-positions
-  [triangle]
+  [bi triangle]
   (let [x1 (get (nth triangle 0) 0)
         y1 (get (nth triangle 0) 1)
         x2 (get (nth triangle 1) 0)
@@ -64,9 +63,12 @@
         x-range (concat (range x1 x2) (range (inc x2) (inc x3)))] ; [x1, x2), (x2, x3]
           (apply concat
             (map (fn [x]
-                (let [y-top (/ (- (* -1 A1 x) C1) (if (= B1 0.0) -1.0 B1)) ; The if statement is a messy hack for avoiding divide by 0
-                      y-bot (/ (- (* -1 A2 x) C2 1) (if (= (+ B2 1) 0.0) -1.0 (+ B2 1)))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
-                  (get-colors-for-x x y-bot y-top)))
+                (let [y-top (int (/ (- (* -1 A1 x) C1) (if (= B1 0.0) -1.0 B1))) ; The if statement is a messy hack for avoiding divide by 0
+                      y-bot (int (/ (- (* -1 A2 x) C2 1) (if (= (+ B2 1) 0.0) -1.0 (+ B2 1))))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
+                  (get-colors-for-x bi
+                                    (min (.getWidth bi) x)
+                                    (min (.getHeight bi) (max 0 y-bot))
+                                    (min (.getHeight bi) (max 0 y-top)))))
               x-range))
   )
 )
@@ -86,7 +88,7 @@
                   ; Get max Y
                   ; Create points for each Y between min and max
 
-                (let [colors (get-colors (sort-by first triangle))]
+                (let [colors (get-colors bi (sort-by first triangle))]
 
                   (if (not (empty? colors)) ; This should never be false, if it is we will have an uncolored triangle
                     (let [total-rgb (apply map + colors)
@@ -95,14 +97,13 @@
                                              total-rgb)
                           average-color (vec average-color-map)]
 
-                      ; ; Fill polygon with color
-                      ; (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
-                      ; ; (.setColor g (Color. 0 200 0))
-                      ; (.fillPolygon g
-                      ;               (int-array (map (fn [point] (get point 0)) triangle))
-                      ;               (int-array (map (fn [point] (get point 1)) triangle))
-                      ;               (count triangle))
-                      )
+                      ; Fill polygon with color
+                      (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
+                      ; (.setColor g (Color. 0 200 0))
+                      (.fillPolygon g
+                                    (int-array (map (fn [point] (get point 0)) triangle))
+                                    (int-array (map (fn [point] (get point 1)) triangle))
+                                    (count triangle)))
                     (println "There was a triangle where no pixel colors could be collected. Oh no!"))
                   bi))
               ; Reduce won't handle the last element so we add an additional element.
