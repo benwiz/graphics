@@ -99,40 +99,31 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     # TODO: Understand and rewrite the rest of this function.
     #
 
-    # Set number of points for low-poly edge vertices. This is a subset of all
-    # points.
+    # Number of points to keep of all detected points
     num_points = int(np.where(edges)[0].size * percent)
-    # Return the indices of the elements that are non-zero.
-    # 'nonzero' returns a tuple of arrays, one for each dimension of a,
-    # containing the indices of the non-zero elements in that dimension.
+
+    # Get the indices of non-zero edge points
     row_indices, col_indices = np.nonzero(edges)
-    # row_indices.shape, returns count of all points that belong to an edge as
-    # a tuple. So 'np.zeros(row_indices.shape)' an array of this size, with all
-    # zeros. 'rnd' is thus an array of this size, with all values as 'False'.
-    # In other words, this is a weird way of getting a Numpy array that looks
+
+    # This is a weird way of getting a Numpy array that looks
     # like [False, False, ..., False] where length is `row_indices.shape[0]`.
     rnd = np.zeros(row_indices.shape) == 1
+
     # Mark indices from beginning to 'num_points - 1' as True. This is not
     # all items in `rnd`.
     rnd[:num_points] = True
-    # Shuffle
+    # Shuffle, so that the `True` values are distributed
     np.random.shuffle(rnd)
+
     # Randomly select a subset of the points to use. The ordered pairs are
     # being maintained because we are getting `rnd` from both lists. The result
     # is still a list of indices since `rnd` is a list of booleans.
     row_indices = row_indices[rnd]
     col_indices = col_indices[rnd]
-    # # Number of rows and columns in image
-    # shape = img.shape
-    # row_max = shape[0]
-    # col_max = shape[1]
+
     # Co-ordinates of all randomly chosen points
     pts = np.vstack([row_indices, col_indices]).T
 
-    #
-    # This addtion is me. I should probably move everything toward numpy, away
-    # from lists.
-    #
     # Turn into python list, tuples, and ints
     points = []
     for p in pts:
