@@ -123,10 +123,11 @@ lein lambda deploy production
 NOTE: Do not run a `pip freeze`
 
 - Now
-  - Coloring is skipping some triangles
+  - Deploy and test the updated `color` function
   - Finish the nearly-complete lowpolyify rewrite in python
   - Turn on DLib
-  - Deploy
+  - Deploy and test the updated `py-detect-features`
+  - Put an end to this project. Any further fragment work will be in a new project.
 
 - Later
   - UI
