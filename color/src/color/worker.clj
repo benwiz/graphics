@@ -62,13 +62,12 @@
         B2 (- x2 x3)
         C2 (- (* x3 y2) (* x2 y3))
         x-range (concat (range x1 x2) (range (inc x2) (inc x3)))] ; [x1, x2), (x2, x3]
-          (vec (map (fn [x]
+          (apply concat
+            (map (fn [x]
                 (let [y-top (/ (- (* -1 A1 x) C1) (if (= B1 0.0) -1.0 B1)) ; The if statement is a messy hack for avoiding divide by 0
                       y-bot (/ (- (* -1 A2 x) C2 1) (if (= (+ B2 1) 0.0) -1.0 (+ B2 1)))] ; NOTE: The `x` in this function may be wrong, stackoverflow said y but didn't think that made sense
                   (get-colors-for-x x y-bot y-top)))
               x-range))
-          ; TODO: I think I need to flatten the result of the map
-          ; (println "done")
   )
 )
 
@@ -79,7 +78,7 @@
   (let [bi (ImageIO/read (io/input-stream image))
         g (.createGraphics bi)]
     (do
-      (reduce (fn [idk-what-this-is triangle]\
+      (reduce (fn [idk-what-this-is triangle]
                 ; Get min X
                 ; Get max X
                 ; For each X between min and max
@@ -88,16 +87,13 @@
                   ; Create points for each Y between min and max
 
                 (let [colors (get-colors (sort-by first triangle))]
-                  (println "type colors:" (type colors))
 
-                  (if (not (empty? colors))
+                  (if (not (empty? colors)) ; This should never be false, if it is we will have an uncolored triangle
                     (let [total-rgb (apply map + colors)
-                          ; average-color-map (map
-                          ;                    (fn [value] (int (/ value (count colors))))
-                          ;                    total-rgb)
-                          ; average-color (vec average-color-map)
-                          ]
-                      (println "total-rgb:" (type total-rgb) total-rgb)
+                          average-color-map (map
+                                             (fn [value] (int (/ value (count colors))))
+                                             total-rgb)
+                          average-color (vec average-color-map)]
 
                       ; ; Fill polygon with color
                       ; (.setColor g (Color. (get average-color 0) (get average-color 1) (get average-color 2)))
