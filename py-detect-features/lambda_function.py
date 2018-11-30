@@ -286,7 +286,9 @@ def identify_points(img, gray_img, options):
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
         canny_edges = identify_points_by_canny_edge_detection(
-            gray_img, options['low_thresh'], options['high_thresh'], options['canny_percent'])
+            gray_img, options['low_thresh'],
+            options['high_thresh'],
+            options['canny_percent'])
 
     # Aggregate points
     points = grid_points + key_points + canny_edges
