@@ -360,8 +360,7 @@ def lambda_handler(event, context):
                                      np.uint8),
                        cv2.IMREAD_UNCHANGED)
 
-    # Analyze image (https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html)
-    # Much above 1000 takes too long for delaunay triangulation
+    # Analyze image
     img, sharp_gray_img, low_thresh, high_thresh = preprocess_img(img)
     options = {
         'grid_points': False,
