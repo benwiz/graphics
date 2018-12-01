@@ -267,7 +267,7 @@ def identify_points(img, gray_img, options):
     if options['grid_points']:
         grid_points = identify_points_by_grid(img, 25)
     if options['key_points']:
-        key_points = identify_points_by_key_points(img, 1000)
+        key_points = identify_points_by_key_points(gray_img, 1500)
     if options['facial_landmarks']:
         facial_landmarks, face_bounds = identify_facial_landmarks(img)
     if options['canny']:
@@ -352,9 +352,9 @@ def lambda_handler(event, context):
     img, sharp_gray_img, low_thresh, high_thresh = preprocess_img(img)
     options = {
         'grid_points': False,
-        'key_points': False,
+        'key_points': True,
         'facial_landmarks': True,  # Code is commented out in the function
-        'canny': True,
+        'canny': False,
         'random': True,
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
