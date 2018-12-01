@@ -2,9 +2,11 @@
 
 Take an image and output a fragmented (low-poly) version. It works by using OpenCV to detect "key points" then connets those key points with delaunay triangulation. Then it fills each triangle with the average color of the pixels within that triangle.
 
-It works but the images are rarely nice looking. Maybe with the new release of AWS Lambda Layers I can use the Clojure OpenCV library and have it all be in Clojure, which was my original intention.
+It works but the images are rarely nice looking. I've used both Canny edge detection and key point detection. Either could probably be good with some more work.
 
-Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide and inspiration. I had better luck with the much simpler _detect key points_ algorithm in OpenCV.
+Maybe with the new release of AWS Lambda Layers I can use the Clojure OpenCV library and have it all be in Clojure, which was my original intention.
+
+Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide for using Canny Detection.
 
 ## Getting Started
 
