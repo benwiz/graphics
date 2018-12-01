@@ -352,9 +352,9 @@ def lambda_handler(event, context):
     img, sharp_gray_img, low_thresh, high_thresh = preprocess_img(img)
     options = {
         'grid_points': False,
-        'key_points': True,
+        'key_points': False,
         'facial_landmarks': True,  # Code is commented out in the function
-        'canny': False,
+        'canny': True,
         'random': True,
         'low_thresh': low_thresh,
         'high_thresh': high_thresh,
