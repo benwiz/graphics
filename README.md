@@ -4,7 +4,7 @@ Take an image and output a fragmented (low-poly) version. It works by using Open
 
 It works but the images are rarely nice looking. Maybe with the new release of AWS Lambda Layers I can use the Clojure OpenCV library and have it all be in Clojure, which was my original intention.
 
-Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide and inspiration.
+Used [ghostwriternr/lowpolify](https://github.com/ghostwriternr/lowpolify/blob/master/scripts/lowpolify.py) as a guide and inspiration. I had better luck with the much simpler _detect key points_ algorithm in OpenCV.
 
 ## Getting Started
 
