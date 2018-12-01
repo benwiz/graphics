@@ -97,7 +97,10 @@ def identify_points_by_canny_edge_detection(img, low_thresh, high_thresh, percen
     # Next, we basically select a random subset of points in an odd way
 
     # Number of points to keep of all detected points
-    num_points = int(np.where(edges)[0].size * percent)
+    if np.where(edges)[0].size > 1000:
+        num_points = int(np.where(edges)[0].size * percent)
+    else:
+        num_points = np.where(edges)[0].size
 
     # Get the indices of non-zero edge points
     row_indices, col_indices = np.nonzero(edges)
