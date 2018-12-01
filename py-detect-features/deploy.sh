@@ -5,7 +5,7 @@
 # Move libs
 mv libs/cv2 .
 mv libs/numpy .
-mv libs/numpy-1.15.0.dist-info .
+mv libs/numpy-1.15.4.dist-info .
 mv libs/opencv_contrib_python-3.4.0.12.dist-info .
 mv libs/dlib-19.15.0.egg-info .
 mv libs/dlib.so .

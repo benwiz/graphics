@@ -57,7 +57,7 @@ The `libs` directory is committed to GitHub so should never need to be re-instal
 docker run -it -v $(pwd):/home/proj lambci/lambda:build bash
 
 cd /home/proj
-export PYTHONPATH=/local/lib/python2.7/site-packages/
+# export PYTHONPATH=/local/lib/python2.7/site-packages/
 easy_install pip
 /local/bin/pip install numpy -t libs/
 /local/bin/pip install dlib -t libs/
