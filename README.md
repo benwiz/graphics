@@ -129,8 +129,6 @@ lein lambda deploy production
 NOTE: Do not run a `pip freeze`, there is stuff installed on the _venv_ on Marg's Mac I don't want or need
 
 - Now
-  - Deploy and test the updated `color` function
-  - Deploy and test the updated `py-detect-features`
   - Put an end to this project. The only time I should be touching this project is if I finish `clj-detect-features` using AWS Lambda Layers and get rid of `py-detect-features`.
 
 - Later
