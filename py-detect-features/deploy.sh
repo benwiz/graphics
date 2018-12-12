@@ -25,6 +25,7 @@ mv dlib-19.15.0.egg-info libs/
 mv dlib.so libs/
 
 # Upload zip to S3
+# TODO: Consider versioning using datetime, maybe another lambda can run cleanup or there's an S3
 aws s3 cp py-detect-features.zip s3://lowpoly/py-detect-features.zip
 
 # Update lambda function code by pointing to S3 artifact
