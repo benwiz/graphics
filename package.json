@@ -2,7 +2,7 @@
   "name": "@benwiz/boba.js",
   "version": "1.0.0",
   "description": "Animated background using P5.js for the web",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,5 +25,6 @@
     "eslint": "^5.11.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0"
-  }
+  },
+  "dependencies": {}
 }
