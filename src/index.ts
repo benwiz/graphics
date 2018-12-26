@@ -28,6 +28,7 @@ const createPoints = (
 };
 
 const updateLoop = (startTime: number, points: Point[]): void => {
+  // TODO: Probably don't need startTime, instead just call at a frame rate = 1000 / fps;
   points = Update.update(startTime, points);
   setTimeout(() => updateLoop(startTime, points), 0);
 };
