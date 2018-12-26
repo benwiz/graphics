@@ -20,15 +20,6 @@ export const createCanvas = (
   return canvas;
 };
 
-// Tmp learning function
-export const drawPoint = (
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-): void => {
-  ctx.fillRect(x, y, 10, 10);
-};
-
 // NOTE: def don't want an interface right here
 export interface Point {
   x: number;
@@ -39,4 +30,17 @@ export const update = (startTime: number, point: Point): Point => {
   const linearSpeed = 100;
   point.x = (linearSpeed * time) / 1000;
   return point;
+};
+
+// Tmp learning function
+export const drawPoint = (
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+): void => {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.fillRect(x, y, 10, 10);
+};
+export const draw = (): void => {
+  // Use this func, once I move past this demo moving dot
 };

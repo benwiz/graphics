@@ -1,17 +1,24 @@
 import * as Drawing from './drawing';
 
 interface StartOptions {
-  // Provide optoinal location and size of canvas
+  // Provide optional location and size of canvas
   x?: number;
   y?: number;
   width?: number;
   height?: number;
 }
 
-let point: Drawing.Point = { x: 10, y: 10 };
-const mainLoop = (startTime: number, ctx: CanvasRenderingContext2D): void => {
+const updateLoop = (startTime: number, point: Drawing.Point): void => {
   point = Drawing.update(startTime, point);
+  setTimeout(() => updateLoop(startTime, point), 0);
+};
+
+const drawLoop = (
+  ctx: CanvasRenderingContext2D,
+  point: Drawing.Point,
+): void => {
   Drawing.drawPoint(ctx, point.x, point.y);
+  setTimeout(() => drawLoop(ctx, point), 0);
 };
 
 export const start = (options: StartOptions): void => {
@@ -33,5 +40,10 @@ export const start = (options: StartOptions): void => {
     throw new Error('Oh no! `ctx` is null!');
   }
 
-  mainLoop(startTime, ctx);
+  // Initialize data
+  const point: Drawing.Point = { x: 10, y: 10 };
+
+  // Execute update and draw loops infinitely, in parallel
+  updateLoop(startTime, point);
+  drawLoop(ctx, point);
 };
