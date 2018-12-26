@@ -16,6 +16,5 @@ npm publish --access public
 
 ## To Do
 
-- Create a `start` function
 - Create a canvas
 - Move a dot across the canvas to learn how to create a step/tick function
