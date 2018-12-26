@@ -1,4 +1,5 @@
-import * as Drawing from './drawing';
+import * as Draw from './draw';
+import * as Update from './update';
 
 interface StartOptions {
   // Provide optional location and size of canvas
@@ -8,16 +9,13 @@ interface StartOptions {
   height?: number;
 }
 
-const updateLoop = (startTime: number, point: Drawing.Point): void => {
-  point = Drawing.update(startTime, point);
+const updateLoop = (startTime: number, point: Point): void => {
+  point = Update.update(startTime, point);
   setTimeout(() => updateLoop(startTime, point), 0);
 };
 
-const drawLoop = (
-  ctx: CanvasRenderingContext2D,
-  point: Drawing.Point,
-): void => {
-  Drawing.drawPoint(ctx, point.x, point.y);
+const drawLoop = (ctx: CanvasRenderingContext2D, point: Point): void => {
+  Draw.drawPoint(ctx, point.x, point.y);
   setTimeout(() => drawLoop(ctx, point), 0);
 };
 
@@ -32,7 +30,7 @@ export const start = (options: StartOptions): void => {
   const y: number = options.y || 0;
   const width: number = options.width || window.innerWidth;
   const height: number = options.height || window.innerHeight;
-  const canvas: HTMLCanvasElement = Drawing.createCanvas(x, y, width, height);
+  const canvas: HTMLCanvasElement = Draw.createCanvas(x, y, width, height);
   const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 
   // Check that context was found, if not exit with an error. TODO: Make this proper.
@@ -41,7 +39,7 @@ export const start = (options: StartOptions): void => {
   }
 
   // Initialize data
-  const point: Drawing.Point = { x: 10, y: 10 };
+  const point: Point = { x: 10, y: 10 };
 
   // Execute update and draw loops infinitely, in parallel
   updateLoop(startTime, point);
