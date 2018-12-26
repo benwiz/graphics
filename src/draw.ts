@@ -20,16 +20,13 @@ export const createCanvas = (
   return canvas;
 };
 
-// Tmp learning function. TODO: Delete and use `draw`
-export const drawPoint = (
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-): void => {
-  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  ctx.fillRect(x, y, 10, 10);
+const drawPoint = (ctx: CanvasRenderingContext2D, point: Point): void => {
+  ctx.fillRect(point.x, point.y, 10, 10);
 };
 
-export const draw = (): void => {
-  // Use this func, once I move past this demo moving dot
+export const draw = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  for (const point of points) {
+    drawPoint(ctx, point);
+  }
 };

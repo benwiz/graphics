@@ -1,6 +1,8 @@
-export const update = (startTime: number, point: Point): Point => {
+export const update = (startTime: number, points: Point[]): Point[] => {
   const time = new Date().getTime() - startTime;
   const linearSpeed = 100;
-  point.x = (linearSpeed * time) / 1000;
-  return point;
+  for (const point of points) {
+    point.x = (linearSpeed * time) / 1000;
+  }
+  return points;
 };

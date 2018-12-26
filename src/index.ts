@@ -1,5 +1,6 @@
 import * as Draw from './draw';
 import * as Update from './update';
+import * as Util from './util';
 
 interface StartOptions {
   // Provide optional location and size of canvas
@@ -7,16 +8,33 @@ interface StartOptions {
   y?: number;
   width?: number;
   height?: number;
+  // Points configurations
+  numPoints: number;
 }
 
-const updateLoop = (startTime: number, point: Point): void => {
-  point = Update.update(startTime, point);
-  setTimeout(() => updateLoop(startTime, point), 0);
+const createPoints = (
+  numPoints: number,
+  maxX: number,
+  maxY: number,
+): Point[] => {
+  const points: Point[] = [];
+  for (let i: number = 0; i < numPoints; i++) {
+    const x: number = Util.getRandomInt(0, maxX);
+    const y: number = Util.getRandomInt(0, maxY);
+    const point: Point = { x, y };
+    points.push(point);
+  }
+  return points;
 };
 
-const drawLoop = (ctx: CanvasRenderingContext2D, point: Point): void => {
-  Draw.drawPoint(ctx, point.x, point.y);
-  setTimeout(() => drawLoop(ctx, point), 0);
+const updateLoop = (startTime: number, points: Point[]): void => {
+  points = Update.update(startTime, points);
+  setTimeout(() => updateLoop(startTime, points), 0);
+};
+
+const drawLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
+  Draw.draw(ctx, points);
+  setTimeout(() => drawLoop(ctx, points), 0);
 };
 
 export const start = (options: StartOptions): void => {
@@ -39,9 +57,13 @@ export const start = (options: StartOptions): void => {
   }
 
   // Initialize data
-  const point: Point = { x: 10, y: 10 };
+  const points: Point[] = createPoints(
+    options.numPoints,
+    width - 1,
+    height - 1,
+  );
 
   // Execute update and draw loops infinitely, in parallel
-  updateLoop(startTime, point);
-  drawLoop(ctx, point);
+  updateLoop(startTime, points);
+  drawLoop(ctx, points);
 };
