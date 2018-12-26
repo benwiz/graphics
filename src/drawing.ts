@@ -19,3 +19,24 @@ export const createCanvas = (
   document.body.appendChild(canvas);
   return canvas;
 };
+
+// Tmp learning function
+export const drawPoint = (
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+): void => {
+  ctx.fillRect(x, y, 10, 10);
+};
+
+// NOTE: def don't want an interface right here
+export interface Point {
+  x: number;
+  y: number;
+}
+export const update = (startTime: number, point: Point): Point => {
+  const time = new Date().getTime() - startTime;
+  const linearSpeed = 100;
+  point.x = (linearSpeed * time) / 1000;
+  return point;
+};
