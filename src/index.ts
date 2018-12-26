@@ -1,3 +1,4 @@
-export function sum(a: number, b: number) {
+export const sum = (a: number, b: number) => {
+  console.log('test log');
   return a + b;
-}
+};
