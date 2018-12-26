@@ -16,5 +16,5 @@ npm publish --access public
 
 ## To Do
 
-- Create a canvas
 - Move a dot across the canvas to learn how to create a step/tick function
+- Map out all the steps for the boba animation here in this TODO section
