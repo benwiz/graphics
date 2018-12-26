@@ -1,10 +1,26 @@
 {
   "name": "@benwiz/boba.js",
   "version": "1.0.0",
-  "description": "Animated background using P5.js for the web",
-  "main": "index.mjs",
+  "description": "Animated background as an NPM module",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "files": [
+    "lib"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/src/.*\\.spec\\.ts$"
   },
   "repository": {
     "type": "git",
@@ -12,19 +28,18 @@
   },
   "keywords": [
     "animation",
-    "background",
-    "p5"
+    "background"
   ],
-  "author": "Ben Wiz",
+  "author": "Ben Wisialowski <bwisialowski@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/benwiz/boba.js/issues"
   },
   "homepage": "https://github.com/benwiz/boba.js#readme",
   "devDependencies": {
-    "eslint": "^5.11.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
-  },
-  "dependencies": {}
+    "@types/jest": "^23.3.10",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "webpack": "^4.28.2"
+  }
 }
