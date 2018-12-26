@@ -16,3 +16,5 @@ npm publish --access public
 
 ## To Do
 
+- Port drawing.js from benwiz.github.io to a canvas-based implementation here using TypeScript
+    - First, figure out how to move a dot across the screen because I'm unsure how a step/tick function will operate
