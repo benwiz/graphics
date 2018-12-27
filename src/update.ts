@@ -163,7 +163,7 @@ export const update = (
 ): UpdateResult => {
   // Move points
   for (const point of points) {
-    // updatePoint(ctx, point);
+    updatePoint(ctx, point);
   }
 
   // Create/find the new set of lines
