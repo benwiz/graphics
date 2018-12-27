@@ -17,7 +17,9 @@ const updateLoop = (
   points: Point[],
   lines: Line[],
 ): void => {
-  points = Update.update(ctx, points);
+  const result: any = Update.update(ctx, points, lines);
+  points = result.points;
+  lines = result.lines;
   setTimeout(() => updateLoop(ctx, points, lines), 0);
 };
 
@@ -31,14 +33,17 @@ const drawLoop = (
 };
 
 export const start = (options: StartOptions): void => {
-  // TODO: Rather than setting defaults below, set defaults in a single block here
+  // Set defaults for optional options
+  options.x = options.x || 0;
+  options.y = options.y || 0;
+  options.width = options.width || document.documentElement.scrollWidth;
+  options.height = options.height || document.documentElement.scrollHeight;
 
   // Create canvas and get context
-  const x: number = options.x || 0;
-  const y: number = options.y || 0;
-  const width: number = options.width || document.documentElement.scrollWidth;
-  const height: number =
-    options.height || document.documentElement.scrollHeight;
+  const x: number = options.x;
+  const y: number = options.y;
+  const width: number = options.width;
+  const height: number = options.height;
   const canvas: HTMLCanvasElement = Setup.createCanvas(x, y, width, height);
   const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 
