@@ -23,6 +23,11 @@ npm publish --access public
 - Make it configurable
 - Make it pretty
 
+- Store results in adj. list will require updates throughout the code. But having those updates will be valuable before starting the C version of this project. But using an adj. list does _not_ necessarily mean I should get rid of the points list or edges list. I probably should have a graph class or a graph interface.
+  - https://www.geeksforgeeks.org/implementation-graph-javascript/
+
+- Finding lines can be optimized.
+
 - Later
   - Mouse effects on points
 

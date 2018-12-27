@@ -101,15 +101,41 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
   return lines;
 };
 
+const createAdjacencyList = (points: Point[], lines: Line[]): Adjacency[] => {
+  const adjList: Adjacency[] = [];
+  for (const point of points) {
+    const adj: Adjacency = {
+      pointID: point.id,
+      neighborIDs: [],
+    };
+
+    // Find all the lines that contain this point and add the neighbor if not alraedy added
+    for (const line of lines) {
+      if (point.id === line.point1.id) {
+        if (adj.neighborIDs.indexOf(line.point2.id) === -1) {
+          adj.neighborIDs.push(line.point2.id);
+        }
+      } else if (point.id === line.point2.id) {
+        if (adj.neighborIDs.indexOf(line.point1.id) === -1) {
+          adj.neighborIDs.push(line.point1.id);
+        }
+      }
+    }
+
+    adjList.push(adj);
+  }
+
+  return adjList;
+};
+
+// To create shapes we run a depth-first search from every point on the graph. We only make
+// `numSides` steps. If we can return to the original point without repeating edges, then we have
+// formed out shape.
 const createShapes = (lines: Line[], numSides: number): Shape[] => {
   const shapes: Shape[] = [];
 
-  // Tmp test shape
-  const shape: Shape = {
-    numSides,
-    points: [lines[0].point1, lines[0].point2, lines[1].point2],
-  };
-  shapes.push(shape);
+  for (const line of lines) {
+  }
 
   return shapes;
 };
@@ -124,11 +150,15 @@ export const update = (
 ): UpdateResult => {
   // Move points
   for (const point of points) {
-    updatePoint(ctx, point);
+    // updatePoint(ctx, point);
   }
 
   // Create/find the new set of lines
   lines = createLines(points, options.numNeighbors);
+
+  // Create adjacency list (eventually, this should be generated in place of the lines list)
+  const adjList = createAdjacencyList(points, lines);
+  console.log(adjList);
 
   // Create/find the new set of shapes
   shapes = createShapes(lines, options.numSides);

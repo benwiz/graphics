@@ -33,6 +33,11 @@ declare interface Line {
   point2: Point;
 }
 
+declare interface Adjacency {
+  pointID: number;
+  neighborIDs: number[];
+}
+
 declare interface Shape {
   numSides: number;
   points: Point[];
