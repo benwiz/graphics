@@ -1,3 +1,17 @@
+declare interface BobaOptions {
+  // Provide optional location and size of canvas
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  // Points configurations
+  numPoints: number;
+  // Lines configurations
+  numNeighbors?: number;
+  // Shapes configurations
+  numSides?: number;
+}
+
 declare interface Point {
   id: number;
   x: number;
@@ -19,14 +33,13 @@ declare interface Line {
   point2: Point;
 }
 
-declare interface Triangle {
-  point1: Point;
-  point2: Point;
-  point3: Point;
+declare interface Shape {
+  numSides: number;
+  points: Point[];
 }
 
 declare interface UpdateResult {
   points: Point[];
   lines: Line[];
-  triangles: Triangle[];
+  shapes: Shape[];
 }

@@ -2,28 +2,13 @@ import * as Setup from './setup';
 import * as Draw from './draw';
 import * as Update from './update';
 
-// Global variables a necessary evil for the game loop
+// Global variables a necessary evil for the game loop. There is probably another way.
 let CTX: CanvasRenderingContext2D;
 let POINTS: Point[];
 let LINES: Line[];
-let TRIANGLES: Triangle[];
+let SHAPES: Shape[];
 let LAST_RENDER: number;
-// Configs that have to be global so I can get them into the `loop` function. This isn't good.
-const CONFIG = {
-  numNeighbors: -1,
-};
-
-interface StartOptions {
-  // Provide optional location and size of canvas
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  // Points configurations
-  numPoints: number;
-  // Lines configurations
-  numNeighbors: number;
-}
+let OPTIONS: BobaOptions;
 
 const loop = (timestamp: number): void => {
   const progress = timestamp - LAST_RENDER;
@@ -31,29 +16,31 @@ const loop = (timestamp: number): void => {
   const result: UpdateResult = Update.update(
     progress,
     CTX,
-    CONFIG.numNeighbors, // TODO: Probably just pass in the whole "CONFIG" object
+    OPTIONS,
     POINTS,
     LINES,
-    TRIANGLES,
+    SHAPES,
   );
   POINTS = result.points;
   LINES = result.lines;
-  TRIANGLES = result.triangles;
-  Draw.draw(CTX, POINTS, LINES, TRIANGLES);
+  SHAPES = result.shapes;
+  Draw.draw(CTX, POINTS, LINES, SHAPES);
 
   LAST_RENDER = timestamp;
   window.requestAnimationFrame(loop);
 };
 
-export const start = (options: StartOptions): void => {
+export const start = (options: BobaOptions): void => {
   // Set defaults for optional options
   options.x = options.x || 0;
   options.y = options.y || 0;
   options.width = options.width || document.documentElement.scrollWidth;
   options.height = options.height || document.documentElement.scrollHeight;
+  options.numNeighbors = options.numNeighbors || 2;
+  options.numSides = options.numNeighbors || 3;
 
-  // Set config global vars
-  CONFIG.numNeighbors = options.numNeighbors;
+  // Make options available globally
+  OPTIONS = options;
 
   // Create canvas and get context
   const x: number = options.x;
@@ -79,7 +66,7 @@ export const start = (options: StartOptions): void => {
   LINES = [];
 
   // Initialize shapes list as an empty array, I think
-  TRIANGLES = [];
+  SHAPES = [];
 
   // Game loop
   LAST_RENDER = 0;

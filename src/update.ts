@@ -102,18 +102,18 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
 };
 
 // NOTE: This could probably be generalized into `createShape` and require a `numSides` input
-const createTriangles = (lines: Line[]): Triangle[] => {
-  const triangles: Triangle[] = [];
-  return triangles;
+const createShapes = (lines: Line[], numSides: number): Shape[] => {
+  const shapes: Shape[] = [];
+  return shapes;
 };
 
 export const update = (
   progress: number,
   ctx: CanvasRenderingContext2D,
-  numNeighbors: number,
+  options: BobaOptions,
   points: Point[],
   lines: Line[],
-  triangles: Triangle[],
+  shapes: Shape[],
 ): UpdateResult => {
   // Move points
   for (const point of points) {
@@ -121,10 +121,10 @@ export const update = (
   }
 
   // Create/find the new set of lines
-  lines = createLines(points, numNeighbors);
+  lines = createLines(points, options.numNeighbors);
 
-  // Create/find the new set of triangles
-  triangles = createTriangles(lines);
+  // Create/find the new set of shapes
+  shapes = createShapes(lines, options.numSides);
 
   return { points, lines, triangles };
 };
