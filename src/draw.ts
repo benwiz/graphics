@@ -12,9 +12,22 @@ const drawPoint = (ctx: CanvasRenderingContext2D, point: Point): void => {
   ctx.fill();
 };
 
-export const draw = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
+const drawLine = (ctx: CanvasRenderingContext2D, line: Line): void => {
+  // draw line
+};
+
+export const draw = (
+  ctx: CanvasRenderingContext2D,
+  points: Point[],
+  lines: Line[],
+): void => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
   for (const point of points) {
     drawPoint(ctx, point);
+  }
+
+  for (const line of lines) {
+    drawLine(ctx, line);
   }
 };

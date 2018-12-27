@@ -12,14 +12,22 @@ interface StartOptions {
   numPoints: number;
 }
 
-const updateLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
+const updateLoop = (
+  ctx: CanvasRenderingContext2D,
+  points: Point[],
+  lines: Line[],
+): void => {
   points = Update.update(ctx, points);
-  setTimeout(() => updateLoop(ctx, points), 0);
+  setTimeout(() => updateLoop(ctx, points, lines), 0);
 };
 
-const drawLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
-  Draw.draw(ctx, points);
-  setTimeout(() => drawLoop(ctx, points), 0);
+const drawLoop = (
+  ctx: CanvasRenderingContext2D,
+  points: Point[],
+  lines: Line[],
+): void => {
+  Draw.draw(ctx, points, lines);
+  setTimeout(() => drawLoop(ctx, points, lines), 0);
 };
 
 export const start = (options: StartOptions): void => {
@@ -47,12 +55,14 @@ export const start = (options: StartOptions): void => {
     height - 1,
   );
 
-  // TODO: 2. Find and create lines
-  // TODO: 3. Find and create shapes
+  // 2. Initialize lines list as an empty array
+  const lines: Line[] = [];
+
+  // TODO 3. Initialize shapes list as an empty array, I think
 
   // Execute update and draw. Infinitely, in parallel.
-  updateLoop(ctx, points);
-  drawLoop(ctx, points);
+  updateLoop(ctx, points, lines);
+  drawLoop(ctx, points, lines);
 };
 
 // // Use this to help with mouse effects on the points

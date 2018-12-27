@@ -12,3 +12,8 @@ declare interface Point {
     a: number;
   };
 }
+
+declare interface Line {
+  point1: Point;
+  point2: Point;
+}
