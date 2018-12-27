@@ -1,4 +1,5 @@
 import * as Util from './util';
+import * as Graph from './graph';
 
 const updatePoint = (ctx: CanvasRenderingContext2D, point: Point): Point => {
   // Update location
@@ -134,8 +135,7 @@ const createAdjacencyList = (points: Point[], lines: Line[]): Adjacency[] => {
 const createShapes = (adjList: Adjacency[], numSides: number): Shape[] => {
   const shapes: Shape[] = [];
 
-  for (const adj of adjList) {
-  }
+  Graph.dfs(adjList);
 
   return shapes;
 };

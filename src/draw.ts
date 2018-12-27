@@ -58,7 +58,6 @@ export const draw = (
     drawLine(ctx, line);
   }
 
-  console.log(shapes);
   for (const shape of shapes) {
     drawShape(ctx, shape);
   }

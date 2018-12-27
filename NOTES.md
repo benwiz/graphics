@@ -19,11 +19,14 @@ npm publish --access public
 - Find/create shapes
 - Draw shapes
 
+- Rename `point` to `vertex`
+- Rename `line` to `edge`
+
 - Provide a function that returns an object with all default options
 - Make it configurable
 - Make it pretty
 
-- Store results in adj. list will require updates throughout the code. But having those updates will be valuable before starting the C version of this project. But using an adj. list does _not_ necessarily mean I should get rid of the points list or edges list. I probably should have a graph class or a graph interface.
+- Storing results in adj list will require updates throughout the code. But having those updates will be valuable before starting the C version of this project. But using an adj. list does _not_ necessarily mean I should get rid of the points list or edges list. I probably should have a graph class or a graph interface.
   - https://www.geeksforgeeks.org/implementation-graph-javascript/
 
 - Finding lines can be optimized.
