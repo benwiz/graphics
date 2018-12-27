@@ -101,7 +101,35 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
   return lines;
 };
 
-const createTriangles = ()
+const createTriangles = (points: Point[], lines: Line[]): Shape[] => {
+  const triangles: Shape[] = [];
+
+  for (const line of lines) {
+    for (const point of points) {
+      // If point is part of the line, skip
+      if (line.point1 === point || line.point2 === point) continue;
+
+      // If (line.point1, point) && (point, line.point2) are edges that exist
+      let testLine1: Line;
+      if (point.id < line.point1.id) {
+        testLine1 = { point1: point, point2: line.point1 };
+      } else {
+        testLine1 = { point1: line.point1, point2: point };
+      }
+
+      let testLine2: Line;
+      if (point.id < line.point2.id) {
+        testLine2 = { point1: point, point2: line.point2 };
+      } else {
+        testLine2 = { point1: line.point2, point2: point };
+      }
+
+      // TODO: Use `filter` to figure out if there are matches based on testLineX's point IDs
+    }
+  }
+
+  return triangles;
+};
 
 export const update = (
   progress: number,
@@ -120,7 +148,7 @@ export const update = (
   lines = createLines(points, options.numNeighbors);
 
   // Create/find the new set of shapes
-  shapes = createShapes(adjList, options.numSides);
+  shapes = createTriangles(points, lines);
 
   return { points, lines, shapes };
 };

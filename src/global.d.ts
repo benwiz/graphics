@@ -39,7 +39,6 @@ declare interface Adjacency {
 }
 
 declare interface Shape {
-  numSides: number;
   points: Point[];
 }
 
