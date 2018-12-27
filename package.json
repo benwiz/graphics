@@ -12,7 +12,9 @@
   },
   "watch": {
     "build": {
-      "patterns": ["src/*"],
+      "patterns": [
+        "src/*"
+      ],
       "extensions": "ts",
       "quiet": false
     }
