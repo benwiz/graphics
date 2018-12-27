@@ -109,7 +109,8 @@ const createTriangles = (points: Point[], lines: Line[]): Shape[] => {
       // If point is part of the line, skip
       if (line.point1 === point || line.point2 === point) continue;
 
-      // If (line.point1, point) && (point, line.point2) are edges that exist
+      // If (line.point1, point) && (point, line.point2) are edges that exist. Create the test
+      // lines here.
       let testLine1: Line;
       if (point.id < line.point1.id) {
         testLine1 = { point1: point, point2: line.point1 };
@@ -125,6 +126,14 @@ const createTriangles = (points: Point[], lines: Line[]): Shape[] => {
       }
 
       // TODO: Use `filter` to figure out if there are matches based on testLineX's point IDs
+      const test1 = true;
+      const test2 = true;
+
+      if (test1 && test2) {
+        const triangle: Shape = {
+          points: [point, line.point1, line.point2];
+        };
+      }
     }
   }
 
