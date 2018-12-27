@@ -1,15 +1,15 @@
 declare interface BobaOptions {
-  // Provide optional location and size of canvas
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
+  // Location and size of canvas
+  x: number;
+  y: number;
+  width: number;
+  height: number;
   // Points configurations
   numPoints: number;
   // Lines configurations
-  numNeighbors?: number;
+  numNeighbors: number;
   // Shapes configurations
-  numSides?: number;
+  numSides: number;
 }
 
 declare interface Point {

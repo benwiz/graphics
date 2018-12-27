@@ -31,14 +31,6 @@ const loop = (timestamp: number): void => {
 };
 
 export const start = (options: BobaOptions): void => {
-  // Set defaults for optional options
-  options.x = options.x || 0;
-  options.y = options.y || 0;
-  options.width = options.width || document.documentElement.scrollWidth;
-  options.height = options.height || document.documentElement.scrollHeight;
-  options.numNeighbors = options.numNeighbors || 2;
-  options.numSides = options.numNeighbors || 3;
-
   // Make options available globally
   OPTIONS = options;
 

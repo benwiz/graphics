@@ -126,5 +126,5 @@ export const update = (
   // Create/find the new set of shapes
   shapes = createShapes(lines, options.numSides);
 
-  return { points, lines, triangles };
+  return { points, lines, shapes };
 };
