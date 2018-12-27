@@ -35,7 +35,7 @@ export const createPoints = (
       id: i,
       x: Util.getRandomInt(0, maxX),
       y: Util.getRandomInt(0, maxY),
-      speed: 1,
+      speed: Util.getRandomFloat(0.5, 2),
       angle: Util.getRandomFloat(0, 360),
       runAwayMultiplier: 1,
       radius: Util.getRandomFloat(8, 16),
