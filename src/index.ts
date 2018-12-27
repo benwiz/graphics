@@ -1,6 +1,6 @@
+import * as Setup from './setup';
 import * as Draw from './draw';
 import * as Update from './update';
-import * as Util from './util';
 
 interface StartOptions {
   // Provide optional location and size of canvas
@@ -11,56 +11,6 @@ interface StartOptions {
   // Points configurations
   numPoints: number;
 }
-
-const createCanvas = (
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-): HTMLCanvasElement => {
-  // Create canvas
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-
-  // Set css-based location
-  canvas.style.position = 'absolute';
-  canvas.style.left = String(x);
-  canvas.style.top = String(y);
-  canvas.style.zIndex = '-1';
-
-  // Append canvas to dom and return canvas
-  document.body.appendChild(canvas);
-  return canvas;
-};
-
-const createPoints = (
-  numPoints: number,
-  maxX: number,
-  maxY: number,
-): Point[] => {
-  const points: Point[] = [];
-  for (let i: number = 0; i < numPoints; i++) {
-    // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
-    // lists rather than just single values
-    const point: Point = {
-      x: Util.getRandomInt(0, maxX),
-      y: Util.getRandomInt(0, maxY),
-      speed: 1,
-      angle: Util.getRandomFloat(0, 360),
-      runAwayMultiplier: 1,
-      radius: Util.getRandomFloat(8, 16),
-      color: {
-        r: 30,
-        g: 144,
-        b: 255,
-        a: 16,
-      },
-    };
-    points.push(point);
-  }
-  return points;
-};
 
 const updateLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
   points = Update.update(ctx, points);
@@ -81,7 +31,7 @@ export const start = (options: StartOptions): void => {
   const width: number = options.width || document.documentElement.scrollWidth;
   const height: number =
     options.height || document.documentElement.scrollHeight;
-  const canvas: HTMLCanvasElement = createCanvas(x, y, width, height);
+  const canvas: HTMLCanvasElement = Setup.createCanvas(x, y, width, height);
   const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 
   // Check that context was found, if not exit with an error. TODO: Make this proper.
@@ -90,7 +40,7 @@ export const start = (options: StartOptions): void => {
   }
 
   // Initialize data
-  const points: Point[] = createPoints(
+  const points: Point[] = Setup.createPoints(
     options.numPoints,
     width - 1,
     height - 1,
