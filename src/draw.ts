@@ -11,10 +11,10 @@ const drawPoint = (ctx: CanvasRenderingContext2D, point: Point): void => {
   ctx.stroke();
   ctx.fill();
 
-  ctx.font = '12px Arial black';
-  ctx.fillStyle = 'black';
-  ctx.textAlign = 'center';
-  ctx.fillText(String(point.id), point.x, point.y);
+  // ctx.font = '12px Arial black';
+  // ctx.fillStyle = 'black';
+  // ctx.textAlign = 'center';
+  // ctx.fillText(String(point.id), point.x, point.y);
 };
 
 const drawLine = (ctx: CanvasRenderingContext2D, line: Line): void => {
