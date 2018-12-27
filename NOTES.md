@@ -16,8 +16,7 @@ npm publish --access public
 
 ## To Do
 
-- Move a dot across the canvas to learn how to create a step/tick function
-- Map out all the steps for the boba animation here in this TODO section
+- Finish the `updatePoint` function by adding in the mouse effects
 
 - Bug
   - tslint.json not listening to "no-magic-numbers" or "max-length" properly

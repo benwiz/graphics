@@ -19,18 +19,22 @@ const createPoints = (
 ): Point[] => {
   const points: Point[] = [];
   for (let i: number = 0; i < numPoints; i++) {
-    const x: number = Util.getRandomInt(0, maxX);
-    const y: number = Util.getRandomInt(0, maxY);
-    const speed: number = 1;
-    const point: Point = { x, y, speed };
+    const point: Point = {
+      x: Util.getRandomInt(0, maxX),
+      y: Util.getRandomInt(0, maxY),
+      speed: 1,
+      angle: Util.getRandomFloat(0, 360),
+      runAwayMultiplier: 1,
+      radius: Util.getRandomFloat(8, 16),
+    };
     points.push(point);
   }
   return points;
 };
 
-const updateLoop = (points: Point[]): void => {
-  points = Update.update(points);
-  setTimeout(() => updateLoop(points), 0);
+const updateLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
+  points = Update.update(ctx, points);
+  setTimeout(() => updateLoop(ctx, points), 0);
 };
 
 const drawLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
@@ -62,6 +66,6 @@ export const start = (options: StartOptions): void => {
   );
 
   // Execute update and draw. Infinitely, in parallel.
-  updateLoop(points);
+  updateLoop(ctx, points);
   drawLoop(ctx, points);
 };

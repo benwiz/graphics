@@ -11,6 +11,7 @@
     "no-param-reassign": ["error", { "props": false }],
     "no-new": "off",
     "no-mixed-operators": "off",
-    "no-return-assign": "off"
+    "no-return-assign": "off",
+    "no-magic-numbers": false
   }
 }
