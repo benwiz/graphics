@@ -23,6 +23,20 @@ const drawLine = (ctx: CanvasRenderingContext2D, line: Line): void => {
   ctx.stroke();
 };
 
+const drawShape = (ctx: CanvasRenderingContext2D, shape: Shape): void => {
+  ctx.fillStyle = `rgba(${shape.points[0].color.r}, ${
+    shape.points[0].color.g
+  }, ${shape.points[0].color.b}, ${shape.points[0].color.a / 2})`;
+
+  ctx.beginPath();
+  ctx.moveTo(shape.points[0].x, shape.points[0].y);
+  for (let i = 1; i < shape.points.length; i++) {
+    const point: Point = shape.points[i];
+    ctx.lineTo(point.x, point.y);
+  }
+  ctx.fill();
+};
+
 export const draw = (
   ctx: CanvasRenderingContext2D,
   points: Point[],
@@ -37,5 +51,10 @@ export const draw = (
 
   for (const line of lines) {
     drawLine(ctx, line);
+  }
+
+  console.log(shapes);
+  for (const shape of shapes) {
+    drawShape(ctx, shape);
   }
 };

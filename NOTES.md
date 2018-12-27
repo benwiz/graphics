@@ -19,6 +19,7 @@ npm publish --access public
 - Find/create shapes
 - Draw shapes
 
+- Provide a function that returns an object with all default options
 - Make it configurable
 - Make it pretty
 

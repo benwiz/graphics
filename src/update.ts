@@ -101,9 +101,16 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
   return lines;
 };
 
-// NOTE: This could probably be generalized into `createShape` and require a `numSides` input
 const createShapes = (lines: Line[], numSides: number): Shape[] => {
   const shapes: Shape[] = [];
+
+  // Tmp test shape
+  const shape: Shape = {
+    numSides: 3,
+    points: [lines[0].point1, lines[0].point2, lines[1].point2],
+  };
+  shapes.push(shape);
+
   return shapes;
 };
 
