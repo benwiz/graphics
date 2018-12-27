@@ -75,6 +75,8 @@ const drawLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
 export const start = (options: StartOptions): void => {
   console.log('Start boba');
 
+  // TODO: Rather than setting defaults below, set defaults in a single block here
+
   // Create canvas and get context
   const x: number = options.x || 0;
   const y: number = options.y || 0;

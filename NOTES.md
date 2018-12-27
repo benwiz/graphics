@@ -16,6 +16,11 @@ npm publish --access public
 
 ## To Do
 
+- Draw lines
+- Fill shapes
+- Make it configurable
+- Make it pretty
+
 - Later
   - Mouse effects on points
 
