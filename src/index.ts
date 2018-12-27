@@ -2,6 +2,9 @@ import * as Setup from './setup';
 import * as Draw from './draw';
 import * as Update from './update';
 
+let POINTS: Point[];
+let LINES: Line[];
+
 interface StartOptions {
   // Provide optional location and size of canvas
   x?: number;
@@ -17,10 +20,10 @@ const updateLoop = (
   points: Point[],
   lines: Line[],
 ): void => {
-  const result: any = Update.update(ctx, points, lines);
-  points = result.points;
-  lines = result.lines;
-  setTimeout(() => updateLoop(ctx, points, lines), 0);
+  const result: UpdateResult = Update.update(ctx, points, lines);
+  POINTS = result.points;
+  LINES = result.lines;
+  setTimeout(() => updateLoop(ctx, POINTS, LINES), 0);
 };
 
 const drawLoop = (
@@ -29,7 +32,7 @@ const drawLoop = (
   lines: Line[],
 ): void => {
   Draw.draw(ctx, points, lines);
-  setTimeout(() => drawLoop(ctx, points, lines), 0);
+  setTimeout(() => drawLoop(ctx, POINTS, LINES), 0);
 };
 
 export const start = (options: StartOptions): void => {
@@ -54,20 +57,16 @@ export const start = (options: StartOptions): void => {
 
   // Initialize data in three step
   // 1. Create points
-  const points: Point[] = Setup.createPoints(
-    options.numPoints,
-    width - 1,
-    height - 1,
-  );
+  POINTS = Setup.createPoints(options.numPoints, width - 1, height - 1);
 
   // 2. Initialize lines list as an empty array
-  const lines: Line[] = [];
+  LINES = [];
 
   // TODO 3. Initialize shapes list as an empty array, I think
 
   // Execute update and draw. Infinitely, in parallel.
-  updateLoop(ctx, points, lines);
-  drawLoop(ctx, points, lines);
+  updateLoop(ctx, POINTS, LINES);
+  drawLoop(ctx, POINTS, LINES);
 };
 
 // // Use this to help with mouse effects on the points

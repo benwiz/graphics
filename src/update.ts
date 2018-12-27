@@ -92,17 +92,16 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
     }
   }
 
-  console.log(lines.length);
+  // console.log(lines.length);
 
   return lines;
 };
 
-// TODO: Don't use "any" as return type
 export const update = (
   ctx: CanvasRenderingContext2D,
   points: Point[],
   lines: Line[],
-): any => {
+): UpdateResult => {
   // Move points
   for (let point of points) {
     point = updatePoint(ctx, point);

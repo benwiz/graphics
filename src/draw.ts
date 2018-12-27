@@ -17,6 +17,7 @@ const drawLine = (ctx: CanvasRenderingContext2D, line: Line): void => {
     line.point1.color.b
   }, ${line.point1.color.a})`;
 
+  console.log('draw line:', line);
   ctx.beginPath();
   ctx.moveTo(line.point1.x, line.point1.y);
   ctx.lineTo(line.point2.x, line.point2.y);
