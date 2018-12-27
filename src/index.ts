@@ -7,6 +7,10 @@ let CTX: CanvasRenderingContext2D;
 let POINTS: Point[];
 let LINES: Line[];
 let LAST_RENDER: number;
+// Configs that have to be global so I can get them into the `loop` function. This isn't good.
+const CONFIG = {
+  numNeighbors: -1,
+};
 
 interface StartOptions {
   // Provide optional location and size of canvas
@@ -16,12 +20,20 @@ interface StartOptions {
   height?: number;
   // Points configurations
   numPoints: number;
+  // Lines configurations
+  numNeighbors: number;
 }
 
 const loop = (timestamp: number): void => {
   const progress = timestamp - LAST_RENDER;
 
-  const result: UpdateResult = Update.update(progress, CTX, POINTS, LINES);
+  const result: UpdateResult = Update.update(
+    progress,
+    CTX,
+    CONFIG.numNeighbors,
+    POINTS,
+    LINES,
+  );
   POINTS = result.points;
   LINES = result.lines;
   Draw.draw(CTX, POINTS, LINES);
@@ -36,6 +48,9 @@ export const start = (options: StartOptions): void => {
   options.y = options.y || 0;
   options.width = options.width || document.documentElement.scrollWidth;
   options.height = options.height || document.documentElement.scrollHeight;
+
+  // Set config global vars
+  CONFIG.numNeighbors = options.numNeighbors;
 
   // Create canvas and get context
   const x: number = options.x;
