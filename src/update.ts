@@ -101,6 +101,10 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
   return lines;
 };
 
+const findLineInLines = (line: Line, lines: Line[]): Boolean => {
+  return true;
+};
+
 const createTriangles = (points: Point[], lines: Line[]): Shape[] => {
   const triangles: Shape[] = [];
 
@@ -125,12 +129,14 @@ const createTriangles = (points: Point[], lines: Line[]): Shape[] => {
         testLine2 = { point1: line.point2, point2: point };
       }
 
-      // TODO: Use `filter` to figure out if there are matches based on testLineX's point IDs
-      const test1 = true;
-      const test2 = true;
+      // Find if there are matching lines
+      const test1 = findLineInLines(testLine1, lines);
+      const test2 = findLineInLines(testLine2, lines);
 
+      // Run the test
       if (test1 && test2) {
         const triangle: Shape = { points: [point, line.point1, line.point2] };
+        triangles.push(triangle);
       }
     }
   }
