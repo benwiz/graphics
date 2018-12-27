@@ -24,6 +24,7 @@ const loop = (timestamp: number): void => {
   const result: UpdateResult = Update.update(progress, CTX, POINTS, LINES);
   POINTS = result.points;
   LINES = result.lines;
+  console.log(LINES.length);
   Draw.draw(CTX, POINTS, LINES);
 
   LAST_RENDER = timestamp;

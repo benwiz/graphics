@@ -76,6 +76,13 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
       linesForPoint.push(line);
     }
 
+    // Sort the lines by distance
+    linesForPoint.sort((lineA, lineB) => {
+      const distA = Util.distance(lineA.point1, lineA.point2);
+      const distB = Util.distance(lineB.point1, lineB.point2);
+      return distA - distB;
+    });
+
     // Keep the first `numNeighbors` lines
     linesForPoint.splice(numNeighbors);
 
