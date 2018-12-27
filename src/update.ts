@@ -135,7 +135,7 @@ const createAdjacencyList = (points: Point[], lines: Line[]): Adjacency[] => {
 const createShapes = (adjList: Adjacency[], numSides: number): Shape[] => {
   const shapes: Shape[] = [];
 
-  Graph.dfs(adjList);
+  Graph.dls(adjList, numSides);
 
   return shapes;
 };

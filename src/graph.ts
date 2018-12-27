@@ -1,33 +1,70 @@
-const dfsUtil = (
+// const dfsUtil = (
+//   adjList: Adjacency[],
+//   pointID: number,
+//   visited: Boolean[],
+//   points: number[],
+//   maxDepth: number,
+// ): number[] => {
+//   visited[pointID] = true;
+//   // If we have reached maxDepth, then check if the starting point is a neighbor of the current
+//   // point. If it is, we must save that shape.
+//   if (points.length === maxDepth) {
+//     pointID = <number>points.pop();
+//     return dfsUtil(adjList, pointID, visited, points, maxDepth);
+//   }
+
+//   points.push(pointID);
+
+//   const neighborIDs = adjList[pointID].neighborIDs;
+//   for (const neighborID of neighborIDs) {
+//     if (!visited[neighborID]) {
+//       return dfsUtil(adjList, neighborID, visited, points, maxDepth);
+//     }
+//   }
+
+//   return points;
+// };
+
+// export const dfs = (adjList: Adjacency[], maxDepth: number): number[] => {
+//   const visited: Boolean[] = [];
+//   for (let i = 0; i < adjList.length; i++) {
+//     visited[i] = false;
+//   }
+
+//   const depth = 0;
+//   const startPointID = adjList[0].pointID;
+//   return dfsUtil(adjList, startPointID, visited, [], maxDepth);
+// };
+
+const dlsUtil = (
   adjList: Adjacency[],
-  startPointID: number,
   pointID: number,
-  visited: Boolean[],
   depth: number,
+  points: number[],
+  shapes: number[][],
 ): void => {
-  // If we have reached maxDepth-1 (because we count from 0), then check if the starting point
-  // is a neighbor of the current point. If it is, we must save that triangle.
+  if (depth < 0) return;
 
-  visited[pointID] = true;
-  console.log(pointID, depth);
+  points.push(pointID);
+  shapes[shapes.length - 1].push(pointID);
 
-  depth += 1;
+  if (depth === 0) {
+    const latestShape = shapes[shapes.length - 1];
+    const newShape: number[] = latestShape.slice(0, latestShape.length - 1);
+    shapes.push(newShape);
+  }
 
-  const neighborIDs = adjList[pointID].neighborIDs;
-  for (const neighborID of neighborIDs) {
-    if (!visited[neighborID]) {
-      dfsUtil(adjList, startPointID, neighborID, visited, depth);
+  for (const neighborID of adjList[pointID].neighborIDs) {
+    // If not already handled
+    if (points.indexOf(neighborID) === -1) {
+      console.log(`${depth}: ${pointID} - ${neighborID}`, shapes);
+      dlsUtil(adjList, neighborID, depth - 1, points, shapes);
     }
   }
 };
 
-export const dfs = (adjList: Adjacency[]): void => {
-  const visited: Boolean[] = [];
-  for (let i = 0; i < adjList.length; i++) {
-    visited[i] = false;
-  }
-
-  const depth = 0;
-  const startPointID = adjList[0].pointID;
-  dfsUtil(adjList, startPointID, startPointID, visited, depth);
+// Depth-limited search
+export const dls = (adjList: Adjacency[], depth: number): void => {
+  console.log('\n-----\n-----\n-----\n-----\n');
+  dlsUtil(adjList, adjList[0].pointID, depth - 2, [], [[]]);
 };
