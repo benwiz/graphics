@@ -22,16 +22,16 @@ export const createCanvas = (
   return canvas;
 };
 
-export const createPoints = (
-  numPoints: number,
+export const createVertices = (
+  numVertices: number,
   maxX: number,
   maxY: number,
-): Point[] => {
-  const points: Point[] = [];
-  for (let i: number = 0; i < numPoints; i++) {
+): Vertex[] => {
+  const vertices: Vertex[] = [];
+  for (let i: number = 0; i < numVertices; i++) {
     // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
     // lists rather than just single values
-    const point: Point = {
+    const vertex: Vertex = {
       id: i,
       x: Util.getRandomInt(0, maxX),
       y: Util.getRandomInt(0, maxY),
@@ -46,7 +46,7 @@ export const createPoints = (
         a: 0.1,
       },
     };
-    points.push(point);
+    vertices.push(vertex);
   }
-  return points;
+  return vertices;
 };

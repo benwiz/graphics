@@ -4,7 +4,7 @@ import * as Update from './update';
 
 // Global variables a necessary evil for the game loop. There is probably another way.
 let CTX: CanvasRenderingContext2D;
-let POINTS: Point[];
+let VERTICES: Vertex[];
 let LINES: Line[];
 let SHAPES: Shape[];
 let LAST_RENDER: number;
@@ -17,14 +17,14 @@ const loop = (timestamp: number): void => {
     progress,
     CTX,
     OPTIONS,
-    POINTS,
+    VERTICES,
     LINES,
     SHAPES,
   );
-  POINTS = result.points;
+  VERTICES = result.vertices;
   LINES = result.lines;
   SHAPES = result.shapes;
-  Draw.draw(CTX, POINTS, LINES, SHAPES);
+  Draw.draw(CTX, VERTICES, LINES, SHAPES);
 
   LAST_RENDER = timestamp;
   window.requestAnimationFrame(loop);
@@ -51,8 +51,8 @@ export const start = (options: BobaOptions): void => {
   CTX = ctx;
 
   // Initialize data in three step
-  // 1. Create points
-  POINTS = Setup.createPoints(options.numPoints, width - 1, height - 1);
+  // 1. Create vertices
+  VERTICES = Setup.createVertices(options.numVertices, width - 1, height - 1);
 
   // 2. Initialize lines list as an empty array
   LINES = [];
@@ -65,7 +65,7 @@ export const start = (options: BobaOptions): void => {
   window.requestAnimationFrame(loop);
 };
 
-// // Use this to help with mouse effects on the points
+// // Use this to help with mouse effects on the vertices
 // document.addEventListener('mousemove', (event: MouseEvent) => {
 //   const mousePos = Util.getMousePos(canvas, event);
 // });

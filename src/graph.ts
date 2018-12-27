@@ -1,49 +1,49 @@
 // const dfsUtil = (
 //   adjList: Adjacency[],
-//   pointID: number,
+//   vertexID: number,
 //   depth: number,
 //   maxDepth: number,
 //   results: number[][],
 // ): void => {
-//   console.log(`${depth}: ${pointID}`);
+//   console.log(`${depth}: ${vertexID}`);
 
 //   if (depth === maxDepth - 1) {
 //     return;
 //   }
 
-//   const neighborIDs = adjList[pointID].neighborIDs;
+//   const neighborIDs = adjList[vertexID].neighborIDs;
 //   for (const neighborID of neighborIDs) {
 //     dfsUtil(adjList, neighborID, depth + 1, maxDepth, results);
 //   }
 // };
 
 // export const dfs = (adjList: Adjacency[], maxDepth: number): void => {
-//   const startPointID = adjList[0].pointID;
-//   dfsUtil(adjList, startPointID, 0, maxDepth, []);
+//   const startVertexID = adjList[0].vertexID;
+//   dfsUtil(adjList, startVertexID, 0, maxDepth, []);
 // };
 
 ///////////////
 
 // const dlsUtil = (
 //   adjList: Adjacency[],
-//   pointID: number,
+//   vertexID: number,
 //   depth: number,
 //   maxDepth: number,
-//   points: number[],
+//   vertices: number[],
 //   sets: number[][],
 // ): void => {
-//   points.push(pointID);
-//   console.log(points);
+//   vertices.push(vertexID);
+//   console.log(vertices);
 
 //   if (depth === maxDepth) {
 //     return;
 //   }
 
-//   for (const neighborID of adjList[pointID].neighborIDs) {
+//   for (const neighborID of adjList[vertexID].neighborIDs) {
 //     // If not already handled
-//     // if (points.indexOf(neighborID) === -1) {
-//     // console.log(`${depth}: ${pointID} - ${neighborID}`);
-//     dlsUtil(adjList, neighborID, depth + 1, maxDepth, points, sets);
+//     // if (vertices.indexOf(neighborID) === -1) {
+//     // console.log(`${depth}: ${vertexID} - ${neighborID}`);
+//     dlsUtil(adjList, neighborID, depth + 1, maxDepth, vertices, sets);
 //     // }
 //   }
 // };
@@ -51,13 +51,13 @@
 // // Depth-limited search
 // export const dls = (adjList: Adjacency[], depth: number): void => {
 //   console.log('\n-----\n-----\n-----\n-----\n');
-//   dlsUtil(adjList, adjList[0].pointID, 0, depth - 2, [], [[]]);
+//   dlsUtil(adjList, adjList[0].vertexID, 0, depth - 2, [], [[]]);
 // };
 
 ///////////////
 
 // const getDeeperNeighbor = (
-//   pointID: number,
+//   vertexID: number,
 //   neighborIDs: number[],
 //   path: number[],
 //   maxDepth: number,
@@ -67,42 +67,42 @@
 //   }
 // };
 
-// const findAllPathsFromPoint = (
+// const findAllPathsFromVertex = (
 //   adjList: Adjacency[],
-//   pointID: number,
+//   vertexID: number,
 //   maxDepth: number,
 // ): number[][] => {
 //   const paths: number[][] = [];
 
-//   // TODO: Get next neighbor, avoid past points. Do recursively
-//   const neighborIDs: number[] = adjList[pointID].neighborIDs;
-//   const path: number[] = [pointID];
-//   getDeeperNeighbor(pointID, neighborIDs, path, maxDepth);
+//   // TODO: Get next neighbor, avoid past vertices. Do recursively
+//   const neighborIDs: number[] = adjList[vertexID].neighborIDs;
+//   const path: number[] = [vertexID];
+//   getDeeperNeighbor(vertexID, neighborIDs, path, maxDepth);
 
 //   return paths;
 // };
 
 // export const findAllPaths = (adjList: Adjacency[], maxDepth: number): void => {
-//   findAllPathsFromPoint(adjList, 0, maxDepth);
+//   findAllPathsFromVertex(adjList, 0, maxDepth);
 // };
 
-// const createAdjacencyList = (points: Point[], lines: Line[]): Adjacency[] => {
+// const createAdjacencyList = (vertices: Vertex[], lines: Line[]): Adjacency[] => {
 //   const adjList: Adjacency[] = [];
-//   for (const point of points) {
+//   for (const vertex of vertices) {
 //     const adj: Adjacency = {
-//       pointID: point.id,
+//       vertexID: vertex.id,
 //       neighborIDs: [],
 //     };
 
-//     // Find all the lines that contain this point and add the neighbor if not alraedy added
+//     // Find all the lines that contain this vertex and add the neighbor if not alraedy added
 //     for (const line of lines) {
-//       if (point.id === line.point1.id) {
-//         if (adj.neighborIDs.indexOf(line.point2.id) === -1) {
-//           adj.neighborIDs.push(line.point2.id);
+//       if (vertex.id === line.vertex1.id) {
+//         if (adj.neighborIDs.indexOf(line.vertex2.id) === -1) {
+//           adj.neighborIDs.push(line.vertex2.id);
 //         }
-//       } else if (point.id === line.point2.id) {
-//         if (adj.neighborIDs.indexOf(line.point1.id) === -1) {
-//           adj.neighborIDs.push(line.point1.id);
+//       } else if (vertex.id === line.vertex2.id) {
+//         if (adj.neighborIDs.indexOf(line.vertex1.id) === -1) {
+//           adj.neighborIDs.push(line.vertex1.id);
 //         }
 //       }
 //     }
@@ -113,12 +113,12 @@
 //   return adjList;
 // };
 
-// // To create shapes we run a depth-first search from every point on the graph. We only make
-// // `numSides` steps. If we can return to the original point without repeating edges, then we have
+// // To create shapes we run a depth-first search from every vertex on the graph. We only make
+// // `numSides` steps. If we can return to the original vertex without repeating edges, then we have
 // // formed out shape.
 // const createShapes = (numSides: number): Shape[] => {
 //   // Create adjacency list (eventually, this should be generated in place of the lines list)
-//   const adjList = createAdjacencyList(points, lines);
+//   const adjList = createAdjacencyList(vertices, lines);
 
 //   const shapes: Shape[] = [];
 //   // TODO: I had trouble finding the cycles in a generic way so I'm falling back to just triangles.

@@ -16,10 +16,7 @@ npm publish --access public
 
 ## To Do
 
-- Find/create shapes
-- Draw shapes
-
-- Rename `point` to `vertex`
+- Rename `vertex` to `vertex`
 - Rename `line` to `edge`
 
 - Provide a function that returns an object with all default options
@@ -29,8 +26,8 @@ npm publish --access public
 - Finding lines can be optimized.
 
 - Later
-  - Mouse effects on points
-  - Storing results in adj list will require updates throughout the code. But having those updates will be valuable before starting the C version of this project. But using an adj. list does _not_ necessarily mean I should get rid of the points list or edges list. I probably should have a graph class or a graph interface.
+  - Mouse effects on vertices
+  - Storing results in adj list will require updates throughout the code. But having those updates will be valuable before starting the C version of this project. But using an adj. list does _not_ necessarily mean I should get rid of the vertices list or edges list. I probably should have a graph class or a graph interface.
     - https://www.geeksforgeeks.org/implementation-graph-javascript/
     - I had a lot of trouble finding 3-cycles and N-cycles using adjacency lists on my first attempt
 

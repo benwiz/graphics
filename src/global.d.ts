@@ -4,15 +4,15 @@ declare interface BobaOptions {
   y: number;
   width: number;
   height: number;
-  // Points configurations
-  numPoints: number;
+  // Vertices configurations
+  numVertices: number;
   // Lines configurations
   numNeighbors: number;
   // Shapes configurations
   numSides: number;
 }
 
-declare interface Point {
+declare interface Vertex {
   id: number;
   x: number;
   y: number;
@@ -29,21 +29,21 @@ declare interface Point {
 }
 
 declare interface Line {
-  point1: Point;
-  point2: Point;
+  vertex1: Vertex;
+  vertex2: Vertex;
 }
 
 declare interface Adjacency {
-  pointID: number;
+  vertexID: number;
   neighborIDs: number[];
 }
 
 declare interface Shape {
-  points: Point[];
+  vertices: Vertex[];
 }
 
 declare interface UpdateResult {
-  points: Point[];
+  vertices: Vertex[];
   lines: Line[];
   shapes: Shape[];
 }
