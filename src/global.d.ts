@@ -5,4 +5,10 @@ declare interface Point {
   angle: number;
   runAwayMultiplier: number;
   radius: number;
+  color: {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+  };
 }

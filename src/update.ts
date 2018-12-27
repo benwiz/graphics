@@ -1,7 +1,5 @@
 import * as Util from './util';
 
-const updatePointWithMouseEffects = (point: Point) => {};
-
 const updatePoint = (ctx: CanvasRenderingContext2D, point: Point): Point => {
   // Update location
   point.x +=

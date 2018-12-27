@@ -41,6 +41,8 @@ const createPoints = (
 ): Point[] => {
   const points: Point[] = [];
   for (let i: number = 0; i < numPoints; i++) {
+    // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
+    // lists rather than just single values
     const point: Point = {
       x: Util.getRandomInt(0, maxX),
       y: Util.getRandomInt(0, maxY),
@@ -48,6 +50,12 @@ const createPoints = (
       angle: Util.getRandomFloat(0, 360),
       runAwayMultiplier: 1,
       radius: Util.getRandomFloat(8, 16),
+      color: {
+        r: 30,
+        g: 144,
+        b: 255,
+        a: 16,
+      },
     };
     points.push(point);
   }
