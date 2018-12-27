@@ -92,3 +92,16 @@ export const start = (options: StartOptions): void => {
   updateLoop(ctx, points);
   drawLoop(ctx, points);
 };
+
+// // Use this to help with mouse effects on the points
+// document.addEventListener('mousemove', (event: MouseEvent) => {
+//   const mousePos = Util.getMousePos(canvas, event);
+// });
+// util.js
+// export const getMousePos = (canvas: HTMLCanvasElement, event: MouseEvent) => {
+//   const rect: ClientRect = canvas.getBoundingClientRect();
+//   return {
+//     x: event.clientX - rect.left,
+//     y: event.clientY - rect.top,
+//   };
+// };

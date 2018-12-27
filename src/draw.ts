@@ -1,6 +1,5 @@
 const drawPoint = (ctx: CanvasRenderingContext2D, point: Point): void => {
   ctx.beginPath();
-  // ctx.moveTo(point.x, point.y);
   ctx.arc(point.x, point.y, point.radius, 0, 2 * Math.PI, false);
   ctx.stroke();
 };
