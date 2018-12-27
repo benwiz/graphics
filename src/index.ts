@@ -27,10 +27,9 @@ const createPoints = (
   return points;
 };
 
-const updateLoop = (startTime: number, points: Point[]): void => {
-  // TODO: Probably don't need startTime, instead just call at a frame rate = 1000 / fps;
-  points = Update.update(startTime, points);
-  setTimeout(() => updateLoop(startTime, points), 0);
+const updateLoop = (points: Point[]): void => {
+  points = Update.update(points);
+  setTimeout(() => updateLoop(points), 0);
 };
 
 const drawLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
@@ -40,9 +39,6 @@ const drawLoop = (ctx: CanvasRenderingContext2D, points: Point[]): void => {
 
 export const start = (options: StartOptions): void => {
   console.log('Start boba');
-
-  // Record start time
-  const startTime = new Date().getTime();
 
   // Create canvas and get context
   const x: number = options.x || 0;
@@ -64,7 +60,7 @@ export const start = (options: StartOptions): void => {
     height - 1,
   );
 
-  // Execute update and draw loops infinitely, in parallel
-  updateLoop(startTime, points);
+  // Execute update and draw. Infinitely, in parallel.
+  updateLoop(points);
   drawLoop(ctx, points);
 };
