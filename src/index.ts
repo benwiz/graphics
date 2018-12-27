@@ -5,7 +5,7 @@ import * as Update from './update';
 // Global variables a necessary evil for the game loop. There is probably another way.
 let CTX: CanvasRenderingContext2D;
 let VERTICES: Vertex[];
-let LINES: Line[];
+let EDGES: Edge[];
 let SHAPES: Shape[];
 let LAST_RENDER: number;
 let OPTIONS: BobaOptions;
@@ -18,13 +18,13 @@ const loop = (timestamp: number): void => {
     CTX,
     OPTIONS,
     VERTICES,
-    LINES,
+    EDGES,
     SHAPES,
   );
   VERTICES = result.vertices;
-  LINES = result.lines;
+  EDGES = result.edges;
   SHAPES = result.shapes;
-  Draw.draw(CTX, VERTICES, LINES, SHAPES);
+  Draw.draw(CTX, VERTICES, EDGES, SHAPES);
 
   LAST_RENDER = timestamp;
   window.requestAnimationFrame(loop);
@@ -54,8 +54,8 @@ export const start = (options: BobaOptions): void => {
   // 1. Create vertices
   VERTICES = Setup.createVertices(options.numVertices, width - 1, height - 1);
 
-  // 2. Initialize lines list as an empty array
-  LINES = [];
+  // 2. Initialize edges list as an empty array
+  EDGES = [];
 
   // Initialize shapes list as an empty array, I think
   SHAPES = [];

@@ -48,19 +48,19 @@ const updateVertex = (ctx: CanvasRenderingContext2D, vertex: Vertex): Vertex => 
   return vertex;
 };
 
-const createLines = (vertices: Vertex[], numNeighbors: number): Line[] => {
-  const lines: Line[] = [];
+const createEdges = (vertices: Vertex[], numNeighbors: number): Edge[] => {
+  const edges: Edge[] = [];
 
   // For each vertex
   for (const vertex1 of vertices) {
     // TODO: This (i.e. these steps to get the k-nearest-neighbors) can be more efficient
 
-    // Create a line to all vertices other than itself
-    const linesForVertex: Line[] = [];
+    // Create a edge to all vertices other than itself
+    const edgesForVertex: Edge[] = [];
     for (const vertex2 of vertices) {
       if (vertex1 === vertex2) continue;
 
-      // Create the line so that vertex1 has the lower id
+      // Create the edge so that vertex1 has the lower id
       let vertexA: Vertex;
       let vertexB: Vertex;
       if (vertex1.id <= vertex2.id) {
@@ -71,41 +71,41 @@ const createLines = (vertices: Vertex[], numNeighbors: number): Line[] => {
         vertexB = vertex1;
       }
 
-      // Record the formatted line
-      const line: Line = { vertex1: vertexA, vertex2: vertexB };
-      linesForVertex.push(line);
+      // Record the formatted edge
+      const edge: Edge = { vertex1: vertexA, vertex2: vertexB };
+      edgesForVertex.push(edge);
     }
 
-    // Sort the lines by distance
-    linesForVertex.sort((lineA, lineB) => {
-      const distA = Util.distance(lineA.vertex1, lineA.vertex2);
-      const distB = Util.distance(lineB.vertex1, lineB.vertex2);
+    // Sort the edges by distance
+    edgesForVertex.sort((edgeA, edgeB) => {
+      const distA = Util.distance(edgeA.vertex1, edgeA.vertex2);
+      const distB = Util.distance(edgeB.vertex1, edgeB.vertex2);
       return distA - distB;
     });
 
-    // Keep the first `numNeighbors` lines
-    linesForVertex.splice(numNeighbors);
+    // Keep the first `numNeighbors` edges
+    edgesForVertex.splice(numNeighbors);
 
-    // Add those lines to the main lines array as long as the line is not already in the list
-    for (const line of linesForVertex) {
-      const matches = lines.filter(
-        l => l.vertex1.id === line.vertex1.id && l.vertex2.id === line.vertex2.id,
+    // Add those edges to the main edges array as long as the edge is not already in the list
+    for (const edge of edgesForVertex) {
+      const matches = edges.filter(
+        l => l.vertex1.id === edge.vertex1.id && l.vertex2.id === edge.vertex2.id,
       );
 
       if (matches.length === 0) {
-        lines.push(line);
+        edges.push(edge);
       }
     }
   }
 
-  return lines;
+  return edges;
 };
 
-const findLineInLines = (testLine: Line, lines: Line[]): Boolean => {
-  for (const line of lines) {
+const findEdgeInEdges = (testEdge: Edge, edges: Edge[]): Boolean => {
+  for (const edge of edges) {
     if (
-      testLine.vertex1.id === line.vertex1.id &&
-      testLine.vertex2.id === line.vertex2.id
+      testEdge.vertex1.id === edge.vertex1.id &&
+      testEdge.vertex2.id === edge.vertex2.id
     ) {
       return true;
     }
@@ -114,37 +114,37 @@ const findLineInLines = (testLine: Line, lines: Line[]): Boolean => {
   return false;
 };
 
-const createTriangles = (vertices: Vertex[], lines: Line[]): Shape[] => {
+const createTriangles = (vertices: Vertex[], edges: Edge[]): Shape[] => {
   const triangles: Shape[] = [];
 
-  for (const line of lines) {
+  for (const edge of edges) {
     for (const vertex of vertices) {
-      // If vertex is part of the line, skip
-      if (line.vertex1 === vertex || line.vertex2 === vertex) continue;
+      // If vertex is part of the edge, skip
+      if (edge.vertex1 === vertex || edge.vertex2 === vertex) continue;
 
-      // If (line.vertex1, vertex) && (vertex, line.vertex2) are edges that exist. Create the test
-      // lines here.
-      let testLine1: Line;
-      if (vertex.id < line.vertex1.id) {
-        testLine1 = { vertex1: vertex, vertex2: line.vertex1 };
+      // If (edge.vertex1, vertex) && (vertex, edge.vertex2) are edges that exist. Create the test
+      // edges here.
+      let testEdge1: Edge;
+      if (vertex.id < edge.vertex1.id) {
+        testEdge1 = { vertex1: vertex, vertex2: edge.vertex1 };
       } else {
-        testLine1 = { vertex1: line.vertex1, vertex2: vertex };
+        testEdge1 = { vertex1: edge.vertex1, vertex2: vertex };
       }
 
-      let testLine2: Line;
-      if (vertex.id < line.vertex2.id) {
-        testLine2 = { vertex1: vertex, vertex2: line.vertex2 };
+      let testEdge2: Edge;
+      if (vertex.id < edge.vertex2.id) {
+        testEdge2 = { vertex1: vertex, vertex2: edge.vertex2 };
       } else {
-        testLine2 = { vertex1: line.vertex2, vertex2: vertex };
+        testEdge2 = { vertex1: edge.vertex2, vertex2: vertex };
       }
 
-      // Find if there are matching lines
-      const test1 = findLineInLines(testLine1, lines);
-      const test2 = findLineInLines(testLine2, lines);
+      // Find if there are matching edges
+      const test1 = findEdgeInEdges(testEdge1, edges);
+      const test2 = findEdgeInEdges(testEdge2, edges);
 
       // Run the test
       if (test1 && test2) {
-        const triangle: Shape = { vertices: [vertex, line.vertex1, line.vertex2] };
+        const triangle: Shape = { vertices: [vertex, edge.vertex1, edge.vertex2] };
         triangles.push(triangle);
       }
     }
@@ -158,7 +158,7 @@ export const update = (
   ctx: CanvasRenderingContext2D,
   options: BobaOptions,
   vertices: Vertex[],
-  lines: Line[],
+  edges: Edge[],
   shapes: Shape[],
 ): UpdateResult => {
   // Move vertices
@@ -166,11 +166,11 @@ export const update = (
     updateVertex(ctx, vertex);
   }
 
-  // Create/find the new set of lines
-  lines = createLines(vertices, options.numNeighbors);
+  // Create/find the new set of edges
+  edges = createEdges(vertices, options.numNeighbors);
 
   // Create/find the new set of shapes
-  shapes = createTriangles(vertices, lines);
+  shapes = createTriangles(vertices, edges);
 
-  return { vertices, lines, shapes };
+  return { vertices, edges, shapes };
 };

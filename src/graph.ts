@@ -86,7 +86,7 @@
 //   findAllPathsFromVertex(adjList, 0, maxDepth);
 // };
 
-// const createAdjacencyList = (vertices: Vertex[], lines: Line[]): Adjacency[] => {
+// const createAdjacencyList = (vertices: Vertex[], edges: Edge[]): Adjacency[] => {
 //   const adjList: Adjacency[] = [];
 //   for (const vertex of vertices) {
 //     const adj: Adjacency = {
@@ -94,15 +94,15 @@
 //       neighborIDs: [],
 //     };
 
-//     // Find all the lines that contain this vertex and add the neighbor if not alraedy added
-//     for (const line of lines) {
-//       if (vertex.id === line.vertex1.id) {
-//         if (adj.neighborIDs.indexOf(line.vertex2.id) === -1) {
-//           adj.neighborIDs.push(line.vertex2.id);
+//     // Find all the edges that contain this vertex and add the neighbor if not alraedy added
+//     for (const edge of edges) {
+//       if (vertex.id === edge.vertex1.id) {
+//         if (adj.neighborIDs.indexOf(edge.vertex2.id) === -1) {
+//           adj.neighborIDs.push(edge.vertex2.id);
 //         }
-//       } else if (vertex.id === line.vertex2.id) {
-//         if (adj.neighborIDs.indexOf(line.vertex1.id) === -1) {
-//           adj.neighborIDs.push(line.vertex1.id);
+//       } else if (vertex.id === edge.vertex2.id) {
+//         if (adj.neighborIDs.indexOf(edge.vertex1.id) === -1) {
+//           adj.neighborIDs.push(edge.vertex1.id);
 //         }
 //       }
 //     }
@@ -117,8 +117,8 @@
 // // `numSides` steps. If we can return to the original vertex without repeating edges, then we have
 // // formed out shape.
 // const createShapes = (numSides: number): Shape[] => {
-//   // Create adjacency list (eventually, this should be generated in place of the lines list)
-//   const adjList = createAdjacencyList(vertices, lines);
+//   // Create adjacency list (eventually, this should be generated in place of the edges list)
+//   const adjList = createAdjacencyList(vertices, edges);
 
 //   const shapes: Shape[] = [];
 //   // TODO: I had trouble finding the cycles in a generic way so I'm falling back to just triangles.

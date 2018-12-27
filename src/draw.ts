@@ -17,14 +17,14 @@ const drawVertex = (ctx: CanvasRenderingContext2D, vertex: Vertex): void => {
   // ctx.fillText(String(vertex.id), vertex.x, vertex.y);
 };
 
-const drawLine = (ctx: CanvasRenderingContext2D, line: Line): void => {
-  ctx.strokeStyle = `rgba(${line.vertex1.color.r}, ${line.vertex1.color.g}, ${
-    line.vertex1.color.b
-  }, ${line.vertex1.color.a})`;
+const drawEdge = (ctx: CanvasRenderingContext2D, edge: Edge): void => {
+  ctx.strokeStyle = `rgba(${edge.vertex1.color.r}, ${edge.vertex1.color.g}, ${
+    edge.vertex1.color.b
+  }, ${edge.vertex1.color.a})`;
 
   ctx.beginPath();
-  ctx.moveTo(line.vertex1.x, line.vertex1.y);
-  ctx.lineTo(line.vertex2.x, line.vertex2.y);
+  ctx.moveTo(edge.vertex1.x, edge.vertex1.y);
+  ctx.lineTo(edge.vertex2.x, edge.vertex2.y);
   ctx.stroke();
 };
 
@@ -45,7 +45,7 @@ const drawShape = (ctx: CanvasRenderingContext2D, shape: Shape): void => {
 export const draw = (
   ctx: CanvasRenderingContext2D,
   vertices: Vertex[],
-  lines: Line[],
+  edges: Edge[],
   shapes: Shape[],
 ): void => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -54,8 +54,8 @@ export const draw = (
     drawVertex(ctx, vertex);
   }
 
-  for (const line of lines) {
-    drawLine(ctx, line);
+  for (const edge of edges) {
+    drawEdge(ctx, edge);
   }
 
   for (const shape of shapes) {

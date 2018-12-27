@@ -6,7 +6,7 @@ declare interface BobaOptions {
   height: number;
   // Vertices configurations
   numVertices: number;
-  // Lines configurations
+  // Edges configurations
   numNeighbors: number;
   // Shapes configurations
   numSides: number;
@@ -28,7 +28,7 @@ declare interface Vertex {
   };
 }
 
-declare interface Line {
+declare interface Edge {
   vertex1: Vertex;
   vertex2: Vertex;
 }
@@ -44,6 +44,6 @@ declare interface Shape {
 
 declare interface UpdateResult {
   vertices: Vertex[];
-  lines: Line[];
+  edges: Edge[];
   shapes: Shape[];
 }

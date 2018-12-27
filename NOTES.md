@@ -17,13 +17,13 @@ npm publish --access public
 ## To Do
 
 - Rename `vertex` to `vertex`
-- Rename `line` to `edge`
+- Rename `edge` to `edge`
 
 - Provide a function that returns an object with all default options
 - Make it configurable
 - Make it pretty
 
-- Finding lines can be optimized.
+- Finding edges can be optimized.
 
 - Later
   - Mouse effects on vertices
