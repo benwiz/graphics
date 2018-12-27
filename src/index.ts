@@ -21,7 +21,8 @@ const createPoints = (
   for (let i: number = 0; i < numPoints; i++) {
     const x: number = Util.getRandomInt(0, maxX);
     const y: number = Util.getRandomInt(0, maxY);
-    const point: Point = { x, y };
+    const speed: number = 1;
+    const point: Point = { x, y, speed };
     points.push(point);
   }
   return points;

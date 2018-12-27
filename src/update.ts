@@ -1,5 +1,5 @@
 const movePoint = (point: Point): Point => {
-  point.x += 1;
+  point.x += point.speed;
   return point;
 };
 
