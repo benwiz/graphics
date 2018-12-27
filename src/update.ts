@@ -101,8 +101,17 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
   return lines;
 };
 
-const findLineInLines = (line: Line, lines: Line[]): Boolean => {
-  return true;
+const findLineInLines = (testLine: Line, lines: Line[]): Boolean => {
+  for (const line of lines) {
+    if (
+      testLine.point1.id === line.point1.id &&
+      testLine.point2.id === line.point2.id
+    ) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 const createTriangles = (points: Point[], lines: Line[]): Shape[] => {
