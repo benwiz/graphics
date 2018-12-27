@@ -16,9 +16,6 @@ npm publish --access public
 
 ## To Do
 
-- Rename `vertex` to `vertex`
-- Rename `edge` to `edge`
-
 - Provide a function that returns an object with all default options
 - Make it configurable
 - Make it pretty
