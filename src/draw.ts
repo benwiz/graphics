@@ -27,6 +27,7 @@ export const draw = (
   ctx: CanvasRenderingContext2D,
   points: Point[],
   lines: Line[],
+  triangles: Triangle[],
 ): void => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 

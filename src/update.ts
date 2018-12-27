@@ -101,20 +101,30 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
   return lines;
 };
 
+// NOTE: This could probably be generalized into `createShape` and require a `numSides` input
+const createTriangles = (lines: Line[]): Triangle[] => {
+  const triangles: Triangle[] = [];
+  return triangles;
+};
+
 export const update = (
   progress: number,
   ctx: CanvasRenderingContext2D,
   numNeighbors: number,
   points: Point[],
   lines: Line[],
+  triangles: Triangle[],
 ): UpdateResult => {
   // Move points
   for (const point of points) {
     updatePoint(ctx, point);
   }
 
-  // Create new set of lines
+  // Create/find the new set of lines
   lines = createLines(points, numNeighbors);
 
-  return { points, lines };
+  // Create/find the new set of triangles
+  triangles = createTriangles(lines);
+
+  return { points, lines, triangles };
 };

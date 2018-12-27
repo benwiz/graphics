@@ -19,7 +19,14 @@ declare interface Line {
   point2: Point;
 }
 
+declare interface Triangle {
+  point1: Point;
+  point2: Point;
+  point3: Point;
+}
+
 declare interface UpdateResult {
   points: Point[];
   lines: Line[];
+  triangles: Triangle[];
 }

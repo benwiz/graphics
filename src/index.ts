@@ -6,6 +6,7 @@ import * as Update from './update';
 let CTX: CanvasRenderingContext2D;
 let POINTS: Point[];
 let LINES: Line[];
+let TRIANGLES: Triangle[];
 let LAST_RENDER: number;
 // Configs that have to be global so I can get them into the `loop` function. This isn't good.
 const CONFIG = {
@@ -30,13 +31,15 @@ const loop = (timestamp: number): void => {
   const result: UpdateResult = Update.update(
     progress,
     CTX,
-    CONFIG.numNeighbors,
+    CONFIG.numNeighbors, // TODO: Probably just pass in the whole "CONFIG" object
     POINTS,
     LINES,
+    TRIANGLES,
   );
   POINTS = result.points;
   LINES = result.lines;
-  Draw.draw(CTX, POINTS, LINES);
+  TRIANGLES = result.triangles;
+  Draw.draw(CTX, POINTS, LINES, TRIANGLES);
 
   LAST_RENDER = timestamp;
   window.requestAnimationFrame(loop);
@@ -75,7 +78,8 @@ export const start = (options: StartOptions): void => {
   // 2. Initialize lines list as an empty array
   LINES = [];
 
-  // TODO 3. Initialize shapes list as an empty array, I think
+  // Initialize shapes list as an empty array, I think
+  TRIANGLES = [];
 
   // Game loop
   LAST_RENDER = 0;

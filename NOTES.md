@@ -16,13 +16,7 @@ npm publish --access public
 
 ## To Do
 
-- Update lines
-  - Don't allow duplicates
-  - main update function should not return `any`
-- Draw lines
-
 - Find/create shapes
-- Update shapes?
 - Draw shapes
 
 - Make it configurable
