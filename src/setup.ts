@@ -42,7 +42,7 @@ export const createPoints = (
         r: 30,
         g: 144,
         b: 255,
-        a: 16,
+        a: 0.2,
       },
     };
     points.push(point);
