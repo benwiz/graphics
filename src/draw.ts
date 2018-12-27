@@ -30,7 +30,7 @@ const drawShape = (ctx: CanvasRenderingContext2D, shape: Shape): void => {
 
   ctx.beginPath();
   ctx.moveTo(shape.points[0].x, shape.points[0].y);
-  for (let i = 1; i < shape.points.length; i++) {
+  for (let i = 1; i < shape.numSides; i++) {
     const point: Point = shape.points[i];
     ctx.lineTo(point.x, point.y);
   }
