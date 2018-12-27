@@ -131,10 +131,10 @@ const createAdjacencyList = (points: Point[], lines: Line[]): Adjacency[] => {
 // To create shapes we run a depth-first search from every point on the graph. We only make
 // `numSides` steps. If we can return to the original point without repeating edges, then we have
 // formed out shape.
-const createShapes = (lines: Line[], numSides: number): Shape[] => {
+const createShapes = (adjList: Adjacency[], numSides: number): Shape[] => {
   const shapes: Shape[] = [];
 
-  for (const line of lines) {
+  for (const adj of adjList) {
   }
 
   return shapes;
@@ -158,10 +158,9 @@ export const update = (
 
   // Create adjacency list (eventually, this should be generated in place of the lines list)
   const adjList = createAdjacencyList(points, lines);
-  console.log(adjList);
 
   // Create/find the new set of shapes
-  shapes = createShapes(lines, options.numSides);
+  shapes = createShapes(adjList, options.numSides);
 
   return { points, lines, shapes };
 };
