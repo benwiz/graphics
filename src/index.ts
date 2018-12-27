@@ -39,12 +39,16 @@ export const start = (options: StartOptions): void => {
     throw new Error('Oh no! `ctx` is null!');
   }
 
-  // Initialize data
+  // Initialize data in three step
+  // 1. Create points
   const points: Point[] = Setup.createPoints(
     options.numPoints,
     width - 1,
     height - 1,
   );
+
+  // TODO: 2. Find and create lines
+  // TODO: 3. Find and create shapes
 
   // Execute update and draw. Infinitely, in parallel.
   updateLoop(ctx, points);

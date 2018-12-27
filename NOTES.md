@@ -16,8 +16,14 @@ npm publish --access public
 
 ## To Do
 
+- Create lines
+- Update lines
 - Draw lines
-- Fill shapes
+
+- Find/create shapes
+- Update shapes?
+- Draw shapes
+
 - Make it configurable
 - Make it pretty
 
