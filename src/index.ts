@@ -12,6 +12,28 @@ interface StartOptions {
   numPoints: number;
 }
 
+const createCanvas = (
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+): HTMLCanvasElement => {
+  // Create canvas
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+
+  // Set css-based location
+  canvas.style.position = 'absolute';
+  canvas.style.left = String(x);
+  canvas.style.top = String(y);
+  canvas.style.zIndex = '-1';
+
+  // Append canvas to dom and return canvas
+  document.body.appendChild(canvas);
+  return canvas;
+};
+
 const createPoints = (
   numPoints: number,
   maxX: number,
@@ -48,9 +70,10 @@ export const start = (options: StartOptions): void => {
   // Create canvas and get context
   const x: number = options.x || 0;
   const y: number = options.y || 0;
-  const width: number = options.width || window.innerWidth;
-  const height: number = options.height || window.innerHeight;
-  const canvas: HTMLCanvasElement = Draw.createCanvas(x, y, width, height);
+  const width: number = options.width || document.documentElement.scrollWidth;
+  const height: number =
+    options.height || document.documentElement.scrollHeight;
+  const canvas: HTMLCanvasElement = createCanvas(x, y, width, height);
   const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 
   // Check that context was found, if not exit with an error. TODO: Make this proper.
