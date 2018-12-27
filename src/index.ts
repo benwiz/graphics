@@ -2,8 +2,11 @@ import * as Setup from './setup';
 import * as Draw from './draw';
 import * as Update from './update';
 
+// Global variables a necessary evil for the game loop
+let CTX: CanvasRenderingContext2D;
 let POINTS: Point[];
 let LINES: Line[];
+let LAST_RENDER: number;
 
 interface StartOptions {
   // Provide optional location and size of canvas
@@ -15,24 +18,34 @@ interface StartOptions {
   numPoints: number;
 }
 
-const updateLoop = (
-  ctx: CanvasRenderingContext2D,
-  points: Point[],
-  lines: Line[],
-): void => {
-  const result: UpdateResult = Update.update(ctx, points, lines);
-  POINTS = result.points;
-  LINES = result.lines;
-  setTimeout(() => updateLoop(ctx, POINTS, LINES), 0);
-};
+// const updateLoop = (
+//   ctx: CanvasRenderingContext2D,
+//   points: Point[],
+//   lines: Line[],
+// ): void => {
+//   const result: UpdateResult = Update.update(ctx, points, lines);
+//   points = result.points;
+//   lines = result.lines;
+//   setTimeout(() => updateLoop(ctx, points, lines), 0);
+// };
 
-const drawLoop = (
-  ctx: CanvasRenderingContext2D,
-  points: Point[],
-  lines: Line[],
-): void => {
-  Draw.draw(ctx, points, lines);
-  setTimeout(() => drawLoop(ctx, POINTS, LINES), 0);
+// const drawLoop = (
+//   ctx: CanvasRenderingContext2D,
+//   points: Point[],
+//   lines: Line[],
+// ): void => {
+//   Draw.draw(ctx, points, lines);
+//   setTimeout(() => drawLoop(ctx, points, lines), 0);
+// };
+
+const loop = (timestamp: number): void => {
+  const progress = timestamp - LAST_RENDER;
+
+  Update.update(CTX, POINTS, LINES);
+  Draw.draw(CTX, POINTS, LINES);
+
+  LAST_RENDER = timestamp;
+  window.requestAnimationFrame(loop);
 };
 
 export const start = (options: StartOptions): void => {
@@ -55,6 +68,9 @@ export const start = (options: StartOptions): void => {
     throw new Error('Oh no! `ctx` is null!');
   }
 
+  // Now that we know `ctx` exists, assign it globally
+  CTX = ctx;
+
   // Initialize data in three step
   // 1. Create points
   POINTS = Setup.createPoints(options.numPoints, width - 1, height - 1);
@@ -64,9 +80,12 @@ export const start = (options: StartOptions): void => {
 
   // TODO 3. Initialize shapes list as an empty array, I think
 
-  // Execute update and draw. Infinitely, in parallel.
-  updateLoop(ctx, POINTS, LINES);
-  drawLoop(ctx, POINTS, LINES);
+  // // Execute update and draw. Infinitely, in parallel.
+  // updateLoop(ctx, points, lines);
+  // drawLoop(ctx, points, lines);
+
+  LAST_RENDER = 0;
+  window.requestAnimationFrame(loop);
 };
 
 // // Use this to help with mouse effects on the points

@@ -92,8 +92,6 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
     }
   }
 
-  // console.log(lines.length);
-
   return lines;
 };
 
@@ -101,15 +99,15 @@ export const update = (
   ctx: CanvasRenderingContext2D,
   points: Point[],
   lines: Line[],
-): UpdateResult => {
+): /*UpdateResult*/ void => {
   // Move points
   for (let point of points) {
     point = updatePoint(ctx, point);
   }
 
   // Create new set of lines
-  const numNeighbors = 3;
+  const numNeighbors = 2;
   lines = createLines(points, numNeighbors);
 
-  return { points, lines };
+  // return { points, lines };
 };
