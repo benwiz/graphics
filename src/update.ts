@@ -60,22 +60,19 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
     for (const point2 of points) {
       if (point1 === point2) continue;
 
-      // We determine the point closer to the origin, then use that as `point1` in the line. The
-      // reason is so that we can dedupe later on.
-      const dist1 = Util.distance({ x: 0, y: 0 }, point1);
-      const dist2 = Util.distance({ x: 0, y: 0 }, point2);
-      let smallerPoint: Point;
-      let largerPoint: Point;
-      if (dist1 < dist2) {
-        smallerPoint = point1;
-        largerPoint = point2;
+      // Create the line so that point1 has the lower id
+      let pointA: Point;
+      let pointB: Point;
+      if (point1.id <= point2.id) {
+        pointA = point1;
+        pointB = point2;
       } else {
-        smallerPoint = point2;
-        largerPoint = point1;
+        pointA = point2;
+        pointB = point1;
       }
 
       // Record the formatted line
-      const line: Line = { point1: smallerPoint, point2: largerPoint };
+      const line: Line = { point1: pointA, point2: pointB };
       linesForPoint.push(line);
     }
 
@@ -84,11 +81,13 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
 
     // Add those lines to the main lines array as long as the line is not already in the list
     for (const line of linesForPoint) {
-      // if (lines.indexOf(line) > -1) continue;
-      // const reversedLine: Line = { point1: line.point2, point2: line.point1 };
-      // if (lines.indexOf(reversedLine)) continue;
+      const matches = lines.filter(
+        l => l.point1.id === line.point1.id && l.point2.id === line.point2.id,
+      );
 
-      lines.push(line);
+      if (matches.length === 0) {
+        lines.push(line);
+      }
     }
   }
 
@@ -96,18 +95,19 @@ const createLines = (points: Point[], numNeighbors: number): Line[] => {
 };
 
 export const update = (
+  progress: number,
   ctx: CanvasRenderingContext2D,
   points: Point[],
   lines: Line[],
-): /*UpdateResult*/ void => {
+): UpdateResult => {
   // Move points
-  for (let point of points) {
-    point = updatePoint(ctx, point);
+  for (const point of points) {
+    updatePoint(ctx, point);
   }
 
   // Create new set of lines
-  const numNeighbors = 2;
+  const numNeighbors = 1;
   lines = createLines(points, numNeighbors);
 
-  // return { points, lines };
+  return { points, lines };
 };

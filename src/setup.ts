@@ -32,6 +32,7 @@ export const createPoints = (
     // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
     // lists rather than just single values
     const point: Point = {
+      id: i,
       x: Util.getRandomInt(0, maxX),
       y: Util.getRandomInt(0, maxY),
       speed: 1,

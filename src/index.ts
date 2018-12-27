@@ -18,30 +18,12 @@ interface StartOptions {
   numPoints: number;
 }
 
-// const updateLoop = (
-//   ctx: CanvasRenderingContext2D,
-//   points: Point[],
-//   lines: Line[],
-// ): void => {
-//   const result: UpdateResult = Update.update(ctx, points, lines);
-//   points = result.points;
-//   lines = result.lines;
-//   setTimeout(() => updateLoop(ctx, points, lines), 0);
-// };
-
-// const drawLoop = (
-//   ctx: CanvasRenderingContext2D,
-//   points: Point[],
-//   lines: Line[],
-// ): void => {
-//   Draw.draw(ctx, points, lines);
-//   setTimeout(() => drawLoop(ctx, points, lines), 0);
-// };
-
 const loop = (timestamp: number): void => {
   const progress = timestamp - LAST_RENDER;
 
-  Update.update(CTX, POINTS, LINES);
+  const result: UpdateResult = Update.update(progress, CTX, POINTS, LINES);
+  POINTS = result.points;
+  LINES = result.lines;
   Draw.draw(CTX, POINTS, LINES);
 
   LAST_RENDER = timestamp;
@@ -80,10 +62,7 @@ export const start = (options: StartOptions): void => {
 
   // TODO 3. Initialize shapes list as an empty array, I think
 
-  // // Execute update and draw. Infinitely, in parallel.
-  // updateLoop(ctx, points, lines);
-  // drawLoop(ctx, points, lines);
-
+  // Game loop
   LAST_RENDER = 0;
   window.requestAnimationFrame(loop);
 };
