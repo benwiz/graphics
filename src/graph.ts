@@ -41,24 +41,20 @@ const dlsUtil = (
   pointID: number,
   depth: number,
   points: number[],
-  shapes: number[][],
+  sets: number[][],
 ): void => {
-  if (depth < 0) return;
-
   points.push(pointID);
-  shapes[shapes.length - 1].push(pointID);
 
-  if (depth === 0) {
-    const latestShape = shapes[shapes.length - 1];
-    const newShape: number[] = latestShape.slice(0, latestShape.length - 1);
-    shapes.push(newShape);
+  if (depth === -1) {
+    console.log(points);
+    return;
   }
 
   for (const neighborID of adjList[pointID].neighborIDs) {
     // If not already handled
     if (points.indexOf(neighborID) === -1) {
-      console.log(`${depth}: ${pointID} - ${neighborID}`, shapes);
-      dlsUtil(adjList, neighborID, depth - 1, points, shapes);
+      console.log(`${depth}: ${pointID} - ${neighborID}`);
+      dlsUtil(adjList, neighborID, depth - 1, points, sets);
     }
   }
 };
