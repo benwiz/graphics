@@ -130,9 +130,7 @@ const createTriangles = (points: Point[], lines: Line[]): Shape[] => {
       const test2 = true;
 
       if (test1 && test2) {
-        const triangle: Shape = {
-          points: [point, line.point1, line.point2];
-        };
+        const triangle: Shape = { points: [point, line.point1, line.point2] };
       }
     }
   }
