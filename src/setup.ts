@@ -38,10 +38,6 @@ export const createVertices = (options: BobaOptions): Vertex[] => {
       color:
         options.vertexColors[Util.getRandomInt(0, options.vertexColors.length)],
     };
-    console.log(
-      Util.getRandomInt(0, options.vertexColors.length),
-      vertex.color,
-    );
     vertices.push(vertex);
   }
   return vertices;
