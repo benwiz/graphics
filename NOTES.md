@@ -16,8 +16,10 @@ npm publish --access public
 
 ## To Do
 
-- Provide a function that returns an object with all default options
-- Make it configurable
+- Add more configs
+  - Dot size
+  - Color(s)
+    - Maybe allow a color palette
 - Make it pretty
 
 - Finding edges can be optimized.

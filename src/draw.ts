@@ -44,6 +44,7 @@ const drawShape = (ctx: CanvasRenderingContext2D, shape: Shape): void => {
 
 export const draw = (
   ctx: CanvasRenderingContext2D,
+  options: BobaOptions,
   vertices: Vertex[],
   edges: Edge[],
   shapes: Shape[],
@@ -58,7 +59,9 @@ export const draw = (
     drawEdge(ctx, edge);
   }
 
-  for (const shape of shapes) {
-    drawShape(ctx, shape);
+  if (options.drawShapes) {
+    for (const shape of shapes) {
+      drawShape(ctx, shape);
+    }
   }
 };

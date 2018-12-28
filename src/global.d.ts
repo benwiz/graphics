@@ -1,3 +1,4 @@
+// NOTE: Any time this is updated, remember to update `index.js::getDefaultOptions()`
 declare interface BobaOptions {
   // Location and size of canvas
   x: number;
@@ -8,8 +9,8 @@ declare interface BobaOptions {
   numVertices: number;
   // Edges configurations
   numNeighbors: number;
-  // Shapes configurations
-  numSides: number;
+  // Shape configurations
+  drawShapes: boolean;
 }
 
 declare interface Vertex {

@@ -24,7 +24,7 @@ const loop = (timestamp: number): void => {
   VERTICES = result.vertices;
   EDGES = result.edges;
   SHAPES = result.shapes;
-  Draw.draw(CTX, VERTICES, EDGES, SHAPES);
+  Draw.draw(CTX, OPTIONS, VERTICES, EDGES, SHAPES);
 
   LAST_RENDER = timestamp;
   window.requestAnimationFrame(loop);
@@ -63,4 +63,17 @@ export const start = (options: BobaOptions): void => {
   // Game loop
   LAST_RENDER = 0;
   window.requestAnimationFrame(loop);
+};
+
+export const getDefaultOptions = (): BobaOptions => {
+  const options = {
+    x: 0,
+    y: 0,
+    width: document.documentElement.scrollWidth,
+    height: document.documentElement.scrollHeight,
+    numVertices: 30,
+    numNeighbors: 2,
+    drawShapes: true,
+  };
+  return options;
 };
