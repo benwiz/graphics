@@ -19,6 +19,9 @@ npm publish --access public
 - Add more configs
   - Color(s) for points, edges, shapes. Will have to do some rearchitecting of core code.
     - Maybe allow a color palette
+  - Implement constraints due to incomplete development:
+    - Edge colors can only be of length 1
+    - Shape colors can only be of length 1
 - Deploy to NPM
 - Create a demo website before deploying benwiz.github.io
 - Clean up readme and create docs

@@ -18,9 +18,9 @@ const drawVertex = (ctx: CanvasRenderingContext2D, vertex: Vertex): void => {
 };
 
 const drawEdge = (ctx: CanvasRenderingContext2D, edge: Edge): void => {
-  ctx.strokeStyle = `rgba(${edge.vertex1.color.r}, ${edge.vertex1.color.g}, ${
-    edge.vertex1.color.b
-  }, ${edge.vertex1.color.a})`;
+  ctx.strokeStyle = `rgba(${edge.color.r}, ${edge.color.g}, ${edge.color.b}, ${
+    edge.color.a
+  })`;
 
   ctx.beginPath();
   ctx.moveTo(edge.vertex1.x, edge.vertex1.y);
@@ -29,9 +29,9 @@ const drawEdge = (ctx: CanvasRenderingContext2D, edge: Edge): void => {
 };
 
 const drawShape = (ctx: CanvasRenderingContext2D, shape: Shape): void => {
-  ctx.fillStyle = `rgba(${shape.vertices[0].color.r}, ${
-    shape.vertices[0].color.g
-  }, ${shape.vertices[0].color.b}, ${shape.vertices[0].color.a / 2})`;
+  ctx.fillStyle = `rgba(${shape.color.r}, ${shape.color.g}, ${shape.color.b}, ${
+    shape.color.a
+  })`;
 
   ctx.beginPath();
   ctx.moveTo(shape.vertices[0].x, shape.vertices[0].y);

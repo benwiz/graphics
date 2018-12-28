@@ -1,6 +1,9 @@
 import * as Util from './util';
 
-const updateVertex = (ctx: CanvasRenderingContext2D, vertex: Vertex): Vertex => {
+const updateVertex = (
+  ctx: CanvasRenderingContext2D,
+  vertex: Vertex,
+): Vertex => {
   // Update location
   vertex.x +=
     vertex.speed *
@@ -48,7 +51,11 @@ const updateVertex = (ctx: CanvasRenderingContext2D, vertex: Vertex): Vertex => 
   return vertex;
 };
 
-const createEdges = (vertices: Vertex[], numNeighbors: number): Edge[] => {
+const createEdges = (
+  options: BobaOptions,
+  vertices: Vertex[],
+  numNeighbors: number,
+): Edge[] => {
   const edges: Edge[] = [];
 
   // For each vertex
@@ -72,7 +79,14 @@ const createEdges = (vertices: Vertex[], numNeighbors: number): Edge[] => {
       }
 
       // Record the formatted edge
-      const edge: Edge = { vertex1: vertexA, vertex2: vertexB };
+      const edge: Edge = {
+        vertex1: vertexA,
+        vertex2: vertexB,
+        color:
+          options.edgeColors[
+            Util.getRandomInt(0, options.edgeColors.length - 1)
+          ],
+      };
       edgesForVertex.push(edge);
     }
 
@@ -89,7 +103,8 @@ const createEdges = (vertices: Vertex[], numNeighbors: number): Edge[] => {
     // Add those edges to the main edges array as long as the edge is not already in the list
     for (const edge of edgesForVertex) {
       const matches = edges.filter(
-        l => l.vertex1.id === edge.vertex1.id && l.vertex2.id === edge.vertex2.id,
+        l =>
+          l.vertex1.id === edge.vertex1.id && l.vertex2.id === edge.vertex2.id,
       );
 
       if (matches.length === 0) {
@@ -114,7 +129,11 @@ const findEdgeInEdges = (testEdge: Edge, edges: Edge[]): Boolean => {
   return false;
 };
 
-const createTriangles = (vertices: Vertex[], edges: Edge[]): Shape[] => {
+const createTriangles = (
+  options: BobaOptions,
+  vertices: Vertex[],
+  edges: Edge[],
+): Shape[] => {
   const triangles: Shape[] = [];
 
   for (const edge of edges) {
@@ -123,19 +142,20 @@ const createTriangles = (vertices: Vertex[], edges: Edge[]): Shape[] => {
       if (edge.vertex1 === vertex || edge.vertex2 === vertex) continue;
 
       // If (edge.vertex1, vertex) && (vertex, edge.vertex2) are edges that exist. Create the test
-      // edges here.
+      // edges here. Color doesn't actually matter since comparisons are done against id.
       let testEdge1: Edge;
+      const color: Color = { r: 0, g: 0, b: 0, a: 0 };
       if (vertex.id < edge.vertex1.id) {
-        testEdge1 = { vertex1: vertex, vertex2: edge.vertex1 };
+        testEdge1 = { vertex1: vertex, vertex2: edge.vertex1, color };
       } else {
-        testEdge1 = { vertex1: edge.vertex1, vertex2: vertex };
+        testEdge1 = { vertex1: edge.vertex1, vertex2: vertex, color };
       }
 
       let testEdge2: Edge;
       if (vertex.id < edge.vertex2.id) {
-        testEdge2 = { vertex1: vertex, vertex2: edge.vertex2 };
+        testEdge2 = { vertex1: vertex, vertex2: edge.vertex2, color };
       } else {
-        testEdge2 = { vertex1: edge.vertex2, vertex2: vertex };
+        testEdge2 = { vertex1: edge.vertex2, vertex2: vertex, color };
       }
 
       // Find if there are matching edges
@@ -144,7 +164,13 @@ const createTriangles = (vertices: Vertex[], edges: Edge[]): Shape[] => {
 
       // Run the test
       if (test1 && test2) {
-        const triangle: Shape = { vertices: [vertex, edge.vertex1, edge.vertex2] };
+        const triangle: Shape = {
+          vertices: [vertex, edge.vertex1, edge.vertex2],
+          color:
+            options.shapeColors[
+              Util.getRandomInt(0, options.shapeColors.length - 1)
+            ],
+        };
         triangles.push(triangle);
       }
     }
@@ -167,10 +193,10 @@ export const update = (
   }
 
   // Create/find the new set of edges
-  edges = createEdges(vertices, options.numNeighbors);
+  edges = createEdges(options, vertices, options.numNeighbors);
 
   // Create/find the new set of shapes
-  shapes = createTriangles(vertices, edges);
+  shapes = createTriangles(options, vertices, edges);
 
   return { vertices, edges, shapes };
 };

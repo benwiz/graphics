@@ -79,11 +79,35 @@ export const getDefaultOptions = (): BobaOptions => {
     vertexMaxSize: 16,
     vertexMinSpeed: 0.5,
     vertexMaxSpeed: 2,
+    vertexColors: [
+      {
+        r: 30,
+        g: 144,
+        b: 255,
+        a: 0.1,
+      },
+    ],
     // Edges configurations
     numNeighbors: 2,
     drawEdges: true,
+    edgeColors: [
+      {
+        r: 30,
+        g: 144,
+        b: 255,
+        a: 0.1,
+      },
+    ],
     // Shapes configurations
     drawShapes: true,
+    shapeColors: [
+      {
+        r: 30,
+        g: 144,
+        b: 255,
+        a: 0.05,
+      },
+    ],
   };
   return options;
 };
