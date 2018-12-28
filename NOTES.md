@@ -19,6 +19,11 @@ npm publish --access public
 - Add more configs
   - Color(s) for points, edges, shapes. Will have to do some rearchitecting of core code.
     - Maybe allow a color palette
+- Deploy to NPM
+- Create a demo website before deploying benwiz.github.io
+- Clean up readme and create docs
+- Deploy to NPM again
+- Finish implementation on benwiz.github.io
 
 - Later
   - Mouse effects on vertices
