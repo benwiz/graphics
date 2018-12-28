@@ -22,19 +22,15 @@ export const createCanvas = (
   return canvas;
 };
 
-export const createVertices = (
-  numVertices: number,
-  maxX: number,
-  maxY: number,
-): Vertex[] => {
+export const createVertices = (options: BobaOptions): Vertex[] => {
   const vertices: Vertex[] = [];
-  for (let i: number = 0; i < numVertices; i++) {
+  for (let i: number = 0; i < options.numVertices; i++) {
     // TODO: Many of these configs will need to be abstractd to be configurable, and maybe into
     // lists rather than just single values
     const vertex: Vertex = {
       id: i,
-      x: Util.getRandomInt(0, maxX),
-      y: Util.getRandomInt(0, maxY),
+      x: Util.getRandomInt(0, options.width - 1),
+      y: Util.getRandomInt(0, options.height - 1),
       speed: Util.getRandomFloat(0.5, 2),
       angle: Util.getRandomFloat(0, 360),
       runAwayMultiplier: 1,

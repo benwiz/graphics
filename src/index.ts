@@ -52,7 +52,7 @@ export const start = (options: BobaOptions): void => {
 
   // Initialize data in three step
   // 1. Create vertices
-  VERTICES = Setup.createVertices(options.numVertices, width - 1, height - 1);
+  VERTICES = Setup.createVertices(options);
 
   // 2. Initialize edges list as an empty array
   EDGES = [];
