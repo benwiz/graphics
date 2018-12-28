@@ -17,9 +17,8 @@ npm publish --access public
 ## To Do
 
 - Add more configs
-  - Color(s) for points, edges, shapes. May have to do some rearchitecting of core code.
+  - Color(s) for points, edges, shapes. Will have to do some rearchitecting of core code.
     - Maybe allow a color palette
-- Make it pretty
 
 - Finding edges can be optimized.
 
