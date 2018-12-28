@@ -67,12 +67,22 @@ export const start = (options: BobaOptions): void => {
 
 export const getDefaultOptions = (): BobaOptions => {
   const options = {
+    // Location and size of canvas
     x: 0,
     y: 0,
     width: document.documentElement.scrollWidth,
     height: document.documentElement.scrollHeight,
+    // Vertices configurations
     numVertices: 30,
+    drawVertices: true,
+    vertexMinSize: 8,
+    vertexMaxSize: 16,
+    vertexMinSpeed: 0.5,
+    vertexMaxSpeed: 2,
+    // Edges configurations
     numNeighbors: 2,
+    drawEdges: true,
+    // Shapes configurations
     drawShapes: true,
   };
   return options;

@@ -17,8 +17,7 @@ npm publish --access public
 ## To Do
 
 - Add more configs
-  - Dot size
-  - Color(s)
+  - Color(s) for points, edges, shapes. May have to do some rearchitecting of core code.
     - Maybe allow a color palette
 - Make it pretty
 

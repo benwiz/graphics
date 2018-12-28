@@ -51,12 +51,15 @@ export const draw = (
 ): void => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  for (const vertex of vertices) {
-    drawVertex(ctx, vertex);
+  if (options.drawVertices) {
+    for (const vertex of vertices) {
+      drawVertex(ctx, vertex);
+    }
   }
-
-  for (const edge of edges) {
-    drawEdge(ctx, edge);
+  if (options.drawEdges) {
+    for (const edge of edges) {
+      drawEdge(ctx, edge);
+    }
   }
 
   if (options.drawShapes) {

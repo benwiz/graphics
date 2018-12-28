@@ -7,8 +7,14 @@ declare interface BobaOptions {
   height: number;
   // Vertices configurations
   numVertices: number;
+  drawVertices: boolean;
+  vertexMinSize: number;
+  vertexMaxSize: number;
+  vertexMinSpeed: number;
+  vertexMaxSpeed: number;
   // Edges configurations
   numNeighbors: number;
+  drawEdges: boolean;
   // Shape configurations
   drawShapes: boolean;
 }
