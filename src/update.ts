@@ -83,9 +83,7 @@ const createEdges = (
         vertex1: vertexA,
         vertex2: vertexB,
         color:
-          options.edgeColors[
-            Util.getRandomInt(0, options.edgeColors.length - 1)
-          ],
+          options.edgeColors[Util.getRandomInt(0, options.edgeColors.length)],
       };
       edgesForVertex.push(edge);
     }
@@ -168,7 +166,7 @@ const createTriangles = (
           vertices: [vertex, edge.vertex1, edge.vertex2],
           color:
             options.shapeColors[
-              Util.getRandomInt(0, options.shapeColors.length - 1)
+              Util.getRandomInt(0, options.shapeColors.length)
             ],
         };
         triangles.push(triangle);
