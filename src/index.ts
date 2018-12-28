@@ -64,16 +64,3 @@ export const start = (options: BobaOptions): void => {
   LAST_RENDER = 0;
   window.requestAnimationFrame(loop);
 };
-
-// // Use this to help with mouse effects on the vertices
-// document.addEventListener('mousemove', (event: MouseEvent) => {
-//   const mousePos = Util.getMousePos(canvas, event);
-// });
-// util.js
-// export const getMousePos = (canvas: HTMLCanvasElement, event: MouseEvent) => {
-//   const rect: ClientRect = canvas.getBoundingClientRect();
-//   return {
-//     x: event.clientX - rect.left,
-//     y: event.clientY - rect.top,
-//   };
-// };
