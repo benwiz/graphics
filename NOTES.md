@@ -16,10 +16,6 @@ npm publish --access public
 
 ## To Do
 
-- Add more configs
-  - Implement constraints due to incomplete development:
-    - Edge colors can only be of length 1
-    - Shape colors can only be of length 1
 - Deploy to NPM
 - Create a demo website before deploying benwiz.github.io
 - Clean up readme and create docs
