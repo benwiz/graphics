@@ -20,11 +20,12 @@ npm publish --access public
   - Color(s) for points, edges, shapes. Will have to do some rearchitecting of core code.
     - Maybe allow a color palette
 
-- Finding edges can be optimized.
-
 - Later
   - Mouse effects on vertices
-  - Storing results in adj list will require updates throughout the code. But having those updates will be valuable before starting the C version of this project. But using an adj. list does _not_ necessarily mean I should get rid of the vertices list or edges list. I probably should have a graph class or a graph interface.
+  - Finding edges can be optimized a lot
+  - Finding triangles can be optimized a little, probably
+  - Use more traditional graph organization like an adjacency list
+    - Storing results in adj list will require updates throughout the code. But having those updates will be valuable before starting the C version of this project. But using an adj. list does _not_ necessarily mean I should get rid of the vertices list or edges list. I probably should have a graph class or a graph interface.
     - https://www.geeksforgeeks.org/implementation-graph-javascript/
     - I had a lot of trouble finding 3-cycles and N-cycles using adjacency lists on my first attempt
 
