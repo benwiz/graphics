@@ -30,7 +30,25 @@ const loop = (timestamp: number): void => {
   window.requestAnimationFrame(loop);
 };
 
+const constrainOptions = (options: BobaOptions): BobaOptions => {
+  if (options.edgeColors.length > 1) {
+    console.log(
+      'Boba.js: `edgeColors` currently only supports one color. Keeping only the first color.',
+    );
+  }
+  if (options.shapeColors.length > 1) {
+    console.log(
+      'Boba.js: `shapeColors` currently only supports one color. Keeping only the first color.',
+    );
+  }
+
+  return options;
+};
+
 export const start = (options: BobaOptions): void => {
+  // Handle option constraings
+  options = constrainOptions(options);
+
   // Make options available globally
   OPTIONS = options;
 
