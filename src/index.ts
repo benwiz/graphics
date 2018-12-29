@@ -52,7 +52,11 @@ export const start = (options: BobaOptions): void => {
   // Make options available globally
   OPTIONS = options;
 
-  // Create canvas and get context
+  // Create canvas and get context if the context is not already set (meaning the canvas already
+  // exists). The reason we do this is to allow `start` to be called to override the setup with
+  // new options. It's not the most elegant workflow but it is simple and it works well enough,
+  // for now.
+  console.log('start::CTX:', CTX);
   const x: number = options.x;
   const y: number = options.y;
   const width: number = options.width;
