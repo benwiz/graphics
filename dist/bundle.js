@@ -1,4 +1,4 @@
-var EntryPoint =
+var Boba =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
