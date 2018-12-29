@@ -56,21 +56,22 @@ export const start = (options: BobaOptions): void => {
   // exists). The reason we do this is to allow `start` to be called to override the setup with
   // new options. It's not the most elegant workflow but it is simple and it works well enough,
   // for now.
-  console.log('start::CTX:', CTX);
-  const x: number = options.x;
-  const y: number = options.y;
-  const width: number = options.width;
-  const height: number = options.height;
-  const canvas: HTMLCanvasElement = Setup.createCanvas(x, y, width, height);
-  const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+  if (CTX === undefined) {
+    const x: number = options.x;
+    const y: number = options.y;
+    const width: number = options.width;
+    const height: number = options.height;
+    const canvas: HTMLCanvasElement = Setup.createCanvas(x, y, width, height);
+    const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 
-  // Check that context was found, if not exit with an error. TODO: Make this proper.
-  if (ctx === null) {
-    throw new Error('Oh no! `ctx` is null!');
+    // Check that context was found, if not exit with an error. TODO: Make this proper.
+    if (ctx === null) {
+      throw new Error('Oh no! `ctx` is null!');
+    }
+
+    // Now that we know `ctx` exists, assign it globally
+    CTX = ctx;
   }
-
-  // Now that we know `ctx` exists, assign it globally
-  CTX = ctx;
 
   // Initialize data in three step
   // 1. Create vertices
