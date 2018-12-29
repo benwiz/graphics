@@ -16,6 +16,8 @@ npm publish --access public
 
 ## To Do
 
+- Port to C and create a wasm module. Visit the [repo](https://github.com/benwiz/boba.wasm).
+
 - Later
   - Contribution section of README
   - Mouse effects on vertices
