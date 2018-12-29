@@ -16,10 +16,9 @@ npm publish --access public
 
 ## To Do
 
-- Make it work via unpkg cdn
-- Create a demo website before deploying benwiz.github.io
-- Clean up readme and create docs
-- Deploy to NPM again
+- Finish demo website (don't make it documentation)
+- Turn README into documentation
+- Any final deploys
 - Finish implementation on benwiz.github.io
 
 - Later
