@@ -18,7 +18,7 @@ npm publish --access public
 
 - Turn README into documentation
   - remember to document `html { height: 100% }`
-- Any final deploys
+- Final deploy so README is displayed on NPM
 - Finish implementation on benwiz.github.io
 
 - Later
