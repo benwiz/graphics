@@ -1,6 +1,9 @@
 module.exports = {
+  mode: "none",
   entry: "./lib/index.js",
   output: {
-    filename: "bundle.js"
+    filename: "bundle.js",
+    libraryTarget: "var",
+    library: "EntryPoint"
   }
 };
