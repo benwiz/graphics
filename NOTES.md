@@ -16,7 +16,6 @@ npm publish --access public
 
 ## To Do
 
-- Document the `stop()` function
 - Port to C and create a wasm module. Visit the [repo](https://github.com/benwiz/boba.wasm).
 
 - Later
