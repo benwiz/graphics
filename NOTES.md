@@ -1,4 +1,4 @@
-# A README for my own notes during development that I don't want to pubish to NPM
+# A README for development
 
 ## How to deploy to NPM
 
@@ -16,12 +16,8 @@ npm publish --access public
 
 ## To Do
 
-- Turn README into documentation
-  - remember to document `html { height: 100% }`
-- Final deploy so README is displayed on NPM
-- Finish implementation on benwiz.github.io
-
 - Later
+  - Contribution section of README
   - Mouse effects on vertices
   - Finding edges can be optimized a lot
   - Finding triangles can be optimized a little, probably
