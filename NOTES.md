@@ -16,8 +16,8 @@ npm publish --access public
 
 ## To Do
 
-- Finish demo website (don't make it documentation)
 - Turn README into documentation
+  - remember to document `html { height: 100% }`
 - Any final deploys
 - Finish implementation on benwiz.github.io
 
