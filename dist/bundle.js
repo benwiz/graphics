@@ -102,6 +102,7 @@ let EDGES;
 let SHAPES;
 let LAST_RENDER;
 let OPTIONS;
+let ANIMATION_REQUEST_ID;
 const loop = (timestamp) => {
     const progress = timestamp - LAST_RENDER;
     const result = Update.update(progress, CTX, OPTIONS, VERTICES, EDGES, SHAPES);
@@ -110,7 +111,7 @@ const loop = (timestamp) => {
     SHAPES = result.shapes;
     Draw.draw(CTX, OPTIONS, VERTICES, EDGES, SHAPES);
     LAST_RENDER = timestamp;
-    window.requestAnimationFrame(loop);
+    ANIMATION_REQUEST_ID = window.requestAnimationFrame(loop);
 };
 const constrainOptions = (options) => {
     if (options.edgeColors.length > 1) {
@@ -151,9 +152,11 @@ exports.start = (options) => {
     SHAPES = [];
     // Game loop
     LAST_RENDER = 0;
-    window.requestAnimationFrame(loop);
+    ANIMATION_REQUEST_ID = window.requestAnimationFrame(loop);
 };
 exports.stop = () => {
+    // Cancel the animation requests
+    window.cancelAnimationFrame(ANIMATION_REQUEST_ID);
     // Remove the canvas from the DOM
     CTX.canvas.remove();
     // Reset all global variables (except CTX because it can't be undefined), probably not necessary

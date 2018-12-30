@@ -9,6 +9,7 @@ let EDGES: Edge[];
 let SHAPES: Shape[];
 let LAST_RENDER: number;
 let OPTIONS: BobaOptions;
+let ANIMATION_REQUEST_ID: number;
 
 const loop = (timestamp: number): void => {
   const progress = timestamp - LAST_RENDER;
@@ -27,7 +28,7 @@ const loop = (timestamp: number): void => {
   Draw.draw(CTX, OPTIONS, VERTICES, EDGES, SHAPES);
 
   LAST_RENDER = timestamp;
-  window.requestAnimationFrame(loop);
+  ANIMATION_REQUEST_ID = window.requestAnimationFrame(loop);
 };
 
 const constrainOptions = (options: BobaOptions): BobaOptions => {
@@ -83,10 +84,13 @@ export const start = (options: BobaOptions): void => {
 
   // Game loop
   LAST_RENDER = 0;
-  window.requestAnimationFrame(loop);
+  ANIMATION_REQUEST_ID = window.requestAnimationFrame(loop);
 };
 
 export const stop = (): void => {
+  // Cancel the animation requests
+  window.cancelAnimationFrame(ANIMATION_REQUEST_ID);
+
   // Remove the canvas from the DOM
   CTX.canvas.remove();
 
