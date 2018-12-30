@@ -105,6 +105,10 @@ html {
 }
 ```
 
+#### `stop` function
+
+Call `Boba.stop()` to stop the animation and remove the canvas. Right now, call `stop` then `start` if options are changed. In the future, I'd like to handle changing options more elegantly.
+
 ## Contributing
 
 See [NOTES.md](./NOTES.md) for development notes and a to do list.

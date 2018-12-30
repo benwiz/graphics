@@ -16,11 +16,11 @@ npm publish --access public
 
 ## To Do
 
-- Document the `stop()` function
 - Port to C and create a wasm module. Visit the [repo](https://github.com/benwiz/boba.wasm).
 
 - Later
   - Contribution section of README
+  - Handle changing configs more elegantly
   - Mouse effects on vertices
   - Finding edges can be optimized a lot
   - Finding triangles can be optimized a little, probably
