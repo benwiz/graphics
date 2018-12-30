@@ -245,7 +245,7 @@ exports.createVertices = (options) => {
             id: i,
             x: Util.getRandomInt(0, options.width - 1),
             y: Util.getRandomInt(0, options.height - 1),
-            speed: Util.getRandomFloat(0.5, 2),
+            speed: Util.getRandomFloat(options.vertexMinSpeed, options.vertexMaxSpeed),
             angle: Util.getRandomFloat(0, 360),
             runAwayMultiplier: 1,
             radius: Util.getRandomFloat(8, 16),
