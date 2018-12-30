@@ -130,20 +130,18 @@ exports.start = (options) => {
     // exists). The reason we do this is to allow `start` to be called to override the setup with
     // new options. It's not the most elegant workflow but it is simple and it works well enough,
     // for now.
-    if (CTX === undefined) {
-        const x = options.x;
-        const y = options.y;
-        const width = options.width;
-        const height = options.height;
-        const canvas = Setup.createCanvas(x, y, width, height);
-        const ctx = canvas.getContext('2d');
-        // Check that context was found, if not exit with an error. TODO: Make this proper.
-        if (ctx === null) {
-            throw new Error('Oh no! `ctx` is null!');
-        }
-        // Now that we know `ctx` exists, assign it globally
-        CTX = ctx;
+    const x = options.x;
+    const y = options.y;
+    const width = options.width;
+    const height = options.height;
+    const canvas = Setup.createCanvas(x, y, width, height);
+    const ctx = canvas.getContext('2d');
+    // Check that context was found, if not exit with an error. TODO: Make this proper.
+    if (ctx === null) {
+        throw new Error('Oh no! `ctx` is null!');
     }
+    // Now that we know `ctx` exists, assign it globally
+    CTX = ctx;
     // Initialize data in three step
     // 1. Create vertices
     VERTICES = Setup.createVertices(options);
@@ -154,6 +152,16 @@ exports.start = (options) => {
     // Game loop
     LAST_RENDER = 0;
     window.requestAnimationFrame(loop);
+};
+exports.stop = () => {
+    // Remove the canvas from the DOM
+    CTX.canvas.remove();
+    // Reset all global variables (except CTX because it can't be undefined), probably not necessary
+    VERTICES = [];
+    EDGES = [];
+    SHAPES = [];
+    LAST_RENDER = 0;
+    OPTIONS = exports.getDefaultOptions();
 };
 exports.getDefaultOptions = () => {
     const options = {
