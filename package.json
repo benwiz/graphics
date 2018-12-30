@@ -1,6 +1,6 @@
 {
   "name": "@benwiz/boba.js",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Animated background as an NPM module",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
