@@ -16,11 +16,11 @@ npm publish --access public
 
 ## To Do
 
+- Handle changing configs more elegantly, probably don't use a stop function. It probably requires iterating through all vertices and updating their configs as well as adding or removing vertices. Edges and shapes probably do not need to be touched since they are overwritten every loop anyway.
 - Port to C and create a wasm module. Visit the [repo](https://github.com/benwiz/boba.wasm).
 
 - Later
   - Contribution section of README
-  - Handle changing configs more elegantly
   - Mouse effects on vertices
   - Finding edges can be optimized a lot
   - Finding triangles can be optimized a little, probably
