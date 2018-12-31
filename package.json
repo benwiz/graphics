@@ -1,7 +1,7 @@
 {
   "name": "@benwiz/boba.js",
   "version": "1.0.16",
-  "description": "Animated background as an NPM module",
+  "description": "Animated background written in TypeScript as an NPM module with no dependencies.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
