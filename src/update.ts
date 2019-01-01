@@ -67,7 +67,7 @@ const createEdges = (
     for (const vertex2 of vertices) {
       if (vertex1 === vertex2) continue;
 
-      // Create the edge so that vertex1 has the lower id
+      // Create the edge so that vertexA has the lower id
       let vertexA: Vertex;
       let vertexB: Vertex;
       if (vertex1.id <= vertex2.id) {
