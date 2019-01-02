@@ -19,7 +19,6 @@ npm publish --access public
 - I made a change to actually use the vertex size configs... needs to be tested and deployed
 
 - Handle changing configs more elegantly, probably don't use a stop function. It probably requires iterating through all vertices and updating their configs as well as adding or removing vertices. Edges and shapes probably do not need to be touched since they are overwritten every loop anyway.
-- Port to C and create a wasm module. Visit the [repo](https://github.com/benwiz/boba.wasm).
 
 - Later
   - Contribution section of README
