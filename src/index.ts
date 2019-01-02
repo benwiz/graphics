@@ -36,12 +36,14 @@ const constrainOptions = (options: BobaOptions): BobaOptions => {
     console.log(
       'Boba.js: `edgeColors` currently only supports one color. Keeping only the first color.',
     );
+    options.edgeColors = [options.edgeColors[0]];
   }
   if (options.shapeColors.length > 1) {
     console.log(
       'Boba.js: `shapeColors` currently only supports one color. Keeping only the first color.',
     );
   }
+  options.shapeColors = [options.shapeColors[0]];
 
   return options;
 };
