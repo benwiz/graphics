@@ -37,7 +37,7 @@ export const createVertices = (options: BobaOptions): Vertex[] => {
       ),
       angle: Util.getRandomFloat(0, 360),
       runAwayMultiplier: 1,
-      radius: Util.getRandomFloat(8, 16),
+      radius: Util.getRandomFloat(options.vertexMinSize, options.vertexMaxSize),
       color:
         options.vertexColors[Util.getRandomInt(0, options.vertexColors.length)],
     };
