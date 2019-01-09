@@ -24,7 +24,7 @@ const sketch = (p5) => {
 
     // Update status message
     const statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = 'Applying Style Transfer...!';
+    statusMessage.innerHTML = 'Applying Style Transfer...';
 
     // Select canvas DOM element
     const canvasElement = document.querySelector('canvas'); // .elt;
@@ -43,16 +43,16 @@ const sketch = (p5) => {
         const img = document.querySelector('#output img');
         img.src = result.src;
         // Show 'Done!' message
-        statusMessage.innerHTML = 'Done!';
+        statusMessage.innerHTML = 'Transfer complete!';
       }
     });
   };
 
   // A function to be called when the models have loaded
   const modelLoaded = () => {
-    // Show 'Model Loaded!' message
+    // Update status message
     const statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = 'Model Loaded!';
+    statusMessage.innerHTML = 'Model Loaded';
 
     // Set modelReady to true
     modelReady = true;
@@ -71,7 +71,8 @@ const sketch = (p5) => {
     transferButton.addEventListener('click', transfer);
   };
 
-  // When mouse is released, transfer the current image if the model is loaded and it's not in the process of another transformation
+  // When mouse is released, transfer the current image if the model is loaded and it's not in the
+  // process of another transformation
   p5.mouseReleased = () => {
     if (modelReady && !isTransfering) {
       transfer();
@@ -95,14 +96,17 @@ const sketch = (p5) => {
     p5.stroke(0);
     p5.pixelDensity(1);
 
+    // Update status message
+    const statusMessage = document.querySelector('#status');
+    statusMessage.innerHTML = 'Downloading model...';
+
     // Create a pix2pix method with a pre-trained model
     const modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
   };
 
-  // Draw on the canvas when mouse is pressed
   p5.draw = () => {
-    if (p5.mouseIsPressed) {
+    if (p5.mouseIsPressed && modelLoaded && !isTransfering) {
       p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
     }
   };

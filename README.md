@@ -20,6 +20,7 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 - Improve the UX and make it pretty
     - Use my own default image, not `images/pikachu.png`
     - Include model selection
+    - Need better signalling for "thinking" time
 
 - Next
     - FYI: The pre-trained Edges2Pikachu model is trained on 256x256 images. So the input images can only be 256x256 or 512x512, or multiple of 256.

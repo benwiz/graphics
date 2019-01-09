@@ -24242,7 +24242,7 @@ var sketch = function sketch(p5) {
 
     // Update status message
     var statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = 'Applying Style Transfer...!';
+    statusMessage.innerHTML = 'Applying Style Transfer...';
 
     // Select canvas DOM element
     var canvasElement = document.querySelector('canvas'); // .elt;
@@ -24261,16 +24261,16 @@ var sketch = function sketch(p5) {
         var img = document.querySelector('#output img');
         img.src = result.src;
         // Show 'Done!' message
-        statusMessage.innerHTML = 'Done!';
+        statusMessage.innerHTML = 'Transfer complete!';
       }
     });
   };
 
   // A function to be called when the models have loaded
   var modelLoaded = function modelLoaded() {
-    // Show 'Model Loaded!' message
+    // Update status message
     var statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = 'Model Loaded!';
+    statusMessage.innerHTML = 'Model Loaded';
 
     // Set modelReady to true
     modelReady = true;
@@ -24289,7 +24289,8 @@ var sketch = function sketch(p5) {
     transferButton.addEventListener('click', transfer);
   };
 
-  // When mouse is released, transfer the current image if the model is loaded and it's not in the process of another transformation
+  // When mouse is released, transfer the current image if the model is loaded and it's not in the
+  // process of another transformation
   p5.mouseReleased = function () {
     if (modelReady && !isTransfering) {
       transfer();
@@ -24313,16 +24314,17 @@ var sketch = function sketch(p5) {
     p5.stroke(0);
     p5.pixelDensity(1);
 
+    // Update status message
+    var statusMessage = document.querySelector('#status');
+    statusMessage.innerHTML = 'Downloading model';
+
     // Create a pix2pix method with a pre-trained model
-    console.log('use local model');
-    pix2pix = ML5.pix2pix(
-    // 'https://rawgit.com/ml5js/pix2pix_models/master/edges2pikachu_AtoB.pict',
-    './models/edges2pikachu.pict', modelLoaded);
+    var modelPath = './models/edges2pikachu.pict';
+    pix2pix = ML5.pix2pix(modelPath, modelLoaded);
   };
 
-  // Draw on the canvas when mouse is pressed
   p5.draw = function () {
-    if (p5.mouseIsPressed) {
+    if (p5.mouseIsPressed && modelLoaded && !isTransfering) {
       p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
     }
   };
