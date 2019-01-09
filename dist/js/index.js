@@ -24205,6 +24205,8 @@ var sketch = function sketch(p5) {
     // Select canvas DOM element
     var canvasElement = document.querySelector('canvas'); // .elt;
 
+    // TODO: Disable select
+
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, function (err, result) {
       if (err) {
@@ -24220,6 +24222,8 @@ var sketch = function sketch(p5) {
         img.src = result.src;
         // Show 'Done!' message
         statusMessage.innerHTML = 'Transfer complete!';
+
+        // TODO: Enable select
       }
     });
   };
