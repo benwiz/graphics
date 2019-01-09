@@ -8,7 +8,7 @@
     "new": "run(){ canvas-sketch src/$1/index.js --new --template=$2; } && run",
     "start": "run(){ canvas-sketch src/$1/index.js; } && run",
     "hot": "run(){ canvas-sketch src/$1/index.js --hot; } && run",
-    "build": "run(){ canvas-sketch src/$1/index.js --build && mkdir -p src/$1/dist/ && mv index.* src/$1/dist/; } && run",
+    "build": "run(){ canvas-sketch src/$1/index.js --build && mkdir -p docs/$1/ && mv index.* docs/$1/; } && run",
     "server": "run(){ http-server src/$1/dist/; }; run"
   },
   "repository": {
