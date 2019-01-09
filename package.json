@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benwiz/benwiz.github.io.git"
+    "url": "git+https://github.com/benwiz/art-warp.git"
   },
   "keywords": [],
   "author": "Ben Wiz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/benwiz/benwiz.github.io/issues"
+    "url": "https://github.com/benwiz/art-warp/issues"
   },
-  "homepage": "https://github.com/benwiz/benwiz.github.io#readme",
+  "homepage": "https://github.com/benwiz/art-warp#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
