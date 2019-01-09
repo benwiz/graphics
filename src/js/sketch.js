@@ -51,8 +51,6 @@ const sketch = (p5) => {
 
   // A function to be called when the models have loaded
   const modelLoaded = () => {
-    console.log('model loaded');
-
     // Show 'Model Loaded!' message
     const statusMessage = document.querySelector('#status');
     statusMessage.innerHTML = 'Model Loaded!';
@@ -86,8 +84,6 @@ const sketch = (p5) => {
   //
 
   p5.setup = () => {
-    console.log('setup');
-
     // Create a canvas
     const inputCanvas = p5.createCanvas(SIZE, SIZE);
     inputCanvas.class('border-box').parent('canvasContainer');

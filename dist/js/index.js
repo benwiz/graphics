@@ -24281,12 +24281,12 @@ var sketch = function sketch(p5) {
     // Call transfer function after the model is loaded
     transfer();
 
-    // Select 'clear' button html element then assign click event.
+    // Unhide and set click event to clearButton
     var clearButton = document.querySelector('#clearButton');
     clearButton.removeAttribute('hidden');
     clearButton.addEventListener('click', clearCanvas);
 
-    // Attach a click event to the transfer button (and show the button)
+    // Unhide and set click event to transferButton
     var transferButton = document.querySelector('#transferButton');
     transferButton.removeAttribute('hidden');
     transferButton.addEventListener('click', transfer);
