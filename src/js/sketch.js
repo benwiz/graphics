@@ -101,7 +101,7 @@ const sketch = (p5) => {
     statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
-    const modelPath = './models/edges2pikachu.pict';
+    const modelPath = './models/edges2pikachu';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
   };
 

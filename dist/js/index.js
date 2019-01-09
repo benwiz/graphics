@@ -24319,7 +24319,7 @@ var sketch = function sketch(p5) {
     statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
-    var modelPath = './models/edges2pikachu.pict';
+    var modelPath = './models/edges2shoes';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
   };
 

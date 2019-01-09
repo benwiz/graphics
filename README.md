@@ -20,7 +20,8 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 
 ## Notes
 
-- An essentially identical project I came across https://affinelayer.com/pixsrv/
+- An essentially identical project I came across https://affinelayer.com/pixsrv/ which is based on https://phillipi.github.io/pix2pix/ 
+    - implementation https://github.com/affinelayer/pix2pix-tensorflow/blob/master/pix2pix.py
     - I'd like to focus more on creating art than
 
 ## To Do
