@@ -16,6 +16,7 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 ## To Do
 
 - Create a rudimentary website based off ml5js pix2pix Pikachu example
+    - Need to rewrite it entirely in my own style after proving it works.
 - Find another pre-trained pix2pix model
 - Use the new pix2pix model and implement the feature in the website for the user to select the desired model
 - Find more pre-trained models and add them to the website
