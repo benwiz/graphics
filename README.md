@@ -23,3 +23,6 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 - Make the website pretty
 - Try to train my own models
 - Consider if/when it will be worth it to offer a "purchase" feature
+
+- Later
+    - It really should be very easy to remove p5.js entirely and just use canvas, but it's probably not worth the effort
