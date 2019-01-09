@@ -4,8 +4,6 @@ import * as ML5 from '../../vendor/js/ml5.min'; // TODO: Try to use npm if I can
 const SIZE = 256;
 
 const sketch = (p5) => {
-  // The pre-trained Edges2Pikachu model is trained on 256x256 images
-  // So the input images can only be 256x256 or 512x512, or multiple of 256
   let pix2pix;
   let clearBtn;
   let transferBtn;

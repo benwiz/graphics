@@ -24222,9 +24222,6 @@ var SIZE = 256; // import * as P5Dom from '../../vendor/js/p5.dom.min';
 
 
 var sketch = function sketch(p5) {
-  // The pre-trained Edges2Pikachu model is trained on 256x256 images
-  // So the input images can only be 256x256 or 512x512, or multiple of 256
-  // let statusMsg;
   var pix2pix = void 0;
   var clearBtn = void 0;
   var transferBtn = void 0;
@@ -24277,7 +24274,8 @@ var sketch = function sketch(p5) {
     console.log('model loaded');
 
     // Show 'Model Loaded!' message
-    statusMsg.innerHTML = 'Model Loaded!';
+    var statusMessage = document.querySelector('#status');
+    statusMessage.innerHTML = 'Model Loaded!';
 
     // Set modelReady to true
     modelReady = true;
@@ -24312,9 +24310,6 @@ var sketch = function sketch(p5) {
     // Display initial input image
     // TODO: Use my own default image
     p5.loadImage('images/pikachu.png', drawImage);
-
-    // Selcect output div container
-    statusMsg = document.querySelector('#status');
 
     // Select 'transfer' button html element
     transferBtn = document.querySelector('#transferBtn');
