@@ -24224,7 +24224,6 @@ var SIZE = 256; // import * as P5Dom from '../../vendor/js/p5.dom.min';
 var sketch = function sketch(p5) {
   // The pre-trained Edges2Pikachu model is trained on 256x256 images
   // So the input images can only be 256x256 or 512x512, or multiple of 256
-  var outputContainer = void 0;
   var statusMsg = void 0;
   var pix2pix = void 0;
   var clearBtn = void 0;
@@ -24240,14 +24239,6 @@ var sketch = function sketch(p5) {
   // Clear the canvas
   var clearCanvas = function clearCanvas() {
     p5.background(255);
-  };
-
-  // Create image tag and add to #output div
-  var createImage = function createImage(src) {
-    var output = document.querySelector('#output');
-    var img = document.createElement('img');
-    img.src = src;
-    output.appendChild(img);
   };
 
   var transfer = function transfer() {
@@ -24271,12 +24262,10 @@ var sketch = function sketch(p5) {
       if (result && result.src) {
         // Set isTransfering back to false
         isTransfering = false;
-        // Clear output container
-        outputContainer.innerHTML = '';
-        // Create an image based result
-        // I have no idea what this original commented out function was calling
-        // createImg(result.src).class('border-box').parent('output');
-        createImage(result.src);
+        // Update the output img src
+        var img = document.querySelector('#output img');
+        img.src = result.src;
+        console.log('no update img func');
         // Show 'Done!' message
         statusMsg.innerHTML = 'Done!';
       }
@@ -24325,7 +24314,6 @@ var sketch = function sketch(p5) {
     p5.loadImage('images/pikachu.png', drawImage);
 
     // Selcect output div container
-    outputContainer = document.querySelector('#output');
     statusMsg = document.querySelector('#status');
 
     // Select 'transfer' button html element
