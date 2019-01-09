@@ -5,7 +5,6 @@ const SIZE = 256;
 
 const sketch = (p5) => {
   let pix2pix;
-  let clearBtn;
   let modelReady = false;
   let isTransfering = false;
 
@@ -67,9 +66,7 @@ const sketch = (p5) => {
     // Attach a click event to the transfer button (and show the button)
     const transferButton = document.querySelector('#transferButton');
     transferButton.removeAttribute('hidden');
-    transferButton.addEventListener('click', () => {
-      transfer();
-    });
+    transferButton.addEventListener('click', transfer);
   };
 
   // When mouse is released, transfer the current image if the model is loaded and it's not in the process of another transformation
@@ -95,11 +92,9 @@ const sketch = (p5) => {
     p5.loadImage('images/pikachu.png', drawImage);
 
     // Select 'clear' button html element then assign click event.
-    clearBtn = document.querySelector('#clearBtn');
-    clearBtn.addEventListener('click', () => {
-      console.log('clear');
-      clearCanvas();
-    });
+    const clearButton = document.querySelector('#clearButton');
+    clearButton.removeAttribute('hidden');
+    clearButton.addEventListener('click', clearCanvas);
 
     // Set stroke to black
     p5.stroke(0);
