@@ -24224,7 +24224,6 @@ var SIZE = 256; // import * as P5Dom from '../../vendor/js/p5.dom.min';
 var sketch = function sketch(p5) {
   var pix2pix = void 0;
   var clearBtn = void 0;
-  var transferBtn = void 0;
   var modelReady = false;
   var isTransfering = false;
 
@@ -24283,8 +24282,10 @@ var sketch = function sketch(p5) {
     // Call transfer function after the model is loaded
     transfer();
 
-    // Attach a click event to the transfer button
-    transferBtn.addEventListener('click', function () {
+    // Attach a click event to the transfer button (and show the button)
+    var transferButton = document.querySelector('#transferButton');
+    transferButton.removeAttribute('hidden');
+    transferButton.addEventListener('click', function () {
       transfer();
     });
   };
@@ -24310,9 +24311,6 @@ var sketch = function sketch(p5) {
     // Display initial input image
     // TODO: Use my own default image
     p5.loadImage('images/pikachu.png', drawImage);
-
-    // Select 'transfer' button html element
-    transferBtn = document.querySelector('#transferBtn');
 
     // Select 'clear' button html element then assign click event.
     clearBtn = document.querySelector('#clearBtn');

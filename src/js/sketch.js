@@ -6,7 +6,6 @@ const SIZE = 256;
 const sketch = (p5) => {
   let pix2pix;
   let clearBtn;
-  let transferBtn;
   let modelReady = false;
   let isTransfering = false;
 
@@ -65,8 +64,10 @@ const sketch = (p5) => {
     // Call transfer function after the model is loaded
     transfer();
 
-    // Attach a click event to the transfer button
-    transferBtn.addEventListener('click', () => {
+    // Attach a click event to the transfer button (and show the button)
+    const transferButton = document.querySelector('#transferButton');
+    transferButton.removeAttribute('hidden');
+    transferButton.addEventListener('click', () => {
       transfer();
     });
   };
@@ -92,9 +93,6 @@ const sketch = (p5) => {
     // Display initial input image
     // TODO: Use my own default image
     p5.loadImage('images/pikachu.png', drawImage);
-
-    // Select 'transfer' button html element
-    transferBtn = document.querySelector('#transferBtn');
 
     // Select 'clear' button html element then assign click event.
     clearBtn = document.querySelector('#clearBtn');
