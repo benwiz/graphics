@@ -24288,8 +24288,6 @@ var sketch = function sketch(p5) {
     // Initialize the select element for picking a model
     var select = document.querySelector('#container select');
     select.addEventListener('change', function (event) {
-      console.log('ev', event);
-
       // Disable
       select.setAttribute('disabled', null);
 

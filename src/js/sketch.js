@@ -29,6 +29,8 @@ const sketch = (p5) => {
     // Select canvas DOM element
     const canvasElement = document.querySelector('canvas'); // .elt;
 
+    // TODO: Disable select
+
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, (err, result) => {
       if (err) {
@@ -44,6 +46,8 @@ const sketch = (p5) => {
         img.src = result.src;
         // Show 'Done!' message
         statusMessage.innerHTML = 'Transfer complete!';
+
+        // TODO: Enable select
       }
     });
   };
