@@ -24224,7 +24224,7 @@ var SIZE = 256; // import * as P5Dom from '../../vendor/js/p5.dom.min';
 var sketch = function sketch(p5) {
   // The pre-trained Edges2Pikachu model is trained on 256x256 images
   // So the input images can only be 256x256 or 512x512, or multiple of 256
-  var statusMsg = void 0;
+  // let statusMsg;
   var pix2pix = void 0;
   var clearBtn = void 0;
   var transferBtn = void 0;
@@ -24246,7 +24246,8 @@ var sketch = function sketch(p5) {
     isTransfering = true;
 
     // Update status message
-    statusMsg.innerHTML = 'Applying Style Transfer...!';
+    var statusMessage = document.querySelector('#status');
+    statusMessage.innerHTML = 'Applying Style Transfer...!';
 
     // Select canvas DOM element
     var canvasElement = document.querySelector('canvas'); // .elt;
@@ -24265,9 +24266,8 @@ var sketch = function sketch(p5) {
         // Update the output img src
         var img = document.querySelector('#output img');
         img.src = result.src;
-        console.log('no update img func');
         // Show 'Done!' message
-        statusMsg.innerHTML = 'Done!';
+        statusMessage.innerHTML = 'Done!';
       }
     });
   };
