@@ -18,6 +18,7 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 - Reorganize all the code to make it in my own style and optimize it
 - Find another pre-trained pix2pix model and save it locally
 - Improve the UX and make it pretty
+    - Use my own default image, not `images/pikachu.png`
 
 - Next
     - Use the new pix2pix model and implement the feature in the website for the user to select the desired model

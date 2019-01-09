@@ -24224,8 +24224,6 @@ var SIZE = 256; // import * as P5Dom from '../../vendor/js/p5.dom.min';
 var sketch = function sketch(p5) {
   // The pre-trained Edges2Pikachu model is trained on 256x256 images
   // So the input images can only be 256x256 or 512x512, or multiple of 256
-  var inputImg = void 0;
-  // let inputCanvas;
   var outputContainer = void 0;
   var statusMsg = void 0;
   var pix2pix = void 0;
@@ -24235,8 +24233,8 @@ var sketch = function sketch(p5) {
   var isTransfering = false;
 
   // Draw the input image to the canvas
-  var drawImage = function drawImage() {
-    p5.image(inputImg, 0, 0);
+  var drawImage = function drawImage(img) {
+    p5.image(img, 0, 0);
   };
 
   // Clear the canvas
@@ -24316,12 +24314,15 @@ var sketch = function sketch(p5) {
   //
 
   p5.setup = function () {
+    console.log('setup');
+
     // Create a canvas
     var inputCanvas = p5.createCanvas(SIZE, SIZE);
     inputCanvas.class('border-box').parent('canvasContainer');
 
     // Display initial input image
-    inputImg = p5.loadImage('images/pikachu.png', drawImage);
+    // TODO: Use my own default image
+    p5.loadImage('images/pikachu.png', drawImage);
 
     // Selcect output div container
     outputContainer = document.querySelector('#output');
