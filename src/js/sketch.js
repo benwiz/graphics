@@ -32,8 +32,7 @@ const sketch = (p5) => {
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, (err, result) => {
       if (err) {
-        console.log('err:', err);
-        console.log('exit because error.');
+        console.err(err);
         return;
       }
 

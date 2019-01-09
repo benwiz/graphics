@@ -24304,8 +24304,6 @@ var sketch = function sketch(p5) {
   //
 
   p5.setup = function () {
-    console.log('setup');
-
     // Create a canvas
     var inputCanvas = p5.createCanvas(SIZE, SIZE);
     inputCanvas.class('border-box').parent('canvasContainer');
