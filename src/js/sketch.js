@@ -2,6 +2,7 @@
 import * as ML5 from '../../vendor/js/ml5.min'; // TODO: Try to use npm if I can use the minified file
 
 const SIZE = 256;
+const modelName = 'edges2pikachu';
 
 const sketch = (p5) => {
   let pix2pix;
@@ -101,7 +102,7 @@ const sketch = (p5) => {
     statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
-    const modelPath = './models/edges2pikachu.pict';
+    const modelPath = `./models/${modelName}.pict`;
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
   };
 
