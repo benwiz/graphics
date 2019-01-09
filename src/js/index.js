@@ -28,7 +28,6 @@ const sketch = (p5) => {
   };
 
   const createImage = (src) => {
-    console.log('create img');
     const output = document.querySelector('#output');
     const img = document.createElement('img');
     img.src = src;
