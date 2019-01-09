@@ -24281,6 +24281,11 @@ var sketch = function sketch(p5) {
     // Call transfer function after the model is loaded
     transfer();
 
+    // Select 'clear' button html element then assign click event.
+    var clearButton = document.querySelector('#clearButton');
+    clearButton.removeAttribute('hidden');
+    clearButton.addEventListener('click', clearCanvas);
+
     // Attach a click event to the transfer button (and show the button)
     var transferButton = document.querySelector('#transferButton');
     transferButton.removeAttribute('hidden');
@@ -24308,11 +24313,6 @@ var sketch = function sketch(p5) {
     // Display initial input image
     // TODO: Use my own default image
     p5.loadImage('images/pikachu.png', drawImage);
-
-    // Select 'clear' button html element then assign click event.
-    var clearButton = document.querySelector('#clearButton');
-    clearButton.removeAttribute('hidden');
-    clearButton.addEventListener('click', clearCanvas);
 
     // Set stroke to black
     p5.stroke(0);
