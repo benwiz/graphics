@@ -74,151 +74,16 @@ var _p = __webpack_require__(1);
 
 var P5 = _interopRequireWildcard(_p);
 
-var _ml = __webpack_require__(4);
+var _sketch = __webpack_require__(6);
 
-var ML5 = _interopRequireWildcard(_ml);
+var _sketch2 = _interopRequireDefault(_sketch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-// TODO: Try to use npm if I can use the minified file
-
+var p5 = new P5.default(_sketch2.default); // TODO: Try to use p5.min or maybe point to the local file
 // import * as P5 from '../../vendor/js/p5.min';
-var sketch = function sketch(p5) {
-  // The pre-trained Edges2Pikachu model is trained on 256x256 images
-  // So the input images can only be 256x256 or 512x512, or multiple of 256
-  var SIZE = 256;
-  var inputImg = void 0;
-  var inputCanvas = void 0;
-  var outputContainer = void 0;
-  var statusMsg = void 0;
-  var pix2pix = void 0;
-  var clearBtn = void 0;
-  var transferBtn = void 0;
-  var modelReady = false;
-  var isTransfering = false;
-
-  // Draw the input image to the canvas
-  var drawImage = function drawImage() {
-    p5.image(inputImg, 0, 0);
-  };
-
-  // Clear the canvas
-  var clearCanvas = function clearCanvas() {
-    p5.background(255);
-  };
-
-  var createImage = function createImage(src) {
-    console.log('create img');
-    var output = document.querySelector('#output');
-    var img = document.createElement('img');
-    img.src = src;
-    output.appendChild(img);
-  };
-
-  var transfer = function transfer() {
-    // Set isTransfering to true
-    isTransfering = true;
-
-    // Update status message
-    statusMsg.innerHTML = 'Applying Style Transfer...!';
-
-    // Select canvas DOM element
-    var canvasElement = document.querySelector('canvas'); // .elt;
-
-    // Apply pix2pix transformation
-    pix2pix.transfer(canvasElement, function (err, result) {
-      if (err) {
-        console.log('err:', err);
-        console.log('exit because error.');
-        return;
-      }
-
-      if (result && result.src) {
-        // Set isTransfering back to false
-        isTransfering = false;
-        // Clear output container
-        outputContainer.innerHTML = '';
-        // Create an image based result
-        // I have no idea what this original commented out function was calling
-        // createImg(result.src).class('border-box').parent('output');
-        createImage(result.src);
-        // Show 'Done!' message
-        statusMsg.innerHTML = 'Done!';
-      }
-    });
-  };
-
-  // A function to be called when the models have loaded
-  var modelLoaded = function modelLoaded() {
-    console.log('model loaded');
-
-    // Show 'Model Loaded!' message
-    statusMsg.innerHTML = 'Model Loaded!';
-
-    // Set modelReady to true
-    modelReady = true;
-
-    // Call transfer function after the model is loaded
-    transfer();
-
-    // Attach a click event to the transfer button
-    transferBtn.addEventListener('click', function () {
-      transfer();
-    });
-  };
-
-  // When mouse is released, transfer the current image if the model is loaded and it's not in the process of another transformation
-  p5.mouseReleased = function () {
-    if (modelReady && !isTransfering) {
-      transfer();
-    }
-  };
-
-  //
-  // Setup and Draw functions
-  //
-
-  p5.setup = function () {
-    // Create a canvas
-    inputCanvas = p5.createCanvas(SIZE, SIZE);
-    inputCanvas.class('border-box').parent('canvasContainer');
-
-    // Display initial input image
-    inputImg = p5.loadImage('images/pikachu.png', drawImage);
-
-    // Selcect output div container
-    outputContainer = document.querySelector('#output');
-    statusMsg = document.querySelector('#status');
-
-    // Select 'transfer' button html element
-    transferBtn = document.querySelector('#transferBtn');
-
-    // Select 'clear' button html element then assign click event.
-    clearBtn = document.querySelector('#clearBtn');
-    clearBtn.addEventListener('click', function () {
-      console.log('clear');
-      clearCanvas();
-    });
-
-    // Set stroke to black
-    p5.stroke(0);
-    p5.pixelDensity(1);
-
-    // Create a pix2pix method with a pre-trained model
-    pix2pix = ML5.pix2pix('https://rawgit.com/ml5js/pix2pix_models/master/edges2pikachu_AtoB.pict', modelLoaded);
-  };
-
-  // Draw on the canvas when mouse is pressed
-  p5.draw = function () {
-    if (p5.mouseIsPressed) {
-      p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-    }
-  };
-}; // TODO: Try to use p5.min or maybe point to the local file
-// import * as P5Dom from '../../vendor/js/p5.dom.min';
-
-
-var p5 = new P5.default(sketch);
 
 /***/ }),
 /* 1 */
@@ -24333,6 +24198,162 @@ module.exports = function (module) {
 	}
 	return module;
 };
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ml = __webpack_require__(4);
+
+var ML5 = _interopRequireWildcard(_ml);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// TODO: Try to use npm if I can use the minified file
+
+var SIZE = 256; // import * as P5Dom from '../../vendor/js/p5.dom.min';
+
+
+var sketch = function sketch(p5) {
+  // The pre-trained Edges2Pikachu model is trained on 256x256 images
+  // So the input images can only be 256x256 or 512x512, or multiple of 256
+  var inputImg = void 0;
+  // let inputCanvas;
+  var outputContainer = void 0;
+  var statusMsg = void 0;
+  var pix2pix = void 0;
+  var clearBtn = void 0;
+  var transferBtn = void 0;
+  var modelReady = false;
+  var isTransfering = false;
+
+  // Draw the input image to the canvas
+  var drawImage = function drawImage() {
+    p5.image(inputImg, 0, 0);
+  };
+
+  // Clear the canvas
+  var clearCanvas = function clearCanvas() {
+    p5.background(255);
+  };
+
+  // Create image tag and add to #output div
+  var createImage = function createImage(src) {
+    var output = document.querySelector('#output');
+    var img = document.createElement('img');
+    img.src = src;
+    output.appendChild(img);
+  };
+
+  var transfer = function transfer() {
+    // Set isTransfering to true
+    isTransfering = true;
+
+    // Update status message
+    statusMsg.innerHTML = 'Applying Style Transfer...!';
+
+    // Select canvas DOM element
+    var canvasElement = document.querySelector('canvas'); // .elt;
+
+    // Apply pix2pix transformation
+    pix2pix.transfer(canvasElement, function (err, result) {
+      if (err) {
+        console.log('err:', err);
+        console.log('exit because error.');
+        return;
+      }
+
+      if (result && result.src) {
+        // Set isTransfering back to false
+        isTransfering = false;
+        // Clear output container
+        outputContainer.innerHTML = '';
+        // Create an image based result
+        // I have no idea what this original commented out function was calling
+        // createImg(result.src).class('border-box').parent('output');
+        createImage(result.src);
+        // Show 'Done!' message
+        statusMsg.innerHTML = 'Done!';
+      }
+    });
+  };
+
+  // A function to be called when the models have loaded
+  var modelLoaded = function modelLoaded() {
+    console.log('model loaded');
+
+    // Show 'Model Loaded!' message
+    statusMsg.innerHTML = 'Model Loaded!';
+
+    // Set modelReady to true
+    modelReady = true;
+
+    // Call transfer function after the model is loaded
+    transfer();
+
+    // Attach a click event to the transfer button
+    transferBtn.addEventListener('click', function () {
+      transfer();
+    });
+  };
+
+  // When mouse is released, transfer the current image if the model is loaded and it's not in the process of another transformation
+  p5.mouseReleased = function () {
+    if (modelReady && !isTransfering) {
+      transfer();
+    }
+  };
+
+  //
+  // Setup and Draw functions
+  //
+
+  p5.setup = function () {
+    // Create a canvas
+    var inputCanvas = p5.createCanvas(SIZE, SIZE);
+    inputCanvas.class('border-box').parent('canvasContainer');
+
+    // Display initial input image
+    inputImg = p5.loadImage('images/pikachu.png', drawImage);
+
+    // Selcect output div container
+    outputContainer = document.querySelector('#output');
+    statusMsg = document.querySelector('#status');
+
+    // Select 'transfer' button html element
+    transferBtn = document.querySelector('#transferBtn');
+
+    // Select 'clear' button html element then assign click event.
+    clearBtn = document.querySelector('#clearBtn');
+    clearBtn.addEventListener('click', function () {
+      console.log('clear');
+      clearCanvas();
+    });
+
+    // Set stroke to black
+    p5.stroke(0);
+    p5.pixelDensity(1);
+
+    // Create a pix2pix method with a pre-trained model
+    pix2pix = ML5.pix2pix('https://rawgit.com/ml5js/pix2pix_models/master/edges2pikachu_AtoB.pict', modelLoaded);
+  };
+
+  // Draw on the canvas when mouse is pressed
+  p5.draw = function () {
+    if (p5.mouseIsPressed) {
+      p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+    }
+  };
+};
+
+exports.default = sketch;
 
 /***/ })
 /******/ ]);

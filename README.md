@@ -16,13 +16,15 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 ## To Do
 
 - Reorganize all the code to make it in my own style and optimize it
+- Find another pre-trained pix2pix model and save it locally
+- Improve the UX and make it pretty
 
-- Find another pre-trained pix2pix model
-- Use the new pix2pix model and implement the feature in the website for the user to select the desired model
-- Find more pre-trained models and add them to the website
-- Make the website pretty
-- Try to train my own models
-- Consider if/when it will be worth it to offer a "purchase" feature
+- Next
+    - Use the new pix2pix model and implement the feature in the website for the user to select the desired model
+    - Find more pre-trained models and add them to the website
+    - Make the website pretty
+    - Try to train my own models
+    - Consider if/when it will be worth it to offer a "purchase" feature
 
 - Later
     - It really should be very easy to remove p5.js entirely and just use canvas, but it's probably not worth the effort
