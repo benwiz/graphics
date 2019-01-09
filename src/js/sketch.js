@@ -96,7 +96,8 @@ const sketch = (p5) => {
     p5.pixelDensity(1);
 
     // Create a pix2pix method with a pre-trained model
-    pix2pix = ML5.pix2pix('./models/edges2pikachu.pict', modelLoaded);
+    const modelPath = './models/edges2pikachu.pict';
+    pix2pix = ML5.pix2pix(modelPath, modelLoaded);
   };
 
   // Draw on the canvas when mouse is pressed
