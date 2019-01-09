@@ -13,6 +13,16 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
   - Thoughts about training
     - I will have to create the inputs. Maybe the simplest way to get started is to use OpenCV to detect edges.
 
+- Two types of results
+    - Results reminiscent of great artists
+    - Totally abstract results
+    - Remember, both the drawer and over/underfitting the model will impact the results
+
+## Notes
+
+- An essentially identical project I came across https://affinelayer.com/pixsrv/
+    - I'd like to focus more on creating art than
+
 ## To Do
 
 - Find another pre-trained pix2pix model and save it locally
@@ -26,6 +36,7 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
     - Find more pre-trained models and add them to the website
     - Make the website pretty
     - Try to train my own models
+        - I may need to hire an nVidia GPU
     - Consider if/when it will be worth it to offer a "purchase" feature
 
 - Later
