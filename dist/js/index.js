@@ -24250,8 +24250,7 @@ var sketch = function sketch(p5) {
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, function (err, result) {
       if (err) {
-        console.log('err:', err);
-        console.log('exit because error.');
+        console.err(err);
         return;
       }
 
@@ -24269,8 +24268,6 @@ var sketch = function sketch(p5) {
 
   // A function to be called when the models have loaded
   var modelLoaded = function modelLoaded() {
-    console.log('model loaded');
-
     // Show 'Model Loaded!' message
     var statusMessage = document.querySelector('#status');
     statusMessage.innerHTML = 'Model Loaded!';
@@ -24317,7 +24314,10 @@ var sketch = function sketch(p5) {
     p5.pixelDensity(1);
 
     // Create a pix2pix method with a pre-trained model
-    pix2pix = ML5.pix2pix('https://rawgit.com/ml5js/pix2pix_models/master/edges2pikachu_AtoB.pict', modelLoaded);
+    console.log('use local model');
+    pix2pix = ML5.pix2pix(
+    // 'https://rawgit.com/ml5js/pix2pix_models/master/edges2pikachu_AtoB.pict',
+    './models/edges2pikachu.pict', modelLoaded);
   };
 
   // Draw on the canvas when mouse is pressed
