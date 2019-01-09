@@ -104,6 +104,8 @@ const sketch = (p5) => {
     // Create a pix2pix method with a pre-trained model
     const modelPath = `./models/${modelName}.pict`;
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
+
+    // TDOO: Initialize the dropdown element for selecting a model
   };
 
   p5.draw = () => {
