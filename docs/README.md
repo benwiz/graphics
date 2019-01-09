@@ -4,5 +4,5 @@
 
 ## Other Links
 
-[Repo](https://github.com/benwiz/sketches)
-[Home](https://benwiz.io)
+- [Repo](https://github.com/benwiz/sketches)
+- [Home](https://benwiz.io)
