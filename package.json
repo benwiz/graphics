@@ -1,0 +1,33 @@
+{
+  "name": "sketches",
+  "version": "1.0.0",
+  "description": "Test the canvas-sketch boilerplate tool.",
+  "main": "index.js",
+  "scripts": {
+    "canvas-sketch": "run(){ http-server src/$1/dist/; }; run",
+    "new": "run(){ canvas-sketch src/$1/index.js --new --template=$2; } && run",
+    "start": "run(){ canvas-sketch src/$1/index.js; } && run",
+    "hot": "run(){ canvas-sketch src/$1/index.js --hot; } && run",
+    "build": "run(){ canvas-sketch src/$1/index.js --build && mkdir -p src/$1/dist/ && mv index.* src/$1/dist/; } && run",
+    "server": "run(){ http-server src/$1/dist/; }; run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwiz/sketches.git"
+  },
+  "keywords": [],
+  "author": "Ben Wiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benwiz/sketches/issues"
+  },
+  "homepage": "https://github.com/benwiz/sketches#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {
+    "canvas-sketch": "^0.2.0",
+    "canvas-sketch-cli": "^1.2.0",
+    "p5": "^0.7.2"
+  }
+}
