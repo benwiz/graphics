@@ -193,10 +193,8 @@ var sketch = function sketch(p5) {
     // Select 'transfer' button html element
     transferBtn = document.querySelector('#transferBtn');
 
-    // Select 'clear' button html element
+    // Select 'clear' button html element then assign click event.
     clearBtn = document.querySelector('#clearBtn');
-    console.log('clearBtn click', clearBtn);
-    // Attach a click event to the 'clear' button
     clearBtn.addEventListener('click', function () {
       console.log('clear');
       clearCanvas();
