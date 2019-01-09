@@ -123,8 +123,7 @@ var sketch = function sketch(p5) {
     statusMsg.innerHTML = 'Applying Style Transfer...!';
 
     // Select canvas DOM element
-    var canvasElement = document.querySelector('canvas').elt;
-    console.log('elt');
+    var canvasElement = document.querySelector('canvas'); // .elt;
 
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, function (err, result) {
@@ -162,8 +161,8 @@ var sketch = function sketch(p5) {
     // Call transfer function after the model is loaded
     transfer();
 
-    // Attach a mousePressed event to the transfer button
-    transferBtn.addEventListener('mousepressed', function () {
+    // Attach a click event to the transfer button
+    transferBtn.addEventListener('click', function () {
       transfer();
     });
   };
@@ -196,8 +195,10 @@ var sketch = function sketch(p5) {
 
     // Select 'clear' button html element
     clearBtn = document.querySelector('#clearBtn');
-    // Attach a mousePressed event to the 'clear' button
-    clearBtn.addEventListener('mousepressed', function () {
+    console.log('clearBtn click', clearBtn);
+    // Attach a click event to the 'clear' button
+    clearBtn.addEventListener('click', function () {
+      console.log('clear');
       clearCanvas();
     });
 

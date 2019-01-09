@@ -81,8 +81,8 @@ const sketch = (p5) => {
     // Call transfer function after the model is loaded
     transfer();
 
-    // Attach a mousePressed event to the transfer button
-    transferBtn.addEventListener('mousepressed', () => {
+    // Attach a click event to the transfer button
+    transferBtn.addEventListener('click', () => {
       transfer();
     });
   };
@@ -113,10 +113,10 @@ const sketch = (p5) => {
     // Select 'transfer' button html element
     transferBtn = document.querySelector('#transferBtn');
 
-    // Select 'clear' button html element
+    // Select 'clear' button html element then assign click event.
     clearBtn = document.querySelector('#clearBtn');
-    // Attach a mousePressed event to the 'clear' button
-    clearBtn.addEventListener('mousepressed', () => {
+    clearBtn.addEventListener('click', () => {
+      console.log('clear');
       clearCanvas();
     });
 
