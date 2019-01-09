@@ -2,7 +2,6 @@
 import * as ML5 from '../../vendor/js/ml5.min'; // TODO: Try to use npm if I can use the minified file
 
 const SIZE = 256;
-const modelName = 'edges2pikachu';
 
 const sketch = (p5) => {
   let pix2pix;
@@ -33,7 +32,7 @@ const sketch = (p5) => {
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, (err, result) => {
       if (err) {
-        console.err(err);
+        console.error('error:', err);
         return;
       }
 
@@ -70,6 +69,10 @@ const sketch = (p5) => {
     const transferButton = document.querySelector('#transferButton');
     transferButton.removeAttribute('hidden');
     transferButton.addEventListener('click', transfer);
+
+    // Enable the model selector
+    const select = document.querySelector('#container select');
+    select.removeAttribute('disabled');
   };
 
   // When mouse is released, transfer the current image if the model is loaded and it's not in the
@@ -102,10 +105,28 @@ const sketch = (p5) => {
     statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
-    const modelPath = `./models/${modelName}.pict`;
+    let modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
 
-    // TDOO: Initialize the dropdown element for selecting a model
+    // NOTE: There is a lot of code repetition, this needs to be cleaned up.
+    // Initialize the select element for picking a model
+    const select = document.querySelector('#container select');
+    select.addEventListener('change', (event) => {
+      // Disable
+      select.setAttribute('disabled', null);
+
+      // Update status message
+      statusMessage.innerHTML = 'Downloading model...';
+
+      // Create a pix2pix method with a pre-trained model
+      const modelName = event.target.value;
+      console.log('modelName:', modelName);
+      modelPath = `./models/${modelName}.pict`;
+      pix2pix = ML5.pix2pix(modelPath, modelLoaded);
+
+      // Transfer the drawing
+      transfer();
+    });
   };
 
   p5.draw = () => {

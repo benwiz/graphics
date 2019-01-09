@@ -26,6 +26,7 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 
 ## To Do
 
+- Try to reduce the bundle size... maybe switch back to local p5.min.js or figure out how to access the min file in npm package
 - Improve the UX and make it pretty
     - Include model selection
     - Need better signalling for "thinking" time

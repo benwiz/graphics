@@ -24178,7 +24178,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var SIZE = 256; // import * as P5Dom from '../../vendor/js/p5.dom.min';
 
-var modelName = 'edges2pikachu';
 
 var sketch = function sketch(p5) {
   var pix2pix = void 0;
@@ -24209,7 +24208,7 @@ var sketch = function sketch(p5) {
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, function (err, result) {
       if (err) {
-        console.err(err);
+        console.error('error:', err);
         return;
       }
 
@@ -24246,6 +24245,10 @@ var sketch = function sketch(p5) {
     var transferButton = document.querySelector('#transferButton');
     transferButton.removeAttribute('hidden');
     transferButton.addEventListener('click', transfer);
+
+    // Enable the model selector
+    var select = document.querySelector('#container select');
+    select.removeAttribute('disabled');
   };
 
   // When mouse is released, transfer the current image if the model is loaded and it's not in the
@@ -24278,8 +24281,30 @@ var sketch = function sketch(p5) {
     statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
-    var modelPath = './models/' + modelName + '.pict';
+    var modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
+
+    // NOTE: There is a lot of code repetition, this needs to be cleaned up.
+    // Initialize the select element for picking a model
+    var select = document.querySelector('#container select');
+    select.addEventListener('change', function (event) {
+      console.log('ev', event);
+
+      // Disable
+      select.setAttribute('disabled', null);
+
+      // Update status message
+      statusMessage.innerHTML = 'Downloading model...';
+
+      // Create a pix2pix method with a pre-trained model
+      var modelName = event.target.value;
+      console.log('modelName:', modelName);
+      modelPath = './models/' + modelName + '.pict';
+      pix2pix = ML5.pix2pix(modelPath, modelLoaded);
+
+      // Transfer the drawing
+      transfer();
+    });
   };
 
   p5.draw = function () {
