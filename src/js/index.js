@@ -27,6 +27,14 @@ const sketch = (p5) => {
     p5.background(255);
   };
 
+  const createImage = (src) => {
+    console.log('create img');
+    const output = document.querySelector('#output');
+    const img = document.createElement('img');
+    img.src = src;
+    output.appendChild(img);
+  };
+
   const transfer = () => {
     // Set isTransfering to true
     isTransfering = true;
@@ -35,22 +43,29 @@ const sketch = (p5) => {
     statusMsg.innerHTML = 'Applying Style Transfer...!';
 
     // Select canvas DOM element
-    const canvasElement = document.querySelector('canvas').elt;
+    const canvasElement = document.querySelector('canvas'); // .elt;
+    console.log('normal');
 
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, (err, result) => {
       if (err) {
-        console.log(err);
+        console.log('err:', err);
+        console.log('exit because error.');
+        return;
       }
+
+      console.log('pix2pix.transfer() mine');
+
       if (result && result.src) {
         // Set isTransfering back to false
         isTransfering = false;
         // Clear output container
         outputContainer.innerHTML = '';
         // Create an image based result
-        p5.createImg(result.src)
-          .class('border-box')
-          .parent('output');
+        // createImg(result.src)
+        //   .class('border-box')
+        //   .parent('output');
+        createImage(result.src);
         // Show 'Done!' message
         statusMsg.innerHTML = 'Done!';
       }
@@ -59,6 +74,8 @@ const sketch = (p5) => {
 
   // A function to be called when the models have loaded
   const modelLoaded = () => {
+    console.log('model loaded');
+
     // Show 'Model Loaded!' message
     statusMsg.innerHTML = 'Model Loaded!';
 
@@ -86,8 +103,6 @@ const sketch = (p5) => {
   //
 
   p5.setup = () => {
-    console.log('setup!');
-
     // Create a canvas
     inputCanvas = p5.createCanvas(SIZE, SIZE);
     inputCanvas.class('border-box').parent('canvasContainer');
@@ -122,8 +137,6 @@ const sketch = (p5) => {
 
   // Draw on the canvas when mouse is pressed
   p5.draw = () => {
-    console.log('draw!');
-
     if (p5.mouseIsPressed) {
       p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
     }
