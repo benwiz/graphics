@@ -24277,7 +24277,7 @@ var sketch = function sketch(p5) {
     statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
-    var modelPath = './models/edges2pikachu';
+    var modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
   };
 
