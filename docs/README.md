@@ -1,5 +1,3 @@
-# Sketches
-
 - [test-default](./test-default/)
 
 ## Other Links

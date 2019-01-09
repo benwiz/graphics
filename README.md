@@ -40,6 +40,10 @@ Run the built html and js on a webserver
 npm run server SKETCH_NAME
 ```
 
+## Things to remember
+
+- For a while, do my best to not create a custom template. Focus on the content.
+
 ## To Do
 
 - Understand what hot loading is an when I should use it
