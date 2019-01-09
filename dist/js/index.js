@@ -123,8 +123,8 @@ var sketch = function sketch(p5) {
     statusMsg.innerHTML = 'Applying Style Transfer...!';
 
     // Select canvas DOM element
-    var canvasElement = document.querySelector('canvas'); // .elt;
-    console.log('normal');
+    var canvasElement = document.querySelector('canvas').elt;
+    console.log('elt');
 
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, function (err, result) {
@@ -134,17 +134,14 @@ var sketch = function sketch(p5) {
         return;
       }
 
-      console.log('pix2pix.transfer() mine');
-
       if (result && result.src) {
         // Set isTransfering back to false
         isTransfering = false;
         // Clear output container
         outputContainer.innerHTML = '';
         // Create an image based result
-        // createImg(result.src)
-        //   .class('border-box')
-        //   .parent('output');
+        // I have no idea what this original commented out function was calling
+        // createImg(result.src).class('border-box').parent('output');
         createImage(result.src);
         // Show 'Done!' message
         statusMsg.innerHTML = 'Done!';

@@ -44,7 +44,6 @@ const sketch = (p5) => {
 
     // Select canvas DOM element
     const canvasElement = document.querySelector('canvas'); // .elt;
-    console.log('normal');
 
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, (err, result) => {
@@ -54,17 +53,14 @@ const sketch = (p5) => {
         return;
       }
 
-      console.log('pix2pix.transfer() mine');
-
       if (result && result.src) {
         // Set isTransfering back to false
         isTransfering = false;
         // Clear output container
         outputContainer.innerHTML = '';
         // Create an image based result
-        // createImg(result.src)
-        //   .class('border-box')
-        //   .parent('output');
+        // I have no idea what this original commented out function was calling
+        // createImg(result.src).class('border-box').parent('output');
         createImage(result.src);
         // Show 'Done!' message
         statusMsg.innerHTML = 'Done!';
