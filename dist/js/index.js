@@ -24316,7 +24316,7 @@ var sketch = function sketch(p5) {
 
     // Update status message
     var statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = 'Downloading model';
+    statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
     var modelPath = './models/edges2pikachu.pict';
