@@ -12,3 +12,13 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 - Learn to train my own models either using ml5.js or Tensorflow directly. Ideally use Tensorflow directly.
   - Thoughts about training
     - I will have to create the inputs. Maybe the simplest way to get started is to use OpenCV to detect edges.
+
+## To Do
+
+- Create a rudimentary website based off ml5js pix2pix Pikachu example
+- Find another pre-trained pix2pix model
+- Use the new pix2pix model and implement the feature in the website for the user to select the desired model
+- Find more pre-trained models and add them to the website
+- Make the website pretty
+- Try to train my own models
+- Consider if/when it will be worth it to offer a "purchase" feature
