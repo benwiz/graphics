@@ -42,7 +42,7 @@ npm run server SKETCH_NAME
 
 ## Things to remember
 
-- For a while, do my best to not create a custom template. Focus on the content.
+- For a while, do my best to not create a custom template. Focus on the content... or maybe not.
 
 ## To Do
 
