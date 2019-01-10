@@ -6,6 +6,7 @@
   "scripts": {
     "canvas-sketch": "run(){ http-server src/$1/dist/; }; run",
     "new": "run(){ canvas-sketch src/$1/index.js --new --template=$2; } && run",
+    "my-new": "run(){ cp -r templates/$2 src/$1; } && run",
     "start": "run(){ canvas-sketch src/$1/index.js; } && run",
     "hot": "run(){ canvas-sketch src/$1/index.js --hot; } && run",
     "build": "run(){ canvas-sketch src/$1/index.js --build && mkdir -p docs/$1/ && mv index.* docs/$1/; } && run",
