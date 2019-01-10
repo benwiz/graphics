@@ -1,4 +1,4 @@
-export const setup = () => {
+export const setup = (p5) => {
   console.log('sketch.setup');
 };
 

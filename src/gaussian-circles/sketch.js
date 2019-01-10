@@ -1,4 +1,6 @@
-export const setup = () => {
+const circles = [];
+
+export const setup = (p5) => {
   console.log('sketch.setup');
 };
 
