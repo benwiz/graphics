@@ -47,6 +47,7 @@ npm run server SKETCH_NAME
 ## To Do
 
 - Consider include dat.gui on gaussian-circles to test it as a viable, js-only configuration tool
+  - https://github.com/benwiz/boba.js/blob/gh-pages/src/js/index.js#L59
 
 - Understand what hot loading is an when I should use it
 - Look into npm script auto compelte

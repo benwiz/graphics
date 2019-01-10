@@ -13,10 +13,11 @@ const settings = {
   animate: false,
   // Configure size
   dimensions: 'letter',
+  pixelsPerInch: 72, // Adjusting this affects print quality, I think
 };
 
-const sketch = (canvasSketch) => {
-  Sketch.setup(canvasSketch.p5);
+const sketch = (options) => {
+  Sketch.setup(options);
   return Sketch.draw;
 };
 
