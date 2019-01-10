@@ -1,4 +1,4 @@
-- [test-default](./test-default/)
+- [gaussian-circles](./gaussian-circles/)
 
 ## Other Links
 
