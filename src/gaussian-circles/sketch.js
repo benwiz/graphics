@@ -10,8 +10,8 @@ export const setup = (options) => {
   const n = 1000;
   for (let i = 0; i < n; i += 1) {
     const circle = {
-      x: p5.randomGaussian(0, 0.2 * width),
-      y: p5.randomGaussian(0, 0.2 * height),
+      x: p5.randomGaussian(0, 0.22 * width),
+      y: p5.randomGaussian(0, 0.22 * height),
       radius: p5.randomGaussian(12, 6),
     };
     circles.push(circle);
@@ -22,18 +22,20 @@ export const setup = (options) => {
 // All drawing functions below here
 //
 
-const drawBorder = (p5, width, height) => {
-  p5.fill('lightcyan');
-  p5.stroke('orange');
-  console.log('draw rect', 0, 0, 0.5 * width, 0.5 * height);
-  p5.rect(0, 0, 0.5 * width, 0.5 * height);
+const drawBorder = (p5, width, height, thickness, color) => {
+  p5.rectMode(p5.CENTER);
+  p5.noFill();
+  p5.strokeWeight(thickness);
+  p5.stroke(color);
+  p5.rect(0, 0, width, height);
 };
 
 export const draw = (options) => {
   const { p5, width, height } = options;
 
   // Make background white
-  p5.background(255);
+  const backgroundColor = 255;
+  p5.background(backgroundColor);
 
   // Translate to center
   p5.translate(0.5 * width, 0.5 * height);
@@ -54,6 +56,7 @@ export const draw = (options) => {
   });
 
   // Draw a white border around the edge of the canvas
-  // TODO: inputs should be: thickness, color, shape?
-  drawBorder(p5);
+  const borderThickness = 50;
+  const borderColor = backgroundColor;
+  drawBorder(p5, width, height, borderThickness, borderColor);
 };
