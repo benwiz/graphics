@@ -21,7 +21,7 @@ const randomBM = (min, max, skew) => {
   return num;
 };
 
-const createSpheres = (n) => {
+const createSpheres = (n, position) => {
   const meshes = [];
 
   const colors = ['red', 'blue', 'yellow'];
@@ -35,9 +35,9 @@ const createSpheres = (n) => {
     });
     const mesh = new THREE.Mesh(geometry, material);
 
-    const x = randomBM(-10, 10, 1);
-    const y = randomBM(-10, 10, 1);
-    const z = randomBM(-10, 10, 1);
+    const x = randomBM(-position, position, 1);
+    const y = randomBM(-position, position, 1);
+    const z = randomBM(-position, position, 1);
     mesh.position.set(x, y, z);
 
     meshes.push(mesh);
@@ -53,11 +53,11 @@ export const setup = (options) => {
   });
 
   // WebGL background color
-  renderer.setClearColor('#000', 1);
+  renderer.setClearColor('#FFFFFF', 1);
 
   // Setup a camera
   const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100);
-  camera.position.set(2, 2, -4);
+  camera.position.set(15, 15, -30);
   camera.lookAt(new THREE.Vector3());
 
   // Setup camera controller
@@ -67,14 +67,14 @@ export const setup = (options) => {
   const scene = new THREE.Scene();
 
   // Create the mesh and add to the scene
-  const meshes = createSpheres(30);
+  const meshes = createSpheres(30, 20);
   meshes.forEach(mesh => scene.add(mesh));
 
   // Specify an ambient/unlit colour
-  scene.add(new THREE.AmbientLight('#59314f'));
+  scene.add(new THREE.AmbientLight('#D0D0D0')); // #59314f
 
   // Add some light
-  const light = new THREE.PointLight('#45caf7', 1, 15.5);
+  const light = new THREE.PointLight('#AAAAAA', 1, 15.5); // #45caff
   light.position.set(2, 2, -4).multiplyScalar(1.5);
   scene.add(light);
 
