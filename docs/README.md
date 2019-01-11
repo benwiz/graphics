@@ -1,4 +1,5 @@
 - [gaussian-circles](./gaussian-circles/)
+- [gaussian-spheres](./gaussian-spheres/)
 
 ## Other Links
 
