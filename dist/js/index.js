@@ -24245,10 +24245,10 @@ var sketch = function sketch(p5) {
     clearButton.removeAttribute('hidden');
     clearButton.addEventListener('click', clearCanvas);
 
-    // Unhide and set click event to transferButton
-    var transferButton = document.querySelector('#transferButton');
-    transferButton.removeAttribute('hidden');
-    transferButton.addEventListener('click', transfer);
+    // // Unhide and set click event to transferButton
+    // const transferButton = document.querySelector('#transferButton');
+    // transferButton.removeAttribute('hidden');
+    // transferButton.addEventListener('click', transfer);
 
     // Enable the model selector
     var select = document.querySelector('#container select');
@@ -24274,7 +24274,7 @@ var sketch = function sketch(p5) {
 
     // Display initial input image
     // TODO: Use my own default image
-    p5.loadImage('images/pikachu.png', drawImage);
+    p5.loadImage('images/pikachu1.png', drawImage);
 
     // Set stroke to black
     p5.stroke(0);
