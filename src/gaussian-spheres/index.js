@@ -12,9 +12,6 @@ const settings = {
 
 const sketch = (options) => {
   const components = Sketch.setup(options);
-  const {
-    renderer, camera, scene, controls, light, mesh,
-  } = components;
 
   // draw each frame
   return {

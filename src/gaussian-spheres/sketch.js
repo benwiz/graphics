@@ -1,8 +1,26 @@
-// Ensure ThreeJS is in global scope for the 'examples/'
-global.THREE = require('three');
+/* global global, require */
 
+const THREE = require('three');
+// Ensure ThreeJS is in global scope for the 'examples/'
+global.THREE = THREE;
 // Include any additional ThreeJS examples below
 require('three/examples/js/controls/OrbitControls');
+
+const createSpheres = (n) => {
+  const meshes = [];
+
+  const mesh = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshPhysicalMaterial({
+      color: 'white',
+      roughness: 0.75,
+      flatShading: true,
+    }),
+  );
+  meshes.push(mesh);
+
+  return meshes;
+};
 
 export const setup = (options) => {
   // Create a renderer
@@ -24,15 +42,9 @@ export const setup = (options) => {
   // Setup your scene
   const scene = new THREE.Scene();
 
-  const mesh = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshPhysicalMaterial({
-      color: 'white',
-      roughness: 0.75,
-      flatShading: true,
-    }),
-  );
-  scene.add(mesh);
+  // Create the mesh and add to the scene
+  const meshes = createSpheres(3);
+  meshes.forEach(mesh => scene.add(mesh));
 
   // Specify an ambient/unlit colour
   scene.add(new THREE.AmbientLight('#59314f'));
@@ -47,7 +59,7 @@ export const setup = (options) => {
     camera,
     controls,
     scene,
-    mesh,
+    meshes,
   };
 };
 
@@ -62,10 +74,12 @@ export const resize = (components, { pixelRatio, viewportWidth, viewportHeight }
 
 export const render = (components, { time }) => {
   const {
-    renderer, controls, mesh, scene, camera,
+    renderer, controls, meshes, scene, camera,
   } = components;
 
-  mesh.rotation.y = time * ((10 * Math.PI) / 180);
+  meshes.forEach((mesh) => {
+    mesh.rotation.y = time * ((10 * Math.PI) / 180);
+  });
   controls.update();
   renderer.render(scene, camera);
 };
