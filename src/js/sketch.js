@@ -1,4 +1,3 @@
-// import * as P5Dom from '../../vendor/js/p5.dom.min';
 import * as ML5 from '../../vendor/js/ml5.min'; // TODO: Try to use npm if I can use the minified file
 
 const SIZE = 256;
