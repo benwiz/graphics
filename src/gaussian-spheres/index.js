@@ -1,23 +1,36 @@
 import CanvasSketch from 'canvas-sketch';
-import P5 from 'p5';
 import * as Sketch from './sketch';
 
-const preload = (p5) => {
-  // You can use p5.loadImage() here, etc...
-};
-
 const settings = {
-  // Pass the p5 instance, and preload function if necessary
-  p5: { p5: P5, preload },
-  // Turn on a render loop
-  animate: false,
-  // Configure size
-  dimensions: 'letter',
+  // Make the loop animated
+  animate: true,
+  // Get a WebGL canvas rather than 2D
+  context: 'webgl',
+  // Turn on MSAA
+  attributes: { antialias: true },
 };
 
-const sketch = (canvasSketch) => {
-  Sketch.setup(canvasSketch.p5);
-  return Sketch.draw;
+const sketch = (options) => {
+  const components = Sketch.setup(options);
+  const {
+    renderer, camera, scene, controls, light, mesh,
+  } = components;
+
+  // draw each frame
+  return {
+    // Handle resize events here
+    resize: ({ pixelRatio, viewportWidth, viewportHeight }) => {
+      Sketch.resize(components, { pixelRatio, viewportWidth, viewportHeight });
+    },
+    // Update & render your scene here
+    render({ time }) {
+      Sketch.render(components, { time });
+    },
+    // Dispose of events & renderer for cleaner hot-reloading
+    unload() {
+      Sketch.unload(components);
+    },
+  };
 };
 
 CanvasSketch(sketch, settings);

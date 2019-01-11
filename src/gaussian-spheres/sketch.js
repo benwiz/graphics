@@ -1,18 +1,78 @@
-export const setup = (p5) => {
-  console.log('sketch.setup');
+// Ensure ThreeJS is in global scope for the 'examples/'
+global.THREE = require('three');
+
+// Include any additional ThreeJS examples below
+require('three/examples/js/controls/OrbitControls');
+
+export const setup = (options) => {
+  // Create a renderer
+  const renderer = new THREE.WebGLRenderer({
+    context: options.context,
+  });
+
+  // WebGL background color
+  renderer.setClearColor('#000', 1);
+
+  // Setup a camera
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100);
+  camera.position.set(2, 2, -4);
+  camera.lookAt(new THREE.Vector3());
+
+  // Setup camera controller
+  const controls = new THREE.OrbitControls(camera);
+
+  // Setup your scene
+  const scene = new THREE.Scene();
+
+  const mesh = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshPhysicalMaterial({
+      color: 'white',
+      roughness: 0.75,
+      flatShading: true,
+    }),
+  );
+  scene.add(mesh);
+
+  // Specify an ambient/unlit colour
+  scene.add(new THREE.AmbientLight('#59314f'));
+
+  // Add some light
+  const light = new THREE.PointLight('#45caf7', 1, 15.5);
+  light.position.set(2, 2, -4).multiplyScalar(1.5);
+  scene.add(light);
+
+  return {
+    renderer,
+    camera,
+    controls,
+    scene,
+    mesh,
+  };
 };
 
-export const draw = (options) => {
+export const resize = (components, { pixelRatio, viewportWidth, viewportHeight }) => {
+  const { renderer, camera } = components;
+
+  renderer.setPixelRatio(pixelRatio);
+  renderer.setSize(viewportWidth, viewportHeight);
+  camera.aspect = viewportWidth / viewportHeight;
+  camera.updateProjectionMatrix();
+};
+
+export const render = (components, { time }) => {
   const {
-    p5, time, width, height,
-  } = options;
-  console.log('sketch.draw');
+    renderer, controls, mesh, scene, camera,
+  } = components;
 
-  // Draw with p5.js things
-  p5.background(0);
-  p5.fill(255);
-  p5.noStroke();
+  mesh.rotation.y = time * ((10 * Math.PI) / 180);
+  controls.update();
+  renderer.render(scene, camera);
+};
 
-  const anim = p5.sin(time - p5.PI / 2) * 0.5 + 0.5;
-  p5.rect(0, 0, width * anim, height);
+export const unload = (components) => {
+  const { renderer, controls } = components;
+
+  controls.dispose();
+  renderer.dispose();
 };

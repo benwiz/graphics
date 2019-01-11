@@ -1,3 +1,11 @@
+const drawBorder = (p5, width, height, thickness, color) => {
+  p5.rectMode(p5.CENTER);
+  p5.noFill();
+  p5.strokeWeight(thickness);
+  p5.stroke(color);
+  p5.rect(0, 0, width, height);
+};
+
 export const setup = (p5) => {
   console.log('sketch.setup');
 };
