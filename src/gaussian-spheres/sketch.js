@@ -9,15 +9,17 @@ require('three/examples/js/controls/OrbitControls');
 const createSpheres = (n) => {
   const meshes = [];
 
-  const mesh = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshPhysicalMaterial({
-      color: 'white',
-      roughness: 0.75,
-      flatShading: true,
-    }),
-  );
-  meshes.push(mesh);
+  for (let i = 0; i < n; i += 1) {
+    const mesh = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1),
+      new THREE.MeshPhysicalMaterial({
+        color: 'white',
+        roughness: 0.75,
+        flatShading: true,
+      }),
+    );
+    meshes.push(mesh);
+  }
 
   return meshes;
 };
