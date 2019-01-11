@@ -27,7 +27,7 @@ const createSpheres = (n) => {
   const colors = ['red', 'blue', 'yellow'];
 
   for (let i = 0; i < n; i += 1) {
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.SphereGeometry(1, 8, 6);
     const material = new THREE.MeshPhysicalMaterial({
       color: colors[i % colors.length],
       roughness: 0.75,
