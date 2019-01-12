@@ -63,13 +63,18 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 
 ## To Do
 
+- Create edges2mountains training set
+  - Script to scrape images and save them
+  - Script to get edges of each image
+    - Name files:
+      - mountain1.png
+      - edges1.png
+  - Script to separate training data into sets
+
 - Read training guide https://affinelayer.com/pix2pix/ in full
-- Collect and preprocess training data https://commons.wikimedia.org/wiki/Category:Impressionist_paintings, mountain scapes
-- Try to run a very small batch of training
-- Write up an article/readme/blog post... maybe blog post can be an external link to the README
-  - Include citations for data sets, pix2pix, etc.
 
 - Later
+  - README, blog post
   - Get clever 
     - Maybe hold a handdrawn sketch up to webcam and it takes photo
     - Maybe keep experimenting but stop using edges
