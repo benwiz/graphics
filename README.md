@@ -41,14 +41,6 @@ npm start
 ## To Do
 
 - Use my own default image, not `images/pikachu.png`
-
-- Next
-  - Find more pre-trained models and add them to the website
-  - Make the website pretty
-  - Try to train my own models
-    - I may be able to have just 1 or 2 target images, like pikachu and do the training on the mac. It doesn't need to be a very good model 
-    - I may need to hire an nVidia GPU
-  - Consider if/when it will be worth it to offer a "purchase" feature
-
-- Later
-  - It really should be very easy to remove p5.js entirely and just use canvas, but it's probably not worth the effort
+- Try to train my own models
+  - I may be able to have just 1 or 2 target images, like pikachu and do the training on the mac. It doesn't need to be a very good model 
+  - I may need to hire an nVidia GPU
