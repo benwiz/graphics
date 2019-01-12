@@ -64,11 +64,9 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 ## To Do
 
 - Create edges2mountains training set
-  - Script to scrape images and save them
-  - Script to get edges of each image
-    - Name files:
-      - mountain1.png
-      - edges1.png
+  - download_images_from_url.py
+  - get_edges.py
+  - get_edges2mountains_data.sh
   - Script to separate training data into sets
 
 - Read training guide https://affinelayer.com/pix2pix/ in full
