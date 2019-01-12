@@ -2,6 +2,20 @@
 
 Make a bad drawing and turn it into a nice painting reminiscent of a selected artist using 
 
+## How to Run
+
+```sh
+npm install
+```
+
+```sh
+npm run webpack
+```
+
+```sh
+npm start
+```
+
 ## First Brainstorm
 
 - A website
@@ -22,7 +36,6 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
 
 - An essentially identical project I came across https://affinelayer.com/pixsrv/ which is based on https://phillipi.github.io/pix2pix/ 
   - implementation https://github.com/affinelayer/pix2pix-tensorflow/blob/master/pix2pix.py
-  - I'd like to focus more on creating art than
 
 ## To Do
 
@@ -35,6 +48,7 @@ Make a bad drawing and turn it into a nice painting reminiscent of a selected ar
   - Find more pre-trained models and add them to the website
   - Make the website pretty
   - Try to train my own models
+    - I may be able to have just 1 or 2 target images, like pikachu and do the training on the mac. It doesn't need to be a very good model 
     - I may need to hire an nVidia GPU
   - Consider if/when it will be worth it to offer a "purchase" feature
 

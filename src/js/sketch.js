@@ -25,10 +25,12 @@ const sketch = (p5) => {
     const statusMessage = document.querySelector('#status');
     statusMessage.innerHTML = 'Applying Style Transfer...';
 
+    // Disable select
+    const select = document.querySelector('#container select');
+    select.setAttribute('disabled', null);
+
     // Select canvas DOM element
     const canvasElement = document.querySelector('canvas'); // .elt;
-
-    // TODO: Disable select
 
     // Apply pix2pix transformation
     pix2pix.transfer(canvasElement, (err, result) => {
@@ -46,7 +48,8 @@ const sketch = (p5) => {
         // Show 'Done!' message
         statusMessage.innerHTML = 'Transfer complete!';
 
-        // TODO: Enable select
+        // Enable select
+        select.removeAttribute('disabled');
       }
     });
   };
