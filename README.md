@@ -40,7 +40,6 @@ npm start
 
 ## To Do
 
-- Use my own default image, not `images/pikachu.png`
 - Try to train my own models
   - I may be able to have just 1 or 2 target images, like pikachu and do the training on the mac. It doesn't need to be a very good model 
   - I may need to hire an nVidia GPU
