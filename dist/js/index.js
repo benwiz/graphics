@@ -185,9 +185,10 @@ var sketch = function sketch(p5) {
   };
 
   // Clear the canvas
-  var clearCanvas = function clearCanvas() {
+  var clearCanvas = function clearCanvas(event) {
     p5.background(255);
     transfer();
+    event.target.blur();
   };
 
   // A function to be called when the models have loaded
