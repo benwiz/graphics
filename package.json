@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@material/button": "^0.43.0",
-    "@material/select": "^0.43.0",
-    "p5": "^0.7.2"
+    "@material/form-field": "^0.43.0",
+    "@material/radio": "^0.43.0"
   }
 }

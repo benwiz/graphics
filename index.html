@@ -32,15 +32,29 @@
   <div id="container">
     <h1>Art Warp</h1>
 
-    <div class="mdc-select">
-      <i class="mdc-select__dropdown-icon"></i>
-      <select class="mdc-select__native-control">
-        <!-- <option value="" disabled selected></option> -->
-        <option selected value="edges2pikachu">Pikachu</option>
-        <option value="edges2cats">Cat</option>
-      </select>
-      <label class="mdc-floating-label">Pick a style</label>
-      <div class="mdc-line-ripple"></div>
+    <div id="model-radio-buttons">
+      <!-- edges2pikachu -->
+      <div class="mdc-form-field">
+        <div class="mdc-radio">
+          <input class="mdc-radio__native-control" type="radio" id="edges2pikachu" name="models" checked>
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+        </div>
+        <label for="edges2pikachu">Pikachu</label>
+      </div>
+      <!-- edges2cats -->
+      <div class="mdc-form-field">
+        <div class="mdc-radio">
+          <input class="mdc-radio__native-control" type="radio" id="edges2cats" name="models">
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+        </div>
+        <label for="edges2cats">Cats</label>
+      </div>
     </div>
 
     <p id="status"></p>

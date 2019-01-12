@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis");
 @import "_variables";
 @import "@material/button/mdc-button";
-@import "@material/select/mdc-select";
+// @import "@material/select/mdc-select";
+@import "@material/form-field/mdc-form-field";
+@import "@material/radio/mdc-radio";
 
 body {
   font-family: "Dosis", sans-serif;

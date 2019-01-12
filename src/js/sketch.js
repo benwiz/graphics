@@ -1,5 +1,4 @@
-import * as ML5 from '../../vendor/js/ml5.min'; // TODO: Try to use npm if I can use the minified file
-import { MDCSelect } from '@material/select';
+import * as ML5 from '../../vendor/js/ml5.min';
 
 const SIZE = 256;
 
@@ -21,10 +20,6 @@ const sketch = (p5) => {
     const statusMessage = document.querySelector('#status');
     statusMessage.innerHTML = '&nbsp;';
 
-    // Disable select
-    const select = document.querySelector('#container select');
-    select.setAttribute('disabled', null);
-
     // Select canvas DOM element
     const canvasElement = document.querySelector('canvas'); // .elt;
 
@@ -43,9 +38,6 @@ const sketch = (p5) => {
         img.src = result.src;
         // Show 'Done!' message
         statusMessage.innerHTML = '&nbsp;';
-
-        // Enable select
-        select.removeAttribute('disabled');
       }
     });
   };
@@ -74,9 +66,7 @@ const sketch = (p5) => {
     clearButton.removeAttribute('disabled');
     clearButton.addEventListener('click', clearCanvas);
 
-    // Enable the model selector
-    const select = document.querySelector('#container select');
-    select.removeAttribute('disabled');
+    // TODO: Enable radio buttons
   };
 
   // When mouse is released, transfer the current image if the model is loaded and it's not in the
@@ -112,28 +102,37 @@ const sketch = (p5) => {
     let modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
 
-    // Initialize the select element for picking a model
-    const select = new MDCSelect(document.querySelector('#container .mdc-select'));
-    select.listen('MDCSelect:change', () => {
-      // Disable
-      select.setAttribute('disabled', null);
+    // Use radio buttons, not the select element
+    const radioButtons = document.querySelectorAll('#container #model-radio-buttons input');
+    radioButtons.forEach((radioButton) => {
+      radioButton.addEventListener('change', (event) => {
+        // Update status message
+        statusMessage.innerHTML = 'Downloading model...';
 
-      // Update status message
-      statusMessage.innerHTML = 'Downloading model...';
+        // Create a pix2pix method with a pre-trained model
+        const modelName = event.target.id;
+        console.log('pick modelName:', modelName);
+        modelPath = `./models/${modelName}.pict`;
+        pix2pix = ML5.pix2pix(modelPath, modelLoaded);
 
-      // Create a pix2pix method with a pre-trained model
-      const modelName = select.value;
-      console.log('modelName:', modelName);
-      modelPath = `./models/${modelName}.pict`;
-      pix2pix = ML5.pix2pix(modelPath, modelLoaded);
-
-      // Transfer the drawing
-      transfer();
+        // Transfer the drawing
+        transfer();
+      });
     });
   };
 
   p5.draw = () => {
-    if (p5.mouseIsPressed && modelLoaded && !isTransfering) {
+    if (
+      p5.mouseIsPressed &&
+      modelLoaded &&
+      !isTransfering &&
+      // Ensure mouse is within canvas
+      p5.mouseX >= 0 &&
+      p5.mouseY >= 0 &&
+      p5.mouseX < p5.width &&
+      p5.mouseY < p5.height
+    ) {
+      console.log('draw!!');
       p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
     }
   };
