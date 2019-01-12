@@ -247,7 +247,6 @@ var sketch = function sketch(p5) {
     var modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
 
-    // NOTE: There is a lot of code repetition, this needs to be cleaned up.
     // Initialize the select element for picking a model
     var select = new _select.MDCSelect(document.querySelector('#container .mdc-select'));
     select.listen('MDCSelect:change', function () {

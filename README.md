@@ -39,9 +39,9 @@ npm start
 
 ## To Do
 
-- Need better signalling for "thinking" time
-- Use my own default image, not `images/pikachu.png`
 - Make it pretty
+- Make the dropdown work
+- Use my own default image, not `images/pikachu.png`
 
 - Next
   - FYI: The pre-trained Edges2Pikachu model is trained on 256x256 images. So the input images can only be 256x256 or 512x512, or multiple of 256.

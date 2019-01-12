@@ -27,11 +27,19 @@ body {
   #workspace {
     display: flex;
     justify-content: center;
-  }
 
-  #buttonContainer {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    & > div {
+      margin: 10px;
+    }
+
+    #canvasContainer {
+      cursor: crosshair;
+    }
+
+    #buttonContainer {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
   }
 }

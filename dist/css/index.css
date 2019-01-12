@@ -1005,7 +1005,11 @@ body {
   #container #workspace {
     display: flex;
     justify-content: center; }
-  #container #buttonContainer {
-    display: flex;
-    justify-content: center;
-    padding: 20px; }
+    #container #workspace > div {
+      margin: 10px; }
+    #container #workspace #canvasContainer {
+      cursor: crosshair; }
+    #container #workspace #buttonContainer {
+      display: flex;
+      justify-content: center;
+      padding: 20px; }
