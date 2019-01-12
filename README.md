@@ -39,8 +39,7 @@ npm start
 
 ## To Do
 
-- Make it pretty
-- Make the dropdown work
+- Radio buttons should be disabled to start and before model load
 - Use my own default image, not `images/pikachu.png`
 
 - Next

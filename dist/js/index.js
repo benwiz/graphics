@@ -7757,12 +7757,21 @@ var sketch = function sketch(p5) {
     // Call transfer function after the model is loaded
     transfer();
 
-    // Unhide and set click event to clearButton
+    // Enable and set click event to clearButton
     var clearButton = document.querySelector('#clearButton');
     clearButton.removeAttribute('disabled');
     clearButton.addEventListener('click', clearCanvas);
 
-    // TODO: Enable radio buttons
+    // Enable radio buttons
+    var radioButtons = document.querySelectorAll('#container .mdc-radio');
+    radioButtons.forEach(function (rb) {
+      rb.classList.remove('mdc-radio--disabled');
+      var i = rb.querySelector('input');
+      i.removeAttribute('disabled');
+    });
+
+    // Transfer the drawing using the newly loaded model
+    transfer();
   };
 
   // When mouse is released, transfer the current image if the model is loaded and it's not in the
@@ -7790,6 +7799,29 @@ var sketch = function sketch(p5) {
     p5.stroke(0);
     p5.pixelDensity(1);
 
+    // Set up radio buttons to switch models
+    var radioButtons = document.querySelectorAll('#container .mdc-radio');
+    radioButtons.forEach(function (radioButton) {
+      var input = radioButton.querySelector('input');
+      input.addEventListener('change', function (event) {
+        // Disable radio buttons
+        radioButtons.forEach(function (rb) {
+          rb.classList.add('mdc-radio--disabled');
+          var i = rb.querySelector('input');
+          i.setAttribute('disabled', null);
+        });
+
+        // Update status message
+        var statusMessage = document.querySelector('#status');
+        statusMessage.innerHTML = 'Downloading model...';
+
+        // Create a pix2pix method with a pre-trained model
+        var modelName = event.target.id;
+        var modelPath = './models/' + modelName + '.pict';
+        pix2pix = ML5.pix2pix(modelPath, modelLoaded);
+      });
+    });
+
     // Update status message
     var statusMessage = document.querySelector('#status');
     statusMessage.innerHTML = 'Downloading model...';
@@ -7797,31 +7829,12 @@ var sketch = function sketch(p5) {
     // Create a pix2pix method with a pre-trained model
     var modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
-
-    // Use radio buttons, not the select element
-    var radioButtons = document.querySelectorAll('#container #model-radio-buttons input');
-    radioButtons.forEach(function (radioButton) {
-      radioButton.addEventListener('change', function (event) {
-        // Update status message
-        statusMessage.innerHTML = 'Downloading model...';
-
-        // Create a pix2pix method with a pre-trained model
-        var modelName = event.target.id;
-        console.log('pick modelName:', modelName);
-        modelPath = './models/' + modelName + '.pict';
-        pix2pix = ML5.pix2pix(modelPath, modelLoaded);
-
-        // Transfer the drawing
-        transfer();
-      });
-    });
   };
 
   p5.draw = function () {
     if (p5.mouseIsPressed && modelLoaded && !isTransfering &&
     // Ensure mouse is within canvas
     p5.mouseX >= 0 && p5.mouseY >= 0 && p5.mouseX < p5.width && p5.mouseY < p5.height) {
-      console.log('draw!!');
       p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
     }
   };

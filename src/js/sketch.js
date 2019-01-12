@@ -61,12 +61,21 @@ const sketch = (p5) => {
     // Call transfer function after the model is loaded
     transfer();
 
-    // Unhide and set click event to clearButton
+    // Enable and set click event to clearButton
     const clearButton = document.querySelector('#clearButton');
     clearButton.removeAttribute('disabled');
     clearButton.addEventListener('click', clearCanvas);
 
-    // TODO: Enable radio buttons
+    // Enable radio buttons
+    const radioButtons = document.querySelectorAll('#container .mdc-radio');
+    radioButtons.forEach((rb) => {
+      rb.classList.remove('mdc-radio--disabled');
+      const i = rb.querySelector('input');
+      i.removeAttribute('disabled');
+    });
+
+    // Transfer the drawing using the newly loaded model
+    transfer();
   };
 
   // When mouse is released, transfer the current image if the model is loaded and it's not in the
@@ -94,31 +103,36 @@ const sketch = (p5) => {
     p5.stroke(0);
     p5.pixelDensity(1);
 
+    // Set up radio buttons to switch models
+    const radioButtons = document.querySelectorAll('#container .mdc-radio');
+    radioButtons.forEach((radioButton) => {
+      const input = radioButton.querySelector('input');
+      input.addEventListener('change', (event) => {
+        // Disable radio buttons
+        radioButtons.forEach((rb) => {
+          rb.classList.add('mdc-radio--disabled');
+          const i = rb.querySelector('input');
+          i.setAttribute('disabled', null);
+        });
+
+        // Update status message
+        const statusMessage = document.querySelector('#status');
+        statusMessage.innerHTML = 'Downloading model...';
+
+        // Create a pix2pix method with a pre-trained model
+        const modelName = event.target.id;
+        const modelPath = `./models/${modelName}.pict`;
+        pix2pix = ML5.pix2pix(modelPath, modelLoaded);
+      });
+    });
+
     // Update status message
     const statusMessage = document.querySelector('#status');
     statusMessage.innerHTML = 'Downloading model...';
 
     // Create a pix2pix method with a pre-trained model
-    let modelPath = './models/edges2pikachu.pict';
+    const modelPath = './models/edges2pikachu.pict';
     pix2pix = ML5.pix2pix(modelPath, modelLoaded);
-
-    // Use radio buttons, not the select element
-    const radioButtons = document.querySelectorAll('#container #model-radio-buttons input');
-    radioButtons.forEach((radioButton) => {
-      radioButton.addEventListener('change', (event) => {
-        // Update status message
-        statusMessage.innerHTML = 'Downloading model...';
-
-        // Create a pix2pix method with a pre-trained model
-        const modelName = event.target.id;
-        console.log('pick modelName:', modelName);
-        modelPath = `./models/${modelName}.pict`;
-        pix2pix = ML5.pix2pix(modelPath, modelLoaded);
-
-        // Transfer the drawing
-        transfer();
-      });
-    });
   };
 
   p5.draw = () => {
@@ -132,7 +146,6 @@ const sketch = (p5) => {
       p5.mouseX < p5.width &&
       p5.mouseY < p5.height
     ) {
-      console.log('draw!!');
       p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
     }
   };
