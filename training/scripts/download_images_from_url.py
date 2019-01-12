@@ -7,3 +7,4 @@ OUTPUT:
 
 ./edges2/mountains/images/mountain_N.png of 250x250 pixels
 """
+
