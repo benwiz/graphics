@@ -41,12 +41,12 @@ npm start
 
 ## To Do
 
-- Training
-  - Guide: https://affinelayer.com/pix2pix/
-    - Just use my own data
-  - Data: https://commons.wikimedia.org/wiki/Category:Impressionist_paintings
+- Read training guide https://affinelayer.com/pix2pix/ in full
+- Collect and preprocess training data https://commons.wikimedia.org/wiki/Category:Impressionist_paintings
+- Try to run a very small batch of training
 
 - Later
   - Get clever 
     - Maybe hold a handdrawn sketch up to webcam and it takes photo
     - Maybe keep experimenting but stop using edges
+    - Style can be broad: "all art between 1100 and 1800" or specific "Van Gogh"
