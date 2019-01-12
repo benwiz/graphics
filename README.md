@@ -2,7 +2,7 @@
 
 Make a bad drawing and turn it into a nice painting reminiscent of a selected artist using 
 
-## How to Run
+## How to Run Webserver
 
 ```sh
 npm install
@@ -14,6 +14,26 @@ npm run webpack
 
 ```sh
 npm start
+```
+
+## How to Train
+
+In `~/code/pix2pix-tensorflow/` run
+
+```sh
+docker run -it --rm -v $PWD:/tmp -w /tmp tensorflow/tensorflow bash
+```
+
+Train the model
+
+```sh
+python pix2pix.py --mode train --output_dir facades_train --max_epochs 200 --input_dir facades/train --which_direction BtoA
+```
+
+Test the model
+
+```sh
+python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val --checkpoint facades_train
 ```
 
 ## First Brainstorm
@@ -39,15 +59,22 @@ npm start
   - An original? https://ml4a.github.io/guides/Pix2Pix/
 - The pre-trained Edges2Pikachu model is trained on 256x256 images. So the input images can only be 256x256 or 512x512, or multiple of 256.
 
+- The pip tensorflow is not optimized for this CPU. I can improve training speed by building Tensorflow myself. https://bazel.build/
+
 ## To Do
 
 - Read training guide https://affinelayer.com/pix2pix/ in full
-- Collect and preprocess training data https://commons.wikimedia.org/wiki/Category:Impressionist_paintings
+- Collect and preprocess training data https://commons.wikimedia.org/wiki/Category:Impressionist_paintings, mountain scapes
 - Try to run a very small batch of training
 - Write up an article/readme/blog post... maybe blog post can be an external link to the README
+  - Include citations for data sets, pix2pix, etc.
 
 - Later
   - Get clever 
     - Maybe hold a handdrawn sketch up to webcam and it takes photo
     - Maybe keep experimenting but stop using edges
     - Style can be broad: "all art between 1100 and 1800" or specific "Van Gogh"
+  - Compile tensorflow to use CPU better
+
+
+docker run -it --rm tensorflow/tensorflow python -c "import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))"
