@@ -36,10 +36,17 @@ npm start
 
 - An essentially identical project I came across https://affinelayer.com/pixsrv/ which is based on https://phillipi.github.io/pix2pix/ 
   - implementation https://github.com/affinelayer/pix2pix-tensorflow/blob/master/pix2pix.py
+  - An original? https://ml4a.github.io/guides/Pix2Pix/
 - The pre-trained Edges2Pikachu model is trained on 256x256 images. So the input images can only be 256x256 or 512x512, or multiple of 256.
 
 ## To Do
 
-- Try to train my own models
-  - I may be able to have just 1 or 2 target images, like pikachu and do the training on the mac. It doesn't need to be a very good model 
-  - I may need to hire an nVidia GPU
+- Training
+  - Guide: https://affinelayer.com/pix2pix/
+    - Just use my own data
+  - Data: https://commons.wikimedia.org/wiki/Category:Impressionist_paintings
+
+- Later
+  - Get clever 
+    - Maybe hold a handdrawn sketch up to webcam and it takes photo
+    - Maybe keep experimenting but stop using edges
