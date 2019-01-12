@@ -63,8 +63,8 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 
 ## To Do
 
-- download_images_from_url.py
-- get_edges.py
+- download_images_from_url.sh
+- get_edges.py... _might_ be able to be a bash script and call opencv via a command line utility... better this than dealing Python
 - get_edges2mountains_data.sh
   - include separating into train, test, val sets
 
