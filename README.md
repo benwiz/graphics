@@ -41,9 +41,12 @@ npm start
 
 ## To Do
 
+- Add home and github links
+
 - Read training guide https://affinelayer.com/pix2pix/ in full
 - Collect and preprocess training data https://commons.wikimedia.org/wiki/Category:Impressionist_paintings
 - Try to run a very small batch of training
+- Write up an article/readme/blog post... maybe blog post can be an external link to the README
 
 - Later
   - Get clever 
