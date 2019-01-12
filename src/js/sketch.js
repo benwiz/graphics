@@ -18,7 +18,9 @@ const sketch = (p5) => {
 
     // Update status message
     const statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = '&nbsp;';
+    const message =
+      'Crete a drawing in the left box and the computer<br>will respond with its own drawing';
+    statusMessage.innerHTML = message;
 
     // Select canvas DOM element
     const canvasElement = document.querySelector('canvas'); // .elt;
@@ -37,7 +39,7 @@ const sketch = (p5) => {
         const img = document.querySelector('#output img');
         img.src = result.src;
         // Show 'Done!' message
-        statusMessage.innerHTML = '&nbsp;';
+        statusMessage.innerHTML = message;
       }
     });
   };
