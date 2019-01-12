@@ -19,7 +19,7 @@ const sketch = (p5) => {
     // Update status message
     const statusMessage = document.querySelector('#status');
     const message =
-      'Crete a drawing in the left box and the computer<br>will respond with its own drawing';
+      'Crete a drawing in the left box and the computer will respond with its own drawing';
     statusMessage.innerHTML = message;
 
     // Select canvas DOM element

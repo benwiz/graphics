@@ -7714,7 +7714,7 @@ var sketch = function sketch(p5) {
 
     // Update status message
     var statusMessage = document.querySelector('#status');
-    var message = 'Crete a drawing in the left box and the computer<br>will respond with its own drawing';
+    var message = 'Crete a drawing in the left box and the computer will respond with its own drawing';
     statusMessage.innerHTML = message;
 
     // Select canvas DOM element

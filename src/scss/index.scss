@@ -21,6 +21,11 @@ body {
     border: black 1px solid;
   }
 
+  #status {
+    max-width: 350px;
+    margin: 10px auto;
+  }
+
   #workspace {
     display: flex;
     justify-content: center;

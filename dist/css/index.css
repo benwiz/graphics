@@ -506,6 +506,9 @@ body {
     width: 200px; }
   #container .border-box {
     border: black 1px solid; }
+  #container #status {
+    max-width: 350px;
+    margin: 10px auto; }
   #container #workspace {
     display: flex;
     justify-content: center; }

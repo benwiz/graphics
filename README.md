@@ -36,14 +36,13 @@ npm start
 
 - An essentially identical project I came across https://affinelayer.com/pixsrv/ which is based on https://phillipi.github.io/pix2pix/ 
   - implementation https://github.com/affinelayer/pix2pix-tensorflow/blob/master/pix2pix.py
+- The pre-trained Edges2Pikachu model is trained on 256x256 images. So the input images can only be 256x256 or 512x512, or multiple of 256.
 
 ## To Do
 
-- Radio buttons should be disabled to start and before model load
 - Use my own default image, not `images/pikachu.png`
 
 - Next
-  - FYI: The pre-trained Edges2Pikachu model is trained on 256x256 images. So the input images can only be 256x256 or 512x512, or multiple of 256.
   - Find more pre-trained models and add them to the website
   - Make the website pretty
   - Try to train my own models
