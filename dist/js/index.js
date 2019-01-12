@@ -153,7 +153,7 @@ var sketch = function sketch(p5) {
 
     // Update status message
     var statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = 'Thinking...';
+    statusMessage.innerHTML = '&nbsp;';
 
     // Disable select
     var select = document.querySelector('#container select');
@@ -176,7 +176,7 @@ var sketch = function sketch(p5) {
         var img = document.querySelector('#output img');
         img.src = result.src;
         // Show 'Done!' message
-        statusMessage.innerHTML = 'Transfer complete!';
+        statusMessage.innerHTML = '&nbsp;';
 
         // Enable select
         select.removeAttribute('disabled');

@@ -1,8 +1,17 @@
-.border-box {
-  border: black 1px solid; }
+@import url(https://fonts.googleapis.com/css?family=Dosis);/* deepskyblue, dodgerblue */
+body {
+  font-family: "Dosis", sans-serif; }
 
-.flex {
-  display: flex; }
-
-#buttonContainer {
-  justify-content: space-between; }
+#container {
+  text-align: center; }
+  #container select {
+    margin: 0 auto; }
+  #container .border-box {
+    border: black 1px solid; }
+  #container #workspace {
+    display: flex;
+    justify-content: center; }
+  #container #buttonContainer {
+    display: flex;
+    justify-content: center;
+    padding: 20px; }
