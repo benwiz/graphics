@@ -12,18 +12,13 @@ const sketch = (p5) => {
     p5.image(img, 0, 0);
   };
 
-  // Clear the canvas
-  const clearCanvas = () => {
-    p5.background(255);
-  };
-
   const transfer = () => {
     // Set isTransfering to true
     isTransfering = true;
 
     // Update status message
     const statusMessage = document.querySelector('#status');
-    statusMessage.innerHTML = 'Applying Style Transfer...';
+    statusMessage.innerHTML = 'Thinking...';
 
     // Disable select
     const select = document.querySelector('#container select');
@@ -54,6 +49,12 @@ const sketch = (p5) => {
     });
   };
 
+  // Clear the canvas
+  const clearCanvas = () => {
+    p5.background(255);
+    transfer();
+  };
+
   // A function to be called when the models have loaded
   const modelLoaded = () => {
     // Update status message
@@ -68,13 +69,8 @@ const sketch = (p5) => {
 
     // Unhide and set click event to clearButton
     const clearButton = document.querySelector('#clearButton');
-    clearButton.removeAttribute('hidden');
+    clearButton.removeAttribute('disabled');
     clearButton.addEventListener('click', clearCanvas);
-
-    // // Unhide and set click event to transferButton
-    // const transferButton = document.querySelector('#transferButton');
-    // transferButton.removeAttribute('hidden');
-    // transferButton.addEventListener('click', transfer);
 
     // Enable the model selector
     const select = document.querySelector('#container select');
