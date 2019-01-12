@@ -1,4 +1,5 @@
 import * as ML5 from '../../vendor/js/ml5.min'; // TODO: Try to use npm if I can use the minified file
+import { MDCSelect } from '@material/select';
 
 const SIZE = 256;
 
@@ -113,8 +114,8 @@ const sketch = (p5) => {
 
     // NOTE: There is a lot of code repetition, this needs to be cleaned up.
     // Initialize the select element for picking a model
-    const select = document.querySelector('#container select');
-    select.addEventListener('change', (event) => {
+    const select = new MDCSelect(document.querySelector('#container .mdc-select'));
+    select.listen('MDCSelect:change', () => {
       // Disable
       select.setAttribute('disabled', null);
 
@@ -122,7 +123,7 @@ const sketch = (p5) => {
       statusMessage.innerHTML = 'Downloading model...';
 
       // Create a pix2pix method with a pre-trained model
-      const modelName = event.target.value;
+      const modelName = select.value;
       console.log('modelName:', modelName);
       modelPath = `./models/${modelName}.pict`;
       pix2pix = ML5.pix2pix(modelPath, modelLoaded);

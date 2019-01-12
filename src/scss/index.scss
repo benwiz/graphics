@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis");
 @import "_variables";
 @import "@material/button/mdc-button";
+@import "@material/select/mdc-select";
 
 body {
   font-family: "Dosis", sans-serif;
@@ -16,6 +17,7 @@ body {
 
   select {
     margin: 0 auto;
+    width: 100px;
   }
 
   .border-box {

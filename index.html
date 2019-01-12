@@ -32,10 +32,16 @@
   <div id="container">
     <h1>Art Warp</h1>
 
-    <select disabled>
-      <option value="edges2pikachu">Pikachu</option>
-      <option value="edges2cats">Cat</option>
-    </select>
+    <div class="mdc-select">
+      <i class="mdc-select__dropdown-icon"></i>
+      <select class="mdc-select__native-control">
+        <!-- <option value="" disabled selected></option> -->
+        <option selected value="edges2pikachu">Pikachu</option>
+        <option value="edges2cats">Cat</option>
+      </select>
+      <label class="mdc-floating-label">Pick a style</label>
+      <div class="mdc-line-ripple"></div>
+    </div>
 
     <p id="status"></p>
 
