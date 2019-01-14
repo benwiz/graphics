@@ -35,26 +35,32 @@ def canny(img, low_thresh, high_thresh):
     return edges
 
 
-def main():
+def run():
     path = './%s/images/' % model_name
     for filename in os.listdir(path):
-        # TODO: Load img
+        # Load image
         in_filepath = path + filename
         img = cv2.imread(in_filepath, cv2.IMREAD_GRAYSCALE)
         if img is None:
             continue
+        print('\tin:\t%s' % in_filepath)
 
         # Canny edge detection on img
         edges = canny(img, 100, 500)
 
         # Output the image
         image_id = filename.split('.')[0]
-        out_filepath = '%s%s%s%s' % (path, image_id, '_edge', '.jpg')
+        out_filepath = '%s%s%s%s' % (path, image_id, '_edges', '.jpg')
         cv2.imwrite(out_filepath, edges)
+        print('\tout:\t%s' % out_filepath)
 
         # Ensure all windows are closed
         if SHOW:
             cv2.destroyAllWindows()
 
 
-main()
+if __name__ == '__main__':
+    print()
+    print('get_edges.py:')
+    print('Begin edge detection.')
+    run()
