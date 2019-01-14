@@ -26,16 +26,24 @@ else
     echo "This program will run in PRODUCTION mode meaning that all available images will be downloaded and used to train the model. This program should complete within several hours."
 fi
 
-#
-# Get and prepare data
-#
-if [ "$IS_DRY_RUN" -eq "1" ]
-then
-    ./scripts/get_data.sh $MODEL_NAME --dry-run
-else
-    ./scripts/get_data.sh $MODEL_NAME
-fi
+# #
+# # Get and prepare data
+# #
+# if [ "$IS_DRY_RUN" -eq "1" ]
+# then
+#     ./scripts/get_data.sh $MODEL_NAME --dry-run
+# else
+#     ./scripts/get_data.sh $MODEL_NAME
+# fi
 
 #
 # TODO: Train
 #
+./scripts/train.sh $MODEL_NAME
+
+echo
+echo
+echo "."
+echo "."
+echo "."
+echo "Done."
