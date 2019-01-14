@@ -9,7 +9,8 @@
 MODEL_NAME=$1
 TOTAL_COUNT=$(echo $(wc -l < "$MODEL_NAME/urls.txt")) 
 
-echo; echo "Downloading images $TOTAL_COUNT from $MODEL_NAME"
+echo
+echo "Downloading images $TOTAL_COUNT from $MODEL_NAME"
 
 while read p; do
     COUNT=$(echo $(ls $MODEL_NAME/images/ | wc -l))
