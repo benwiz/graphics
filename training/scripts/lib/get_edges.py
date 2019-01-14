@@ -49,8 +49,7 @@ def main():
 
         # Output the image
         image_id = filename.split('.')[0]
-        image_id = image_id.split('mountain')[1]  # TODO: No prefix `mountain`
-        out_filepath = '%s%s%s%s%s' % (path, 'mountain', image_id, '_edge', '.jpg')
+        out_filepath = '%s%s%s%s' % (path, image_id, '_edge', '.jpg')
         cv2.imwrite(out_filepath, edges)
 
         # Ensure all windows are closed

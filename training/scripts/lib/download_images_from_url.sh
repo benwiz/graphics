@@ -14,7 +14,7 @@ echo "Downloading images $TOTAL_COUNT from $MODEL_NAME"
 
 while read p; do
     COUNT=$(echo $(ls $MODEL_NAME/images/ | wc -l))
-    wget -O "$MODEL_NAME/images/deleteme$MODEL_NAME$COUNT.jpg" "$p" --tries 2 --timeout 5 &> /dev/null
+    wget -O "$MODEL_NAME/images/$COUNT.jpg" "$p" --tries 2 --timeout 5 &> /dev/null
 
     PERCENT=$(echo "scale=4 ; $COUNT / $TOTAL_COUNT * 100" | bc)
     echo -ne "\t$COUNT / $TOTAL_COUNT ($PERCENT%)\r"

@@ -1,3 +1,5 @@
+# Download data then create edge images
+
 MODEL_NAME=$1
 
 mkdir -p ./$MODEL_NAME/images/
