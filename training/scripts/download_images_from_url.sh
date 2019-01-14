@@ -9,8 +9,5 @@ MODEL_NAME=$1
 echo; echo "Downloading images from $MODEL_NAME"; echo
 
 while read p; do
-    echo;echo;echo
-    echo "$MODEL_NAME/images/mountain$(echo $(ls $MODEL_NAME/images/ | wc -l)).jpg"
-    echo;echo;echo
-    wget -O "$MODEL_NAME/images/mountain$(echo $(ls $MODEL_NAME/images/ | wc -l)).jpg" "$p"
+    wget -O "$MODEL_NAME/images/mountain$(echo $(ls $MODEL_NAME/images/ | wc -l)).jpg" "$p" --tries 2 --timeout 5
 done <$MODEL_NAME/urls.txt
