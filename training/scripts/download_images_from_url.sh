@@ -6,7 +6,7 @@
 
 MODEL_NAME=$1
 
-echo "hey" "$1"
+echo; echo "Downloading images from $MODEL_NAME"; echo
 
 while read p; do
     echo;echo;echo
