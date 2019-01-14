@@ -15,24 +15,7 @@ import os
 import numpy as np
 import cv2
 
-SHOW = False
-
 model_name = sys.argv[1]
-
-
-def canny(img, low_thresh, high_thresh):
-    """
-    Canny edge detection. `img` should be grayscale.
-    """
-
-    # Detect edges (points that identify the edges)
-    edges = cv2.Canny(img, low_thresh, high_thresh)
-    if SHOW:
-        cv2.imshow('Edges', edges)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-    
-    return edges
 
 
 def run():
@@ -45,18 +28,19 @@ def run():
             continue
         print('\tin:\t%s' % in_filepath)
 
+        # TODO: Resize image to 256x256
+
         # Canny edge detection on img
-        edges = canny(img, 100, 500)
+        edges = cv2.Canny(img, 100, 500)
+
+        # TODO: Stich the two photos together with the edges on the right
 
         # Output the image
+        out_path = './%s/data/' % model_name
         image_id = filename.split('.')[0]
-        out_filepath = '%s%s%s%s' % (path, image_id, '_edges', '.jpg')
+        out_filepath = out_path + image_id + '.jpg'
         cv2.imwrite(out_filepath, edges)
         print('\tout:\t%s' % out_filepath)
-
-        # Ensure all windows are closed
-        if SHOW:
-            cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':

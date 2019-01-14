@@ -63,15 +63,12 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 
 ## To Do
 
-- Dry Run optional flag on all scripts, where appropriate
-
 - download_images_from_url.sh
   - How to handle bad data like the flickr images? Maybe manually curate a list and store in S3.
 - get_edges.py
-  - Update script to not use prepended `mountain`
-  - Previous use of Canny edge detection: https://github.com/benwiz/fragment/blob/master/py-detect-features/lambda_function.py
-- get_edges2mountains_data.sh
-  - include separating into train, test, val sets
+  - optimize edge detection
+- sort_data.sh
+- run.sh must ensure every step of the way is success or exit on error
 - train_edges2mountains... maybe make this a docker image and teach dad to `docker run benwiz/pix2pix-edges2mountains`
 
 - Create a docker file that will call `cd ./training/ && ./scripts/run.sh` which will download data then

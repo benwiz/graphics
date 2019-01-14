@@ -3,7 +3,8 @@
 # Initialize the training sequence.
 
 echo
-echo "train.sh"
+echo "train.sh:"
+echo "Begin training the model."
 
 # Read model argument
 MODEL_NAME=$1
