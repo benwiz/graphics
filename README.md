@@ -63,7 +63,11 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 
 ## To Do
 
+- Change mountain image filenames to just include image_id
+- Find a better way of programmatically getting mountain images... there are a lot of bad flickr images
+  - Maybe this is simply me hosting a curated set of training data
 - get_edges.py
+  - Update script to not use prepended `mountain`
   - Previous use of Canny edge detection: https://github.com/benwiz/fragment/blob/master/py-detect-features/lambda_function.py
 - get_edges2mountains_data.sh
   - include separating into train, test, val sets
