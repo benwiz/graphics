@@ -67,6 +67,7 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 - get_edges.py... _might_ be able to be a bash script and call opencv via a command line utility... better this than dealing Python
 - get_edges2mountains_data.sh
   - include separating into train, test, val sets
+- train_edges2mountains... maybe make this a docker image and teach dad to `docker run benwiz/pix2pix-edges2mountains`
 
 - Read training guide https://affinelayer.com/pix2pix/ in full
 

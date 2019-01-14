@@ -1,6 +1,8 @@
 # TODO: Orchestrate the various python scripts
 
-make some directories 
+MODEL_NAME=edges2mountains
 
-download_images_from_url.py
-get_edges.py
+mkdir -p ./$1/images/
+
+./scripts/download_images_from_url.sh $MODEL_NAME
+python3 ./scripts/get_edges.py

@@ -7,3 +7,5 @@ OUTPUT:
 
 ./edges2mountains/edges/edge_N.png
 """
+
+print("get edges script")
