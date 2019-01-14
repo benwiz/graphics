@@ -1,3 +1,4 @@
+#!/bin/bash
 # Download data then create edge images
 
 MODEL_NAME=$1

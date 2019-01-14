@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # INPUT:
 # ./scripts/download_images_from_url.sh ./edges2mountains/urls.txt ./edges2mountains/images/ 250 250
 # TODO: revisit this example input
