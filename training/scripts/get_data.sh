@@ -19,13 +19,13 @@ fi
 
 mkdir -p ./$MODEL_NAME/images/
 
-# # Download images
-# if [ "$IS_DRY_RUN" -eq "1" ]
-# then
-#     ./scripts/lib/download_images_from_url.sh $MODEL_NAME --dry-run
-# else
-#     ./scripts/lib/download_images_from_url.sh $MODEL_NAME
-# fi
+# Download images
+if [ "$IS_DRY_RUN" -eq "1" ]
+then
+    ./scripts/lib/download_images_from_url.sh $MODEL_NAME --dry-run
+else
+    ./scripts/lib/download_images_from_url.sh $MODEL_NAME
+fi
 
 # Get edges
 python3 ./scripts/lib/get_edges.py $MODEL_NAME

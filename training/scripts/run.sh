@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Get and prepare data. Then begin training the Tensorflow pix2pix model.
+# ./scripts/run.sh edges2mountains --dry-run
 #
 
 echo
