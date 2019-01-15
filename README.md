@@ -152,16 +152,18 @@ export OUTPUT_DIR=out
 rm -r out/*
 
 # Train the model
-python tools/dockrun.py python pix2pix.py --mode train --output_dir $OUTPUT_DIR/train_out --max_epochs $EPOCHS --input_dir $INPUT_DIR/train --which_direction BtoA
+python3 tools/dockrun.py python pix2pix.py --mode train --output_dir $OUTPUT_DIR/train_out --max_epochs $EPOCHS --input_dir $INPUT_DIR/train --which_direction BtoA
 
 # Test the model
-python tools/dockrun.py python pix2pix.py --mode test --output_dir $OUTPUT_DIR/test_out --input_dir $INPUT_DIR/val --checkpoint $INPUT_DIR/train_out
+python3 tools/dockrun.py python pix2pix.py --mode test --output_dir $OUTPUT_DIR/test_out --input_dir $INPUT_DIR/val --checkpoint $INPUT_DIR/train_out
 ```
 
 ## To Do
 
-- Read training guide https://affinelayer.com/pix2pix/ in full
+NOTE: Where I left off Jan. 15, 2019:
+  - I need to run the actual training commands. The preferred option is noted just above. 
 
+- Read training guide https://affinelayer.com/pix2pix/ in full
 - Zip pix2pix-tensorflow with training data
 - Provide dad instructions to install docker
 - Provide dad instructions to install Python3 incase it is needed
