@@ -31,7 +31,7 @@ def run():
     for filename in os.listdir(path):
         # Load image
         in_filepath = path + filename
-        img = cv2.imread(in_filepath, cv2.IMREAD_GRAYSCALE)
+        img = cv2.imread(in_filepath, cv2.IMREAD_COLOR)
         if img is None:
             continue
         # print('\tin:\t%s' % in_filepath)
@@ -40,10 +40,15 @@ def run():
         size = 256
         img = cv2.resize(img, (size, size))
 
-        # Canny edge detection on img
-        edges = cv2.Canny(img, 100, 500)
+        # Convert it to grayscale
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        # TODO: Stich the two photos together with the edges on the right
+        # Canny edge detection on gray image
+        edges = cv2.Canny(gray, 100, 500)
+
+        # Stich the two photos together with the edges on the right. But first
+        # we need to convert the edges image to color.
+        edges = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
         out = np.concatenate((img, edges), axis=1)
 
         # Output the image
