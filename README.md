@@ -18,23 +18,35 @@ npm start
 
 ## How to Train
 
-In `~/code/pix2pix-tensorflow/` run
+### Preparing the data
+
+Before getting started, create a Python3 virtualenv and install the requirements. Specifically this is OpenCV and Numpy. Using my alias, just run the following command.
 
 ```sh
-docker run -it --rm -v $PWD:/tmp -w /tmp tensorflow/tensorflow bash
+venv
 ```
 
-Train the model
+Then enter the `training/` directory.
 
 ```sh
-python pix2pix.py --mode train --output_dir facades_train --max_epochs 200 --input_dir facades/train --which_direction BtoA
+cd training/
 ```
 
-Test the model
+First, prepare the training data. Optionally pass in `--dry-run` to only download 5 images. This will download data from `./edges2mountains/urls.txt`, detect their edges, and organize the training data into three directories.
 
 ```sh
-python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val --checkpoint facades_train
+./scripts/get_data.sh edges2mountains --dry-run
 ```
+
+Second, upload the resulting data to S3 or another data store for future use.
+
+```sh
+./scripts/upload_data.sh edges2mountains
+```
+
+### Training the model
+
+TODO
 
 ## First Brainstorm
 
@@ -61,16 +73,36 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 
 - The pip tensorflow is not optimized for this CPU. I can improve training speed by building Tensorflow myself. https://bazel.build/
 
+### How to Train using pix2pix
+
+In `~/code/pix2pix-tensorflow/` run
+
+```sh
+docker run -it --rm -v $PWD:/tmp -w /tmp tensorflow/tensorflow bash
+```
+
+Train the model
+
+```sh
+python pix2pix.py --mode train --output_dir facades_train --max_epochs 200 --input_dir facades/train --which_direction BtoA
+```
+
+Test the model
+
+```sh
+python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val --checkpoint facades_train
+```
+
 ## To Do
+
+- Read training guide https://affinelayer.com/pix2pix/ in full
 
 - download_images_from_url.sh
   - How to handle bad data like the flickr images? Maybe manually curate a list and store in S3.
-- run.sh must ensure every step of the way is success or exit on error. I think this can be done easily by checking `$?`.
-- train_edges2mountains... maybe make this a docker image and teach dad to `docker run benwiz/pix2pix-edges2mountains`
-
-- Create a docker file that will call `cd ./training/ && ./scripts/run.sh` which will download data then
-
-- Read training guide https://affinelayer.com/pix2pix/ in full
+- upload_data.sh
+  - Need a script that will upload the results of get_data.sh to 
+- Easy-to-use `docker run` command for training.
+  - I am expecting two different Docker images. One for CPU and one for GPU. The command should look something like `docker run benwiz/art-warp-training-cpu edges2mountains`.
 
 - Later
   - README, blog post
