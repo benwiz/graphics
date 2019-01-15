@@ -122,12 +122,15 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 Preferable option. Will need downloaded [repo](https://github.com/affinelayer/pix2pix-tensorflow).
 
 ```sh
-# train the model
-python tools/dockrun.py python pix2pix.py --mode train --output_dir facades_train --max_epochs 200 --input_dir facades/train --which_direction BtoA
-# test the model
-python tools/dockrun.py python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val --checkpoint facades_train
-```
+EPOCHS=200
+DATA_DIR=edges2mountains
 
+# Train the model
+python tools/dockrun.py python pix2pix.py --mode train --output_dir $DATA_DIR/train_out --max_epochs $EPOCHS --input_dir $DATA_DIR/train --which_direction BtoA
+
+# Test the model
+python tools/dockrun.py python pix2pix.py --mode test --output_dir $DATA_DIR/test_out --input_dir $DATA_DIR/val --checkpoint $DATA_DIR/train_out
+```
 
 ## To Do
 
