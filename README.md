@@ -160,8 +160,6 @@ python tools/dockrun.py python pix2pix.py --mode test --output_dir $OUTPUT_DIR/t
 
 ## To Do
 
-- get_edges.py must resize the initial image
-- get_edges.py must stick together the two images with the original on the left.
 - Complete the training data
 
 - Read training guide https://affinelayer.com/pix2pix/ in full
