@@ -15,6 +15,10 @@ import os
 import numpy as np
 import cv2
 
+if len(sys.argv) != 1:
+    print('Error: exactly 1 argument must be supplied.')
+    sys.exit(1)
+
 model_name = sys.argv[1]
 
 
