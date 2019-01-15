@@ -44,7 +44,10 @@ def run():
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Canny edge detection on gray image
-        edges = cv2.Canny(gray, 100, 500)
+        edges = cv2.Canny(gray, 100, 450)
+
+        # Invert black and white
+        edges = cv2.bitwise_not(edges)
 
         # Stich the two photos together with the edges on the right. But first
         # we need to convert the edges image to color.
