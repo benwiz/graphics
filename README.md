@@ -16,9 +16,7 @@ npm run webpack
 npm start
 ```
 
-## How to Train
-
-### Preparing the data
+## How to prepare the data
 
 Before getting started, create a Python3 virtualenv and install the requirements. Specifically this is OpenCV and Numpy. Also enter the training directory. It is also helpful to set the `MODEL_NAME` variable.
 
@@ -54,15 +52,25 @@ open ./$MODEL_NAME/data/
 ./scripts/sort_data.sh $MODEL_NAME
 ```
 
-5. Upload the data to S3.
+5. Upload data somewhere. Right now I think this is going to be me uploading a .zip of *pix2pix-tensorflow* that includes the training data and a customize run script.
 
-```sh
-./scripts/upload_data.sh edges2mountains
-```
-
-### Training the model
+## How to train the model
 
 TODO
+
+## How to create the training Docker image
+
+1. Enter the training directory
+
+```sh
+cd training/
+```
+
+2. Build the image
+
+```sh
+docker build . -t benwiz/art-warp-training
+```
 
 ## First Brainstorm
 
@@ -91,7 +99,7 @@ TODO
 
 ### How to Train using pix2pix
 
-In `~/code/pix2pix-tensorflow/` run
+In `~/code/pix2pix-tensorflow/` run. [Repo](https://github.com/affinelayer/pix2pix-tensorflow).
 
 ```sh
 docker run -it --rm -v $PWD:/tmp -w /tmp tensorflow/tensorflow bash
@@ -109,14 +117,25 @@ Test the model
 python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val --checkpoint facades_train
 ```
 
+--------
+
+Preferable option. Will need downloaded [repo](https://github.com/affinelayer/pix2pix-tensorflow).
+
+```sh
+# train the model
+python tools/dockrun.py python pix2pix.py --mode train --output_dir facades_train --max_epochs 200 --input_dir facades/train --which_direction BtoA
+# test the model
+python tools/dockrun.py python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val --checkpoint facades_train
+```
+
+
 ## To Do
 
 - Read training guide https://affinelayer.com/pix2pix/ in full
 
-- upload_data.sh
-  - Need a script that will upload the results of get_data.sh to 
-- Easy-to-use `docker run` command for training.
-  - I am expecting two different Docker images. One for CPU and one for GPU. The command should look something like `docker run benwiz/art-warp-training-cpu edges2mountains`.
+- Figure out how to get data to dad to make it easy
+  - Need to give instructions to install Docker
+  - Maybe provide a zipped version of `pix2pix-tensorflow` that includes all the training training data and a script `run.sh` that makes the two python calls.
 
 - Later
   - README, blog post
