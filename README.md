@@ -160,10 +160,9 @@ python tools/dockrun.py python pix2pix.py --mode test --output_dir $OUTPUT_DIR/t
 
 ## To Do
 
-- Complete the training data
-
 - Read training guide https://affinelayer.com/pix2pix/ in full
 
+- Zip pix2pix-tensorflow with training data
 - Provide dad instructions to install docker
 - Provide dad instructions to install Python3 incase it is needed
 - Provide dad instructions to download zip file and click train
