@@ -26,7 +26,7 @@ def run():
         img = cv2.imread(in_filepath, cv2.IMREAD_GRAYSCALE)
         if img is None:
             continue
-        print('\tin:\t%s' % in_filepath)
+        # print('\tin:\t%s' % in_filepath)
 
         # TODO: Resize image to 256x256
 
@@ -40,7 +40,7 @@ def run():
         image_id = filename.split('.')[0]
         out_filepath = out_path + image_id + '.jpg'
         cv2.imwrite(out_filepath, edges)
-        print('\tout:\t%s' % out_filepath)
+        # print('\tout:\t%s' % out_filepath)
 
 
 if __name__ == '__main__':
@@ -48,3 +48,4 @@ if __name__ == '__main__':
     print('get_edges.py:')
     print('Begin edge detection.')
     run()
+    print('Complete edge detection.')

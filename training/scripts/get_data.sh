@@ -31,7 +31,7 @@ mkdir -p ./$MODEL_NAME/images/
 mkdir -p ./$MODEL_NAME/data/
 python3 ./scripts/lib/get_edges.py $MODEL_NAME
 
-# # Sort data
-# ./scripts/lib/sort_data.sh
+# Sort data
+./scripts/lib/sort_data.sh $MODEL_NAME
 
 # TODO: Sort the data into train, test, and validation sets

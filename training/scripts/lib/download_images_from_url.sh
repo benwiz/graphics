@@ -29,6 +29,8 @@ else
     TOTAL_COUNT=$(echo $(wc -l < "$MODEL_NAME/urls.txt")) 
 fi
 
+# TODO: Probably clear existing images
+
 echo "Downloading $TOTAL_COUNT images for $MODEL_NAME"
 
 while read p; do
