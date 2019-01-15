@@ -56,21 +56,45 @@ open ./$MODEL_NAME/data/
 
 ## How to train the model
 
-TODO
+## First, prepare a zip file
 
-## How to create the training Docker image
-
-1. Enter the training directory
+Enter the pix2pix repo
 
 ```sh
-cd training/
+cd ~/code/pix2pix-tensorflow
 ```
 
-2. Build the image
+Remove any old training data 
 
 ```sh
-docker build . -t benwiz/art-warp-training
+rm -r ~/code/pix2pix-tensorflow/training/*
 ```
+
+Set the model name
+
+```sh
+export MODEL_NAME=edges2mountains
+```
+
+Copy in new training data
+
+```sh
+cp -r ~/code/art-warp/training/$MODEL_NAME/train ~/code/pix2pix-tensorflow/training/
+cp -r ~/code/art-warp/training/$MODEL_NAME/test ~/code/pix2pix-tensorflow/training/
+cp -r ~/code/art-warp/training/$MODEL_NAME/val ~/code/pix2pix-tensorflow/training/
+```
+
+Check that data copied in correctly
+
+```sh
+ls ~/code/pix2pix-tensorflow/training/*
+```
+
+TODO: Create the zipfile
+
+### TODO: How to train using the zipfile
+
+TODO: this section
 
 ## First Brainstorm
 
@@ -122,16 +146,18 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 Preferable option. Will need downloaded [repo](https://github.com/affinelayer/pix2pix-tensorflow).
 
 ```sh
-EPOCHS=200
-DATA_DIR=edges2mountains
+export EPOCHS=200
+export INPUT_DIR=training
+export OUTPUT_DIR=out
 
-# TODO: Separate DATA_DIR into INPUT_DIR and OUTPUT_DIR
+# Empty the output dir
+rm -r out/*
 
 # Train the model
-python tools/dockrun.py python pix2pix.py --mode train --output_dir $DATA_DIR/train_out --max_epochs $EPOCHS --input_dir $DATA_DIR/train --which_direction BtoA
+python tools/dockrun.py python pix2pix.py --mode train --output_dir $OUTPUT_DIR/train_out --max_epochs $EPOCHS --input_dir $INPUT_DIR/train --which_direction BtoA
 
 # Test the model
-python tools/dockrun.py python pix2pix.py --mode test --output_dir $DATA_DIR/test_out --input_dir $DATA_DIR/val --checkpoint $DATA_DIR/train_out
+python tools/dockrun.py python pix2pix.py --mode test --output_dir $OUTPUT_DIR/test_out --input_dir $INPUT_DIR/val --checkpoint $INPUT_DIR/train_out
 ```
 
 ## To Do
