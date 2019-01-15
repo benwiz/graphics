@@ -24,12 +24,13 @@ fi
 # Calculate total number of images
 if [ "$IS_DRY_RUN" -eq "1" ]
 then
-    TOTAL_COUNT=9
+    TOTAL_COUNT=10
 else
     TOTAL_COUNT=$(echo $(wc -l < "$MODEL_NAME/urls.txt")) 
 fi
 
-# TODO: Probably clear existing images
+# Clear existing images
+rm $MODEL_NAME/images/*
 
 echo "Downloading $TOTAL_COUNT images for $MODEL_NAME"
 
@@ -43,7 +44,7 @@ while read p; do
     echo -ne "\t$COUNT / $TOTAL_COUNT ($PERCENT%)\r"
 
     # Exit loop if total count has been reached
-    if [ "$COUNT" -gt "$TOTAL_COUNT" ] # TODO: use greater than or equal to
+    if [ "$COUNT" -ge "$TOTAL_COUNT" ]
     then
         break;
     fi
