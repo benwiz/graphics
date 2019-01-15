@@ -25,7 +25,7 @@ Before getting started, create a Python3 virtualenv and install the requirements
 ```sh
 venv
 cd training/
-MODEL_NAME=edges2mountains
+export MODEL_NAME=edges2mountains
 ```
 
 1. Download the image-net training data. Optionally pass in `--dry-run` as the second argument to download only 10 images.
