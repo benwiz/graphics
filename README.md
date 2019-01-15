@@ -20,25 +20,41 @@ npm start
 
 ### Preparing the data
 
-Before getting started, create a Python3 virtualenv and install the requirements. Specifically this is OpenCV and Numpy. Using my alias, just run the following command.
+Before getting started, create a Python3 virtualenv and install the requirements. Specifically this is OpenCV and Numpy. Also enter the training directory. It is also helpful to set the `MODEL_NAME` variable.
 
 ```sh
 venv
-```
-
-Then enter the `training/` directory.
-
-```sh
 cd training/
+MODEL_NAME=edges2mountains
 ```
 
-First, prepare the training data. Optionally pass in `--dry-run` to only download 5 images. This will download data from `./edges2mountains/urls.txt`, detect their edges, and organize the training data into three directories.
+1. Download the image-net training data. Optionally pass in `--dry-run` as the second argument to download only 10 images.
 
 ```sh
-./scripts/get_data.sh edges2mountains --dry-run
+./scripts/download_images_from_url.sh $MODEL_NAME --dry-run
 ```
 
-Second, upload the resulting data to S3 or another data store for future use.
+2. Detect the edges on the recently downloaded pictures. First ensure the directory exists and is empty. Any bad files will be skipped.
+
+```sh
+mkdir -p ./$MODEL_NAME/data/ && rm -f ./$MODEL_NAME/data/*
+python3 ./scripts/get_edges.py $MODEL_NAME
+```
+
+3. Manually look through all the files in `./$MODEL_NAME/data/*` and delete any images that are bad for training. Suck as Flickr error screens.
+
+```sh
+open ./$MODEL_NAME/data/
+```
+
+4. Sort the data into train, test, and validation sets
+
+
+```sh
+./scripts/sort_data.sh $MODEL_NAME
+```
+
+5. Upload the data to S3.
 
 ```sh
 ./scripts/upload_data.sh edges2mountains
@@ -97,8 +113,6 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 
 - Read training guide https://affinelayer.com/pix2pix/ in full
 
-- download_images_from_url.sh
-  - How to handle bad data like the flickr images? Maybe manually curate a list and store in S3.
 - upload_data.sh
   - Need a script that will upload the results of get_data.sh to 
 - Easy-to-use `docker run` command for training.

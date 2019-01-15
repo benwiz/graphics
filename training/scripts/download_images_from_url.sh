@@ -24,7 +24,7 @@ fi
 # Calculate total number of images
 if [ "$IS_DRY_RUN" -eq "1" ]
 then
-    TOTAL_COUNT=4
+    TOTAL_COUNT=9
 else
     TOTAL_COUNT=$(echo $(wc -l < "$MODEL_NAME/urls.txt")) 
 fi
