@@ -9,6 +9,7 @@ echo "Begin sorting data into train, test, and validation sets."
 if [ -z "$1" ]
 then
     echo "No argument supplied"
+    exit 1
 fi
 
 # Configs for distribution. Must sum to 1.0.

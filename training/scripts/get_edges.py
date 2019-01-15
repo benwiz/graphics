@@ -12,18 +12,22 @@ OUTPUT:
 
 import sys
 import os
-import numpy as np
+# import numpy as np
 import cv2
 
-if len(sys.argv) != 1:
+if len(sys.argv) != 2:
     print('Error: exactly 1 argument must be supplied.')
     sys.exit(1)
 
-model_name = sys.argv[1]
+MODEL_NAME = sys.argv[1]
 
 
 def run():
-    path = './%s/images/' % model_name
+    """
+    Run everything.
+    """
+
+    path = './%s/images/' % MODEL_NAME
     for filename in os.listdir(path):
         # Load image
         in_filepath = path + filename
@@ -32,7 +36,9 @@ def run():
             continue
         # print('\tin:\t%s' % in_filepath)
 
-        # TODO: Resize image to 256x256
+        # Resize image to 256x256
+        size = 256
+        img = cv2.resize(img, (size, size))
 
         # Canny edge detection on img
         edges = cv2.Canny(img, 100, 500)
@@ -40,7 +46,7 @@ def run():
         # TODO: Stich the two photos together with the edges on the right
 
         # Output the image
-        out_path = './%s/data/' % model_name
+        out_path = './%s/data/' % MODEL_NAME
         image_id = filename.split('.')[0]
         out_filepath = out_path + image_id + '.jpg'
         cv2.imwrite(out_filepath, edges)

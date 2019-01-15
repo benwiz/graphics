@@ -12,8 +12,9 @@ echo
 echo "download_images_from_url.sh:"
 
 if [ -z "$1" ]
-  then
+then
     echo "No argument supplied"
+    exit 1
 fi
 
 # Read model argument
