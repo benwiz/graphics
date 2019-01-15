@@ -65,7 +65,6 @@ python pix2pix.py --mode test --output_dir facades_test --input_dir facades/val 
 
 - download_images_from_url.sh
   - How to handle bad data like the flickr images? Maybe manually curate a list and store in S3.
-- sort_data.sh
 - run.sh must ensure every step of the way is success or exit on error. I think this can be done easily by checking `$?`.
 - train_edges2mountains... maybe make this a docker image and teach dad to `docker run benwiz/pix2pix-edges2mountains`
 
