@@ -11,6 +11,11 @@
 echo
 echo "download_images_from_url.sh:"
 
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+fi
+
 # Read model argument
 MODEL_NAME=$1
 

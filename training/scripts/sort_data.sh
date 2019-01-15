@@ -6,6 +6,11 @@ echo
 echo "sort_data.sh:"
 echo "Begin sorting data into train, test, and validation sets."
 
+if [ -z "$1" ]
+then
+    echo "No argument supplied"
+fi
+
 # Configs for distribution. Must sum to 1.0.
 TRAIN_PERCENT=0.8
 TEST_PERCENT=0.1
