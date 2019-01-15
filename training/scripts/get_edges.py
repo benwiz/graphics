@@ -12,7 +12,7 @@ OUTPUT:
 
 import sys
 import os
-# import numpy as np
+import numpy as np
 import cv2
 
 if len(sys.argv) != 2:
@@ -44,12 +44,13 @@ def run():
         edges = cv2.Canny(img, 100, 500)
 
         # TODO: Stich the two photos together with the edges on the right
+        out = np.concatenate((img, edges), axis=1)
 
         # Output the image
         out_path = './%s/data/' % MODEL_NAME
         image_id = filename.split('.')[0]
         out_filepath = out_path + image_id + '.jpg'
-        cv2.imwrite(out_filepath, edges)
+        cv2.imwrite(out_filepath, out)
         # print('\tout:\t%s' % out_filepath)
 
 
