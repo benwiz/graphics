@@ -125,6 +125,8 @@ Preferable option. Will need downloaded [repo](https://github.com/affinelayer/pi
 EPOCHS=200
 DATA_DIR=edges2mountains
 
+# TODO: Separate DATA_DIR into INPUT_DIR and OUTPUT_DIR
+
 # Train the model
 python tools/dockrun.py python pix2pix.py --mode train --output_dir $DATA_DIR/train_out --max_epochs $EPOCHS --input_dir $DATA_DIR/train --which_direction BtoA
 
@@ -138,7 +140,12 @@ python tools/dockrun.py python pix2pix.py --mode test --output_dir $DATA_DIR/tes
 
 - Figure out how to get data to dad to make it easy
   - Need to give instructions to install Docker
-  - Maybe provide a zipped version of `pix2pix-tensorflow` that includes all the training training data and a script `run.sh` that makes the two python calls.
+  - Maybe provide a zipped version of `pix2pix-tensorflow` that includes all the training training data and a script `run.sh` that makes the two python calls. 
+    - Workflow for dad would be:
+      1. Click link in email
+      2. Unzip file
+      3. Double click `run.sh`
+      4. Zip `out/` directory and email it to me
 
 - Later
   - README, blog post
