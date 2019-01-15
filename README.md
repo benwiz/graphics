@@ -166,6 +166,7 @@ python3 tools/dockrun.py python pix2pix.py --mode test --output_dir $OUTPUT_DIR/
 
 NOTE: Where I left off Jan. 15, 2019:
   - I need to run the actual training commands. The preferred option is noted just above. 
+  - There are pictures stored on my Macbook Air but also in a Google Photos album called `edges2mountains-data`.
 
 - Read training guide https://affinelayer.com/pix2pix/ in full
 - Zip pix2pix-tensorflow with training data
