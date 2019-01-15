@@ -52,8 +52,6 @@ open ./$MODEL_NAME/data/
 ./scripts/sort_data.sh $MODEL_NAME
 ```
 
-5. Upload data somewhere. Right now I think this is going to be me uploading a .zip of *pix2pix-tensorflow* that includes the training data and a customize run script.
-
 ## How to train the model
 
 ## First, prepare a zip file
@@ -162,16 +160,15 @@ python tools/dockrun.py python pix2pix.py --mode test --output_dir $OUTPUT_DIR/t
 
 ## To Do
 
+- get_edges.py must resize the initial image
+- get_edges.py must stick together the two images with the original on the left.
+- Complete the training data
+
 - Read training guide https://affinelayer.com/pix2pix/ in full
 
-- Figure out how to get data to dad to make it easy
-  - Need to give instructions to install Docker
-  - Maybe provide a zipped version of `pix2pix-tensorflow` that includes all the training training data and a script `run.sh` that makes the two python calls. 
-    - Workflow for dad would be:
-      1. Click link in email
-      2. Unzip file
-      3. Double click `run.sh`
-      4. Zip `out/` directory and email it to me
+- Provide dad instructions to install docker
+- Provide dad instructions to install Python3 incase it is needed
+- Provide dad instructions to download zip file and click train
 
 - Later
   - README, blog post
