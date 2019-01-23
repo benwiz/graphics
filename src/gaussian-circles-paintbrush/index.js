@@ -10,7 +10,7 @@ const settings = {
   // Pass the p5 instance, and preload function if necessary
   p5: { p5: P5, preload },
   // Turn on a render loop
-  animate: false,
+  animate: true,
   // Configure size
   dimensions: 'letter',
   pixelsPerInch: 72, // Adjusting this affects print quality, I think

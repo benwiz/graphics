@@ -6,31 +6,26 @@ const CIRCLES = [];
 //
 
 export const setup = (options) => {
-  const { p5, width, height } = options;
-
-  // Make background white
-  p5.background(BACKGROUND_COLOR);
-
-  // Create circles
-  const n = 1000;
-  for (let i = 0; i < n; i += 1) {
-    const circle = {
-      x: p5.randomGaussian(0, 0.22 * width),
-      y: p5.randomGaussian(0, 0.22 * height),
-      radius: p5.randomGaussian(12, 6),
-    };
-    CIRCLES.push(circle);
-  }
+  // const { p5, width, height } = options;
 };
 
 //
 // All drawing functions below here
 //
 
-const drawCircles = (p5, circles) => {
-  circles.forEach((circle) => {
-    p5.ellipse(circle.x, circle.y, circle.radius, circle.radius);
-  });
+const addCircles = (p5, n) => {
+  const range = 10;
+  const mouseX = p5.mouseX - p5.width / 2; // Since we will later translate to center
+  const mouseY = p5.mouseY - p5.height / 2;
+  for (let i = 0; i < n; i += 1) {
+    const circle = {
+      x: mouseX + p5.randomGaussian(0, range),
+      y: mouseY + p5.randomGaussian(0, range),
+      radius: p5.randomGaussian(12, 6),
+    };
+    CIRCLES.push(circle);
+  }
+  console.log(CIRCLES.length);
 };
 
 const drawBorder = (p5, width, height, thickness, color) => {
@@ -43,6 +38,15 @@ const drawBorder = (p5, width, height, thickness, color) => {
 
 export const draw = (options) => {
   const { p5, width, height } = options;
+
+  // Add more circles where the mouse button is pressed
+  if (p5.mouseIsPressed) {
+    const n = 1;
+    addCircles(p5, n);
+  }
+
+  // Clear the canvas
+  p5.background(BACKGROUND_COLOR);
 
   // Translate to center
   p5.translate(0.5 * width, 0.5 * height);
@@ -58,10 +62,12 @@ export const draw = (options) => {
   p5.stroke(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a * 1.25})`);
 
   // Draw circles
-  drawCircles(p5, CIRCLES);
+  CIRCLES.forEach((circle) => {
+    p5.ellipse(circle.x, circle.y, circle.radius, circle.radius);
+  });
 
-  // // Draw a white border around the edge of the canvas
-  // const borderThickness = 50;
-  // const borderColor = BACKGROUND_COLOR;
-  // drawBorder(p5, width, height, borderThickness, borderColor);
+  // Draw a white border around the edge of the canvas
+  const borderThickness = 50;
+  const borderColor = BACKGROUND_COLOR;
+  drawBorder(p5, width, height, borderThickness, borderColor);
 };
