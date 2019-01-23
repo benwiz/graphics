@@ -19,7 +19,7 @@ npm run new SKETCH_NAME TEMPLATE_NAME
 Run an existing sketch
 
 ```sh
-npm start SKETCH_NAME
+npm run start SKETCH_NAME
 ```
 
 Run an existing sketch with hot reloading
@@ -45,6 +45,8 @@ npm run server SKETCH_NAME
 - For a while, do my best to not create a custom template. Focus on the content... or maybe not.
 
 ## To Do
+
+- Make gaussian-circles-paintbrush
 
 - Consider include dat.gui on gaussian-circles to test it as a viable, js-only configuration tool
   - https://github.com/benwiz/boba.js/blob/gh-pages/src/js/index.js#L59
