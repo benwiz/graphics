@@ -15,13 +15,14 @@ export const setup = (options) => {
 //
 
 const addCircles = (p5, n, range) => {
-  const mouseX = p5.mouseX - p5.width / 2; // Since we will later translate to center
+  const mouseX = p5.mouseX - p5.width / 2; // Since we will translate to center before drawing
   const mouseY = p5.mouseY - p5.height / 2;
   for (let i = 0; i < n; i += 1) {
     const circle = {
       x: mouseX + p5.randomGaussian(0, range),
       y: mouseY + p5.randomGaussian(0, range),
       radius: p5.randomGaussian(12, 6),
+      strokeweight: p5.randomGaussian(50, 10),
     };
     CIRCLES.push(circle);
   }
@@ -41,7 +42,7 @@ export const draw = (options) => {
   // Add more circles where the mouse button is pressed
   const drawCirclesFPS = 8;
   const currDate = new Date();
-  if (p5.mouseIsPressed && currDate - LAST_CIRCLE_ADDED_AT > 1000 / drawCirclesFPS) {
+  if (currDate - LAST_CIRCLE_ADDED_AT > 1000 / drawCirclesFPS && p5.mouseIsPressed) {
     const n = 1;
     const range = 50;
     addCircles(p5, n, range);
@@ -66,6 +67,7 @@ export const draw = (options) => {
 
   // Draw circles
   CIRCLES.forEach((circle) => {
+    p5.strokeWeight(circle.strokeweight);
     p5.ellipse(circle.x, circle.y, circle.radius, circle.radius);
   });
 
