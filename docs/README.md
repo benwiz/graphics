@@ -1,6 +1,6 @@
 - [gaussian-circles](./gaussian-circles/)
-- [gaussian-circles-paintbrush](./gaussian-circles-paintbrush?)
 - [gaussian-spheres](./gaussian-spheres/)
+- [gaussian-circles-paintbrush](./gaussian-circles-paintbrush/)
 
 -----------------------------------------------
 
