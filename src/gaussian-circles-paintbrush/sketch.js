@@ -1,20 +1,20 @@
 const BACKGROUND_COLOR = 255;
 const CIRCLES = [];
+let LAST_CIRCLE_ADDED_AT = new Date();
 
 //
 // All setup functions here
 //
 
 export const setup = (options) => {
-  // const { p5, width, height } = options;
+  const { p5, width, height } = options;
 };
 
 //
 // All drawing functions below here
 //
 
-const addCircles = (p5, n) => {
-  const range = 10;
+const addCircles = (p5, n, range) => {
   const mouseX = p5.mouseX - p5.width / 2; // Since we will later translate to center
   const mouseY = p5.mouseY - p5.height / 2;
   for (let i = 0; i < n; i += 1) {
@@ -25,7 +25,6 @@ const addCircles = (p5, n) => {
     };
     CIRCLES.push(circle);
   }
-  console.log(CIRCLES.length);
 };
 
 const drawBorder = (p5, width, height, thickness, color) => {
@@ -40,9 +39,13 @@ export const draw = (options) => {
   const { p5, width, height } = options;
 
   // Add more circles where the mouse button is pressed
-  if (p5.mouseIsPressed) {
+  const drawCirclesFPS = 8;
+  const currDate = new Date();
+  if (p5.mouseIsPressed && currDate - LAST_CIRCLE_ADDED_AT > 1000 / drawCirclesFPS) {
     const n = 1;
-    addCircles(p5, n);
+    const range = 50;
+    addCircles(p5, n, range);
+    LAST_CIRCLE_ADDED_AT = currDate;
   }
 
   // Clear the canvas
