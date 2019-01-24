@@ -75,7 +75,7 @@ export const draw = (options) => {
   // Set fill and stroke colors
   const color = {
     r: 0,
-    g: 200,
+    g: 255,
     b: 0,
     a: 0.25,
   };
