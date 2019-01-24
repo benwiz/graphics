@@ -57,9 +57,9 @@ export const draw = (options) => {
 
   // Set fill and stroke colors
   const color = {
-    r: 255,
-    g: 0,
-    b: 0,
+    r: 0,
+    g: 200,
+    b: 200,
     a: 0.25,
   };
   p5.fill(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`);
