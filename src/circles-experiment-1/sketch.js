@@ -39,6 +39,12 @@ const drawBorder = (p5, width, height, thickness, color) => {
 export const draw = (options) => {
   const { p5, width, height } = options;
 
+  // If the esc button is pressed, clear CIRCLES array
+  if (p5.keyIsPressed && p5.keyCode === 27) {
+    console.log('esc');
+    // TODO: Clear the array
+  }
+
   // Add more circles where the mouse button is pressed
   const drawCirclesFPS = 8;
   const currDate = new Date();
