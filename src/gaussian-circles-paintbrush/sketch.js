@@ -6,7 +6,7 @@ let LAST_CIRCLE_ADDED_AT = new Date();
 // All setup functions here
 //
 
-export const setup = (options) => {
+export const setup = (_options) => {
   // const { p5, width, height } = options;
 };
 
