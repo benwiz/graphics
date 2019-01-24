@@ -4,3 +4,4 @@
   - Make the resulting sections colored in some way
 - Make them look like eyes
   - Evil eyes
+- Pokéballs

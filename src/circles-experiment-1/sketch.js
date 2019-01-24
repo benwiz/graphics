@@ -76,7 +76,7 @@ export const draw = (options) => {
   const color = {
     r: 0,
     g: 200,
-    b: 200,
+    b: 0,
     a: 0.25,
   };
   p5.fill(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`);
