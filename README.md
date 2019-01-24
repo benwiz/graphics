@@ -43,13 +43,8 @@ npm run server SKETCH_NAME
 ## Things to remember
 
 - For a while, do my best to not create a custom template. Focus on the content... or maybe not.
+- Use dat.gui for easy configs
 
 ## To Do
 
-- Make gaussian-circles-paintbrush
-
-- Consider include dat.gui on gaussian-circles to test it as a viable, js-only configuration tool
-  - https://github.com/benwiz/boba.js/blob/gh-pages/src/js/index.js#L59
-
-- Understand what hot loading is an when I should use it
-- Look into npm script auto compelte
+- Create a `pokeballs` clone of `circles-experiment-1`
