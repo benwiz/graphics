@@ -17,10 +17,22 @@ export const setup = (options) => {
 const addCircles = (p5, n, range) => {
   const mouseX = p5.mouseX - p5.width / 2; // Since we will translate to center before drawing
   const mouseY = p5.mouseY - p5.height / 2;
+
+  // Calculate x and y offsets if the alt/option key is pressed
+  let offsetX;
+  let offsetY;
+  if (p5.keyIsPressed && p5.keyCode === 18) {
+    offsetX = 0;
+    offsetY = 0;
+  } else {
+    offsetX = p5.randomGaussian(0, range);
+    offsetY = p5.randomGaussian(0, range);
+  }
+
   for (let i = 0; i < n; i += 1) {
     const circle = {
-      x: mouseX + p5.randomGaussian(0, range),
-      y: mouseY + p5.randomGaussian(0, range),
+      x: mouseX + offsetX,
+      y: mouseY + offsetY,
       radius: p5.randomGaussian(12, 6),
       strokeweight: p5.randomGaussian(50, 10),
     };
@@ -41,8 +53,7 @@ export const draw = (options) => {
 
   // If the esc button is pressed, clear CIRCLES array
   if (p5.keyIsPressed && p5.keyCode === 27) {
-    console.log('esc');
-    // TODO: Clear the array
+    CIRCLES.length = 0;
   }
 
   // Add more circles where the mouse button is pressed
