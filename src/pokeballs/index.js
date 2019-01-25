@@ -9,8 +9,8 @@ const preload = (p5) => {
 // Set pixelsPerInch so it can be used for dimensions calculations... I don't like the effects
 // of using sketch-canvas `units: 'in'`.
 const pixelsPerInch = 72;
-const widthInches = 8;
-const heightInches = 8;
+const widthInches = 8.5;
+const heightInches = 8.5; // NOTE: Using square is helpful for posting to instagram.
 
 const settings = {
   // Pass the p5 instance, and preload function if necessary
