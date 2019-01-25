@@ -3,6 +3,7 @@
 - [gaussian-circles-paintbrush](./gaussian-circles-paintbrush/)
 - [circles-experiment-1](./circles-experiment-1/)
 - [pokeballs](./pokeballs/)
+- [minions](./minions/)
 
 -----------------------------------------------
 
