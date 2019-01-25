@@ -33,9 +33,11 @@ const addCircles = (p5, n, range) => {
     const circle = {
       x: mouseX + offsetX,
       y: mouseY + offsetY,
-      radius: p5.randomGaussian(12, 6),
-      strokeweight: p5.randomGaussian(50, 10),
+      radius: p5.randomGaussian(50, 6),
+      strokeweight: p5.randomGaussian(25, 5),
     };
+    circle.innerRadius = circle.radius - circle.strokeweight * (1 + p5.randomGaussian(0.5, 0.25));
+
     CIRCLES.push(circle);
   }
 };
@@ -83,20 +85,27 @@ export const draw = (options) => {
     r: 255,
     g: 0,
     b: 0,
-    a: 0.25,
+    a: gray.a / 2,
   };
-  p5.fill(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a})`);
+
+  p5.strokeCap(p5.SQUARE);
 
   // Draw circles
   CIRCLES.forEach((circle) => {
-    p5.strokeWeight(circle.strokeweight);
+    // Draw the center
+    p5.fill(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a})`);
+    p5.strokeWeight(0);
+    p5.ellipse(circle.x, circle.y, circle.innerRadius, circle.innerRadius);
 
     // Draw the colored, top half
-    p5.stroke(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a * 1.25})`);
-    p5.arc(circle.x, circle.y, circle.radius, circle.radius, -p5.PI, 0, p5.CHORD);
+    p5.noFill();
+    p5.strokeWeight(circle.strokeweight);
+    p5.stroke(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`);
+    p5.arc(circle.x, circle.y, circle.radius, circle.radius, -p5.PI, 0);
 
-    // TODO: Draw the gray, bottom half
-    p5.stroke(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a * 1.25})`);
+    // Draw the gray, bottom half
+    p5.stroke(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a / 2})`);
+    p5.arc(circle.x, circle.y, circle.radius, circle.radius, 0, -p5.PI);
   });
 
   // Draw a white border around the edge of the canvas
