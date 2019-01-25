@@ -56,3 +56,6 @@ npm run server SKETCH_NAME
 
 - Pokeballs
 - Minions
+
+- Later
+  - Customize the HTML template... don't create it from scratch but use what exists as a starting point
