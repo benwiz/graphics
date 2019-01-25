@@ -2,7 +2,7 @@ import CanvasSketch from 'canvas-sketch';
 import P5 from 'p5';
 import * as Sketch from './sketch';
 
-const preload = (p5) => {
+const preload = (_p5) => {
   // You can use p5.loadImage() here, etc...
 };
 
