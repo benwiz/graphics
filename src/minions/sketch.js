@@ -35,7 +35,36 @@ const addCircles = (p5, n, range) => {
       y: mouseY + offsetY,
       radius: p5.randomGaussian(12, 6),
       strokeweight: p5.randomGaussian(50, 10),
+      eyes: [],
     };
+
+    // Handle eyes
+    const numEyesOptions = [1, 2, 2, 2, 2, 2];
+    const numEyes = numEyesOptions[Math.floor(Math.random() * numEyesOptions.length)];
+    const eyeRadius = circle.radius * (1 + p5.randomGaussian(0.5, 0.25));
+    const eyeY = circle.y - 1.25 * circle.radius;
+    if (numEyes === 1) {
+      const eye = {
+        x: circle.x,
+        y: eyeY,
+        radius: eyeRadius,
+      };
+      circle.eyes.push(eye);
+    } else {
+      const eye1 = {
+        x: circle.x - circle.radius,
+        y: eyeY,
+        radius: eyeRadius,
+      };
+      const eye2 = {
+        x: circle.x + circle.radius,
+        y: eyeY,
+        radius: eyeRadius,
+      };
+      circle.eyes.push(eye1);
+      circle.eyes.push(eye2);
+    }
+
     CIRCLES.push(circle);
   }
 };
@@ -98,9 +127,9 @@ export const draw = (options) => {
     // Draw the eye(s)
     p5.fill(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a})`);
     p5.strokeWeight(0);
-    p5.ellipse(circle.x, circle.y - circle.radius, circle.radius, circle.radius);
-
-    // TODO: Decide how to implement a second eye (two eyes should happen more often than one)
+    circle.eyes.forEach((eye) => {
+      p5.ellipse(eye.x, eye.y, eye.radius, eye.radius);
+    });
   });
 
   // Draw a white border around the edge of the canvas
