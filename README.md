@@ -45,6 +45,14 @@ npm run server SKETCH_NAME
 - For a while, do my best to not create a custom template. Focus on the content... or maybe not.
 - Use dat.gui for easy configs
 
+## Ideas
+
+- Connect some circles with others with lines or triangles
+  - Make the resulting sections colored in some way
+- Make them look like eyes
+  - Evil eyes
+
 ## To Do
 
-- Create a `pokeballs` clone of `circles-experiment-1`
+- Pokeballs
+- Monsters
