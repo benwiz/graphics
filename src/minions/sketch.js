@@ -114,7 +114,6 @@ export const draw = (options) => {
     b: 0,
     a: 0.25,
   };
-  // p5.fill(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a})`);
 
   // Draw circles
   CIRCLES.forEach((circle) => {
