@@ -55,4 +55,4 @@ npm run server SKETCH_NAME
 ## To Do
 
 - Pokeballs
-- Monsters
+- Minions
