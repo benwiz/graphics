@@ -80,23 +80,27 @@ export const draw = (options) => {
     a: 0.5,
   };
   const color = {
-    r: 255,
-    g: 0,
+    r: 200,
+    g: 200,
     b: 0,
     a: 0.25,
   };
-  p5.fill(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a})`);
+  // p5.fill(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a})`);
 
   // Draw circles
   CIRCLES.forEach((circle) => {
-    p5.strokeWeight(circle.strokeweight);
-
-    // Draw the colored, top half
+    // Draw the base of the minion
+    p5.noFill();
     p5.stroke(`rgba(${color.r}, ${color.g}, ${color.b}, ${color.a * 1.25})`);
+    p5.strokeWeight(circle.strokeweight);
     p5.arc(circle.x, circle.y, circle.radius, circle.radius, -p5.PI, 0, p5.CHORD);
 
-    // TODO: Draw the gray, bottom half
-    p5.stroke(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a * 1.25})`);
+    // Draw the eye(s)
+    p5.fill(`rgba(${gray.r}, ${gray.g}, ${gray.b}, ${gray.a})`);
+    p5.strokeWeight(0);
+    p5.ellipse(circle.x, circle.y - circle.radius, circle.radius, circle.radius);
+
+    // TODO: Decide how to implement a second eye (two eyes should happen more often than one)
   });
 
   // Draw a white border around the edge of the canvas
