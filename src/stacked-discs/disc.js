@@ -1,4 +1,5 @@
 import Noise from 'noisejs-ilmiont';
+import * as Util from '../util';
 
 // Seed the noise
 Noise.seed(Math.random());
@@ -7,8 +8,15 @@ export const create = (p5) => {
   const disc = {
     x: p5.randomGaussian(0, 500),
     y: p5.randomGaussian(0, 500),
-    radius: 50,
   };
+
+  // Determine a radius based on distance to center
+  const dist = Util.distance(disc.x, disc.y, 0, 0);
+  const maxDist = p5.width / 2;
+  const minRadius = 20;
+  const maxRadius = 100;
+  const radius = Util.scale(dist, maxDist, 0, minRadius, maxRadius);
+  disc.radius = radius;
 
   return disc;
 };
