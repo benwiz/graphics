@@ -1,20 +1,35 @@
 import * as Disc from './disc';
+import * as Util from '../util';
 
 const DISCS = [];
+const N = 1000;
 
 //
 // All setup functions here
 //
 
+// Sort discs by distance to the upper left corner. Remember that we will have translated to center.
+const compareDiscs = (a, b, point) => {
+  const distA = Util.distance(a.x, a.y, point.x, point.y);
+  const distB = Util.distance(b.x, b.y, point.x, point.y);
+
+  if (distA < distB) return 1;
+  if (distA > distB) return -1;
+  return 0;
+};
+
 export const setup = (options) => {
   const { p5, width, height } = options;
 
   // Create discs
-  const n = 50;
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < N; i++) {
     const disc = Disc.create(p5);
     DISCS.push(disc);
   }
+
+  // Sort discs. This is because we want a specific drawing order.
+  const point = { x: -width / 2, y: -height / 2 };
+  DISCS.sort((a, b) => compareDiscs(a, b, point));
 };
 
 //
