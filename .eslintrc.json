@@ -14,6 +14,7 @@
     "no-mixed-operators": "off",
     "no-return-assign": "off",
     "no-magic-numbers": "off",
-    "import/prefer-default-export": false
+    "import/prefer-default-export": false,
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
   }
 }
