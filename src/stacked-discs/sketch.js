@@ -2,7 +2,7 @@ import * as Disc from './disc';
 import * as Util from '../util';
 
 const DISCS = [];
-const N = 10000;
+const N = 1000;
 
 //
 // All setup functions here
@@ -23,7 +23,23 @@ export const setup = (options) => {
 
   // Create discs
   for (let i = 0; i < N; i++) {
-    const disc = Disc.create(p5);
+    let x;
+    let y;
+    if (i < (1 * N) / 4) {
+      x = -width / 2;
+      y = -height / 2;
+    } else if (i < (2 * N) / 4) {
+      x = width / 2;
+      y = -height / 2;
+    } else if (i < (3 * N) / 4) {
+      x = width / 2;
+      y = height / 2;
+    } else {
+      x = -width / 2;
+      y = height / 2;
+    }
+
+    const disc = Disc.create(p5, x, y);
     DISCS.push(disc);
   }
 

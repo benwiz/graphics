@@ -4,10 +4,10 @@ import * as Util from '../util';
 // Seed the noise
 Noise.seed(Math.random());
 
-export const create = (p5) => {
+export const create = (p5, x, y) => {
   const disc = {
-    x: p5.randomGaussian(0, 500),
-    y: p5.randomGaussian(0, 500),
+    x: p5.randomGaussian(x, 150),
+    y: p5.randomGaussian(y, 150),
   };
 
   // Determine a radius based on distance to center
