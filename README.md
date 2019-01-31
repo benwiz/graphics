@@ -58,7 +58,7 @@ npm run server SKETCH_NAME
 
 - Reimplement: Stacked Discs: https://www.instagram.com/p/BtBNnoinZwu/
   - Maybe have a class or a file that contains the functions that make the different designed discs. Start off using his then customize.
-  - Use perlin noise or another new type of noise. Just for the sake of learning.
+  - Having an issue importing noise lib inside disc.js
 
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point

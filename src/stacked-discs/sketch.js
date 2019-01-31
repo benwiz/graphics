@@ -2,7 +2,7 @@ import * as Disc from './disc';
 import * as Util from '../util';
 
 const DISCS = [];
-const N = 1000;
+const N = 5000;
 
 //
 // All setup functions here
