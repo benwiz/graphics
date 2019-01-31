@@ -51,8 +51,15 @@ npm run server SKETCH_NAME
   - Make the resulting sections colored in some way
 - Make them look like eyes
   - Evil eyes
+- Balloons (or hot air balloons) rising
+  - Use a physics engine (matter.js?) to make them pop. I think they'll need to be made up of lines or particles to pop correctly... probably just lines will do fine.
 
 ## To Do
 
+- Reimplement: Stacked Discs: https://www.instagram.com/p/BtBNnoinZwu/
+  - Maybe have a class or a file that contains the functions that make the different designed discs. Start off using his then customize.
+  - Use perlin noise or another new type of noise. Just for the sake of learning.
+
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
+  - Figure out if I can speed up the reloading
