@@ -40,7 +40,11 @@ export const setup = (options) => {
     }
 
     const disc = Disc.create(p5, x, y);
-    DISCS.push(disc);
+
+    // Check that there is a disc, because we can get null
+    if (disc) {
+      DISCS.push(disc);
+    }
   }
 
   // Sort discs. This is because we want a specific drawing order.

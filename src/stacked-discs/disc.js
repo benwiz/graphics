@@ -1,8 +1,12 @@
-import Noise from 'noisejs-ilmiont';
+import FastSimplexNoise from 'fast-simplex-noise';
 import * as Util from '../util';
 
-// Seed the noise
-// Noise.seed(Math.random());
+const noiseGen = new FastSimplexNoise({
+  frequency: 0.01,
+  min: 0,
+  max: 255,
+  octaves: 8,
+});
 
 export const create = (p5, x, y) => {
   const disc = {
@@ -18,6 +22,13 @@ export const create = (p5, x, y) => {
   const radius = Util.scale(dist, maxDist, 0, minRadius, maxRadius);
   disc.radius = radius;
 
+  // If the disc lies outside a border, return a null disc
+  const percent = 0.4;
+  const xConstraint = percent * p5.width;
+  const yConstraint = percent * p5.height;
+  if (disc.x < -xConstraint || disc.x > xConstraint) return null;
+  if (disc.y < -yConstraint || disc.y > yConstraint) return null;
+
   return disc;
 };
 
@@ -28,9 +39,9 @@ export const setupDrawing = (p5) => {
 };
 
 export const draw = (p5, disc) => {
-  // const perlinValue = Noise.simplex2(disc.x, disc.y);
-  // const color = Math.abs(perlinValue) * 256;
-  // p5.fill(color);
+  // Use noise to select the color
+  const color = noiseGen.scaled([disc.x, disc.y]);
+  p5.fill(color);
 
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
