@@ -22,7 +22,7 @@ export const create = (p5, x, y) => {
   const radius = Util.scale(dist, maxDist, 0, minRadius, maxRadius);
   disc.radius = radius;
 
-  // If the disc lies outside a border, return a null disc
+  // If the disc lies outside a padding-like border, return a null disc
   const percent = 0.4;
   const xConstraint = percent * p5.width;
   const yConstraint = percent * p5.height;
