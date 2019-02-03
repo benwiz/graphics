@@ -1,7 +1,7 @@
 import FastSimplexNoise from 'fast-simplex-noise';
 import * as Util from '../util';
 
-const noiseGen = new FastSimplexNoise({
+const noiseGenColor = new FastSimplexNoise({
   frequency: 0.01,
   min: 0,
   max: 255,
@@ -38,7 +38,7 @@ const grayscale = (p5, disc) => {
   p5.stroke(0);
   p5.strokeWeight(1);
 
-  const color = noiseGen.scaled([disc.x, disc.y]);
+  const color = noiseGenColor.scaled([disc.x, disc.y]);
   p5.fill(color);
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
@@ -49,7 +49,7 @@ const rainbow = (p5, disc) => {
   p5.stroke(0);
   p5.strokeWeight(1);
 
-  const hue = noiseGen.scaled([disc.x, disc.y]);
+  const hue = noiseGenColor.scaled([disc.x, disc.y]);
   p5.fill(hue * 2, 100, 100);
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
