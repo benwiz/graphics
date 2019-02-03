@@ -54,9 +54,25 @@ const rainbow = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
 
+const concentricCirclesGrayscale = (p5, disc) => {
+  p5.colorMode(p5.RGB);
+  p5.strokeWeight(0);
+
+  const n = 10;
+  for (let i = n; i > 0; i--) {
+    if (i % 2) {
+      p5.fill(0);
+    } else {
+      p5.fill(200);
+    }
+    p5.ellipse(disc.x, disc.y, disc.radius * (i / n));
+  }
+};
+
 export const draw = (p5, disc) => {
   // Use a predefined algorithm to define the circle's contents
 
-  grayscale(p5, disc);
+  // grayscale(p5, disc);
   // rainbow(p5, disc);
+  concentricCirclesGrayscale(p5, disc);
 };
