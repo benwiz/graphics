@@ -221,9 +221,9 @@ export const draw = (p5, disc) => {
 
   // grayscale(p5, disc);
   // rainbow(p5, disc);
-  // concentricCirclesGrayscale(p5, disc);
+  concentricCirclesGrayscale(p5, disc);
   // archeryTarget(p5, disc);
   // evilEye(p5, disc);
   // catsEye(p5, disc);
-  sauronsEye(p5, disc);
+  // sauronsEye(p5, disc);
 };
