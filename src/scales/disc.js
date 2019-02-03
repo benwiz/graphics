@@ -38,9 +38,14 @@ export const setupDrawing = (p5) => {
   p5.strokeWeight(1);
 };
 
+const grayscale = (disc) => {
+  const color = noiseGen.scaled([disc.x, disc.y]);
+  return color;
+};
+
 export const draw = (p5, disc) => {
   // Use noise to select the color
-  const color = noiseGen.scaled([disc.x, disc.y]);
+  const color = grayscale(disc);
   p5.fill(color);
 
   p5.ellipse(disc.x, disc.y, disc.radius);
