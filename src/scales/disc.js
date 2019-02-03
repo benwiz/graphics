@@ -6,6 +6,15 @@ export const create = (p5, x, y) => {
     y: p5.randomGaussian(y, 150),
   };
 
+  // If the disc lies outside a padding-like border, move it inside the border
+  const percent = 0.4;
+  const xConstraint = percent * p5.width;
+  const yConstraint = percent * p5.height;
+  if (disc.x < -xConstraint) return null;
+  if (disc.x > xConstraint) return null;
+  if (disc.y < -yConstraint) return null;
+  if (disc.y > yConstraint) return null;
+
   // Determine a radius based on distance to center
   const dist = Util.distance(disc.x, disc.y, 0, 0);
   const maxDist = p5.width / 2;
@@ -13,13 +22,6 @@ export const create = (p5, x, y) => {
   const maxRadius = 100;
   const radius = Util.scale(dist, maxDist, 0, minRadius, maxRadius);
   disc.radius = radius;
-
-  // If the disc lies outside a padding-like border, return a null disc
-  const percent = 0.4;
-  const xConstraint = percent * p5.width;
-  const yConstraint = percent * p5.height;
-  if (disc.x < -xConstraint || disc.x > xConstraint) return null;
-  if (disc.y < -yConstraint || disc.y > yConstraint) return null;
 
   return disc;
 };
@@ -210,12 +212,24 @@ const sauronsEye = (p5, disc) => {
 
 const handdrawn = (p5, disc) => {
   p5.colorMode(p5.HSB);
-  p5.stroke(0);
+  p5.stroke(1);
   p5.strokeWeight(1);
 
   const hue = 255 * p5.noise(disc.x, disc.y);
-  p5.fill(hue * 2, 40, 80);
-  p5.ellipse(disc.x, disc.y, disc.radius);
+  p5.fill(hue * 1.5, 40, 80);
+
+  p5.noiseDetail(0.01, 0.01);
+
+  p5.beginShape();
+  const n = p5.TWO_PI;
+  const step = 0.1;
+  for (let angle = 0; angle < n; angle += step) {
+    const radius = disc.radius * p5.noise(disc.x, disc.y, angle);
+    const x = disc.x + radius * p5.cos(angle);
+    const y = disc.y + radius * p5.sin(angle);
+    p5.curveVertex(x, y);
+  }
+  p5.endShape(p5.CLOSE);
 };
 
 export const draw = (p5, disc) => {
@@ -227,6 +241,6 @@ export const draw = (p5, disc) => {
   // archeryTarget(p5, disc);
   // evilEye(p5, disc);
   // catsEye(p5, disc);
-  // sauronsEye(p5, disc);
+  // sauronsEye(p5, disc); // in progress
   handdrawn(p5, disc);
 };
