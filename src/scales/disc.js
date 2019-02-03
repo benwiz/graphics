@@ -111,11 +111,42 @@ const archeryTarget = (p5, disc) => {
   }
 };
 
+const evilEye = (p5, disc) => {
+  p5.colorMode(p5.RGB);
+  p5.strokeWeight(0);
+
+  // TODO: Look into adding some wavering noise to replicate a more handpainted result
+
+  // Using n=5 results in too much of the dark blue covering everything
+  const n = 4;
+  for (let i = n; i > 0; i--) {
+    switch (i) {
+      case 1:
+        p5.fill(0);
+        break;
+      case 2:
+        p5.fill(175, 215, 245);
+        break;
+      case 3:
+        p5.fill(255);
+        break;
+      case 4:
+      case 5:
+        p5.fill(20, 50, 180);
+        break;
+      default:
+        break;
+    }
+    p5.ellipse(disc.x, disc.y, disc.radius * (i / n));
+  }
+};
+
 export const draw = (p5, disc) => {
   // Use a predefined algorithm to define the circle's contents
 
   // grayscale(p5, disc);
   // rainbow(p5, disc);
   // concentricCirclesGrayscale(p5, disc);
-  archeryTarget(p5, disc);
+  // archeryTarget(p5, disc);
+  evilEye(p5, disc);
 };
