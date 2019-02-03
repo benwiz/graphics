@@ -9,3 +9,5 @@ export const distance = (x1, y1, x2, y2) => {
 
 export const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+
+export const randomElement = items => items[Math.floor(Math.random() * items.length)];

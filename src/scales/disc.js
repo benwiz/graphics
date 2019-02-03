@@ -141,6 +141,32 @@ const evilEye = (p5, disc) => {
   }
 };
 
+const catsEye = (p5, disc) => {
+  // TODO: Use a color palette for iris, maybe throw in some minor noise
+  // TODO: Use some minor noise for pupil width
+
+  p5.colorMode(p5.RGB);
+  p5.strokeWeight(1);
+  p5.stroke(0);
+
+  // Draw the iris
+  const irisColors = [
+    // Blue
+    { r: 50, g: 185, b: 250 },
+    // Gold
+    { r: 210, g: 170, b: 10 },
+    // Green
+    { r: 150, g: 210, b: 10 },
+  ];
+  const irisColor = Util.randomElement(irisColors);
+  p5.fill(irisColor.r, irisColor.g, irisColor.b);
+  p5.ellipse(disc.x, disc.y, disc.radius);
+
+  // Draw the pupil
+  p5.fill(0);
+  p5.ellipse(disc.x, disc.y, 0.15 * disc.radius, 0.85 * disc.radius);
+};
+
 export const draw = (p5, disc) => {
   // Use a predefined algorithm to define the circle's contents
 
@@ -148,5 +174,6 @@ export const draw = (p5, disc) => {
   // rainbow(p5, disc);
   // concentricCirclesGrayscale(p5, disc);
   // archeryTarget(p5, disc);
-  evilEye(p5, disc);
+  // evilEye(p5, disc);
+  catsEye(p5, disc);
 };
