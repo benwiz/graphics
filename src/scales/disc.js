@@ -38,15 +38,22 @@ export const setupDrawing = (p5) => {
   p5.strokeWeight(1);
 };
 
-const grayscale = (disc) => {
+const grayscale = (p5, disc) => {
+  p5.colorMode(p5.RGB);
   const color = noiseGen.scaled([disc.x, disc.y]);
-  return color;
+  p5.fill(color);
+};
+
+const rainbow = (p5, disc) => {
+  p5.colorMode(p5.HSB);
+  const hue = noiseGen.scaled([disc.x, disc.y]);
+  p5.fill(hue * 2, 100, 100);
 };
 
 export const draw = (p5, disc) => {
   // Use noise to select the color
-  const color = grayscale(disc);
-  p5.fill(color);
+  // grayscale(p5, disc);
+  rainbow(p5, disc);
 
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
