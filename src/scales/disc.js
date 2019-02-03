@@ -58,7 +58,7 @@ const concentricCirclesGrayscale = (p5, disc) => {
   p5.colorMode(p5.RGB);
   p5.strokeWeight(0);
 
-  const n = 10;
+  const n = 5;
   for (let i = n; i > 0; i--) {
     if (i % 2) {
       p5.fill(0);
@@ -69,10 +69,53 @@ const concentricCirclesGrayscale = (p5, disc) => {
   }
 };
 
+const archeryTarget = (p5, disc) => {
+  // NOTE: I looked into drawing the internal black lines... it doesn't come out that well.
+  // The remnant of that attempt is why n=10 instead of n=5.
+
+  p5.colorMode(p5.RGB);
+  p5.stroke(0);
+
+  const n = 10;
+  for (let i = n; i > 0; i--) {
+    p5.strokeWeight(0);
+
+    switch (i) {
+      case 1:
+      case 2:
+        p5.fill(255, 255, 0);
+        break;
+      case 3:
+      case 4:
+        p5.fill(255, 0, 0);
+        break;
+      case 5:
+      case 6:
+        p5.fill(0, 0, 255);
+        break;
+      case 7:
+      case 8:
+        p5.fill(0, 0, 0);
+        break;
+      case 9:
+        p5.fill(255, 255, 255);
+        break;
+      case 10:
+        p5.fill(255, 255, 255);
+        p5.strokeWeight(1);
+        break;
+      default:
+        break;
+    }
+    p5.ellipse(disc.x, disc.y, disc.radius * (i / n));
+  }
+};
+
 export const draw = (p5, disc) => {
   // Use a predefined algorithm to define the circle's contents
 
   // grayscale(p5, disc);
   // rainbow(p5, disc);
-  concentricCirclesGrayscale(p5, disc);
+  // concentricCirclesGrayscale(p5, disc);
+  archeryTarget(p5, disc);
 };
