@@ -145,22 +145,33 @@ const catsEye = (p5, disc) => {
   // TODO: Figure out how to do a gradient on each eye... maybe the border should be an exrema of
   // the gradient
 
-  p5.colorMode(p5.RGB);
+  p5.colorMode(p5.HSB);
   p5.strokeWeight(1);
-  p5.stroke(0);
 
-  // Draw the iris
-  const irisColors = [
+  // Select the color for the iris
+  const colors = [
     // Blue
-    { r: 50, g: 185, b: 250 },
+    { h: 200, s: 100, b: 100 },
     // Gold
-    { r: 210, g: 170, b: 10 },
+    { h: 50, s: 100, b: 100 },
     // Green
-    { r: 150, g: 210, b: 10 },
+    { h: 80, s: 100, b: 100 },
   ];
-  const irisColor = Util.randomElement(irisColors);
-  p5.fill(irisColor.r, irisColor.g, irisColor.b);
-  p5.ellipse(disc.x, disc.y, disc.radius);
+  const color = Util.randomElement(colors);
+  p5.stroke(color.h, color.s, 50);
+
+  // The the iris using a gradient. Begin with the outside and decreate saturation inward.
+  for (let i = disc.radius; i > 0; i--) {
+    const saturationAdjust = Util.scale(i, 0, disc.radius, color.s, 0);
+    const saturation = color.s - saturationAdjust;
+    p5.fill(color.h, saturation, color.b);
+    p5.ellipse(disc.x, disc.y, i);
+
+    // Turn off border
+    if (i === disc.radius) {
+      p5.strokeWeight(0);
+    }
+  }
 
   // Draw the pupil
   p5.fill(0);

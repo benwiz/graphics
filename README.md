@@ -66,3 +66,4 @@ npm run server SKETCH_NAME
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
   - Figure out if I can speed up the reloading
+  - Contribute to canvas-sketch repo... maybe tackle a simple issue
