@@ -32,28 +32,31 @@ export const create = (p5, x, y) => {
   return disc;
 };
 
-export const setupDrawing = (p5) => {
+const grayscale = (p5, disc) => {
+  p5.colorMode(p5.RGB);
   p5.fill(200);
   p5.stroke(0);
   p5.strokeWeight(1);
-};
 
-const grayscale = (p5, disc) => {
-  p5.colorMode(p5.RGB);
   const color = noiseGen.scaled([disc.x, disc.y]);
   p5.fill(color);
+  p5.ellipse(disc.x, disc.y, disc.radius);
 };
 
 const rainbow = (p5, disc) => {
   p5.colorMode(p5.HSB);
+  p5.fill(200);
+  p5.stroke(0);
+  p5.strokeWeight(1);
+
   const hue = noiseGen.scaled([disc.x, disc.y]);
   p5.fill(hue * 2, 100, 100);
+  p5.ellipse(disc.x, disc.y, disc.radius);
 };
 
 export const draw = (p5, disc) => {
-  // Use noise to select the color
-  // grayscale(p5, disc);
-  rainbow(p5, disc);
+  // Use a predefined algorithm to define the circle's contents
 
-  p5.ellipse(disc.x, disc.y, disc.radius);
+  grayscale(p5, disc);
+  // rainbow(p5, disc);
 };

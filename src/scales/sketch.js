@@ -66,7 +66,6 @@ export const draw = (options) => {
   p5.translate(width / 2, height / 2);
 
   // Draw discs
-  Disc.setupDrawing(p5);
   for (let i = 0; i < DISCS.length; i++) {
     const disc = DISCS[i];
     Disc.draw(p5, disc);
