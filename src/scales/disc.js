@@ -142,8 +142,8 @@ const evilEye = (p5, disc) => {
 };
 
 const catsEye = (p5, disc) => {
-  // TODO: Use a color palette for iris, maybe throw in some minor noise
-  // TODO: Use some minor noise for pupil width
+  // TODO: Figure out how to do a gradient on each eye... maybe the border should be an exrema of
+  // the gradient
 
   p5.colorMode(p5.RGB);
   p5.strokeWeight(1);
@@ -164,7 +164,11 @@ const catsEye = (p5, disc) => {
 
   // Draw the pupil
   p5.fill(0);
-  p5.ellipse(disc.x, disc.y, 0.15 * disc.radius, 0.85 * disc.radius);
+  const pupilHeight = 0.85 * disc.radius;
+  let pupilWidth = disc.radius * p5.randomGaussian(0.15, 0.5);
+  pupilWidth = Math.max(0.1 * disc.radius, pupilWidth);
+  pupilWidth = Math.min(0.8 * disc.radius, pupilWidth);
+  p5.ellipse(disc.x, disc.y, pupilWidth, pupilHeight);
 };
 
 export const draw = (p5, disc) => {

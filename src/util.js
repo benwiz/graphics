@@ -11,3 +11,7 @@ export const scale = (num, inMin, inMax, outMin, outMax) =>
   ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 
 export const randomElement = items => items[Math.floor(Math.random() * items.length)];
+
+export const getRandomFloat = (min, max) => Math.random() * (max - min) + min;
+
+export const getRandomInt = (min, max) => Math.floor(getRandomFloat(min, max));

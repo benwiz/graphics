@@ -61,6 +61,7 @@ npm run server SKETCH_NAME
   - Spirals
   - Other noise based graphics or designs... not necessarily constrained to ellipses and circles
   - Maybe I can actually make rainbow fish by doing more advanced constraints
+    - Maybe I could even take an edge drawing, use canny edge detection, and use the resulting edges as border constraints... or just a svg. Maybe its easiest to create a svg using Gimp.
 
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
