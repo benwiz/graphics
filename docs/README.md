@@ -4,7 +4,7 @@
 - [circles-experiment-1](./circles-experiment-1/)
 - [pokeballs](./pokeballs/)
 - [minions](./minions/)
-- [scales]('./scales/)
+- [scales](./scales/)
 
 -----------------------------------------------
 
