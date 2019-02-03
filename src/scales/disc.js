@@ -1,12 +1,4 @@
-import FastSimplexNoise from 'fast-simplex-noise';
 import * as Util from '../util';
-
-const noiseGenColor = new FastSimplexNoise({
-  frequency: 0.01,
-  min: 0,
-  max: 255,
-  octaves: 8,
-});
 
 export const create = (p5, x, y) => {
   const disc = {
@@ -38,7 +30,7 @@ const grayscale = (p5, disc) => {
   p5.stroke(0);
   p5.strokeWeight(1);
 
-  const color = noiseGenColor.scaled([disc.x, disc.y]);
+  const color = 255 * p5.noise(disc.x, disc.y);
   p5.fill(color);
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
@@ -49,7 +41,7 @@ const rainbow = (p5, disc) => {
   p5.stroke(0);
   p5.strokeWeight(1);
 
-  const hue = noiseGenColor.scaled([disc.x, disc.y]);
+  const hue = 255 * p5.noise(disc.x, disc.y);
   p5.fill(hue * 2, 100, 100);
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
@@ -216,14 +208,25 @@ const sauronsEye = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, 0.9 * disc.radius);
 };
 
+const handdrawn = (p5, disc) => {
+  p5.colorMode(p5.HSB);
+  p5.stroke(0);
+  p5.strokeWeight(1);
+
+  const hue = 255 * p5.noise(disc.x, disc.y);
+  p5.fill(hue * 2, 40, 80);
+  p5.ellipse(disc.x, disc.y, disc.radius);
+};
+
 export const draw = (p5, disc) => {
   // Use a predefined algorithm to define the circle's contents
 
   // grayscale(p5, disc);
   // rainbow(p5, disc);
-  concentricCirclesGrayscale(p5, disc);
+  // concentricCirclesGrayscale(p5, disc);
   // archeryTarget(p5, disc);
   // evilEye(p5, disc);
   // catsEye(p5, disc);
   // sauronsEye(p5, disc);
+  handdrawn(p5, disc);
 };

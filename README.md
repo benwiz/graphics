@@ -47,17 +47,12 @@ npm run server SKETCH_NAME
 
 ## Ideas
 
-- Connect some circles with others with lines or triangles
-  - Make the resulting sections colored in some way
-- Make them look like eyes
-  - Evil eyes
 - Balloons (or hot air balloons) rising
   - Use a physics engine (matter.js?) to make them pop. I think they'll need to be made up of lines or particles to pop correctly... probably just lines will do fine.
 
 ## To Do
 
 - scales
-  - Finish cats eyes
   - Spirals
   - Other noise based graphics or designs... not necessarily constrained to ellipses and circles
   - Maybe I can actually make rainbow fish by doing more advanced constraints
