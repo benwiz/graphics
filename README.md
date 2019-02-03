@@ -56,9 +56,11 @@ npm run server SKETCH_NAME
 
 ## To Do
 
-- Reimplement: Stacked Discs: https://www.instagram.com/p/BtBNnoinZwu/
-  - Maybe have a class or a file that contains the functions that make the different designed discs. Start off using his then customize.
-  - Having an issue importing noise lib inside disc.js
+- scales
+  - Finish cats eyes
+  - Spirals
+  - Other noise based graphics or designs... not necessarily constrained to ellipses and circles
+  - Maybe I can actually make rainbow fish by doing more advanced constraints
 
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
