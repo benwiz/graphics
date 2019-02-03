@@ -142,9 +142,6 @@ const evilEye = (p5, disc) => {
 };
 
 const catsEye = (p5, disc) => {
-  // TODO: Figure out how to do a gradient on each eye... maybe the border should be an exrema of
-  // the gradient
-
   p5.colorMode(p5.HSB);
   p5.strokeWeight(1);
 
@@ -182,6 +179,43 @@ const catsEye = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, pupilWidth, pupilHeight);
 };
 
+const sauronsEye = (p5, disc) => {
+  // This is unfished. I am not sure how to cut a hole or mask in an ellipse. I also will need to
+  // use some noise for texturing for the iris. Look into the p5.createImage() function, because
+  // a mask can only be used with an image.
+
+  p5.colorMode(p5.HSB);
+  p5.strokeWeight(1);
+
+  // First draw a yellow background with gradient. Begin outside and work in decreating saturation.
+  let color = { h: 50, s: 100, b: 82 };
+  p5.stroke(color.h, color.s, 60);
+  for (let i = disc.radius; i > 0; i--) {
+    const saturationAdjust = Util.scale(i, 0, disc.radius, color.s, 20);
+    const saturation = color.s - saturationAdjust;
+    p5.fill(color.h, saturation, color.b);
+    p5.ellipse(disc.x, disc.y, i);
+
+    // Turn off border
+    if (i === disc.radius) {
+      p5.strokeWeight(0);
+    }
+  }
+
+  // Then, draw the pupil
+  p5.fill(0);
+  const pupilHeight = 0.75 * disc.radius;
+  const pupilWidth = 0.1 * disc.radius;
+  p5.ellipse(disc.x, disc.y, pupilWidth, pupilHeight);
+
+  // Finally, draw the iris (red, textured part) of the eye with a mask slightly larger than the
+  // pupil to allow the pupil and some surrounding area to show.
+  color = { h: 40, s: 100, b: 82 };
+  p5.strokeWeight(0);
+  p5.fill(color.h, color.s, color.b);
+  p5.ellipse(disc.x, disc.y, 0.9 * disc.radius);
+};
+
 export const draw = (p5, disc) => {
   // Use a predefined algorithm to define the circle's contents
 
@@ -190,5 +224,6 @@ export const draw = (p5, disc) => {
   // concentricCirclesGrayscale(p5, disc);
   // archeryTarget(p5, disc);
   // evilEye(p5, disc);
-  catsEye(p5, disc);
+  // catsEye(p5, disc);
+  sauronsEye(p5, disc);
 };
