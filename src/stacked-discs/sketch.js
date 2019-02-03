@@ -2,7 +2,7 @@ import * as Disc from './disc';
 import * as Util from '../util';
 
 const DISCS = [];
-const N = 5000;
+const N = 6000;
 
 //
 // All setup functions here
@@ -58,6 +58,9 @@ export const setup = (options) => {
 
 export const draw = (options) => {
   const { p5, width, height } = options;
+
+  // Set background color
+  p5.background(255);
 
   // Translate to center
   p5.translate(width / 2, height / 2);
