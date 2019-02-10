@@ -18,6 +18,7 @@ export const create = (p5, x, y) => {
     y: p5.randomGaussian(y, 150),
     color: null,
     pupil: { width: 0, height: 0 },
+    blinkPercent: 0, // p5.random(),
   };
 
   // Constrain by selected algorithm, return null if doConstrain is true
@@ -35,6 +36,7 @@ export const create = (p5, x, y) => {
   ];
   disc.color = Util.randomElement(colors);
 
+  // NOTE: I think I'm actually using this variable as diameter not radius
   // Determine a radius based on distance to center
   const dist = Util.distance(disc.x, disc.y, 0, 0);
   const maxDist = p5.width / 2;
@@ -109,6 +111,28 @@ const catsEye = (p5, disc) => {
   // Draw the pupil
   p5.fill(0);
   p5.ellipse(disc.x, disc.y, disc.pupil.width, disc.pupil.height);
+
+  // Draw the top eyelid
+  const c = 0.55191502449;
+  p5.beginShape();
+  p5.vertex(disc.x - disc.radius / 2, disc.y);
+  p5.bezierVertex(
+    // Control point 1
+    disc.x - disc.radius * 0.5,
+    disc.y - disc.radius * 0.7,
+    // Control point 2
+    disc.x + disc.radius * 0.5,
+    disc.y - disc.radius * 0.7,
+    // End point
+    disc.x + disc.radius * 0.5,
+    disc.y,
+  );
+  p5.endShape();
+
+  // TODO: Draw the lower eyelid
+
+  // TODO: Update the eyelid
+  // disc.blinkPercent += 0.01;
 };
 
 export const draw = (p5, disc) => {
