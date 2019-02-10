@@ -115,7 +115,7 @@ const catsEye = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, disc.pupil.width, disc.pupil.height);
 
   // Draw the top eyelid
-  const c = 0.5; // 0.55191502449;
+  const c = 0.5;
   const blinkPercent = Util.scale(disc.blinkPercent, 0, 1, 0.7, 0);
   p5.beginShape();
   p5.vertex(disc.x - disc.radius * 0.5, disc.y);
@@ -142,18 +142,42 @@ const catsEye = (p5, disc) => {
     disc.y,
   );
   p5.endShape();
-  // TODO: If still having troublem, look into contour
 
   // TODO: Draw the lower eyelid
+  p5.beginShape();
+  p5.vertex(disc.x - disc.radius * 0.5, disc.y);
+  p5.bezierVertex(
+    // Control point 1
+    disc.x - disc.radius * c,
+    disc.y + disc.radius * 0.7,
+    // Control point 2
+    disc.x + disc.radius * c,
+    disc.y + disc.radius * 0.7,
+    // End point
+    disc.x + disc.radius * 0.5,
+    disc.y,
+  );
+  p5.bezierVertex(
+    // Control point 2
+    disc.x + disc.radius * c,
+    disc.y + disc.radius * blinkPercent,
+    // Control point 1
+    disc.x - disc.radius * c,
+    disc.y + disc.radius * blinkPercent,
+    // End point
+    disc.x - disc.radius * 0.5,
+    disc.y,
+  );
+  p5.endShape();
 
   // Update the eyelid
   disc.blinkPercent += disc.blinkRate * disc.blinkDirection;
   if (disc.blinkPercent <= disc.blinkRate) {
     disc.blinkDirection = 1;
     disc.blinkPercent = disc.blinkRate;
-  } else if (disc.blinkPercent >= 0.99) {
+  } else if (disc.blinkPercent >= 1 - disc.blinkRate) {
     disc.blinkDirection = -1;
-    disc.blinkPercent = 1.0;
+    disc.blinkPercent = 1 - disc.blinkRate;
   }
 };
 
