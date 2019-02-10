@@ -1,19 +1,28 @@
 import * as Util from '../util';
 
+const constrainPadding = (p5, disc, percent) => {
+  const xConstraint = percent * p5.width;
+  const yConstraint = percent * p5.height;
+
+  if (disc.x < -xConstraint) return true;
+  if (disc.x > xConstraint) return true;
+  if (disc.y < -yConstraint) return true;
+  if (disc.y > yConstraint) return true;
+
+  return false;
+};
+
 export const create = (p5, x, y) => {
   const disc = {
     x: p5.randomGaussian(x, 150),
     y: p5.randomGaussian(y, 150),
   };
 
-  // If the disc lies outside a padding-like border, move it inside the border
-  const percent = 0.4;
-  const xConstraint = percent * p5.width;
-  const yConstraint = percent * p5.height;
-  if (disc.x < -xConstraint) return null;
-  if (disc.x > xConstraint) return null;
-  if (disc.y < -yConstraint) return null;
-  if (disc.y > yConstraint) return null;
+  // Constrain by selected algorithm
+  const doConstrain = constrainPadding(p5, disc, 0.4);
+
+  // Return null says don't draw this disc
+  if (doConstrain) return null;
 
   // Determine a radius based on distance to center
   const dist = Util.distance(disc.x, disc.y, 0, 0);
