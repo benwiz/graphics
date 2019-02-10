@@ -20,6 +20,7 @@ export const create = (p5, x, y) => {
     pupil: { width: 0, height: 0 },
     blinkPercent: p5.random(),
     blinkDirection: Util.randomElement([-1, 1]),
+    blinkRate: Util.getRandomFloat(0, 0.04),
   };
 
   // Constrain by selected algorithm, return null if doConstrain is true
@@ -146,11 +147,11 @@ const catsEye = (p5, disc) => {
   // TODO: Draw the lower eyelid
 
   // Update the eyelid
-  disc.blinkPercent += 0.01 * disc.blinkDirection;
-  if (blinkPercent === 0) {
+  disc.blinkPercent += disc.blinkRate * disc.blinkDirection;
+  if (disc.blinkPercent <= disc.blinkRate) {
     disc.blinkDirection = 1;
-    disc.blinkPercent = 0.0;
-  } else if (blinkPercent === 1) {
+    disc.blinkPercent = disc.blinkRate;
+  } else if (disc.blinkPercent >= 0.99) {
     disc.blinkDirection = -1;
     disc.blinkPercent = 1.0;
   }
