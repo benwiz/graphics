@@ -59,8 +59,9 @@ npm run server SKETCH_NAME
     - Maybe I could even take an edge drawing, use canny edge detection, and use the resulting edges as border constraints... or just a svg. Maybe its easiest to create a svg using Gimp.
 
 - blinking-eyeballs
+  - Create a pause before the next blink
   - Create a gif with a full screen of eyeballs (about 4000)
-    - Should use GIMP for this
+    - Create an npm script for `../../node_modules/.bin/canvas-sketch-gif ~/Downloads/ output/2.gif --fps=24`
   - look into using a shader then try using an already built fur shader
   - try creating my own shader using GLSL
 
