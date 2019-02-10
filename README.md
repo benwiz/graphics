@@ -59,11 +59,13 @@ npm run server SKETCH_NAME
     - Maybe I could even take an edge drawing, use canny edge detection, and use the resulting edges as border constraints... or just a svg. Maybe its easiest to create a svg using Gimp.
 
 - blinking-eyeballs
-  - make it blink with black lids
+  - Create a gif with a full screen of eyeballs (about 4000)
+    - Should use GIMP for this
   - look into using a shader then try using an already built fur shader
   - try creating my own shader using GLSL
 
-- https://programmingdesignsystems.com/shape/custom-shapes/index.html
+- Wet and Dry sketch #1
+  - https://programmingdesignsystems.com/shape/custom-shapes/index.html
 
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
