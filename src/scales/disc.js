@@ -26,6 +26,7 @@ export const create = (p5, x, y) => {
   return disc;
 };
 
+// eslint-disable-next-line no-unused-vars
 const grayscale = (p5, disc) => {
   p5.colorMode(p5.RGB);
   p5.fill(200);
@@ -37,6 +38,7 @@ const grayscale = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
 
+// eslint-disable-next-line no-unused-vars
 const rainbow = (p5, disc) => {
   p5.colorMode(p5.HSB);
   p5.fill(200);
@@ -48,6 +50,7 @@ const rainbow = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, disc.radius);
 };
 
+// eslint-disable-next-line no-unused-vars
 const concentricCirclesGrayscale = (p5, disc) => {
   p5.colorMode(p5.RGB);
   p5.strokeWeight(0);
@@ -63,6 +66,7 @@ const concentricCirclesGrayscale = (p5, disc) => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 const archeryTarget = (p5, disc) => {
   // NOTE: I looked into drawing the internal black lines... it doesn't come out that well.
   // The remnant of that attempt is why n=10 instead of n=5.
@@ -105,6 +109,7 @@ const archeryTarget = (p5, disc) => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 const evilEye = (p5, disc) => {
   p5.colorMode(p5.RGB);
   p5.strokeWeight(0);
@@ -135,6 +140,7 @@ const evilEye = (p5, disc) => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 const catsEye = (p5, disc) => {
   p5.colorMode(p5.HSB);
   p5.strokeWeight(1);
@@ -173,6 +179,7 @@ const catsEye = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, pupilWidth, pupilHeight);
 };
 
+// eslint-disable-next-line no-unused-vars
 const sauronsEye = (p5, disc) => {
   // This is unfished. I am not sure how to cut a hole or mask in an ellipse. I also will need to
   // use some noise for texturing for the iris. Look into the p5.createImage() function, because
@@ -210,6 +217,7 @@ const sauronsEye = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, 0.9 * disc.radius);
 };
 
+// eslint-disable-next-line no-unused-vars
 const handdrawn = (p5, disc) => {
   p5.colorMode(p5.HSB);
   p5.stroke(1);
