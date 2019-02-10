@@ -58,6 +58,11 @@ npm run server SKETCH_NAME
   - Maybe I can actually make rainbow fish by doing more advanced constraints
     - Maybe I could even take an edge drawing, use canny edge detection, and use the resulting edges as border constraints... or just a svg. Maybe its easiest to create a svg using Gimp.
 
+- blinking-eyeballs
+  - make it blink with black lids
+  - look into using a shader then try using an already built fur shader
+  - try creating my own shader using GLSL
+
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
   - Figure out if I can speed up the reloading
