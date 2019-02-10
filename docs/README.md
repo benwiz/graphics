@@ -5,6 +5,7 @@
 - [pokeballs](./pokeballs/)
 - [minions](./minions/)
 - [scales](./scales/)
+- [blinking-eyeballs](./blinking-eyeballs/)
 
 -----------------------------------------------
 

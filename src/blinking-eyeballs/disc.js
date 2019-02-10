@@ -18,7 +18,8 @@ export const create = (p5, x, y) => {
     y: p5.randomGaussian(y, 150),
     color: null,
     pupil: { width: 0, height: 0 },
-    blinkPercent: 0, // p5.random(),
+    blinkPercent: p5.random(),
+    blinkDirection: Util.randomElement([-1, 1]),
   };
 
   // Constrain by selected algorithm, return null if doConstrain is true
@@ -113,26 +114,46 @@ const catsEye = (p5, disc) => {
   p5.ellipse(disc.x, disc.y, disc.pupil.width, disc.pupil.height);
 
   // Draw the top eyelid
-  const c = 0.55191502449;
+  const c = 0.5; // 0.55191502449;
+  const blinkPercent = Util.scale(disc.blinkPercent, 0, 1, 0.7, 0);
   p5.beginShape();
-  p5.vertex(disc.x - disc.radius / 2, disc.y);
+  p5.vertex(disc.x - disc.radius * 0.5, disc.y);
   p5.bezierVertex(
     // Control point 1
-    disc.x - disc.radius * 0.5,
+    disc.x - disc.radius * c,
     disc.y - disc.radius * 0.7,
     // Control point 2
-    disc.x + disc.radius * 0.5,
+    disc.x + disc.radius * c,
     disc.y - disc.radius * 0.7,
     // End point
     disc.x + disc.radius * 0.5,
     disc.y,
   );
+  p5.bezierVertex(
+    // Control point 2
+    disc.x + disc.radius * c,
+    disc.y - disc.radius * blinkPercent,
+    // Control point 1
+    disc.x - disc.radius * c,
+    disc.y - disc.radius * blinkPercent,
+    // End point
+    disc.x - disc.radius * 0.5,
+    disc.y,
+  );
   p5.endShape();
+  // TODO: If still having troublem, look into contour
 
   // TODO: Draw the lower eyelid
 
-  // TODO: Update the eyelid
-  // disc.blinkPercent += 0.01;
+  // Update the eyelid
+  disc.blinkPercent += 0.01 * disc.blinkDirection;
+  if (blinkPercent === 0) {
+    disc.blinkDirection = 1;
+    disc.blinkPercent = 0.0;
+  } else if (blinkPercent === 1) {
+    disc.blinkDirection = -1;
+    disc.blinkPercent = 1.0;
+  }
 };
 
 export const draw = (p5, disc) => {

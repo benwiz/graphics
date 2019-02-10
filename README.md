@@ -63,6 +63,8 @@ npm run server SKETCH_NAME
   - look into using a shader then try using an already built fur shader
   - try creating my own shader using GLSL
 
+- https://programmingdesignsystems.com/shape/custom-shapes/index.html
+
 - Later
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
   - Figure out if I can speed up the reloading
