@@ -21,6 +21,7 @@ export const create = (p5, x, y) => {
     blinkPercent: p5.random(),
     blinkDirection: Util.randomElement([-1, 1]),
     blinkRate: Util.getRandomFloat(0, 0.04),
+    blinkCooldown: p5.random(100),
   };
 
   // Constrain by selected algorithm, return null if doConstrain is true

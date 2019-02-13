@@ -52,12 +52,6 @@ npm run server SKETCH_NAME
 
 ## To Do
 
-- scales
-  - Spirals
-  - Other noise based graphics or designs... not necessarily constrained to ellipses and circles
-  - Maybe I can actually make rainbow fish by doing more advanced constraints
-    - Maybe I could even take an edge drawing, use canny edge detection, and use the resulting edges as border constraints... or just a svg. Maybe its easiest to create a svg using Gimp.
-
 - blinking-eyeballs
   - Create a pause before the next blink
   - Create a gif with a full screen of eyeballs (about 4000)
@@ -72,3 +66,10 @@ npm run server SKETCH_NAME
   - Customize the HTML template... don't create it from scratch but use what exists as a starting point
   - Figure out if I can speed up the reloading
   - Contribute to canvas-sketch repo... maybe tackle a simple issue
+
+- Frozen / stalled / lost interest
+  - scales
+    - Spirals
+    - Other noise based graphics or designs... not necessarily constrained to ellipses and circles
+    - Maybe I can actually make rainbow fish by doing more advanced constraints
+      - Maybe I could even take an edge drawing, use canny edge detection, and use the resulting edges as border constraints... or just a svg. Maybe its easiest to create a svg using Gimp.
