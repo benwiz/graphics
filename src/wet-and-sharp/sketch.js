@@ -22,7 +22,7 @@ const peaksAndReflections = (p5) => {
   const rectHeight = p5.height * (1 - GOLDEN_RATIO);
   p5.rect(0, 0, p5.width, rectHeight);
 
-  // Draw the black mountains on the white background
+  // Create the points for the mountain
   const startX = (1 / 3) * p5.width;
   const endX = p5.width - (1 / 3) * p5.width;
   const width = endX - startX;
@@ -36,21 +36,25 @@ const peaksAndReflections = (p5) => {
     if (i === 0 || i === n - 1) {
       y = 0;
     } else {
-      // TODO (maybe): Make sure every point moves alternatively up/down to create pointier peaks
-      y = -1 * p5.random(0.2 * maxHeight, maxHeight);
+      const prevPoint = peakPoints[i - 1];
+      if (i % 2) {
+        // If index is even, the point must be below the previous point
+        const maxY = Math.abs(prevPoint.y);
+        y = p5.random(0.2 * maxHeight, maxY);
+      } else {
+        // If index is odd, the point must be above the previous point
+        const minY = Math.abs(prevPoint.y);
+        y = p5.random(minY, maxHeight);
+      }
+      y *= -1;
     }
     const point = { x, y };
     peakPoints.push(point);
   }
-  p5.beginShape();
-  for (let i = 0; i < peakPoints.length; i++) {
-    const point = peakPoints[i];
-    p5.vertex(point.x, point.y);
-  }
-  p5.endShape();
 
   // Draw the reflections filled with white
   p5.fill(255);
+  p5.curveTightness(-5);
   p5.beginShape();
   for (let i = 0; i < peakPoints.length; i++) {
     const point = peakPoints[i];
@@ -60,6 +64,15 @@ const peaksAndReflections = (p5) => {
     if (i === 0 || i === peakPoints.length - 1) {
       p5.curveVertex(point.x, -point.y);
     }
+  }
+  p5.endShape();
+
+  // Draw the mountain second so it covers any oddities caused by curve tightness
+  p5.fill(0);
+  p5.beginShape();
+  for (let i = 0; i < peakPoints.length; i++) {
+    const point = peakPoints[i];
+    p5.vertex(point.x, point.y);
   }
   p5.endShape();
 };
