@@ -4,7 +4,7 @@ const GOLDEN_RATIO = 1 / 1.61803398875;
 // All setup functions here
 //
 
-export const setup = (options) => {};
+export const setup = (_options) => {};
 
 //
 // All drawing functions below here
