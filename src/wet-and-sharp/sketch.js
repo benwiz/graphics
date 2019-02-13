@@ -42,14 +42,24 @@ const peaksAndReflections = (p5) => {
     const point = { x, y };
     peakPoints.push(point);
   }
-
-  // Yes this could be integrated into the previous loop, readability is the goal not speed.
   p5.beginShape();
   for (let i = 0; i < peakPoints.length; i++) {
     const point = peakPoints[i];
     p5.vertex(point.x, point.y);
-    // p5.ellipse(point.x, 0, 5);
-    // p5.ellipse(point.x, point.y, 5);
+  }
+  p5.endShape();
+
+  // Draw the reflections filled with white
+  p5.fill(255);
+  p5.beginShape();
+  for (let i = 0; i < peakPoints.length; i++) {
+    const point = peakPoints[i];
+    p5.curveVertex(point.x, -point.y);
+
+    // If first or last, repeat it
+    if (i === 0 || i === peakPoints.length - 1) {
+      p5.curveVertex(point.x, -point.y);
+    }
   }
   p5.endShape();
 };
