@@ -14,6 +14,9 @@ const peaksAndReflections = (p5) => {
   // Translate down to the golden ratio
   p5.translate(0, GOLDEN_RATIO * p5.height);
 
+  // Shut off borders
+  p5.strokeWidth(0);
+
   // Draw the bottom (golden) half of the canvas black
   p5.fill(0);
   const rectHeight = p5.height * (1 - GOLDEN_RATIO);
@@ -23,17 +26,17 @@ const peaksAndReflections = (p5) => {
   const startX = (1 / 3) * p5.width;
   const endX = p5.width - (1 / 3) * p5.width;
   const width = endX - startX;
-  const numPeaks = 4;
   const maxHeight = GOLDEN_RATIO * rectHeight;
-  const step = width / (2 * numPeaks + 1);
   const peakPoints = [];
-  for (let x = startX; x <= endX; x += step) {
-    // TODO: I need to look at the last two points and determine if the new point is above or below
-    // the previous point.
+  const n = 9;
+  const step = width / n;
+  for (let i = 0; i < n; i++) {
+    const x = startX + i * step;
     let y;
-    if (x === startX || x === endX) {
+    if (i === 0 || i === n - 1) {
       y = 0;
     } else {
+      // TODO (maybe): Make sure every point moves alternatively up/down to create pointier peaks
       y = -1 * p5.random(0.2 * maxHeight, maxHeight);
     }
     const point = { x, y };
@@ -45,9 +48,8 @@ const peaksAndReflections = (p5) => {
   for (let i = 0; i < peakPoints.length; i++) {
     const point = peakPoints[i];
     p5.vertex(point.x, point.y);
-
-    p5.ellipse(point.x, 0, 5);
-    p5.ellipse(point.x, point.y, 5);
+    // p5.ellipse(point.x, 0, 5);
+    // p5.ellipse(point.x, point.y, 5);
   }
   p5.endShape();
 };
