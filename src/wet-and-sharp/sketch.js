@@ -40,7 +40,7 @@ const peaksAndReflections = (p5) => {
       y = 0;
     } else {
       const prevPoint = peakPoints[i - 1];
-      if (i % 2) {
+      if (i % 2 === 0) {
         // If index is even, the point must be below the previous point
         const maxY = Math.abs(prevPoint.y);
         y = p5.random(0.2 * maxHeight, maxY);
@@ -57,7 +57,7 @@ const peaksAndReflections = (p5) => {
 
   // Draw the reflections filled with white
   p5.fill(255);
-  p5.curveTightness(2); // MESS WITH THIS, IT HAS A LARGE IMPACT
+  p5.curveTightness(-4); // MESS WITH THIS [-5, 5], IT HAS A LARGE IMPACT
   p5.beginShape();
   for (let i = 0; i < peakPoints.length; i++) {
     const point = peakPoints[i];
