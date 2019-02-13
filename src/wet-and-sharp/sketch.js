@@ -15,7 +15,7 @@ const peaksAndReflections = (p5) => {
   p5.translate(0, GOLDEN_RATIO * p5.height);
 
   // Shut off borders
-  p5.strokeWidth(0);
+  p5.strokeWeight(0);
 
   // Draw the bottom (golden) half of the canvas black
   p5.fill(0);
