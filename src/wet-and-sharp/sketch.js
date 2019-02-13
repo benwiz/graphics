@@ -11,6 +11,9 @@ export const setup = (_options) => {};
 //
 
 const peaksAndReflections = (p5) => {
+  // Set background color to be white
+  p5.background(255);
+
   // Translate down to the golden ratio
   p5.translate(0, GOLDEN_RATIO * p5.height);
 
@@ -54,7 +57,7 @@ const peaksAndReflections = (p5) => {
 
   // Draw the reflections filled with white
   p5.fill(255);
-  p5.curveTightness(-5);
+  p5.curveTightness(2); // MESS WITH THIS, IT HAS A LARGE IMPACT
   p5.beginShape();
   for (let i = 0; i < peakPoints.length; i++) {
     const point = peakPoints[i];
