@@ -53,12 +53,19 @@ const concentricCirclesGrayscale = (p5, disc) => {
 
 // eslint-disable-next-line no-unused-vars
 const evilEye = (p5, disc) => {
+  p5.push();
+
   // Drawing configs
   p5.colorMode(p5.RGB);
   p5.strokeWeight(0);
 
   // Translate to center of disc
   p5.translate(disc.x, disc.y);
+
+  // Rotate based on frame count
+  p5.angleMode(p5.DEGREES);
+  const frameCount = p5.frameCount % 360;
+  p5.rotate(frameCount);
 
   // Draw the evil eye disc
   const n = 4;
@@ -93,13 +100,11 @@ const evilEye = (p5, disc) => {
       p5.line(0, 0, diameter / 2, 0);
     }
   }
+
+  p5.pop();
 };
 
 export const draw = (p5, disc) => {
-  p5.push();
-
   // concentricCirclesGrayscale(p5, disc);
   evilEye(p5, disc);
-
-  p5.pop();
 };
