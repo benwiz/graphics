@@ -6,6 +6,7 @@
 - [minions](./minions/)
 - [scales](./scales/)
 - [blinking-eyeballs](./blinking-eyeballs/)
+- [wet-and-sharp](./wet-and-sharp/)
 
 -----------------------------------------------
 
