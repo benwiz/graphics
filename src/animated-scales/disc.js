@@ -143,8 +143,21 @@ const evilEyeSpiral = (p5, disc) => {
     const y = p5.sin(angle) * scalar;
     const dist = Util.distance(x, y, 0, 0);
     const d = Util.scale(dist, 0, disc.diameter / 2, 1, 4);
-    const color = 50; // TODO: Set based on distance to center
-    p5.fill(color);
+
+    if (dist < disc.diameter / 4) {
+      // Pupil
+      p5.fill(0, 0, 0);
+    } else if (dist < disc.diameter / 2) {
+      // Light blue iris
+      p5.fill(175, 215, 245);
+    } else if (dist < (3 * disc.diameter) / 4) {
+      // White
+      p5.fill(255, 255, 255);
+    } else {
+      // Outer dark blue
+      p5.fill(20, 50, 180);
+    }
+
     p5.ellipse(x, y, d);
 
     const step = 0.1; // Util.scale(dist, 0, disc.diameter / 2, 0.1, 0.2);
