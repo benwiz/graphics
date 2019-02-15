@@ -1,5 +1,8 @@
 import * as Util from '../util';
 
+const MIN_DIAMETER = 30;
+const MAX_DIAMETER = 110;
+
 const constrainPadding = (p5, disc, percent) => {
   const xConstraint = percent * p5.width;
   const yConstraint = percent * p5.height;
@@ -27,9 +30,7 @@ export const create = (p5, x, y) => {
   // Determine a diameter based on distance to center
   const dist = Util.distance(disc.x, disc.y, 0, 0);
   const maxDist = p5.width / 2;
-  const minDiameter = 70;
-  const maxDiameter = 200;
-  const diameter = Util.scale(dist, maxDist, 0, minDiameter, maxDiameter);
+  const diameter = Util.scale(dist, maxDist, 0, MIN_DIAMETER, MAX_DIAMETER);
   disc.diameter = diameter;
 
   return disc;
@@ -134,22 +135,21 @@ const evilEyeSpiral = (p5, disc) => {
 
   // Draw the evil eye using points. The color of point is based on distance to center.
   p5.angleMode(p5.RADIANS);
-  const n = 300; // Number of points in the spiral
+  const n = Util.scale(disc.diameter, MIN_DIAMETER, MAX_DIAMETER, 100, 1000);
   let angle = 2.0;
   let scalar = 0.0;
-  const angleStep = 0.2;
-  const scalarStep = 0.1;
   for (let i = 0; i < n; i++) {
     const x = p5.cos(angle) * scalar;
     const y = p5.sin(angle) * scalar;
     const dist = Util.distance(x, y, 0, 0);
-    const d = Util.scale(dist, 0, 30, 1, 4);
+    const d = Util.scale(dist, 0, disc.diameter / 2, 1, 4);
     const color = 50; // TODO: Set based on distance to center
     p5.fill(color);
     p5.ellipse(x, y, d);
 
-    angle += angleStep;
-    scalar += scalarStep;
+    const step = 0.1; // Util.scale(dist, 0, disc.diameter / 2, 0.1, 0.2);
+    angle += 2 * step;
+    scalar += step;
   }
 
   p5.pop();
