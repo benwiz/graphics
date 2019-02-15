@@ -93,6 +93,10 @@ const evilEye = (p5, disc) => {
 };
 
 export const draw = (p5, disc) => {
+  p5.push();
+
   // concentricCirclesGrayscale(p5, disc);
   evilEye(p5, disc);
+
+  p5.pop();
 };
