@@ -1,3 +1,5 @@
+import * as Util from '../util';
+
 const GOLDEN_RATIO = 1 / 1.61803398875;
 
 //
@@ -75,7 +77,8 @@ const peaksAndReflections = (p5) => {
   p5.beginShape();
   for (let i = 0; i < peakPoints.length; i++) {
     const point = peakPoints[i];
-    p5.vertex(point.x, point.y);
+    const y = Util.scale(point.y, 0, maxHeight, 0, GOLDEN_RATIO * p5.height); // Mess around
+    p5.vertex(point.x, y);
   }
   p5.endShape();
 };
