@@ -116,7 +116,47 @@ const evilEye = (p5, disc) => {
   p5.pop();
 };
 
+// eslint-disable-next-line no-unused-vars
+const evilEyeSpiral = (p5, disc) => {
+  p5.push();
+
+  // Drawing configs
+  p5.colorMode(p5.RGB);
+  p5.strokeWeight(0);
+  p5.angleMode(p5.DEGREES);
+
+  // Translate to center of disc
+  p5.translate(disc.x, disc.y);
+
+  // Rotate based on frame count
+  const frameCount = p5.frameCount % 360;
+  p5.rotate(frameCount);
+
+  // Draw the evil eye using points. The color of point is based on distance to center.
+  p5.angleMode(p5.RADIANS);
+  const n = 300; // Number of points in the spiral
+  let angle = 2.0;
+  let scalar = 0.0;
+  const angleStep = 0.2;
+  const scalarStep = 0.1;
+  for (let i = 0; i < n; i++) {
+    const x = p5.cos(angle) * scalar;
+    const y = p5.sin(angle) * scalar;
+    const dist = Util.distance(x, y, 0, 0);
+    const d = Util.scale(dist, 0, 30, 1, 4);
+    const color = 50; // TODO: Set based on distance to center
+    p5.fill(color);
+    p5.ellipse(x, y, d);
+
+    angle += angleStep;
+    scalar += scalarStep;
+  }
+
+  p5.pop();
+};
+
 export const draw = (p5, disc) => {
   // concentricCirclesGrayscale(p5, disc);
-  evilEye(p5, disc);
+  // evilEye(p5, disc);
+  evilEyeSpiral(p5, disc);
 };
