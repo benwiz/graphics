@@ -40,6 +40,12 @@ Run the built html and js on a webserver
 npm run server SKETCH_NAME
 ```
 
+Build a gif from files inside the `~/Downloads/` folder. First agument is `sketch-name`, second argument is `output-filename` (without extension), third agument is `fps` for the gif.
+
+```sh
+npm run gif blinking-eyeballs 2 24
+```
+
 ## Things to remember
 
 - For a while, do my best to not create a custom template. Focus on the content... or maybe not.
