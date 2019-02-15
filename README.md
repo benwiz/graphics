@@ -58,12 +58,12 @@ npm run gif blinking-eyeballs 2 24
 
 ## To Do
 
+- animated-scales
+  - hypnotic evil eye
+  - wavy concentric circles
+
 - blinking-eyeballs
-  - Create a pause before the next blink
-  - Create a gif with a full screen of eyeballs (about 4000)
-    - Create an npm script for `../../node_modules/.bin/canvas-sketch-gif ~/Downloads/ output/2.gif --fps=24`
-  - look into using a shader then try using an already built fur shader
-  - try creating my own shader using GLSL
+  - Optimize the pause
 
 - wet-and-sharp
   - Look into more abstract reflections (check out out/cool-bug.png)
