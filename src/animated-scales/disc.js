@@ -24,13 +24,13 @@ export const create = (p5, x, y) => {
   // Return null says don't draw this disc
   if (doConstrain) return null;
 
-  // Determine a radius based on distance to center
+  // Determine a diameter based on distance to center
   const dist = Util.distance(disc.x, disc.y, 0, 0);
   const maxDist = p5.width / 2;
-  const minRadius = 20;
-  const maxRadius = 100;
-  const radius = Util.scale(dist, maxDist, 0, minRadius, maxRadius);
-  disc.radius = radius;
+  const minDiameter = 20;
+  const maxDiameter = 100;
+  const diameter = Util.scale(dist, maxDist, 0, minDiameter, maxDiameter);
+  disc.diameter = diameter;
 
   return disc;
 };
@@ -47,7 +47,7 @@ const concentricCirclesGrayscale = (p5, disc) => {
     } else {
       p5.fill(200);
     }
-    p5.ellipse(disc.x, disc.y, disc.radius * (i / n));
+    p5.ellipse(disc.x, disc.y, disc.diameter * (i / n));
   }
 };
 
@@ -83,11 +83,14 @@ const evilEye = (p5, disc) => {
       default:
         break;
     }
-    p5.ellipse(0, 0, disc.radius * (i / n));
+    const diameter = disc.diameter * (i / n);
+    p5.ellipse(0, 0, diameter);
 
     // If pupil draw a spiral (for now, a line)
     if (i === 1) {
-      // p5.line()
+      p5.stroke(255);
+      p5.strokeWeight(1);
+      p5.line(0, 0, diameter / 2, 0);
     }
   }
 };
