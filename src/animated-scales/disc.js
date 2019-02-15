@@ -97,7 +97,17 @@ const evilEye = (p5, disc) => {
     if (i === 1) {
       p5.stroke(255);
       p5.strokeWeight(1);
-      p5.line(0, 0, diameter / 2, 0);
+
+      let r = 0;
+      const rotations = 2;
+      const rStep = (0.5 * diameter) / (360 * rotations);
+      for (let a = 0; a < 360 * rotations; a++) {
+        const x = r * p5.cos(a);
+        const y = r * p5.sin(a);
+        p5.point(x, y);
+
+        r += rStep;
+      }
     }
   }
 
