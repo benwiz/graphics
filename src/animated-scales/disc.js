@@ -123,6 +123,7 @@ const evilEyeSpiral = (p5, disc) => {
 
   // Drawing configs
   p5.colorMode(p5.RGB);
+  p5.stroke(0);
   p5.strokeWeight(0);
   p5.angleMode(p5.DEGREES);
 
@@ -144,13 +145,14 @@ const evilEyeSpiral = (p5, disc) => {
     const dist = Util.distance(x, y, 0, 0);
     const d = Util.scale(dist, 0, disc.diameter / 2, 1, 4);
 
-    if (dist < disc.diameter / 4) {
+    p5.strokeWeight(0);
+    if (i < n / 4) {
       // Pupil
       p5.fill(0, 0, 0);
-    } else if (dist < disc.diameter / 2) {
+    } else if (i < n / 2) {
       // Light blue iris
       p5.fill(175, 215, 245);
-    } else if (dist < (3 * disc.diameter) / 4) {
+    } else if (i < (3 * n) / 4) {
       // White
       p5.fill(255, 255, 255);
     } else {
