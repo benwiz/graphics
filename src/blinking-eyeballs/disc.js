@@ -21,7 +21,7 @@ export const create = (p5, x, y) => {
     blinkPercent: p5.random(),
     blinkDirection: Util.randomElement([-1, 1]),
     blinkRate: Util.getRandomFloat(0, 0.04),
-    blinkCooldown: p5.random(100),
+    blinkCooldown: Util.getRandomInt(0, 100),
   };
 
   // Constrain by selected algorithm, return null if doConstrain is true
@@ -171,14 +171,25 @@ const catsEye = (p5, disc) => {
   );
   p5.endShape();
 
-  // Update the eyelid
-  disc.blinkPercent += disc.blinkRate * disc.blinkDirection;
-  if (disc.blinkPercent <= disc.blinkRate) {
-    disc.blinkDirection = 1;
-    disc.blinkPercent = disc.blinkRate;
-  } else if (disc.blinkPercent >= 1 - disc.blinkRate) {
-    disc.blinkDirection = -1;
-    disc.blinkPercent = 1 - disc.blinkRate;
+  // Update the eyelid blink
+  if (disc.blinkCooldown === 0) {
+    disc.blinkPercent += disc.blinkRate * disc.blinkDirection;
+    if (disc.blinkPercent <= disc.blinkRate) {
+      // Open -> Closed
+      disc.blinkDirection = 1;
+      disc.blinkPercent = disc.blinkRate;
+      disc.blinkCooldown = Util.getRandomInt(80, 100); // Full pause when open
+    } else if (disc.blinkPercent >= 1 - disc.blinkRate) {
+      // Closed -> Open
+      disc.blinkDirection = -1;
+      disc.blinkPercent = 1 - disc.blinkRate;
+      disc.blinkCooldown = Util.getRandomInt(1, 8); // Brief pause when closed
+    }
+  }
+
+  // Update the blink cooldown
+  if (disc.blinkCooldown > 0) {
+    disc.blinkCooldown -= 1;
   }
 };
 

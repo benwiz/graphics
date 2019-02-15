@@ -62,8 +62,12 @@ npm run server SKETCH_NAME
 - wet-and-sharp
   - Look into more abstract reflections (check out out/cool-bug.png)
 
+- Create a customized html template (don't start from scratch but copy an already built example)
+  - Needs dropdown or radio buttons to select between functions
+  - Maybe a refresh button
+  - Maybe a save button
+
 - Later
-  - Customize the HTML template... don't create it from scratch but use what exists as a starting point
   - Figure out if I can speed up the reloading
   - Contribute to canvas-sketch repo... maybe tackle a simple issue
 
