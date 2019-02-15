@@ -60,6 +60,7 @@ npm run gif blinking-eyeballs 2 24
 
 - animated-scales
   - hypnotic evil eye
+  - pointilism spiral hypnotic evil eye
   - wavy concentric circles
 
 - blinking-eyeballs

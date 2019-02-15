@@ -27,8 +27,8 @@ export const create = (p5, x, y) => {
   // Determine a diameter based on distance to center
   const dist = Util.distance(disc.x, disc.y, 0, 0);
   const maxDist = p5.width / 2;
-  const minDiameter = 20;
-  const maxDiameter = 100;
+  const minDiameter = 70;
+  const maxDiameter = 200;
   const diameter = Util.scale(dist, maxDist, 0, minDiameter, maxDiameter);
   disc.diameter = diameter;
 
@@ -58,14 +58,14 @@ const evilEye = (p5, disc) => {
   // Drawing configs
   p5.colorMode(p5.RGB);
   p5.strokeWeight(0);
+  p5.angleMode(p5.DEGREES);
 
   // Translate to center of disc
   p5.translate(disc.x, disc.y);
 
   // Rotate based on frame count
-  p5.angleMode(p5.DEGREES);
   const frameCount = p5.frameCount % 360;
-  p5.rotate(frameCount);
+  p5.rotate(frameCount * 8);
 
   // Draw the evil eye disc
   const n = 4;
@@ -97,6 +97,8 @@ const evilEye = (p5, disc) => {
     if (i === 1) {
       p5.stroke(255);
       p5.strokeWeight(1);
+
+      // p5.line(0, 0, diameter / 2, 0);
 
       let r = 0;
       const rotations = 2;
