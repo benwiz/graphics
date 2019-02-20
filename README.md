@@ -69,6 +69,10 @@ npm run gif blinking-eyeballs 2 24
 - wet-and-sharp
   - Look into more abstract reflections (check out out/cool-bug.png)
 
+- noisy-shapes
+  - rough.js implementation
+  - custom implementation
+
 - Create a customized html template (don't start from scratch but copy an already built example)
   - Needs dropdown or radio buttons to select between functions
   - Maybe a refresh button

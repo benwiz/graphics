@@ -36,6 +36,7 @@
     "canvas-sketch": "^0.2.0",
     "canvas-sketch-cli": "^1.2.0",
     "p5": "^0.7.2",
+    "roughjs": "^3.0.0",
     "three": "^0.100.0"
   }
 }
