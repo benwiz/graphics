@@ -193,19 +193,20 @@ const roughShapesMirror = (p5) => {
   });
 
   // Create and draw a few rects
-  const numRects = Util.getRandomInt(1, 3);
+  const numRects = Util.getRandomInt(1.2, 3);
   for (let i = 0; i < numRects; i++) {
     const rect = createRect(canvas);
 
     // Draw the left side
     const leftOptions = {
-      roughness: p5.randomGaussian(2.5),
+      roughness: Util.getRandomFloat(1, 2.5),
       stroke: 'black',
       fill: 'white',
     };
     canvas.rectangle(rect.x, rect.y, rect.w, rect.h, leftOptions);
 
     // Draw the right side
+    // TODO: Fix the x and y values since ellipses draw from center, unlike rectangles
     rect.x += 2 * (p5.width / 2 - (rect.x + rect.w / 2));
     const rightOptions = {
       roughness: leftOptions.roughness * 3,
@@ -222,7 +223,7 @@ const roughShapesMirror = (p5) => {
 
     // Draw the left side
     const leftOptions = {
-      roughness: p5.randomGaussian(2.5),
+      roughness: Util.getRandomFloat(1, 2.5),
       stroke: 'black',
       fill: 'white',
     };
@@ -239,9 +240,20 @@ const roughShapesMirror = (p5) => {
   }
 
   // Create and draw a few triangles
-  const numTriangles = Util.getRandomInt(1, 3);
+  const numTriangles = Util.getRandomInt(1.2, 3);
   for (let i = 0; i < numTriangles; i++) {
-    //
+    const triangle = createTriangle();
+
+    // Draw the left side
+    const leftOptions = {
+      roughness: Util.getRandomFloat(1, 2.5),
+      stroke: 'black',
+      fill: 'white',
+    };
+    canvas.polygon(triangle, leftOptions);
+
+    // TODO: Draw the right side
+    // this is slightly more complex (not much more)
   }
 };
 
