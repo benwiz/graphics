@@ -68,15 +68,7 @@ const noisyShapes = (p5) => {
 };
 
 const roughShapes = (p5) => {
-  // Set up rough.js canvas
-  const canvas = Rough.canvas(document.querySelector('canvas'));
-
-  // Set background color to be white
-  p5.background(255);
-
-  // Draw a few squares
-  const numSquares = 4;
-  for (let i = 0; i < numSquares; i++) {
+  const drawSquare = (canvas, side) => {
     // Set random location and size
     const minX = 0.1 * p5.width;
     const maxX = (0.8 * p5.width) / 2;
@@ -85,7 +77,7 @@ const roughShapes = (p5) => {
     const minW = 0.02 * p5.width;
     const maxW = 0.1 * p5.width;
 
-    const x = Util.getRandomFloat(minX, maxX);
+    let x = Util.getRandomFloat(minX, maxX);
     const y = Util.getRandomFloat(minY, maxY);
     const w = Util.getRandomFloat(minW, maxW);
     const h = w;
@@ -95,7 +87,27 @@ const roughShapes = (p5) => {
       stroke: 'black',
       fill: 'white',
     };
+
+    // Override some location and options if drawing on the right (black) side
+    if (side === 'right') {
+      x += p5.width / 2;
+      options.stroke = 'white';
+      options.fill = 'black';
+    }
+
     canvas.rectangle(x, y, w, h, options);
+  };
+
+  // Set up rough.js canvas
+  const canvas = Rough.canvas(document.querySelector('canvas'));
+
+  // Set background color to be white
+  p5.background(255);
+
+  // Draw a few squares
+  const numSquaresLeft = Util.getRandomInt(3, 5);
+  for (let i = 0; i < numSquaresLeft; i++) {
+    drawSquare(canvas, 'left');
   }
 
   // Make the right half black
@@ -107,6 +119,12 @@ const roughShapes = (p5) => {
     fillWeight: 3,
     hachureGap: 3,
   });
+
+  // Draw a few squares
+  const numSquaresRight = Util.getRandomInt(3, 5);
+  for (let i = 0; i < numSquaresRight; i++) {
+    drawSquare(canvas, 'right');
+  }
 };
 
 export const draw = (options) => {
