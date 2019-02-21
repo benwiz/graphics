@@ -130,7 +130,7 @@ const roughShapesRandom = (p5) => {
 };
 
 const roughShapesMirror = (p5) => {
-  const createRect = (canvas) => {
+  const createShape = () => {
     // Set random location and size
     const minX = 0.1 * p5.width;
     const maxX = (0.8 * p5.width) / 2;
@@ -138,13 +138,15 @@ const roughShapesMirror = (p5) => {
     const maxY = 0.8 * p5.height;
     const minW = 0.02 * p5.width;
     const maxW = 0.1 * p5.width;
+    const minH = minW;
+    const maxH = maxW;
 
     const x = Util.getRandomFloat(minX, maxX);
     const y = Util.getRandomFloat(minY, maxY);
     const w = Util.getRandomFloat(minW, maxW);
-    const h = w;
+    const h = Util.getRandomFloat(minH, maxH);
 
-    const rect = {
+    const shape = {
       x,
       y,
       w,
@@ -156,7 +158,7 @@ const roughShapesMirror = (p5) => {
       fill: 'white',
     };
 
-    return { rect, options };
+    return { shape, options };
   };
 
   // Set up rough.js canvas
@@ -178,17 +180,33 @@ const roughShapesMirror = (p5) => {
   // Create and draw a few rects
   const numRects = Util.getRandomInt(3, 5);
   for (let i = 0; i < numRects; i++) {
-    const { rect, options } = createRect(canvas);
+    const { shape, options } = createShape(canvas);
 
     // Draw the left side
-    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
+    canvas.rectangle(shape.x, shape.y, shape.w, shape.h, options);
 
     // Draw the right side
-    rect.x += 2 * (p5.width / 2 - (rect.x + rect.w / 2));
+    shape.x += 2 * (p5.width / 2 - (shape.x + shape.w / 2));
     options.roughness *= 3;
     options.stroke = 'white';
     options.fill = 'black';
-    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
+    canvas.rectangle(shape.x, shape.y, shape.w, shape.h, options);
+  }
+
+  // Create and draw a few ellipses
+  const numEllipses = Util.getRandomInt(1, 3);
+  for (let i = 0; i < numEllipses; i++) {
+    const { shape, options } = createShape(canvas);
+
+    // Draw the left side
+    canvas.ellipse(shape.x, shape.y, shape.w, shape.h, options);
+
+    // Draw the right side
+    shape.x += 2 * (p5.width / 2 - (shape.x + shape.w / 2));
+    options.roughness *= 3;
+    options.stroke = 'white';
+    options.fill = 'black';
+    canvas.ellipse(shape.x, shape.y, shape.w, shape.h, options);
   }
 };
 

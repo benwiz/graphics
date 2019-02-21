@@ -55,23 +55,28 @@ npm run gif blinking-eyeballs 2 24
 
 - Balloons (or hot air balloons) rising
   - Use a physics engine (matter.js?) to make them pop. I think they'll need to be made up of lines or particles to pop correctly... probably just lines will do fine.
+- Make tetris using rough.js... this should probably be its own repo. Maybe it should use TypeScript or ClojureScript.
 
 ## To Do
+
+- noisy-shapes
+  - rough.js implementation
+    - Once `roughShapesMirror()` is mostly done, copy it and make `roughShapesMirrorTetris()` using tetris shapes. It could be animated.
+    - Consider a sketch where there is a box. Inside the box use high roughness, outside use low roughness. Representing chaotic inside and calm outside.
+    - Consider an animation because the roughness is a sort of randomness
+  - custom implementation
+
+- wet-and-sharp
+  - Look into more abstract reflections (check out out/cool-bug.png)
+
+- blinking-eyeballs
+  - Optimize the pause
 
 - animated-scales
   - hypnotic evil eye
   - pointilism spiral hypnotic evil eye
   - wavy concentric circles
-
-- blinking-eyeballs
-  - Optimize the pause
-
-- wet-and-sharp
-  - Look into more abstract reflections (check out out/cool-bug.png)
-
-- noisy-shapes
-  - rough.js implementation
-  - custom implementation
+    - Consider using rough.js?
 
 - Create a customized html template (don't start from scratch but copy an already built example)
   - Needs dropdown or radio buttons to select between functions
