@@ -131,7 +131,6 @@ const roughShapesRandom = (p5) => {
 
 const roughShapesMirror = (p5) => {
   const createRect = () => {
-    // Set random location and size
     const minX = 0.1 * p5.width;
     const maxX = (0.8 * p5.width) / 2;
     const minY = 0.1 * p5.height;
@@ -152,19 +151,29 @@ const roughShapesMirror = (p5) => {
       w,
       h,
     };
-    const options = {
-      roughness: p5.randomGaussian(2.5),
-      stroke: 'black',
-      fill: 'white',
-    };
 
-    return { rect, options };
+    return rect;
   };
 
-  const createEllipse = () => {
-    const { rect, options } = createRect();
-    const ellipse = rect;
-    return { ellipse, options };
+  const createEllipse = () => createRect();
+
+  const createTriangle = () => {
+    const minX = 0.1 * p5.width;
+    const maxX = (0.8 * p5.width) / 2;
+    const minY = 0.1 * p5.height;
+    const maxY = 0.8 * p5.height;
+    const minW = 0.02 * p5.width;
+    const maxW = 0.1 * p5.width;
+    const minH = minW;
+    const maxH = maxW;
+
+    const x = Util.getRandomFloat(minX, maxX);
+    const y = Util.getRandomFloat(minY, maxY);
+    const w = Util.getRandomFloat(minW, maxW);
+    const h = Util.getRandomFloat(minH, maxH);
+
+    const triangle = [[x, y], [x + w / 2, y + h], [x - w / 2, y + h]];
+    return triangle;
   };
 
   // Set up rough.js canvas
@@ -184,35 +193,55 @@ const roughShapesMirror = (p5) => {
   });
 
   // Create and draw a few rects
-  const numRects = Util.getRandomInt(3, 5);
+  const numRects = Util.getRandomInt(1, 3);
   for (let i = 0; i < numRects; i++) {
-    const { rect, options } = createRect(canvas);
+    const rect = createRect(canvas);
 
     // Draw the left side
-    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
+    const leftOptions = {
+      roughness: p5.randomGaussian(2.5),
+      stroke: 'black',
+      fill: 'white',
+    };
+    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, leftOptions);
 
     // Draw the right side
     rect.x += 2 * (p5.width / 2 - (rect.x + rect.w / 2));
-    options.roughness *= 3;
-    options.stroke = 'white';
-    options.fill = 'black';
-    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
+    const rightOptions = {
+      roughness: leftOptions.roughness * 3,
+      stroke: 'white',
+      fill: 'black',
+    };
+    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, rightOptions);
   }
 
   // Create and draw a few ellipses
   const numEllipses = Util.getRandomInt(1, 3);
   for (let i = 0; i < numEllipses; i++) {
-    const { ellipse, options } = createEllipse(canvas);
+    const ellipse = createEllipse();
 
     // Draw the left side
-    canvas.ellipse(ellipse.x, ellipse.y, ellipse.w, ellipse.h, options);
+    const leftOptions = {
+      roughness: p5.randomGaussian(2.5),
+      stroke: 'black',
+      fill: 'white',
+    };
+    canvas.ellipse(ellipse.x, ellipse.y, ellipse.w, ellipse.h, leftOptions);
 
     // Draw the right side
     ellipse.x += 2 * (p5.width / 2 - (ellipse.x + ellipse.w / 2));
-    options.roughness *= 3;
-    options.stroke = 'white';
-    options.fill = 'black';
-    canvas.ellipse(ellipse.x, ellipse.y, ellipse.w, ellipse.h, options);
+    const rightOptions = {
+      roughness: leftOptions.roughness * 3,
+      stroke: 'white',
+      fill: 'black',
+    };
+    canvas.ellipse(ellipse.x, ellipse.y, ellipse.w, ellipse.h, rightOptions);
+  }
+
+  // Create and draw a few triangles
+  const numTriangles = Util.getRandomInt(1, 3);
+  for (let i = 0; i < numTriangles; i++) {
+    //
   }
 };
 
