@@ -67,15 +67,46 @@ const noisyShapes = (p5) => {
   p5.rect(p5.width / 2, 0, p5.width / 2, p5.height);
 };
 
-const roughShapes = () => {
-  console.log(Rough);
+const roughShapes = (p5) => {
+  // Set up rough.js canvas
   const canvas = Rough.canvas(document.querySelector('canvas'));
-  canvas.rectangle(140, 10, 100, 100, { roughness: 2.8, fill: 'red' });
+
+  // Set background color to be white
+  p5.background(255);
+
+  // Draw a few squares
+  const numSquares = 4;
+  for (let i = 0; i < numSquares; i++) {
+    // Set random location and size
+    const minX = 0.1 * p5.width;
+    const maxX = (0.8 * p5.width) / 2;
+    const minY = 0.1 * p5.height;
+    const maxY = 0.8 * p5.height;
+    const minW = 0.02 * p5.width;
+    const maxW = 0.1 * p5.width;
+
+    const x = Util.getRandomFloat(minX, maxX);
+    const y = Util.getRandomFloat(minY, maxY);
+    const w = Util.getRandomFloat(minW, maxW);
+    const h = w;
+
+    canvas.rectangle(x, y, w, h, { roughness: 3.0, stroke: 'black', fill: 'white' });
+  }
+
+  // Make the right half black
+  canvas.rectangle(p5.width / 2, 0, p5.width / 2, p5.height, {
+    roughness: 1.0,
+    strokeWidth: 1,
+    fill: 'black',
+    fillStyle: 'solid', // 'hachure',
+    fillWeight: 3,
+    hachureGap: 3,
+  });
 };
 
 export const draw = (options) => {
   const { p5 } = options;
 
   // noisyShapes(p5);
-  roughShapes();
+  roughShapes(p5);
 };
