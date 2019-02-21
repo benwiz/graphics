@@ -113,7 +113,7 @@ const createBalls = (width, height) => {
   return balls;
 };
 
-const createBodies = (balls) => {
+const createBallBodies = (balls) => {
   const bodies = [];
   for (let i = 0; i < balls.length; i++) {
     const ball = balls[i];
@@ -125,18 +125,39 @@ const createBodies = (balls) => {
   return bodies;
 };
 
-const setupMatter = (balls) => {
+const createWallBodies = (width, height) => {
+  const bodies = [
+    // Top
+    Matter.Bodies.rectangle(width / 2, -50, width, 100, { isStatic: true }),
+    // Bottom
+    Matter.Bodies.rectangle(width / 2, height + 50, width, 100, { isStatic: true }),
+    // Left
+    Matter.Bodies.rectangle(-50, height / 2, 100, height, { isStatic: true }),
+    // Right
+    Matter.Bodies.rectangle(width + 50, height / 2, 100, height, { isStatic: true }),
+  ];
+  return bodies;
+};
+
+const setupMatter = (balls, width, height) => {
   // Create a Matter engine
   const engine = Matter.Engine.create();
 
+  // Shut off gravity
+  // engine.world.gravity.y = 0;
+
   // Create and add balls to the world
-  const bodies = createBodies(balls);
-  Matter.World.add(engine.world, bodies);
+  const ballBodies = createBallBodies(balls);
+  Matter.World.add(engine.world, ballBodies);
+
+  // Create and add walls to the world
+  const wallBodies = createWallBodies(width, height);
+  Matter.World.add(engine.world, wallBodies);
 
   // Run the Matter engine
   Matter.Engine.run(engine);
 
-  return bodies;
+  return ballBodies;
 };
 
 export const setup = (_options) => {
@@ -148,7 +169,7 @@ export const setup = (_options) => {
   BALLS = createBalls(width, height);
 
   // Set up matter.js
-  const bodies = setupMatter(BALLS);
+  const bodies = setupMatter(BALLS, width, height);
 
   // Add bodies to balls
   for (let i = 0; i < BALLS.length; i++) {
