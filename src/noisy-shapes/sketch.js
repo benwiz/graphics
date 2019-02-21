@@ -206,7 +206,6 @@ const roughShapesMirror = (p5) => {
     canvas.rectangle(rect.x, rect.y, rect.w, rect.h, leftOptions);
 
     // Draw the right side
-    // TODO: Fix the x and y values since ellipses draw from center, unlike rectangles
     rect.x += 2 * (p5.width / 2 - (rect.x + rect.w / 2));
     const rightOptions = {
       roughness: leftOptions.roughness * 3,
@@ -230,7 +229,7 @@ const roughShapesMirror = (p5) => {
     canvas.ellipse(ellipse.x, ellipse.y, ellipse.w, ellipse.h, leftOptions);
 
     // Draw the right side
-    ellipse.x += 2 * (p5.width / 2 - (ellipse.x + ellipse.w / 2));
+    ellipse.x += 2 * (p5.width / 2 - ellipse.x);
     const rightOptions = {
       roughness: leftOptions.roughness * 3,
       stroke: 'white',
@@ -252,8 +251,16 @@ const roughShapesMirror = (p5) => {
     };
     canvas.polygon(triangle, leftOptions);
 
-    // TODO: Draw the right side
-    // this is slightly more complex (not much more)
+    // Draw the right side
+    triangle[0][0] += 2 * (p5.width / 2 - triangle[0][0]);
+    triangle[1][0] += 2 * (p5.width / 2 - triangle[1][0]);
+    triangle[2][0] += 2 * (p5.width / 2 - triangle[2][0]);
+    const rightOptions = {
+      roughness: leftOptions.roughness * 3,
+      stroke: 'white',
+      fill: 'black',
+    };
+    canvas.polygon(triangle, rightOptions);
   }
 };
 
