@@ -13,6 +13,7 @@ export const setup = (_options) => {};
 // All drawing functions below here
 //
 
+// eslint-disable-next-line no-unused-vars
 const noisyShapes = (p5) => {
   // Set background color to be white
   p5.background(255);
@@ -69,35 +70,52 @@ const noisyShapes = (p5) => {
   p5.rect(p5.width / 2, 0, p5.width / 2, p5.height);
 };
 
+// eslint-disable-next-line no-unused-vars
 const roughShapesRandom = (p5) => {
-  const drawSquare = (canvas, side) => {
-    // Set random location and size
+  const createRect = () => {
     const minX = 0.1 * p5.width;
     const maxX = (0.8 * p5.width) / 2;
     const minY = 0.1 * p5.height;
     const maxY = 0.8 * p5.height;
     const minW = 0.02 * p5.width;
     const maxW = 0.1 * p5.width;
+    const minH = minW;
+    const maxH = maxW;
 
-    let x = Util.getRandomFloat(minX, maxX);
+    const x = Util.getRandomFloat(minX, maxX);
     const y = Util.getRandomFloat(minY, maxY);
     const w = Util.getRandomFloat(minW, maxW);
-    const h = w;
+    const h = Util.getRandomFloat(minH, maxH);
 
-    const options = {
-      roughness: p5.randomGaussian(4.0),
-      stroke: 'black',
-      fill: 'white',
+    const rect = {
+      x,
+      y,
+      w,
+      h,
     };
 
-    // Override some location and options if drawing on the right (black) side
-    if (side === 'right') {
-      x += p5.width / 2;
-      options.stroke = 'white';
-      options.fill = 'black';
-    }
+    return rect;
+  };
 
-    canvas.rectangle(x, y, w, h, options);
+  const createEllipse = () => createRect();
+
+  const createTriangle = () => {
+    const minX = 0.1 * p5.width;
+    const maxX = (0.8 * p5.width) / 2;
+    const minY = 0.1 * p5.height;
+    const maxY = 0.8 * p5.height;
+    const minW = 0.02 * p5.width;
+    const maxW = 0.1 * p5.width;
+    const minH = minW;
+    const maxH = maxW;
+
+    const x = Util.getRandomFloat(minX, maxX);
+    const y = Util.getRandomFloat(minY, maxY);
+    const w = Util.getRandomFloat(minW, maxW);
+    const h = Util.getRandomFloat(minH, maxH);
+
+    const triangle = [[x, y], [x + w / 2, y + h], [x - w / 2, y + h]];
+    return triangle;
   };
 
   // Set up rough.js canvas
@@ -106,29 +124,95 @@ const roughShapesRandom = (p5) => {
   // Set background color to be white
   p5.background(255);
 
-  // Draw a few squares
-  const numSquaresLeft = Util.getRandomInt(3, 5);
-  for (let i = 0; i < numSquaresLeft; i++) {
-    drawSquare(canvas, 'left');
-  }
-
   // Make the right half black
   canvas.rectangle(p5.width / 2, 0, p5.width / 2, p5.height, {
-    roughness: 1.0,
-    strokeWidth: 1,
+    roughness: 0,
+    strokeWidth: 0,
     fill: 'black',
     fillStyle: 'solid', // 'hachure',
     fillWeight: 3,
     hachureGap: 3,
   });
 
-  // Draw a few squares
-  const numSquaresRight = Util.getRandomInt(3, 5);
-  for (let i = 0; i < numSquaresRight; i++) {
-    drawSquare(canvas, 'right');
+  // Create and draw a few rects on the left
+  const numRectsLeft = Util.getRandomInt(1.2, 3);
+  for (let i = 0; i < numRectsLeft; i++) {
+    const rect = createRect(canvas);
+    const options = {
+      roughness: Util.getRandomFloat(1, 2.25),
+      stroke: 'black',
+      fill: 'black',
+    };
+    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
+  }
+
+  // Create and draw a few rects on the right
+  const numRectsRight = Util.getRandomInt(1.2, 3);
+  for (let i = 0; i < numRectsRight; i++) {
+    const rect = createRect(canvas);
+    rect.x += p5.width / 2;
+    const options = {
+      roughness: Util.getRandomFloat(1, 2.25),
+      stroke: 'white',
+      fill: 'white',
+    };
+    canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
+  }
+
+  // Create and draw a few ellipses on the left
+  const numEllipsesLeft = Util.getRandomInt(1, 3);
+  for (let i = 0; i < numEllipsesLeft; i++) {
+    const ellipse = createEllipse();
+    const options = {
+      roughness: Util.getRandomFloat(1, 2.25),
+      stroke: 'black',
+      fill: 'black',
+    };
+    canvas.ellipse(ellipse.x, ellipse.y, ellipse.w, ellipse.h, options);
+  }
+
+  // Create and draw a few ellipses on the right
+  const numEllipsesRight = Util.getRandomInt(1, 3);
+  for (let i = 0; i < numEllipsesRight; i++) {
+    const ellipse = createEllipse();
+    ellipse.x += p5.width / 2;
+    const options = {
+      roughness: Util.getRandomFloat(1, 2.25),
+      stroke: 'white',
+      fill: 'white',
+    };
+    canvas.ellipse(ellipse.x, ellipse.y, ellipse.w, ellipse.h, options);
+  }
+
+  // Create and draw a few triangles on the left
+  const numTrianglesLeft = Util.getRandomInt(1.2, 3);
+  for (let i = 0; i < numTrianglesLeft; i++) {
+    const triangle = createTriangle();
+    const options = {
+      roughness: Util.getRandomFloat(1, 2.25),
+      stroke: 'black',
+      fill: 'black',
+    };
+    canvas.polygon(triangle, options);
+  }
+
+  // Create and draw a few triangles on the right
+  const numTrianglesRight = Util.getRandomInt(1.2, 3);
+  for (let i = 0; i < numTrianglesRight; i++) {
+    const triangle = createTriangle();
+    triangle[0][0] += p5.width / 2;
+    triangle[1][0] += p5.width / 2;
+    triangle[2][0] += p5.width / 2;
+    const options = {
+      roughness: Util.getRandomFloat(1, 2.25),
+      stroke: 'white',
+      fill: 'white',
+    };
+    canvas.polygon(triangle, options);
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 const roughShapesMirror = (p5) => {
   const createRect = () => {
     const minX = 0.1 * p5.width;
@@ -274,8 +358,8 @@ export const draw = (options) => {
 
   if (DO_DRAW) {
     // noisyShapes(p5);
-    // roughShapesRandom(p5);
-    roughShapesMirror(p5);
+    roughShapesRandom(p5);
+    // roughShapesMirror(p5);
 
     DO_DRAW = false;
   }
