@@ -144,7 +144,7 @@ const setupMatter = (balls, width, height) => {
   const engine = Matter.Engine.create();
 
   // Shut off gravity
-  // engine.world.gravity.y = 0;
+  engine.world.gravity.y = 0;
 
   // Create and add balls to the world
   const ballBodies = createBallBodies(balls);
