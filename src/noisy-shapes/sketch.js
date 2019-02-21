@@ -1,6 +1,8 @@
 import * as Rough from 'roughjs/dist/rough.umd';
 import * as Util from '../util';
 
+let DO_DRAW = true;
+
 //
 // All setup functions here
 //
@@ -193,7 +195,16 @@ const roughShapesMirror = (p5) => {
 export const draw = (options) => {
   const { p5 } = options;
 
-  // noisyShapes(p5);
-  // roughShapesRandom(p5);
-  roughShapesMirror(p5);
+  // If SPACE is pressed
+  if (p5.keyIsPressed && p5.keyCode === 32) {
+    DO_DRAW = true;
+  }
+
+  if (DO_DRAW) {
+    // noisyShapes(p5);
+    // roughShapesRandom(p5);
+    roughShapesMirror(p5);
+
+    DO_DRAW = false;
+  }
 };
