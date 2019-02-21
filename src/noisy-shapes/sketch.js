@@ -182,8 +182,8 @@ const roughShapesMirror = (p5) => {
     canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
 
     // Draw the right side
-    rect.x += p5.width / 2;
-    options.roughness *= 2;
+    rect.x += 2 * (p5.width / 2 - (rect.x + rect.w / 2));
+    options.roughness *= 3;
     options.stroke = 'white';
     options.fill = 'black';
     canvas.rectangle(rect.x, rect.y, rect.w, rect.h, options);
