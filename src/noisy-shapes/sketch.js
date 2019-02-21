@@ -199,7 +199,7 @@ const roughShapesMirror = (p5) => {
 
     // Draw the left side
     const leftOptions = {
-      roughness: Util.getRandomFloat(1, 2.5),
+      roughness: Util.getRandomFloat(1, 2.25),
       stroke: 'black',
       fill: 'white',
     };
@@ -223,7 +223,7 @@ const roughShapesMirror = (p5) => {
 
     // Draw the left side
     const leftOptions = {
-      roughness: Util.getRandomFloat(1, 2.5),
+      roughness: Util.getRandomFloat(1, 2.25),
       stroke: 'black',
       fill: 'white',
     };
@@ -246,7 +246,7 @@ const roughShapesMirror = (p5) => {
 
     // Draw the left side
     const leftOptions = {
-      roughness: Util.getRandomFloat(1, 2.5),
+      roughness: Util.getRandomFloat(1, 2.25),
       stroke: 'black',
       fill: 'white',
     };
