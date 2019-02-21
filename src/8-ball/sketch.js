@@ -24,6 +24,7 @@ const drawBackground = (canvas) => {
   const options = {
     roughness: 1.5,
     strokeWidth: 2.0,
+    stroke: 'saddlebrown',
     fill: 'green',
     fillStyle: 'hachure',
     fillWeight: 3,
