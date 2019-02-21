@@ -90,7 +90,12 @@ const roughShapes = (p5) => {
     const w = Util.getRandomFloat(minW, maxW);
     const h = w;
 
-    canvas.rectangle(x, y, w, h, { roughness: 3.0, stroke: 'black', fill: 'white' });
+    const options = {
+      roughness: p5.randomGaussian(4.0),
+      stroke: 'black',
+      fill: 'white',
+    };
+    canvas.rectangle(x, y, w, h, options);
   }
 
   // Make the right half black
