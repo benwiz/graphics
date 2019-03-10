@@ -59,6 +59,9 @@ npm run gif blinking-eyeballs 2 24
 
 ## To Do
 
+- gallery
+  - Create a simple gallery that displays all images in the gallery in an instagram like grid (this should be very simple). Ideally sort by image created date.
+
 - noisy-shapes
   - rough.js implementation
     - Once `roughShapesMirror()` is mostly done, copy it and make `roughShapesMirrorTetris()` using tetris shapes. It could be animated.
@@ -69,22 +72,13 @@ npm run gif blinking-eyeballs 2 24
 - wet-and-sharp
   - Look into more abstract reflections (check out out/cool-bug.png)
 
-- blinking-eyeballs
-  - Optimize the pause
-
-- animated-scales
-  - hypnotic evil eye
-  - pointilism spiral hypnotic evil eye
-  - wavy concentric circles
-    - Consider using rough.js?
-
 - Create a customized html template (don't start from scratch but copy an already built example)
   - Needs dropdown or radio buttons to select between functions
   - Maybe a refresh button
   - Maybe a save button
 
 - Later
-  - Figure out if I can speed up the reloading
+  - Figure out if I can speed up the reloading during development
   - Contribute to canvas-sketch repo... maybe tackle a simple issue
 
 - Frozen / stalled / lost interest
@@ -93,3 +87,10 @@ npm run gif blinking-eyeballs 2 24
     - Other noise based graphics or designs... not necessarily constrained to ellipses and circles
     - Maybe I can actually make rainbow fish by doing more advanced constraints
       - Maybe I could even take an edge drawing, use canny edge detection, and use the resulting edges as border constraints... or just a svg. Maybe its easiest to create a svg using Gimp.
+  - animated-scales
+    - hypnotic evil eye
+    - pointilism spiral hypnotic evil eye
+    - wavy concentric circles
+      - Consider using rough.js?
+  - blinking-eyeballs
+    - Optimize the pause

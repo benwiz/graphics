@@ -10,7 +10,7 @@
     "start": "run(){ canvas-sketch src/$1/index.js; } && run",
     "hot": "run(){ canvas-sketch src/$1/index.js --hot; } && run",
     "build": "run(){ canvas-sketch src/$1/index.js --build && mkdir -p docs/$1/ && mv index.* docs/$1/; } && run",
-    "server": "run(){ http-server src/$1/dist/; } && run",
+    "server": "run(){ http-server docs/$1/; } && run",
     "gif": "run(){ canvas-sketch-gif ~/Downloads/ src/$1/out/$2.gif --fps=$3; } && run",
     "gif-to-mp4": "run() { ffmpeg -i src/$1/out/$2.gif -movflags faststart -pix_fmt yuv420p -vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" src/$1/out/$2.mp4; } && run",
     "mp4": "run(){ canvas-sketch-mp4 ~/Downloads/ --fps=$1; } && run"
