@@ -59,8 +59,8 @@ npm run gif blinking-eyeballs 2 24
 
 ## To Do
 
-- gallery
-  - Create a simple gallery that displays all images in the gallery in an instagram like grid (this should be very simple). Ideally sort by image created date.
+- river-walk
+  - Create initial walk algorithm. Data should be randomly generated during preload. Later data can be manually gathered from spotify and read in from a json file.
 
 - noisy-shapes
   - rough.js implementation
