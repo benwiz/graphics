@@ -60,8 +60,7 @@ npm run gif blinking-eyeballs 2 24
 ## To Do
 
 - spotify-track-analysis-grid
-  - Get example track analysis data
-  - Use example track analysis data
+  - Rather than setting color and radius, set flags to say if is bar, if is section, etc.
   - Figure out padding around drawing
 
 - river-walk

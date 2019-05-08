@@ -1,5 +1,5 @@
 import * as Util from '../util';
-import * as TrackAnalysis from './data/tarlabasi.json';
+import * as TrackAnalysis from './data/bedroom.json';
 
 //
 // All setup functions here
@@ -112,42 +112,63 @@ const drawSegmentInGrid = (p5, width, height) => {
   const n = Math.ceil(Math.sqrt(TrackAnalysis.segments.length));
   const xStep = width / n;
   const yStep = height / n;
+  let currBarIndex = 0;
   let currSectionIndex = 0;
-  for (let l = 0; l < TrackAnalysis.segments.length; l++) {
-    const segment = TrackAnalysis.segments[l];
+  for (let i = 0; i < TrackAnalysis.segments.length; i++) {
+    const segment = TrackAnalysis.segments[i];
+
+    // Determine if this segment is the beginning of a bar. Do this by checking
+    // the current bar to see if its start timestamp falls within this segment.
+    const bar = TrackAnalysis.bars[currBarIndex];
+    let color;
+    if (bar.start >= segment.start && bar.start <= segment.start + segment.duration) {
+      color = 'red';
+      currBarIndex += 1;
+    } else {
+      color = 'black';
+    }
 
     // Determine which section the current segment falls into. Only search
     // current and future sections. Use start timestamp.
-    for (let k = currSectionIndex; k < TrackAnalysis.sections.length; k++) {
-      const section = TrackAnalysis.sections[k];
+    for (let j = currSectionIndex; j < TrackAnalysis.sections.length; j++) {
+      const section = TrackAnalysis.sections[j];
       const isThisSection =
         segment.start >= section.start && segment.start <= section.start + section.duration;
       if (isThisSection) {
-        if (k % 2) {
-          p5.fill(0);
+        if (j % 2) {
+          p5.stroke(color);
+          p5.fill(color);
         } else {
+          p5.stroke(color);
           p5.noFill();
         }
 
-        currSectionIndex = k;
+        currSectionIndex = j;
         break;
       }
     }
 
-    // Determine radius using loudness
+    // Determine radius using loudness/pitch
     const minRadius = 1;
     const maxRadius = Math.min(xStep, yStep);
+    // const radius = Util.scale(
+    //   segment.loudness_max,
+    //   loudnessRange.min,
+    //   loudnessRange.max,
+    //   minRadius,
+    //   maxRadius,
+    // );
     const radius = Util.scale(
-      segment.loudness_max,
-      loudnessRange.min,
-      loudnessRange.max,
+      segment.pitches.indexOf(Math.max(...segment.pitches)),
+      0,
+      11,
       minRadius,
       maxRadius,
     );
 
     // Draw ellipse at correct grid placement
-    const x = (l % n) * xStep + xStep / 2;
-    const y = Math.floor(l / n) * yStep + yStep / 2;
+    const x = (i % n) * xStep + xStep / 2;
+    const y = Math.floor(i / n) * yStep + yStep / 2;
     p5.push();
     p5.translate(x, y);
     p5.ellipse(0, 0, radius);
@@ -166,8 +187,7 @@ export const draw = (options) => {
   // // Draw using the location as the dictator of the drawing
   // drawLocationToTimestamp(p5, width, height);
 
-  // Draw each segment as a point in the grid
+  // Draw each segment as a point in the grid. I like this method better
+  // because it maps to something a human can make sense of.
   drawSegmentInGrid(p5, width, height);
-
-  // TODO: Draw using the timestamp from the data to dictate the location
 };
