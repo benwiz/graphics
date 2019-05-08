@@ -59,6 +59,11 @@ npm run gif blinking-eyeballs 2 24
 
 ## To Do
 
+- spotify-track-analysis-grid
+  - Get example track analysis data
+  - Use example track analysis data
+  - Figure out padding around drawing
+
 - river-walk
   - Create initial walk algorithm. Data should be randomly generated during preload. Later data can be manually gathered from spotify and read in from a json file.
 

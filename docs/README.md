@@ -13,6 +13,7 @@
 - [wet-and-sharp](./wet-and-sharp/)
 - [animated-scales](./animated-scales/)
 - [river-walk](./river-walk/)
+- [spotify-track-analysis-grid](./spotify-track-analysis-grid/)
 
 -----------------------------------------------
 
