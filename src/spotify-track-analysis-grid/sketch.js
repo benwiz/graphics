@@ -22,7 +22,7 @@ export const draw = (options) => {
   const nTotal = 250;
   const n = Math.ceil(Math.sqrt(nTotal));
   const xStep = width / n;
-  const yStep = width / n;
+  const yStep = height / n;
   let count = 0;
   for (let j = 0; j < n; j++) {
     for (let i = 0; i < n; i++) {
