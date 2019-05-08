@@ -28,6 +28,7 @@ const getLoudnessRange = (segments) => {
   return { min: minLoudness, max: maxLoudness };
 };
 
+// eslint-disable-next-line no-unused-vars
 const drawLocationToTimestamp = (p5, width, height) => {
   // Get loudness range
   const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
@@ -65,7 +66,7 @@ const drawLocationToTimestamp = (p5, width, height) => {
         }
       }
 
-      // Determien which segment the current timestamp falls into. Only search
+      // Determine which segment the current timestamp falls into. Only search
       // current and future segments. Right now, this is used to set the
       // ellipse's radius.
       const minRadius = 1;
@@ -102,6 +103,58 @@ const drawLocationToTimestamp = (p5, width, height) => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
+const drawSegmentInGrid = (p5, width, height) => {
+  // Get loudness range
+  const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
+
+  // Draw n ellipses in a grid pattern using translate
+  const n = Math.ceil(Math.sqrt(TrackAnalysis.segments.length));
+  const xStep = width / n;
+  const yStep = height / n;
+  let currSectionIndex = 0;
+  for (let l = 0; l < TrackAnalysis.segments.length; l++) {
+    const segment = TrackAnalysis.segments[l];
+
+    // Determine which section the current segment falls into. Only search
+    // current and future sections. Use start timestamp.
+    for (let k = currSectionIndex; k < TrackAnalysis.sections.length; k++) {
+      const section = TrackAnalysis.sections[k];
+      const isThisSection =
+        segment.start >= section.start && segment.start <= section.start + section.duration;
+      if (isThisSection) {
+        if (k % 2) {
+          p5.fill(0);
+        } else {
+          p5.noFill();
+        }
+
+        currSectionIndex = k;
+        break;
+      }
+    }
+
+    // Determine radius using loudness
+    const minRadius = 1;
+    const maxRadius = Math.min(xStep, yStep);
+    const radius = Util.scale(
+      segment.loudness_max,
+      loudnessRange.min,
+      loudnessRange.max,
+      minRadius,
+      maxRadius,
+    );
+
+    // Draw ellipse at correct grid placement
+    const x = (l % n) * xStep + xStep / 2;
+    const y = Math.floor(l / n) * yStep + yStep / 2;
+    p5.push();
+    p5.translate(x, y);
+    p5.ellipse(0, 0, radius);
+    p5.pop();
+  }
+};
+
 export const draw = (options) => {
   const { p5, width, height } = options;
 
@@ -110,9 +163,11 @@ export const draw = (options) => {
   p5.stroke(0);
   p5.fill(0);
 
-  // Draw using the location as the dictator of the drawing
-  drawLocationToTimestamp(p5, width, height);
+  // // Draw using the location as the dictator of the drawing
+  // drawLocationToTimestamp(p5, width, height);
+
+  // Draw each segment as a point in the grid
+  drawSegmentInGrid(p5, width, height);
 
   // TODO: Draw using the timestamp from the data to dictate the location
-  // TODO: Draw using the timestamp from the data but lock into grid locations
 };
