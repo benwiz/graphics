@@ -12,6 +12,7 @@
 - [blinking-eyeballs](./blinking-eyeballs/)
 - [wet-and-sharp](./wet-and-sharp/)
 - [animated-scales](./animated-scales/)
+- [river-walk](./river-walk/)
 
 -----------------------------------------------
 
