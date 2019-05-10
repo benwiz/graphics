@@ -25,7 +25,7 @@ const getLoudnessRange = (segments) => {
 const findBarForTimeInterval = (timeInterval) => {
   for (let i = 0; i < TrackAnalysis.bars.length; i++) {
     const bar = TrackAnalysis.bars[i];
-    if (timeInterval.start === bar.start) {
+    if (timeInterval.start >= bar.start && timeInterval.start <= bar.start + bar.duration) {
       return i;
     }
   }
@@ -33,7 +33,8 @@ const findBarForTimeInterval = (timeInterval) => {
 };
 
 const isFirstBeatOfBar = (beat, bar) => {
-  //
+  if (!bar) return false;
+  return beat.start === bar.start;
 };
 
 const findSegmentForTimeInterval = (timeInterval) => {
@@ -58,7 +59,6 @@ const organizeAnalysisByBeat = () => {
     beat.sectionIndex = sectionIndex;
   });
 
-  console.log('----');
   console.log(
     TrackAnalysis.beats[0],
     TrackAnalysis.beats[1],
