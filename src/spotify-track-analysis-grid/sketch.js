@@ -164,80 +164,16 @@ const drawLocationToTimestamp = (p5, width, height) => {
   }
 };
 
-// eslint-disable-next-line no-unused-vars
-const drawSegmentInGrid = (p5, width, height) => {
-  // Get loudness range
+const drawCircle = (p5, width, height, i, n, beat) => {
+  p5.rectMode(p5.CENTER);
+
+  // Get segment and section
+  const segment = TrackAnalysis.segments[beat.segmentIndex];
+  const section = TrackAnalysis.sections[beat.sectionIndex];
+
+  // Calculate loudness range
   const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
 
-  // Draw n ellipses in a grid pattern using translate
-  const n = Math.ceil(Math.sqrt(TrackAnalysis.segments.length));
-  const xStep = width / n;
-  const yStep = height / n;
-  let currBarIndex = 0;
-  let currSectionIndex = 0;
-  for (let i = 0; i < TrackAnalysis.segments.length; i++) {
-    const segment = TrackAnalysis.segments[i];
-
-    // Determine if this segment is the beginning of a bar. Do this by checking
-    // the current bar to see if its start timestamp falls within this segment.
-    const bar = TrackAnalysis.bars[currBarIndex];
-    let color;
-    if (bar.start >= segment.start && bar.start <= segment.start + segment.duration) {
-      color = 'red';
-      currBarIndex += 1;
-    } else {
-      color = 'black';
-    }
-
-    // Determine which section the current segment falls into. Only search
-    // current and future sections. Use start timestamp.
-    for (let j = currSectionIndex; j < TrackAnalysis.sections.length; j++) {
-      const section = TrackAnalysis.sections[j];
-      const isThisSection =
-        segment.start >= section.start && segment.start <= section.start + section.duration;
-      if (isThisSection) {
-        if (j % 2) {
-          p5.stroke(color);
-          p5.fill(color);
-        } else {
-          p5.stroke(color);
-          p5.noFill();
-        }
-
-        currSectionIndex = j;
-        break;
-      }
-    }
-
-    // Determine radius using loudness/pitch
-    const minRadius = 1;
-    const maxRadius = Math.min(xStep, yStep);
-    // const radius = Util.scale(
-    //   segment.loudness_max,
-    //   loudnessRange.min,
-    //   loudnessRange.max,
-    //   minRadius,
-    //   maxRadius,
-    // );
-    const radius = Util.scale(
-      segment.pitches.indexOf(Math.max(...segment.pitches)),
-      0,
-      11,
-      minRadius,
-      maxRadius,
-    );
-
-    // Draw ellipse at correct grid placement
-    const x = (i % n) * xStep + xStep / 2;
-    const y = Math.floor(i / n) * yStep + yStep / 2;
-    p5.push();
-    p5.translate(x, y);
-    p5.ellipse(0, 0, radius);
-    p5.pop();
-  }
-};
-
-const drawCircle = (p5, width, height, i, n, beat) => {
   // Calculate position
   const xStep = width / n;
   const yStep = height / n;
@@ -246,16 +182,40 @@ const drawCircle = (p5, width, height, i, n, beat) => {
 
   // Determine colors
   const color = beat.isFirstBeat ? 'red' : 'black';
-  p5.stroke(color);
-  p5.fill(color);
+  if (beat.sectionIndex % 2) {
+    p5.stroke(color);
+    p5.fill(color);
+  } else {
+    p5.stroke(color);
+    p5.noFill();
+  }
 
   // Determine radius
-  const radius = 10;
+  const minRadius = 1;
+  const maxRadius = Math.min(xStep, yStep);
+  // const radius = Util.scale(
+  //   segment.loudness_max,
+  //   loudnessRange.min,
+  //   loudnessRange.max,
+  //   minRadius,
+  //   maxRadius,
+  // );
+  const radius = Util.scale(
+    segment.pitches.indexOf(Math.max(...segment.pitches)),
+    11,
+    0,
+    minRadius,
+    maxRadius,
+  );
 
   // The actual translating and drawing
   p5.push();
   p5.translate(x, y);
-  p5.ellipse(0, 0, radius);
+  if (section.key === 1) {
+    p5.rect(0, 0, radius, radius);
+  } else {
+    p5.ellipse(0, 0, radius);
+  }
   p5.pop();
 };
 

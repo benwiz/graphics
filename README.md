@@ -60,10 +60,10 @@ npm run gif blinking-eyeballs 2 24
 ## To Do
 
 - spotify-track-analysis-grid
-  - Rather than setting color and radius, set flags to say if is bar, if is section, etc.
-  - Set up global configs for radius, colors, and whatever else
-  - Generalize the grid block drawing method
+  - Make it draw along with the song
   - Figure out padding around drawing
+  - Ideas:
+    - Use the pitch to select a shape or color and timbre to tweak it
 
 - river-walk
   - Create initial walk algorithm. Data should be randomly generated during preload. Later data can be manually gathered from spotify and read in from a json file.
