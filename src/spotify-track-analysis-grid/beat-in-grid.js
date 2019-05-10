@@ -103,7 +103,6 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
     maxRadius,
     true,
   );
-  console.log(radius2);
 
   // The actual translating and drawing
   p5.push();
