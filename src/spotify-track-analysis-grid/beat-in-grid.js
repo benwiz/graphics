@@ -30,10 +30,39 @@ const getLoudnessRange = (segments) => {
   return { min: minLoudness, max: maxLoudness };
 };
 
+const getDurationRange = (timeIntervals) => {
+  const durations = timeIntervals.map(timeInterval => timeInterval.loudness_max);
+  const stdev = ComputeStdev.default(durations);
+  const mean = Util.getMean(durations);
+
+  let minDuration = Infinity;
+  let maxDuration = -Infinity;
+  for (let i = 0; i < timeIntervals.length; i++) {
+    const timeInterval = timeIntervals[i];
+    const { duration } = timeInterval;
+
+    // If duration is greater than 2*stdev away, skip this iteration
+    const dist = Math.abs(duration - mean);
+    if (dist > 2 * stdev) {
+      continue;
+    }
+
+    // Update min and max
+    if (duration < minDuration) {
+      minDuration = duration;
+    }
+    if (duration > maxDuration) {
+      maxDuration = duration;
+    }
+  }
+
+  return { min: minDuration, max: maxDuration };
+};
+
 const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
   // Get segment and section
   const segment = TrackAnalysis.segments[beat.segmentIndex];
-  const section = TrackAnalysis.sections[beat.sectionIndex];
+  // const section = TrackAnalysis.sections[beat.sectionIndex];
 
   // Calculate position
   const xStep = width / n;
@@ -51,13 +80,14 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
     p5.noFill();
   }
 
-  // Calculate loudness range
+  // Calculate ranges for loudness and segment duration
   const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
+  const segmentDurationRange = getDurationRange(TrackAnalysis.segments);
 
-  // Determine radius
-  const minRadius = 1;
+  // Determine radii
+  const minRadius = 10;
   const maxRadius = Math.min(xStep, yStep);
-  const radius = p5.map(
+  const radius1 = p5.map(
     segment.loudness_max,
     loudnessRange.min,
     loudnessRange.max,
@@ -65,11 +95,20 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
     maxRadius,
     true,
   );
+  const radius2 = p5.map(
+    segment.duration,
+    segmentDurationRange.min,
+    segmentDurationRange.max,
+    minRadius,
+    maxRadius,
+    true,
+  );
+  console.log(radius2);
 
   // The actual translating and drawing
   p5.push();
   p5.translate(x, y);
-  p5.ellipse(0, 0, radius);
+  p5.ellipse(0, 0, radius2, radius1);
   p5.pop();
 };
 
