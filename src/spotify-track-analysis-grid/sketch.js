@@ -234,11 +234,22 @@ const drawSegmentInGrid = (p5, width, height) => {
   }
 };
 
-const drawCircle = (p5, width, height, i, n, radius) => {
+const drawCircle = (p5, width, height, i, n, beat) => {
+  // Calculate position
   const xStep = width / n;
   const yStep = height / n;
   const x = (i % n) * xStep + xStep / 2;
   const y = Math.floor(i / n) * yStep + yStep / 2;
+
+  // Determine colors
+  const color = beat.isFirstBeat ? 'red' : 'black';
+  p5.stroke(color);
+  p5.fill(color);
+
+  // Determine radius
+  const radius = 10;
+
+  // The actual translating and drawing
   p5.push();
   p5.translate(x, y);
   p5.ellipse(0, 0, radius);
@@ -249,7 +260,7 @@ const drawCircle = (p5, width, height, i, n, radius) => {
 const drawBeatInGrid = (p5, width, height) => {
   const n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length));
   TrackAnalysis.beats.forEach((beat, beatIndex) => {
-    drawCircle(p5, width, height, beatIndex, n, 10);
+    drawCircle(p5, width, height, beatIndex, n, beat);
   });
 };
 
