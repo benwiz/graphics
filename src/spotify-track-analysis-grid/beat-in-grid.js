@@ -73,8 +73,18 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
 };
 
 export const draw = (p5, width, height, TrackAnalysis) => {
+  // Translate and scale for padding
+  p5.push();
+  const scale = 0.85;
+  p5.translate(((1 - scale) / 2) * width, ((1 - scale) / 2) * height);
+  p5.scale(scale);
+
+  // Run drawing function for each beat
   const n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length));
   TrackAnalysis.beats.forEach((beat, beatIndex) => {
     drawCircle(p5, width, height, beatIndex, n, beat, TrackAnalysis);
   });
+
+  // Pop the padding matrix
+  p5.pop();
 };

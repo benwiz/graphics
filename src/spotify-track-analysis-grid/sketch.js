@@ -84,6 +84,4 @@ export const draw = (options) => {
   if (TrackAnalysis) {
     BeatInGrid.draw(p5, width, height, TrackAnalysis);
   }
-
-  p5.scale(0.5);
 };
