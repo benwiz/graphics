@@ -76,8 +76,6 @@ const organizeAnalysisByBeat = () => {
     beat.segmentIndex = segmentIndex;
     beat.sectionIndex = sectionIndex;
   });
-
-  console.log(TrackAnalysis.beats[5]);
 };
 
 export const setup = (_options) => {
@@ -236,9 +234,23 @@ const drawSegmentInGrid = (p5, width, height) => {
   }
 };
 
+const drawCircle = (p5, width, height, i, n, radius) => {
+  const xStep = width / n;
+  const yStep = height / n;
+  const x = (i % n) * xStep + xStep / 2;
+  const y = Math.floor(i / n) * yStep + yStep / 2;
+  p5.push();
+  p5.translate(x, y);
+  p5.ellipse(0, 0, radius);
+  p5.pop();
+};
+
 // eslint-disable-next-line no-unused-vars
 const drawBeatInGrid = (p5, width, height) => {
-  // Use these properties to draw the visual using a specialized drawing function
+  const n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length));
+  TrackAnalysis.beats.forEach((beat, beatIndex) => {
+    drawCircle(p5, width, height, beatIndex, n, 10);
+  });
 };
 
 export const draw = (options) => {
@@ -255,7 +267,6 @@ export const draw = (options) => {
   // // Draw each segment as a point in the grid
   // drawSegmentInGrid(p5, width, height);
 
-  // Draw each beat as a point in the grid. This is the best so far because it
-  // locks in how people hear with a rigid viewing system.
+  // Draw each beat as a point in the grid
   drawBeatInGrid(p5, width, height);
 };
