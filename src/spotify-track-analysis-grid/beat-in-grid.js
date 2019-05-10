@@ -1,11 +1,24 @@
 import * as Util from '../util';
+import * as ComputeStdev from 'compute-stdev';
 
 const getLoudnessRange = (segments) => {
+  const loudnesses = segments.map(segment => segment.loudness_max);
+  const stdev = ComputeStdev.default(loudnesses);
+  const mean = Util.getMean(loudnesses);
+
   let minLoudness = Infinity;
   let maxLoudness = -Infinity;
   for (let i = 0; i < segments.length; i++) {
     const segment = segments[i];
     const loudness = segment.loudness_max;
+
+    // If loudness is greater than 2*stdev away, skip this iteration
+    const dist = Math.abs(loudness - mean);
+    if (dist > 2 * stdev) {
+      continue;
+    }
+
+    // Update min and max
     if (loudness < minLoudness) {
       minLoudness = loudness;
     }
@@ -18,14 +31,9 @@ const getLoudnessRange = (segments) => {
 };
 
 const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
-  p5.rectMode(p5.CENTER);
-
   // Get segment and section
   const segment = TrackAnalysis.segments[beat.segmentIndex];
   const section = TrackAnalysis.sections[beat.sectionIndex];
-
-  // Calculate loudness range
-  const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
 
   // Calculate position
   const xStep = width / n;
@@ -43,32 +51,25 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
     p5.noFill();
   }
 
+  // Calculate loudness range
+  const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
+
   // Determine radius
   const minRadius = 1;
   const maxRadius = Math.min(xStep, yStep);
-  // const radius = Util.scale(
-  //   segment.loudness_max,
-  //   loudnessRange.min,
-  //   loudnessRange.max,
-  //   minRadius,
-  //   maxRadius,
-  // );
-  const radius = Util.scale(
-    segment.pitches.indexOf(Math.max(...segment.pitches)),
-    11,
-    0,
+  const radius = p5.map(
+    segment.loudness_max,
+    loudnessRange.min,
+    loudnessRange.max,
     minRadius,
     maxRadius,
+    true,
   );
 
   // The actual translating and drawing
   p5.push();
   p5.translate(x, y);
-  if (section.key === 1) {
-    p5.rect(0, 0, radius, radius);
-  } else {
-    p5.ellipse(0, 0, radius);
-  }
+  p5.ellipse(0, 0, radius);
   p5.pop();
 };
 
