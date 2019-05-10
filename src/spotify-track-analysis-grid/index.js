@@ -10,7 +10,7 @@ const preload = (_p5) => {
 // of using sketch-canvas `units: 'in'`.
 const pixelsPerInch = 72;
 const widthInches = 8.5;
-const heightInches = 8.5; // NOTE: Using square is helpful for posting to instagram.
+const heightInches = 11;
 
 const settings = {
   // Pass the p5 instance, and preload function if necessary

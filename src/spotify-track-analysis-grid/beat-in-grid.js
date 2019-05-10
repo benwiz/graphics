@@ -59,7 +59,7 @@ const getDurationRange = (timeIntervals) => {
   return { min: minDuration, max: maxDuration };
 };
 
-const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
+const drawEllipse = (p5, width, height, i, n, beat, TrackAnalysis) => {
   // Get segment and section
   const segment = TrackAnalysis.segments[beat.segmentIndex];
   // const section = TrackAnalysis.sections[beat.sectionIndex];
@@ -115,6 +115,69 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
   p5.pop();
 };
 
+const drawFlower = (p5, width, height, i, n, beat, TrackAnalysis) => {
+  // Get segment and section
+  const segment = TrackAnalysis.segments[beat.segmentIndex];
+  // const section = TrackAnalysis.sections[beat.sectionIndex];
+
+  // Calculate position
+  const xStep = width / n;
+  const yStep = height / n;
+  const x = (i % n) * xStep + xStep / 2;
+  const y = Math.floor(i / n) * yStep + yStep / 2;
+
+  // Determine colors
+  p5.strokeWeight(1);
+  const color = beat.isFirstBeat ? 'red' : 'black';
+  if (beat.sectionIndex % 2) {
+    p5.stroke(color);
+    p5.fill(255);
+  } else {
+    p5.stroke(color);
+    p5.fill(255);
+  }
+
+  // // Calculate ranges for loudness and segment duration
+  // const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
+  // const segmentDurationRange = getDurationRange(TrackAnalysis.segments);
+
+  // Hardcode radius of little circles as a percent of the width
+  const radius = 8;
+
+  // Calculate positions of ellipses
+  const x1 = p5.random([-1, 0, 1]) * radius;
+  const y1 = -1.5 * radius;
+  const x2 = p5.random([-1, 0, 1]) * 0.75 * radius;
+  const y2 = -0.5 * radius;
+  const x3 = p5.random([-1, 0, 1]) * 0.5 * radius;
+  const y3 = 0.5 * radius;
+  const x4 = p5.random([-1, 0, 1]) * 0.25 * radius;
+  const y4 = 1.5 * radius;
+
+  // The actual translating, rotating, and drawing
+  p5.push();
+  p5.translate(x, y);
+
+  // Draw curves from base to each ellipse
+  const xBase = 0;
+  const yBase = 3 * radius;
+  p5.bezier(xBase, yBase, xBase, yBase, x1, y1, x1, y1);
+  p5.bezier(xBase, yBase, xBase, yBase, x2, y2, x2, y2);
+  p5.bezier(xBase, yBase, xBase, yBase, x3, y3, x3, y3);
+  p5.bezier(xBase, yBase, xBase, yBase, x4, y4, x4, y4);
+
+  // Draw the baseline
+  p5.line(-0.75 * radius, yBase, 0.75 * radius, yBase);
+
+  // Draw the four ellipses
+  p5.ellipse(x1, y1, radius, radius);
+  p5.ellipse(x2, y2, radius, radius);
+  p5.ellipse(x3, y3, radius, radius);
+  p5.ellipse(x4, y4, radius, radius);
+
+  p5.pop();
+};
+
 export const draw = (p5, width, height, TrackAnalysis) => {
   // Translate and scale for padding
   p5.push();
@@ -123,9 +186,12 @@ export const draw = (p5, width, height, TrackAnalysis) => {
   p5.scale(scale);
 
   // Run drawing function for each beat
-  const n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length)) + 0;
+  let n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length));
+  // n = Math.ceil(n / 1.75); // To make drawing bigger
+  n /= 1.75; // Don't round to make lines offset, it
   TrackAnalysis.beats.forEach((beat, beatIndex) => {
-    drawCircle(p5, width, height, beatIndex, n, beat, TrackAnalysis);
+    // drawEllipse(p5, width, height, beatIndex, n, beat, TrackAnalysis);
+    drawFlower(p5, width, height, beatIndex, n, beat, TrackAnalysis);
   });
 
   // Pop the padding matrix
