@@ -105,7 +105,7 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
   );
 
   // Determine rotation
-  const rotation = p5.random() * p5.TWO_PI; // Maybe use key or scale
+  const rotation = p5.random() * p5.TWO_PI; // TODO: Maybe use key or scale
 
   // The actual translating, rotating, and drawing
   p5.push();
