@@ -85,7 +85,7 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
   const segmentDurationRange = getDurationRange(TrackAnalysis.segments);
 
   // Determine radii
-  const minRadius = 10;
+  const minRadius = 4;
   const maxRadius = Math.min(xStep, yStep);
   const radius1 = p5.map(
     segment.loudness_max,
@@ -104,9 +104,13 @@ const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
     true,
   );
 
-  // The actual translating and drawing
+  // Determine rotation
+  const rotation = p5.random() * p5.TWO_PI; // Maybe use key or scale
+
+  // The actual translating, rotating, and drawing
   p5.push();
   p5.translate(x, y);
+  p5.rotate(rotation);
   p5.ellipse(0, 0, radius2, radius1);
   p5.pop();
 };
@@ -119,7 +123,7 @@ export const draw = (p5, width, height, TrackAnalysis) => {
   p5.scale(scale);
 
   // Run drawing function for each beat
-  const n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length));
+  const n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length)) + 0;
   TrackAnalysis.beats.forEach((beat, beatIndex) => {
     drawCircle(p5, width, height, beatIndex, n, beat, TrackAnalysis);
   });

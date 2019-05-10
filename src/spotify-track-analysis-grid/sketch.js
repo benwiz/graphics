@@ -77,8 +77,6 @@ export const draw = (options) => {
 
   // Set background color
   p5.background(255);
-  p5.stroke(0);
-  p5.fill(0);
 
   // Draw each beat as a point in the grid
   if (TrackAnalysis) {
