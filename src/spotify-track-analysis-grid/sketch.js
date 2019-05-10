@@ -25,7 +25,7 @@ const getLoudnessRange = (segments) => {
 const findBarForTimeInterval = (timeInterval) => {
   for (let i = 0; i < TrackAnalysis.bars.length; i++) {
     const bar = TrackAnalysis.bars[i];
-    if (timeInterval.start >= bar.start && timeInterval.start <= bar.start + bar.duration) {
+    if (timeInterval.start >= bar.start && timeInterval.start < bar.start + bar.duration - 0.00009) {
       return i;
     }
   }
