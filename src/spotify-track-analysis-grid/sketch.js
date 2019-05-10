@@ -38,7 +38,16 @@ const isFirstBeatOfBar = (beat, bar) => {
 };
 
 const findSegmentForTimeInterval = (timeInterval) => {
-  //
+  for (let i = 0; i < TrackAnalysis.segments.length; i++) {
+    const segment = TrackAnalysis.segments[i];
+    if (
+      timeInterval.start >= segment.start &&
+      timeInterval.start <= segment.start + segment.duration
+    ) {
+      return i;
+    }
+  }
+  return -1; // Should never be reached
 };
 
 const findSectionForTimeInterval = (timeInterval) => {
@@ -59,14 +68,7 @@ const organizeAnalysisByBeat = () => {
     beat.sectionIndex = sectionIndex;
   });
 
-  console.log(
-    TrackAnalysis.beats[0],
-    TrackAnalysis.beats[1],
-    TrackAnalysis.beats[2],
-    TrackAnalysis.beats[3],
-    TrackAnalysis.beats[4],
-    TrackAnalysis.beats[5],
-  );
+  console.log(TrackAnalysis.beats[5]);
 };
 
 export const setup = (_options) => {
