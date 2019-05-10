@@ -1,27 +1,9 @@
-import * as Util from '../util';
 import * as BeatInGrid from './beat-in-grid';
 import * as TrackAnalysis from './data/bedroom.json';
 
 //
 // All setup functions here
 //
-
-const getLoudnessRange = (segments) => {
-  let minLoudness = Infinity;
-  let maxLoudness = -Infinity;
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i];
-    const loudness = segment.loudness_max;
-    if (loudness < minLoudness) {
-      minLoudness = loudness;
-    }
-    if (loudness > maxLoudness) {
-      maxLoudness = loudness;
-    }
-  }
-
-  return { min: minLoudness, max: maxLoudness };
-};
 
 const findBarForTimeInterval = (timeInterval) => {
   for (let i = 0; i < TrackAnalysis.bars.length; i++) {
@@ -99,7 +81,9 @@ export const draw = (options) => {
   p5.fill(0);
 
   // Draw each beat as a point in the grid
-  BeatInGrid.draw(p5, width, height);
+  if (TrackAnalysis) {
+    BeatInGrid.draw(p5, width, height, TrackAnalysis);
+  }
 
   p5.scale(0.5);
 };

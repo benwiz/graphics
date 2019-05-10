@@ -1,4 +1,23 @@
-const drawCircle = (p5, width, height, i, n, beat) => {
+import * as Util from '../util';
+
+const getLoudnessRange = (segments) => {
+  let minLoudness = Infinity;
+  let maxLoudness = -Infinity;
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i];
+    const loudness = segment.loudness_max;
+    if (loudness < minLoudness) {
+      minLoudness = loudness;
+    }
+    if (loudness > maxLoudness) {
+      maxLoudness = loudness;
+    }
+  }
+
+  return { min: minLoudness, max: maxLoudness };
+};
+
+const drawCircle = (p5, width, height, i, n, beat, TrackAnalysis) => {
   p5.rectMode(p5.CENTER);
 
   // Get segment and section
@@ -56,6 +75,6 @@ const drawCircle = (p5, width, height, i, n, beat) => {
 export const draw = (p5, width, height, TrackAnalysis) => {
   const n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length));
   TrackAnalysis.beats.forEach((beat, beatIndex) => {
-    drawCircle(p5, width, height, beatIndex, n, beat);
+    drawCircle(p5, width, height, beatIndex, n, beat, TrackAnalysis);
   });
 };
