@@ -5,12 +5,6 @@ import * as TrackAnalysis from './data/bedroom.json';
 // All setup functions here
 //
 
-export const setup = (_options) => {};
-
-//
-// All drawing functions below here
-//
-
 const getLoudnessRange = (segments) => {
   let minLoudness = Infinity;
   let maxLoudness = -Infinity;
@@ -27,6 +21,61 @@ const getLoudnessRange = (segments) => {
 
   return { min: minLoudness, max: maxLoudness };
 };
+
+const findBarForTimeInterval = (timeInterval) => {
+  for (let i = 0; i < TrackAnalysis.bars.length; i++) {
+    const bar = TrackAnalysis.bars[i];
+    if (timeInterval.start === bar.start) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+const isFirstBeatOfBar = (beat, bar) => {
+  //
+};
+
+const findSegmentForTimeInterval = (timeInterval) => {
+  //
+};
+
+const findSectionForTimeInterval = (timeInterval) => {
+  //
+};
+
+// To each beat, add index IDs for bar, segment, and section.
+const organizeAnalysisByBeat = () => {
+  TrackAnalysis.beats.forEach((beat) => {
+    const barIndex = findBarForTimeInterval(beat);
+    const isFirstBeat = isFirstBeatOfBar(beat, TrackAnalysis.bars[barIndex]);
+    const segmentIndex = findSegmentForTimeInterval(beat);
+    const sectionIndex = findSectionForTimeInterval(beat);
+
+    beat.barIndex = barIndex;
+    beat.isFirstBeat = isFirstBeat;
+    beat.segmentIndex = segmentIndex;
+    beat.sectionIndex = sectionIndex;
+  });
+
+  console.log('----');
+  console.log(
+    TrackAnalysis.beats[0],
+    TrackAnalysis.beats[1],
+    TrackAnalysis.beats[2],
+    TrackAnalysis.beats[3],
+    TrackAnalysis.beats[4],
+    TrackAnalysis.beats[5],
+  );
+};
+
+export const setup = (_options) => {
+  organizeAnalysisByBeat();
+};
+
+//
+// All drawing functions below here
+//
 
 // eslint-disable-next-line no-unused-vars
 const drawLocationToTimestamp = (p5, width, height) => {
@@ -176,6 +225,11 @@ const drawSegmentInGrid = (p5, width, height) => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
+const drawBeatInGrid = (p5, width, height) => {
+  // Use these properties to draw the visual using a specialized drawing function
+};
+
 export const draw = (options) => {
   const { p5, width, height } = options;
 
@@ -187,7 +241,10 @@ export const draw = (options) => {
   // // Draw using the location as the dictator of the drawing
   // drawLocationToTimestamp(p5, width, height);
 
-  // Draw each segment as a point in the grid. I like this method better
-  // because it maps to something a human can make sense of.
-  drawSegmentInGrid(p5, width, height);
+  // // Draw each segment as a point in the grid
+  // drawSegmentInGrid(p5, width, height);
+
+  // Draw each beat as a point in the grid. This is the best so far because it
+  // locks in how people hear with a rigid viewing system.
+  drawBeatInGrid(p5, width, height);
 };

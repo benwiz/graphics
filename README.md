@@ -61,6 +61,8 @@ npm run gif blinking-eyeballs 2 24
 
 - spotify-track-analysis-grid
   - Rather than setting color and radius, set flags to say if is bar, if is section, etc.
+  - Set up global configs for radius, colors, and whatever else
+  - Generalize the grid block drawing method
   - Figure out padding around drawing
 
 - river-walk
