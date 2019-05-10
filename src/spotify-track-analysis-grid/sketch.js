@@ -51,7 +51,16 @@ const findSegmentForTimeInterval = (timeInterval) => {
 };
 
 const findSectionForTimeInterval = (timeInterval) => {
-  //
+  for (let i = 0; i < TrackAnalysis.sections.length; i++) {
+    const section = TrackAnalysis.sections[i];
+    if (
+      timeInterval.start >= section.start &&
+      timeInterval.start <= section.start + section.duration
+    ) {
+      return i;
+    }
+  }
+  return -1; // Should never be reached
 };
 
 // To each beat, add index IDs for bar, segment, and section.
