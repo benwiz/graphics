@@ -60,9 +60,9 @@ npm run gif blinking-eyeballs 2 24
 ## To Do
 
 - spotify-track-analysis-grid
-  - Make it draw along with the song by creating a new github project just for this and hook up to spotify. Select song, pull json api, display result, allow user to click play and the song will play and their device and draw out the song in time.
   - Figure out padding around drawing
   - IDEA: Use the pitch to select a shape or color and timbre to tweak it
+  - AFTER HAVING SOMETHING ON THE WALL: Make it draw along with the song by creating a new github project just for this and hook up to spotify. Select song, pull json api, display result, allow user to click play and the song will play and their device and draw out the song in time.
 
 - river-walk
   - Create initial walk algorithm. Data should be randomly generated during preload. Later data can be manually gathered from spotify and read in from a json file.
