@@ -187,7 +187,8 @@ export const draw = (p5, width, height, TrackAnalysis) => {
 
   // Run drawing function for each beat
   let n = Math.ceil(Math.sqrt(TrackAnalysis.beats.length));
-  n = Math.ceil(n / 1.75); // To make drawing bigger
+  n = Math.ceil(n / 3); // To make drawing bigger
+  n = 9;
   TrackAnalysis.beats.forEach((beat, beatIndex) => {
     // drawEllipse(p5, width, height, beatIndex, n, beat, TrackAnalysis);
     drawFlower(p5, width, height, beatIndex, n, beat, TrackAnalysis);

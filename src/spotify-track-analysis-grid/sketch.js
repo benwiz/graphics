@@ -78,6 +78,9 @@ export const draw = (options) => {
   // Set background color
   p5.background(255);
 
+  // TEMP: Strip the first three beats
+  TrackAnalysis.beats.splice(0, 3);
+
   // Draw each beat as a point in the grid
   if (TrackAnalysis) {
     BeatInGrid.draw(p5, width, height, TrackAnalysis);
