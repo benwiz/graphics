@@ -1,5 +1,5 @@
-import * as BeatInGrid from './beat-in-grid';
 import * as TrackAnalysis from './data/bedroom.json';
+import * as BeatInGrid from './beat-in-grid';
 
 //
 // All setup functions here
@@ -73,16 +73,14 @@ export const setup = (_options) => {
 //
 
 export const draw = (options) => {
+  if (!TrackAnalysis) return;
+  // TrackAnalysis.beats.splice(0, 3);
+
   const { p5, width, height } = options;
 
   // Set background color
   p5.background(255);
 
-  // TEMP: Strip the first three beats
-  TrackAnalysis.beats.splice(0, 3);
-
   // Draw each beat as a point in the grid
-  if (TrackAnalysis) {
-    BeatInGrid.draw(p5, width, height, TrackAnalysis);
-  }
+  BeatInGrid.draw(p5, width, height, TrackAnalysis);
 };
