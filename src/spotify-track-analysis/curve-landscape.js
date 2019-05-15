@@ -16,7 +16,10 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     // Create line shape and add vertices
     p5.noFill();
     p5.beginShape();
-    p5.curveVertex(0, y + 0.2 * segment.timbre[0]);
+    const firstVertex = { x: 0, y: y + 0.2 * segment.timbre[0] };
+    const lastVertex = { x: width, y: y + 0.2 * segment.timbre[segment.timbre.length - 1] };
+
+    p5.curveVertex(firstVertex.x, firstVertex.y);
     for (let i = 0; i < segment.timbre.length; i++) {
       const timbre = segment.timbre[i];
       const vertex = {
@@ -25,7 +28,8 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
       };
       p5.curveVertex(vertex.x, vertex.y);
     }
-    p5.curveVertex(width, y + 0.2 * segment.timbre[segment.timbre.length - 1]);
+    p5.curveVertex(lastVertex.x, lastVertex.y);
+
     p5.endShape();
   }
 };
