@@ -5,6 +5,9 @@
 
 const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
   const n = TrackAnalysis.segments.length;
+  let previousShape = [];
+  let currentShape = [];
+
   for (let segmentIndex = 0; segmentIndex < n; segmentIndex++) {
     const segment = TrackAnalysis.segments[segmentIndex];
 
@@ -13,39 +16,42 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     const y = segmentIndex * step + step / 2;
     if (y > height) continue;
 
+    // TODO: Look into including two segments per line
+
     // Create line shape by adding vertices
     p5.noFill();
+    // p5.fill('white'); // TODO: Fills can have a good effect https://www.instagram.com/p/Be2wfb1Butf/, https://www.instagram.com/p/Bq7Fc4ZnSRJ/
     p5.beginShape();
     const firstVertex = { x: 0, y: y + 0.2 * segment.timbre[0] };
     const lastVertex = { x: width, y: y + 0.2 * segment.timbre[segment.timbre.length - 1] };
-
     p5.curveVertex(firstVertex.x, firstVertex.y);
     for (let i = 0; i < segment.timbre.length; i++) {
       const timbre = segment.timbre[i];
-      const previousVertex = {
-        x: ((i - 1) / (segment.timbre.length - 1)) * width,
-        y: y + 0.2 * segment.timbre[i - 1],
-      };
+      const multiplier = 0.2;
       const vertex = {
         x: (i / (segment.timbre.length - 1)) * width,
-        y: y + 0.2 * timbre,
+        y: y + multiplier * timbre,
       };
-
-      // If vertex.y is above the previous vertex's y value, shift it down below
-      if (vertex.y <= previousVertex.y) {
-        vertex.y = previousVertex.y + 5;
-      }
-
-      // If vertex.y is below the previous vertex's y value, shift it up above
-      if (vertex.y >= previousVertex.y) {
-        vertex.x = previousVertex.y - 5;
+      if (previousShape.length > 0) {
+        if (vertex.y < previousShape[i].y) {
+          // NOTE: Only allowing positive adjustments (downward)
+          vertex.y = timbre < 0 ? previousShape[i].y : previousShape[i].y + multiplier * timbre;
+        }
       }
 
       p5.curveVertex(vertex.x, vertex.y);
+      // p5.ellipse(vertex.x, vertex.y, 10);
+
+      currentShape.push(vertex);
     }
     p5.curveVertex(lastVertex.x, lastVertex.y);
-
     p5.endShape();
+
+    // Update previous shape
+    previousShape = currentShape.slice();
+    currentShape = [];
+
+    // if (segmentIndex === 3) break;
   }
 };
 
