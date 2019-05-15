@@ -13,7 +13,7 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     const y = segmentIndex * step + step / 2;
     if (y > height) continue;
 
-    // Create line shape and add vertices
+    // Create line shape by adding vertices
     p5.noFill();
     p5.beginShape();
     const firstVertex = { x: 0, y: y + 0.2 * segment.timbre[0] };
