@@ -1,5 +1,6 @@
 import * as TrackAnalysis from './data/bedroom.json';
 import * as BeatInGrid from './beat-in-grid';
+import * as CurveLandscape from './curve-landscape';
 
 //
 // All setup functions here
@@ -82,5 +83,8 @@ export const draw = (options) => {
   p5.background(255);
 
   // Draw each beat as a point in the grid
-  BeatInGrid.draw(p5, width, height, TrackAnalysis);
+  // BeatInGrid.draw(p5, width, height, TrackAnalysis);
+
+  // Draw curve landscape
+  CurveLandscape.draw(p5, width, height, TrackAnalysis);
 };

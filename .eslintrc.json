@@ -15,6 +15,7 @@
     "no-return-assign": "off",
     "no-magic-numbers": "off",
     "import/prefer-default-export": false,
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-continue": "off"
   }
 }
