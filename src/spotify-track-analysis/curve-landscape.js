@@ -63,6 +63,7 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     p5.noFill();
     // p5.fill('white'); // TODO: Fills can have a cool effect https://www.instagram.com/p/Be2wfb1Butf/, https://www.instagram.com/p/Bq7Fc4ZnSRJ/
     p5.strokeWeight(p5.map(segment.loudness_max, loudnessRange.min, loudnessRange.max, 0.5, 1.0));
+    p5.curveTightness(0);
 
     // Begin drawing the shape. Note the first and last vertices because when
     // using `curveVertex` the first and last points must be duplicated.
