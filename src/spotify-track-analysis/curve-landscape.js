@@ -18,7 +18,7 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     const y = segmentIndex * step + step / 2;
     if (y > height) continue;
 
-    // TODO: Look into including two segments per line
+    // TODO: Consider including two segments per line
 
     // Create line shape by adding vertices
     p5.noFill();
@@ -41,9 +41,8 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
         }
       }
 
+      // Actually add the vertex and save it
       p5.curveVertex(vertex.x, vertex.y);
-      // p5.ellipse(vertex.x, vertex.y, 10);
-
       currentShape.push(vertex);
     }
     p5.curveVertex(lastVertex.x, lastVertex.y);
