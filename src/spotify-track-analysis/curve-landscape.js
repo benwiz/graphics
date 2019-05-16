@@ -24,8 +24,14 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     p5.noFill();
     // p5.fill('white'); // TODO: Fills can have a good effect https://www.instagram.com/p/Be2wfb1Butf/, https://www.instagram.com/p/Bq7Fc4ZnSRJ/
     p5.beginShape();
-    const firstVertex = { x: 0, y: y + 0.2 * segment.timbre[0] };
-    const lastVertex = { x: width, y: y + 0.2 * segment.timbre[segment.timbre.length - 1] };
+    const firstVertex = {
+      x: p5.random(-10, 10),
+      y: y + 0.2 * segment.timbre[0],
+    };
+    const lastVertex = {
+      x: width + p5.random(-10, 10),
+      y: y + 0.2 * segment.timbre[segment.timbre.length - 1],
+    };
     p5.curveVertex(firstVertex.x, firstVertex.y);
     for (let i = 0; i < segment.timbre.length; i++) {
       const timbre = segment.timbre[i];
@@ -41,6 +47,9 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
         }
       }
 
+      if (i === 0) vertex.x = firstVertex.x;
+      if (i === segment.timbre.length - 1) vertex.x = lastVertex.x;
+
       // Actually add the vertex and save it
       p5.curveVertex(vertex.x, vertex.y);
       currentShape.push(vertex);
@@ -51,8 +60,6 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     // Update previous shape
     previousShape = currentShape.slice();
     currentShape = [];
-
-    // if (segmentIndex === 3) break;
   }
 };
 
