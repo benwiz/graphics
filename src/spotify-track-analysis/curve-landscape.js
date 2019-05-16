@@ -6,6 +6,9 @@ import * as Util from '../util';
  *    - Offset start and end X-values of some lines to make it look a little messier
  *    - Use PITCH (or something) to affect the quality of the line. Idk what the
  *      "quality of the line" actually means.
+ *      - This would be a lot of work, but I could create different types of shaders
+ *        or something else that would determine how a line was drawn. Dashed and dotted
+ *        are the familiar basics.
  *    - Rather than adding two segments to a row, just scale the multiplier
  *      linearly with `i` in the TIMBRE loop so that later timbres and more wiggly.
  */
