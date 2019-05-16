@@ -1,18 +1,6 @@
 import * as ComputeStdev from 'compute-stdev';
 import * as Util from '../util';
 
-/*
- *  IDEAS:
- *    - Offset start and end X-values of some lines to make it look a little messier
- *    - Use PITCH (or something) to affect the quality of the line. Idk what the
- *      "quality of the line" actually means.
- *      - This would be a lot of work, but I could create different types of shaders
- *        or something else that would determine how a line was drawn. Dashed and dotted
- *        are the familiar basics.
- *    - Rather than adding two segments to a row, just scale the multiplier
- *      linearly with `i` in the TIMBRE loop so that later timbres and more wiggly.
- */
-
 // Yes, this is copy-pasted from `./beat-in-grid.js` :(
 const getLoudnessRange = (segments) => {
   const loudnesses = segments.map(segment => segment.loudness_max);
@@ -82,17 +70,18 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     p5.curveVertex(firstVertex.x, firstVertex.y);
     for (let i = 0; i < segment.timbre.length; i++) {
       const timbre = segment.timbre[i];
-      const multiplier = 0.2;
+      const timbreMultiplier = 0.2; // I tried scaling up multiplier with i but didn't like it as much as expected
       const vertex = {
         x: (i / (segment.timbre.length - 1)) * width,
-        y: y + multiplier * timbre,
+        y: y + timbreMultiplier * timbre,
       };
       if (previousShape.length > 0) {
         if (vertex.y < previousShape[i].y) {
           // NOTE: Only allowing positive adjustments (downward). Not ideal for
           // an accurate visual representation... but I guess I shouldn't care
           // about an accurate visual representation of the timbre of the music.
-          vertex.y = timbre < 0 ? previousShape[i].y : previousShape[i].y + multiplier * timbre;
+          vertex.y =
+            timbre < 0 ? previousShape[i].y : previousShape[i].y + timbreMultiplier * timbre;
         }
       }
 

@@ -60,7 +60,8 @@ npm run gif blinking-eyeballs 2 24
 ## To Do
 
 - spotify-track-analysis-grid
-  - Figure out how to use: pitch, timbre
+  - Optimize the timbre multiplier, maybe scale along with `i` so that ending timbres have impact
+  - Use pitch or something else to affect the quality of the line. Idk what the "quality of the line" actually means. Dashed and dotted are the familiar basics.
   - AFTER HAVING SOMETHING ON THE WALL: Make it draw along with the song by creating a new github project just for this and hook up to spotify. Select song, pull json api, display result, allow user to click play and the song will play and their device and draw out the song in time.
 
 - river-walk
