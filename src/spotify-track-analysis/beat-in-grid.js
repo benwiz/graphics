@@ -159,6 +159,7 @@ const drawFlower = (p5, width, height, i, n, beat, TrackAnalysis) => {
   const y4 = -1 * radius;
 
   // Draw bezier curves from base to each ellipse
+  // TODO: Look into `quadraticCurve` instead of `bezier`
   const xBase = 0;
   const yBase = 3 * radius;
   p5.bezier(xBase, yBase, xBase, yBase - 1.5 * radius, 0.25 * x1, y1, x1, y1);
