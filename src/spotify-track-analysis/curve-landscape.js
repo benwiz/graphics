@@ -1,15 +1,50 @@
+import * as ComputeStdev from 'compute-stdev';
+import * as Util from '../util';
+
 /*
  *  IDEAS:
  *    - Offset start and end X-values of some lines to make it look a little messier
  *    - Use PITCH (or something) to affect the quality of the line. Idk what the
  *      "quality of the line" actually means.
- *    -
+ *    - Rather than adding two segments to a row, just scale the multiplier
+ *      linearly with `i` in the TIMBRE loop so that later timbres and more wiggly.
  */
+
+// Yes, this is copy-pasted from `./beat-in-grid.js` :(
+const getLoudnessRange = (segments) => {
+  const loudnesses = segments.map(segment => segment.loudness_max);
+  const stdev = ComputeStdev.default(loudnesses);
+  const mean = Util.getMean(loudnesses);
+
+  let minLoudness = Infinity;
+  let maxLoudness = -Infinity;
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i];
+    const loudness = segment.loudness_max;
+
+    // If loudness is greater than 2*stdev away, skip this iteration
+    const dist = Math.abs(loudness - mean);
+    if (dist > 2 * stdev) {
+      continue;
+    }
+
+    // Update min and max
+    if (loudness < minLoudness) {
+      minLoudness = loudness;
+    }
+    if (loudness > maxLoudness) {
+      maxLoudness = loudness;
+    }
+  }
+
+  return { min: minLoudness, max: maxLoudness };
+};
 
 const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
   const n = TrackAnalysis.segments.length;
   let previousShape = [];
   let currentShape = [];
+  const loudnessRange = getLoudnessRange(TrackAnalysis.segments);
 
   for (let segmentIndex = 0; segmentIndex < n; segmentIndex++) {
     const segment = TrackAnalysis.segments[segmentIndex];
@@ -21,16 +56,23 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
 
     // TODO: Consider including two segments per line
 
+    //
     // Create line shape by adding vertices
+    //
+    // First define the characteristics of the line
     p5.noFill();
     // p5.fill('white'); // TODO: Fills can have a cool effect https://www.instagram.com/p/Be2wfb1Butf/, https://www.instagram.com/p/Bq7Fc4ZnSRJ/
+    p5.strokeWeight(p5.map(segment.loudness_max, loudnessRange.min, loudnessRange.max, 0.5, 1.0));
+
+    // Begin drawing the shape. Note the first and last vertices because when
+    // using `curveVertex` the first and last points must be duplicated.
     p5.beginShape();
     const firstVertex = {
-      x: p5.random(-10, 10),
+      x: p5.randomGaussian(0, 10),
       y: y + 0.2 * segment.timbre[0],
     };
     const lastVertex = {
-      x: width + p5.random(-10, 10),
+      x: width + p5.randomGaussian(0, 10),
       y: y + 0.2 * segment.timbre[segment.timbre.length - 1],
     };
     p5.curveVertex(firstVertex.x, firstVertex.y);
