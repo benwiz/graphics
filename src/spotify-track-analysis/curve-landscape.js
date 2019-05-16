@@ -72,7 +72,6 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
       const timbre = segment.timbre[i];
       const timbreMultiplier = 0.2; // I tried scaling up multiplier with i but didn't like it as much as expected
       const timbreAdjust = timbreMultiplier * timbre;
-      console.log(timbreAdjust);
       const vertex = {
         x: (i / (segment.timbre.length - 1)) * width,
         y: y + timbreAdjust,
@@ -82,7 +81,7 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
           // NOTE: Only allowing positive adjustments (downward). Not ideal for
           // an accurate visual representation... but I guess I shouldn't care
           // about an accurate visual representation of the timbre of the music.
-          const timbreSecondMultipler = 2.0;
+          const timbreSecondMultipler = 0.8;
           vertex.y =
             timbre < 0
               ? previousShape[i].y
