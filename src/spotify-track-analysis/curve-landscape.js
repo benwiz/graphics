@@ -1,8 +1,8 @@
 /*
  *  IDEAS:
  *    - Offset start and end X-values of some lines to make it look a little messier
- *    - Consider using PITCH instead of TIMBRE for line shape. Then use TIMBRE
- *      to mess with the "quality" of the line.
+ *    - Use PITCH to affect the quality of the line. Not sure how. TIMBRE looks
+ *      better than PITCH as vertices of the line.
  */
 
 const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
