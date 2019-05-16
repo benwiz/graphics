@@ -1,8 +1,9 @@
 /*
  *  IDEAS:
  *    - Offset start and end X-values of some lines to make it look a little messier
- *    - Use PITCH to affect the quality of the line. Not sure how. TIMBRE looks
- *      better than PITCH as vertices of the line.
+ *    - Use PITCH (or something) to affect the quality of the line. Idk what the
+ *      "quality of the line" actually means.
+ *    -
  */
 
 const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
@@ -42,11 +43,14 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
       };
       if (previousShape.length > 0) {
         if (vertex.y < previousShape[i].y) {
-          // NOTE: Only allowing positive adjustments (downward)
+          // NOTE: Only allowing positive adjustments (downward). Not ideal for
+          // an accurate visual representation... but I guess I shouldn't care
+          // about an accurate visual representation of the timbre of the music.
           vertex.y = timbre < 0 ? previousShape[i].y : previousShape[i].y + multiplier * timbre;
         }
       }
 
+      // Add x offsets to first and last vertices
       if (i === 0) vertex.x = firstVertex.x;
       if (i === segment.timbre.length - 1) vertex.x = lastVertex.x;
 
