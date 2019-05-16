@@ -23,7 +23,7 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
 
     // Create line shape by adding vertices
     p5.noFill();
-    // p5.fill('white'); // TODO: Fills can have a good effect https://www.instagram.com/p/Be2wfb1Butf/, https://www.instagram.com/p/Bq7Fc4ZnSRJ/
+    // p5.fill('white'); // TODO: Fills can have a cool effect https://www.instagram.com/p/Be2wfb1Butf/, https://www.instagram.com/p/Bq7Fc4ZnSRJ/
     p5.beginShape();
     const firstVertex = {
       x: p5.random(-10, 10),
