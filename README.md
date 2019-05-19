@@ -63,6 +63,7 @@ npm run gif blinking-eyeballs 2 24
   - curve-landscape.js
     - Use pitch or something else to affect the quality of the line. Idk what the "quality of the line" actually means. Dashed and dotted are the familiar basics.
     - Maybe I need some sort of config to modify the timbre multipliers (and whatever else)
+  - WEIRD IDEA: Maybe I could constrain the lines to be within a shape... so the lines could be inside the shape of a dog or state
   - AFTER HAVING SOMETHING ON THE WALL: Make it draw along with the song by creating a new github project just for this and hook up to spotify. Select song, pull json api, display result, allow user to click play and the song will play and their device and draw out the song in time.
 
 - river-walk
