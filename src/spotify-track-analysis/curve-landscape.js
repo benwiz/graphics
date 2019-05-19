@@ -45,8 +45,6 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     const y = segmentIndex * step + step / 2;
     if (y > height) continue;
 
-    // TODO: Consider including two segments per line
-
     //
     // Create line shape by adding vertices
     //
@@ -59,18 +57,19 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     // Begin drawing the shape. Note the first and last vertices because when
     // using `curveVertex` the first and last points must be duplicated.
     p5.beginShape();
+    const timbreMultiplier = 0.2; // I tried scaling up multiplier with i but didn't like it as much as expected
+    const timbreSecondMultipler = 1.0;
     const firstVertex = {
       x: p5.randomGaussian(0, 10),
-      y: y + 0.2 * segment.timbre[0],
+      y: y + timbreMultiplier * segment.timbre[0],
     };
     const lastVertex = {
       x: width + p5.randomGaussian(0, 10),
-      y: y + 0.2 * segment.timbre[segment.timbre.length - 1],
+      y: y + timbreMultiplier * segment.timbre[segment.timbre.length - 1],
     };
     p5.curveVertex(firstVertex.x, firstVertex.y);
     for (let i = 0; i < segment.timbre.length; i++) {
       const timbre = segment.timbre[i];
-      const timbreMultiplier = 0.2; // I tried scaling up multiplier with i but didn't like it as much as expected
       const timbreAdjust = timbreMultiplier * timbre;
       const vertex = {
         x: (i / (segment.timbre.length - 1)) * width,
@@ -81,7 +80,6 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
           // NOTE: Only allowing positive adjustments (downward). Not ideal for
           // an accurate visual representation... but I guess I shouldn't care
           // about an accurate visual representation of the timbre of the music.
-          const timbreSecondMultipler = 0.8;
           vertex.y =
             timbre < 0
               ? previousShape[i].y
