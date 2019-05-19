@@ -55,19 +55,6 @@ npm run gif blinking-eyeballs 2 24
   - WEIRD IDEA: Maybe I could constrain the lines to be within a shape... so the lines could be inside the shape of a dog or state
   - AFTER HAVING SOMETHING ON THE WALL: Make it draw along with the song by creating a new github project just for this and hook up to spotify. Select song, pull json api, display result, allow user to click play and the song will play and their device and draw out the song in time.
 
-- river-walk
-  - Create initial walk algorithm. Data should be randomly generated during preload. Later data can be manually gathered from spotify and read in from a json file.
-
-- noisy-shapes
-  - rough.js implementation
-    - Once `roughShapesMirror()` is mostly done, copy it and make `roughShapesMirrorTetris()` using tetris shapes. It could be animated.
-    - Consider a sketch where there is a box. Inside the box use high roughness, outside use low roughness. Representing chaotic inside and calm outside.
-    - Consider an animation because the roughness is a sort of randomness
-  - custom implementation
-
-- wet-and-sharp
-  - Look into more abstract reflections (check out out/cool-bug.png)
-
 - Create a customized html template (don't start from scratch but copy an already built example)
   - Needs dropdown or radio buttons to select between functions
   - Maybe a refresh button
@@ -90,3 +77,13 @@ npm run gif blinking-eyeballs 2 24
       - Consider using rough.js?
   - blinking-eyeballs
     - Optimize the pause
+  - wet-and-sharp
+    - Look into more abstract reflections (check out out/cool-bug.png)
+  - river-walk
+    - Create initial walk algorithm. Data should be randomly generated during preload. Later data can be manually gathered from spotify and read in from a json file.
+  - noisy-shapes
+    - rough.js implementation
+      - Once `roughShapesMirror()` is mostly done, copy it and make `roughShapesMirrorTetris()` using tetris shapes. It could be animated.
+      - Consider a sketch where there is a box. Inside the box use high roughness, outside use low roughness. Representing chaotic inside and calm outside.
+      - Consider an animation because the roughness is a sort of randomness
+    - custom implementation
