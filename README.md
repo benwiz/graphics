@@ -46,17 +46,6 @@ Build a gif from files inside the `~/Downloads/` folder. First agument is `sketc
 npm run gif blinking-eyeballs 2 24
 ```
 
-## Things to remember
-
-- For a while, do my best to not create a custom template. Focus on the content... or maybe not.
-- Use dat.gui for easy configs
-
-## Ideas
-
-- Balloons (or hot air balloons) rising
-  - Use a physics engine (matter.js?) to make them pop. I think they'll need to be made up of lines or particles to pop correctly... probably just lines will do fine.
-- Make tetris using rough.js... this should probably be its own repo. Maybe it should use TypeScript or ClojureScript.
-
 ## To Do
 
 - spotify-track-analysis-grid
