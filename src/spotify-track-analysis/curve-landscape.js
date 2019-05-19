@@ -70,11 +70,15 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
     p5.curveVertex(firstVertex.x, firstVertex.y);
     for (let i = 0; i < segment.timbre.length; i++) {
       const timbre = segment.timbre[i];
-      const timbreAdjust = timbreMultiplier * timbre;
+      let timbreAdjust = timbreMultiplier * timbre;
+      if (i > segment.timbre.length / 2) {
+        timbreAdjust *= 3.5;
+      }
       const vertex = {
         x: (i / (segment.timbre.length - 1)) * width,
         y: y + timbreAdjust,
       };
+      // If not the first shape (line) and there is vertex crossing
       if (previousShape.length > 0) {
         if (vertex.y < previousShape[i].y) {
           // NOTE: Only allowing positive adjustments (downward). Not ideal for
@@ -91,7 +95,7 @@ const drawCurveLandscape = (p5, width, height, TrackAnalysis) => {
       if (i === 0) vertex.x = firstVertex.x;
       if (i === segment.timbre.length - 1) vertex.x = lastVertex.x;
 
-      // Actually add the vertex and save it
+      // Add the vertex and save it
       p5.curveVertex(vertex.x, vertex.y);
       currentShape.push(vertex);
     }
