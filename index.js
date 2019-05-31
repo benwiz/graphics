@@ -1,4 +1,4 @@
-/* global webglUtils */
+/* global webglUtils:readable */
 
 const createShader = (gl, type, source) => {
   const shader = gl.createShader(type);
