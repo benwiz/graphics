@@ -1,0 +1,27 @@
+{
+  "name": "sketches",
+  "version": "1.0.0",
+  "description": "Test the canvas-sketch boilerplate tool.",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwiz/sketches.git"
+  },
+  "keywords": [],
+  "author": "Ben Wiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benwiz/sketches/issues"
+  },
+  "homepage": "https://github.com/benwiz/sketches#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {}
+}
