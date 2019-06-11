@@ -19,3 +19,5 @@ npm start
 ```
 
 ## To Do
+
+- Left off at "Rendering"
