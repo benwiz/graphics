@@ -29,7 +29,9 @@ const randomInt = range => Math.floor(Math.random() * range);
 
 const createPositions = (gl, n) => {
   // To begin, create n random triangles. My goal is to create a plane of multi
-  // colored triangles.
+  // colored triangles. The positions will need to be created according to some
+  // algorithm rather than just randomly. Or they can be created randomly then
+  // sorted.
 
   const positions = [
     randomInt(gl.canvas.width),
