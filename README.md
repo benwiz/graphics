@@ -2,7 +2,7 @@
 
 Learn WebGL by making a very simple banner
 
-Working through [WebGL Fundamentals tutorial](https://webglfundamentals.org/webgl/lessons/webgl-fundamentals.html).
+First worked through [WebGL Fundamentals tutorial](https://webglfundamentals.org/webgl/lessons/webgl-fundamentals.html). Then doing my own thing.
 
 ## How to run
 

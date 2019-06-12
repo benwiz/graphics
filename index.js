@@ -25,19 +25,35 @@ const createProgram = (gl, vertexShader, fragmentShader) => {
   gl.deleteProgram(program);
 };
 
-const createPositions = (gl, n) => {
-  // To begin, just make a grid of n-by-n
-  // const positions = [];
-  // for (let i = 0; i < n; i++) {
-  //   for (let j = 0; j < n; j++) {
-  //     const x = (i * gl.canvas.width) / n;
-  //     const y = (j * gl.canvas.height) / n;
-  //     positions.push(x);
-  //     positions.push(y);
-  //   }
-  // }
+const randomInt = range => Math.floor(Math.random() * range);
 
-  const positions = [0, 0, 100, 0, 0, 100, 200, 0, 300, 0, 200, 100];
+const createPositions = (gl, n) => {
+  // To begin, create n random triangles. My goal is to create a plane of multi
+  // colored triangles.
+
+  const positions = [
+    randomInt(gl.canvas.width),
+    randomInt(gl.canvas.height),
+    randomInt(gl.canvas.width),
+    randomInt(gl.canvas.height),
+    randomInt(gl.canvas.width),
+    randomInt(gl.canvas.height),
+  ];
+
+  for (let i = 1; i < n; i++) {
+    const x1 = positions[positions.length - 4];
+    const y1 = positions[positions.length - 3];
+    const x2 = positions[positions.length - 2];
+    const y2 = positions[positions.length - 1];
+    const x3 = randomInt(gl.canvas.width);
+    const y3 = randomInt(gl.canvas.height);
+    positions.push(x1);
+    positions.push(y1);
+    positions.push(x2);
+    positions.push(y2);
+    positions.push(x3);
+    positions.push(y3);
+  }
 
   console.log(positions);
   return positions;
@@ -118,7 +134,8 @@ const main = async () => {
   const primitiveType = gl.TRIANGLES;
   offset = 0;
   const count = 3;
-  while (offset < positions.length) {
+  while (offset < positions.length - count) {
+    console.log(offset);
     gl.drawArrays(primitiveType, offset, count);
     offset += count;
   }
