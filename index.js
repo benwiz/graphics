@@ -56,6 +56,9 @@ const main = async () => {
   // Look up where the vertex data needs to go.
   const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
 
+  // look up uniform locations
+  const resolutionUniformLocation = gl.getUniformLocation(program, 'u_resolution');
+
   // Create a buffer and put three 2d clip space points in it
   const positionBuffer = gl.createBuffer();
 
@@ -63,7 +66,7 @@ const main = async () => {
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
   // Three 2d points
-  const positions = [0, 0, 0, 0.5, 0.7, 0];
+  const positions = [10, 20, 80, 20, 10, 30, 10, 30, 80, 20, 80, 30];
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
   //
@@ -102,10 +105,13 @@ const main = async () => {
   // ARRAY_BUFFER bind point. The attribute will continue to use positionBuffer.
   gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
 
+  // set the resolution
+  gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+
   // draw
   const primitiveType = gl.TRIANGLES;
   offset = 0;
-  const count = 3;
+  const count = 6;
   gl.drawArrays(primitiveType, offset, count);
 };
 
