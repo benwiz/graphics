@@ -7,6 +7,7 @@
   "rules": {
     "max-len": [1, 100, 2, { "ignoreComments": true }],
     "no-console": 0,
+    "consistent-return": 0,
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-param-reassign": ["error", { "props": false }],
     "radix": ["error", "as-needed"],

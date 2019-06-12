@@ -18,6 +18,21 @@ Start the webserver
 npm start
 ```
 
+## Notes
+
+LinkedIn color palette:
+
+```text
+#0077b5
+#000000
+#313335
+#86888a
+#caccce
+#00a0dc
+#8d6cab
+#dd5143
+```
+
 ## To Do
 
 - Left off at the first iFrame
