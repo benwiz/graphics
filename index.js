@@ -28,6 +28,23 @@ const createProgram = (gl, vertexShader, fragmentShader) => {
   return null;
 };
 
+// Returns a random integer from 0 to range - 1.
+const randomInt = range => Math.floor(Math.random() * range);
+
+// Fill the buffer with the values that define a rectangle.
+const setRectangle = (gl, x, y, width, height) => {
+  const x1 = x;
+  const x2 = x + width;
+  const y1 = y;
+  const y2 = y + height;
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]),
+    gl.STATIC_DRAW,
+  );
+};
+
+// Main funciton
 const main = async () => {
   //
   // Initialization.
@@ -58,6 +75,7 @@ const main = async () => {
 
   // look up uniform locations
   const resolutionUniformLocation = gl.getUniformLocation(program, 'u_resolution');
+  const colorUniformLocation = gl.getUniformLocation(program, 'u_color');
 
   // Create a buffer and put three 2d clip space points in it
   const positionBuffer = gl.createBuffer();
@@ -80,7 +98,7 @@ const main = async () => {
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
   // Clear the canvas
-  gl.clearColor(0, 0, 1, 0.1); // Background color
+  gl.clearColor(0, 0, 1, 0.01); // Background color
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Tell it to use our program (pair of shaders)
@@ -97,7 +115,7 @@ const main = async () => {
   const type = gl.FLOAT; // the data is 32bit floats
   const normalize = false; // don't normalize the data
   const stride = 0; // 0 = move forward size * sizeof(type) each iteration to get the next position
-  let offset = 0; // start at the beginning of the buffer
+  const offset = 0; // start at the beginning of the buffer
 
   // A hidden part of gl.vertexAttribPointer is that it binds the current
   // ARRAY_BUFFER to the attribute. In other words now this attribute is bound
@@ -105,14 +123,27 @@ const main = async () => {
   // ARRAY_BUFFER bind point. The attribute will continue to use positionBuffer.
   gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
 
-  // set the resolution
+  // Set the resolution
   gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
-  // draw
-  const primitiveType = gl.TRIANGLES;
-  offset = 0;
-  const count = 6;
-  gl.drawArrays(primitiveType, offset, count);
+  // Draw 50 random rectangles in random colors
+  for (let i = 0; i < 50; i++) {
+    // Setup a random rectangle. This will write to positionBuffer because
+    // its the last thing we bound on the ARRAY_BUFFER bind point.
+    setRectangle(
+      gl,
+      randomInt(canvas.width),
+      randomInt(canvas.height),
+      randomInt(canvas.width),
+      randomInt(canvas.height),
+    );
+
+    // Set a random color.
+    gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
+
+    // Draw the rectangle.
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
 };
 
 main();
