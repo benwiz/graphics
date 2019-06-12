@@ -25,39 +25,104 @@ const createProgram = (gl, vertexShader, fragmentShader) => {
   gl.deleteProgram(program);
 };
 
-const randomInt = range => Math.floor(Math.random() * range);
+const randomFloat = (min, max) => Math.random() * (max - min) + min;
+const randomInt = (min, max) => Math.floor(randomFloat(min, max));
 
-const createPositions = (gl, n) => {
-  // To begin, create n random triangles. My goal is to create a plane of multi
-  // colored triangles. The positions will need to be created according to some
-  // algorithm rather than just randomly. Or they can be created randomly then
-  // sorted.
+const distance = (point1, point2) => {
+  // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
+  const x1 = point1.x;
+  const y1 = point1.y;
+  const x2 = point2.x;
+  const y2 = point2.y;
+  const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+  return dist;
+};
 
-  const positions = [
-    randomInt(gl.canvas.width),
-    randomInt(gl.canvas.height),
-    randomInt(gl.canvas.width),
-    randomInt(gl.canvas.height),
-    randomInt(gl.canvas.width),
-    randomInt(gl.canvas.height),
-  ];
+const createPoints = (gl, n) => {
+  const points = [];
+  for (let i = 0; i < n; i++) {
+    const point = {
+      x: randomInt(0, gl.canvas.width),
+      y: randomInt(0, gl.canvas.height),
+    };
+    points.push(point);
+  }
+  return points;
+};
 
-  for (let i = 1; i < n; i++) {
-    const x1 = positions[positions.length - 4];
-    const y1 = positions[positions.length - 3];
-    const x2 = positions[positions.length - 2];
-    const y2 = positions[positions.length - 1];
-    const x3 = randomInt(gl.canvas.width);
-    const y3 = randomInt(gl.canvas.height);
-    positions.push(x1);
-    positions.push(y1);
-    positions.push(x2);
-    positions.push(y2);
-    positions.push(x3);
-    positions.push(y3);
+const createTriangles = (points) => {
+  // This is implemented extremely naively and inneficiently. Using Delaunay
+  // triangulation is probably the best method.
+  //
+  // Here, I find the two nearest points to the current point and call that a
+  // triangle. I may need to dedupelicate later which will require sorting the
+  // vertices within the triangle.
+  //
+  const triangles = [];
+
+  for (let i = 0; i < points.length; i++) {
+    const point = points[i];
+
+    // Find the first nearest poit
+    let nearestPointA = { x: Infinity, y: Infinity };
+    for (let j = 0; j < points.length; j++) {
+      if (i === j) continue;
+      const testPoint = points[j];
+      const testDist = distance(point, testPoint);
+      const dist = distance(point, nearestPointA);
+      if (testDist < dist) {
+        nearestPointA = testPoint;
+      }
+    }
+
+    // Find the second nearest poit
+    let nearestPointB = { x: Infinity, y: Infinity };
+    for (let j = 0; j < points.length; j++) {
+      if (i === j) continue;
+      const testPoint = points[j];
+      if (testPoint === nearestPointA) continue;
+      const testDist = distance(point, testPoint);
+      const dist = distance(point, nearestPointB);
+      if (testDist < dist) {
+        nearestPointB = testPoint;
+      }
+    }
+
+    // Form the triangle (TODO: the points should be sorted by distance from origin for future deduplicating)
+    const triangle = [point, nearestPointA, nearestPointB];
+    triangles.push(triangle);
   }
 
-  console.log(positions);
+  console.log('triangles:', triangles);
+  return triangles;
+};
+
+const createPositions = (gl, n) => {
+  // First, randomly generate n points. Some points should exist outside the
+  // bounds of the canvas.
+  const points = createPoints(gl, n);
+
+  // Second, generate triangles using those points
+  const triangles = createTriangles(points);
+
+  // Third, concatenate a list of all triangles so into the positions list
+  const positions = [];
+  for (let i = 0; i < triangles.length; i++) {
+    const triangle = triangles[i];
+    for (let j = 0; j < triangle.length; j++) {
+      const point = triangle[j];
+      positions.push(point.x);
+      positions.push(point.y);
+    }
+  }
+
+  // //
+  // // Hardcode positions
+  // //
+  // const positions = [25, 43, 236, 67, 50, 300];
+
+  // Return positions list
+  console.log('positions:', positions);
   return positions;
 };
 
@@ -137,7 +202,6 @@ const main = async () => {
   offset = 0;
   const count = 3;
   while (offset < positions.length - count) {
-    console.log(offset);
     gl.drawArrays(primitiveType, offset, count);
     offset += count;
   }

@@ -17,6 +17,7 @@
     "no-magic-numbers": "off",
     "import/prefer-default-export": false,
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "object-shorthand": ["error", "consistent-as-needed"]
+    "object-shorthand": ["error", "consistent-as-needed"],
+    "no-continue": "off"
   }
 }
