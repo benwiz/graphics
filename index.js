@@ -37,14 +37,14 @@ const randomInt = (min, max) => Math.floor(randomFloat(min, max));
 //   return dist;
 // };
 
-// const createPoints = (gl, n) => {
-//   const points = [];
-//   for (let i = 0; i < n; i++) {
-//     const point = [randomInt(0, gl.canvas.width), randomInt(0, gl.canvas.height)];
-//     points.push(point);
-//   }
-//   return points;
-// };
+const createPoints = (gl, n) => {
+  const points = [];
+  for (let i = 0; i < n; i++) {
+    const point = [randomInt(0, gl.canvas.width), randomInt(0, gl.canvas.height)];
+    points.push(point);
+  }
+  return points;
+};
 
 const createTriangles = (points) => {
   // Returns a flat list of coordinates
