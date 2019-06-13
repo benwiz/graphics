@@ -43,6 +43,7 @@ const createPoints = (gl, n) => {
     const point = [randomInt(0, gl.canvas.width), randomInt(0, gl.canvas.height)];
     points.push(point);
   }
+  console.log(gl.canvas.width, gl.canvas.height);
   return points;
 };
 
@@ -88,6 +89,10 @@ const main = async () => {
   // Initializations
   //
 
+  // Resize canvas relative to display size. This has to be done before we
+  // generate points based on canvas size.
+  webglUtils.resizeCanvasToDisplaySize(gl.canvas);
+
   // Get the strings for our GLSL shaders
   const vertexShaderResponse = await fetch('./2d.vert');
   const vertexShaderSource = await vertexShaderResponse.text();
@@ -120,8 +125,6 @@ const main = async () => {
   //
   // Rendering.
   //
-
-  webglUtils.resizeCanvasToDisplaySize(gl.canvas);
 
   // Tell WebGL how to convert from clip space to pixels
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
