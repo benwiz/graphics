@@ -1,4 +1,4 @@
-/* global webglUtils:readable */
+/* global webglUtils:readable, Delaunator:readable */
 
 const createShader = (gl, type, source) => {
   const shader = gl.createShader(type);
@@ -41,59 +41,24 @@ const distance = (point1, point2) => {
 const createPoints = (gl, n) => {
   const points = [];
   for (let i = 0; i < n; i++) {
-    const point = {
-      x: randomInt(0, gl.canvas.width),
-      y: randomInt(0, gl.canvas.height),
-    };
+    const point = [randomInt(0, gl.canvas.width), randomInt(0, gl.canvas.height)];
     points.push(point);
   }
   return points;
 };
 
 const createTriangles = (points) => {
-  // This is implemented extremely naively and inneficiently. Using Delaunay
-  // triangulation is probably the best method.
-  //
-  // Here, I find the two nearest points to the current point and call that a
-  // triangle. I may need to dedupelicate later which will require sorting the
-  // vertices within the triangle.
-  //
+  // Returns a flat list of coordinates
   const triangles = [];
-
-  for (let i = 0; i < points.length; i++) {
-    const point = points[i];
-
-    // Find the first nearest poit
-    let nearestPointA = { x: Infinity, y: Infinity };
-    for (let j = 0; j < points.length; j++) {
-      if (i === j) continue;
-      const testPoint = points[j];
-      const testDist = distance(point, testPoint);
-      const dist = distance(point, nearestPointA);
-      if (testDist < dist) {
-        nearestPointA = testPoint;
-      }
-    }
-
-    // Find the second nearest poit
-    let nearestPointB = { x: Infinity, y: Infinity };
-    for (let j = 0; j < points.length; j++) {
-      if (i === j) continue;
-      const testPoint = points[j];
-      if (testPoint === nearestPointA) continue;
-      const testDist = distance(point, testPoint);
-      const dist = distance(point, nearestPointB);
-      if (testDist < dist) {
-        nearestPointB = testPoint;
-      }
-    }
-
-    // Form the triangle (TODO: the points should be sorted by distance from origin for future deduplicating)
-    const triangle = [point, nearestPointA, nearestPointB];
+  const delaunay = Delaunator.from(points);
+  for (let i = 0; i < delaunay.triangles.length; i += 3) {
+    const triangle = [
+      points[delaunay.triangles[i]],
+      points[delaunay.triangles[i + 1]],
+      points[delaunay.triangles[i + 2]],
+    ];
     triangles.push(triangle);
   }
-
-  console.log('triangles:', triangles);
   return triangles;
 };
 
@@ -105,24 +70,10 @@ const createPositions = (gl, n) => {
   // Second, generate triangles using those points
   const triangles = createTriangles(points);
 
-  // Third, concatenate a list of all triangles so into the positions list
-  const positions = [];
-  for (let i = 0; i < triangles.length; i++) {
-    const triangle = triangles[i];
-    for (let j = 0; j < triangle.length; j++) {
-      const point = triangle[j];
-      positions.push(point.x);
-      positions.push(point.y);
-    }
-  }
-
-  // //
-  // // Hardcode positions
-  // //
-  // const positions = [25, 43, 236, 67, 50, 300];
+  // Third, create the flattened postitions array
+  const positions = triangles.flat(2);
 
   // Return positions list
-  console.log('positions:', positions);
   return positions;
 };
 
@@ -161,7 +112,7 @@ const main = async () => {
   // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-  const positions = createPositions(gl, 3);
+  const positions = createPositions(gl, 20);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
   //
@@ -201,7 +152,7 @@ const main = async () => {
   const primitiveType = gl.TRIANGLES;
   offset = 0;
   const count = 3;
-  while (offset < positions.length - count) {
+  while (offset < positions.length - count - 1) {
     gl.drawArrays(primitiveType, offset, count);
     offset += count;
   }
