@@ -99,7 +99,8 @@ const createPositions = (gl, n) => {
 
 // Decide color which is a gradient from blue (#0077b5, [0,119,181], [0, .47, .71]) to white.
 const selectColor = (gl, x, y) => {
-  // TODO: Fix some problem related to to the distance function I think.
+  // TODO: Fix some problem related to to the distance function I think. (not
+  // the function itself but something related to the origin, idk)
 
   const origin = { x: 0, y: 0 };
   const point = { x, y };
