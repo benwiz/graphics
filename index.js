@@ -27,25 +27,24 @@ const createProgram = (gl, vertexShader, fragmentShader) => {
 
 const randomFloat = (min, max) => Math.random() * (max - min) + min;
 const randomInt = (min, max) => Math.floor(randomFloat(min, max));
+// const distance = (point1, point2) => {
+//   // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
+//   const x1 = point1.x;
+//   const y1 = point1.y;
+//   const x2 = point2.x;
+//   const y2 = point2.y;
+//   const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+//   return dist;
+// };
 
-const distance = (point1, point2) => {
-  // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
-  const x1 = point1.x;
-  const y1 = point1.y;
-  const x2 = point2.x;
-  const y2 = point2.y;
-  const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
-  return dist;
-};
-
-const createPoints = (gl, n) => {
-  const points = [];
-  for (let i = 0; i < n; i++) {
-    const point = [randomInt(0, gl.canvas.width), randomInt(0, gl.canvas.height)];
-    points.push(point);
-  }
-  return points;
-};
+// const createPoints = (gl, n) => {
+//   const points = [];
+//   for (let i = 0; i < n; i++) {
+//     const point = [randomInt(0, gl.canvas.width), randomInt(0, gl.canvas.height)];
+//     points.push(point);
+//   }
+//   return points;
+// };
 
 const createTriangles = (points) => {
   // Returns a flat list of coordinates
