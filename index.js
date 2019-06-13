@@ -104,7 +104,10 @@ const main = async () => {
 
   // look up where the vertex data needs to go.
   const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
+
+  // Look up uniform locations
   const resolutionUniformLocation = gl.getUniformLocation(program, 'u_resolution');
+  const colorUniformLocation = gl.getUniformLocation(program, 'u_color');
 
   // Create a buffer and put three 2d clip space points in it
   const positionBuffer = gl.createBuffer();
@@ -125,7 +128,7 @@ const main = async () => {
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
   // Clear the canvas
-  gl.clearColor(0, 0, 0, 0);
+  gl.clearColor(0, 0, 1, 0.2); // Background
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Tell it to use our program (pair of shaders)
@@ -153,6 +156,10 @@ const main = async () => {
   offset = 0;
   const count = 3;
   while (offset < positions.length - count - 1) {
+    // Set a random color.
+    gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
+
+    // Draw triangle
     gl.drawArrays(primitiveType, offset, count);
     offset += count;
   }
