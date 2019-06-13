@@ -6,23 +6,22 @@
 
 const randomFloat = (min, max) => Math.random() * (max - min) + min;
 const randomInt = (min, max) => Math.floor(randomFloat(min, max));
-// const distance = (point1, point2) => {
-//   // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
-//   const x1 = point1.x;
-//   const y1 = point1.y;
-//   const x2 = point2.x;
-//   const y2 = point2.y;
-//   const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
-//   return dist;
-// };
-const hexToRgb = hex => hex
-  .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => `#${r}${r}${g}${g}${b}${b}`)
-  .substring(1)
-  .match(/.{2}/g)
-  .map(x => parseInt(x, 16));
+const distance = (point1, point2) => {
+  // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
+  const x1 = point1.x;
+  const y1 = point1.y;
+  const x2 = point2.x;
+  const y2 = point2.y;
+  const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+  return dist;
+};
+// const hexToRgb = hex => hex
+//   .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => `#${r}${r}${g}${g}${b}${b}`)
+//   .substring(1)
+//   .match(/.{2}/g)
+//   .map(x => parseInt(x, 16));
 const getRandomElement = (arr) => {
   const i = randomInt(0, arr.length - 1);
-  console.log(i);
   const element = arr[i];
   return element;
 };
@@ -65,7 +64,6 @@ const createPoints = (gl, n) => {
     ];
     points.push(point);
   }
-  console.log(gl.canvas.width, gl.canvas.height);
   return points;
 };
 
@@ -97,6 +95,20 @@ const createPositions = (gl, n) => {
 
   // Return positions list
   return positions;
+};
+
+// Decide color which is a gradient from blue (#0077b5, [0,119,181], [0, .47, .71]) to white.
+const selectColor = (gl, x, y) => {
+  const origin = { x: 0, y: 0 };
+  const point = { x, y };
+  const dist = distance(origin, point);
+  const maxDist = distance(origin, { x: gl.canvas.width, y: gl.canvas.height });
+  const ratio = dist / maxDist;
+  const rDiff = 1 * ratio;
+  const gDiff = 0.53 * ratio;
+  const bDiff = 0.29 * ratio;
+  const color = [0 + rDiff, 0.47 + gDiff, 0.71 + bDiff];
+  return color;
 };
 
 const main = async () => {
@@ -175,25 +187,13 @@ const main = async () => {
   // Set the resolution
   gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
-  // Color palette
-  const palette = [
-    hexToRgb('#0077b5'),
-    hexToRgb('#000000'),
-    hexToRgb('#313335'),
-    hexToRgb('#86888a'),
-    hexToRgb('#caccce'),
-    hexToRgb('#00a0dc'),
-    hexToRgb('#8d6cab'),
-    hexToRgb('#dd5143'),
-  ];
-
   // draw
   const primitiveType = gl.TRIANGLES;
   offset = 0;
   const count = 3;
   while (offset < positions.length - count - 1) {
     // Set a random color.
-    const color = getRandomElement(palette);
+    const color = selectColor(gl, positions[offset], positions[offset + 1]);
     gl.uniform4f(colorUniformLocation, color[0], color[1], color[2], 1);
 
     // Draw triangle
