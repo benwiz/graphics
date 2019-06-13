@@ -1,5 +1,36 @@
 /* global webglUtils:readable, Delaunator:readable */
 
+//
+// Helper functions
+//
+
+const randomFloat = (min, max) => Math.random() * (max - min) + min;
+const randomInt = (min, max) => Math.floor(randomFloat(min, max));
+// const distance = (point1, point2) => {
+//   // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
+//   const x1 = point1.x;
+//   const y1 = point1.y;
+//   const x2 = point2.x;
+//   const y2 = point2.y;
+//   const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+//   return dist;
+// };
+const hexToRgb = hex => hex
+  .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => `#${r}${r}${g}${g}${b}${b}`)
+  .substring(1)
+  .match(/.{2}/g)
+  .map(x => parseInt(x, 16));
+const getRandomElement = (arr) => {
+  const i = randomInt(0, arr.length - 1);
+  console.log(i);
+  const element = arr[i];
+  return element;
+};
+
+//
+// Key functions
+//
+
 const createShader = (gl, type, source) => {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
@@ -25,22 +56,13 @@ const createProgram = (gl, vertexShader, fragmentShader) => {
   gl.deleteProgram(program);
 };
 
-const randomFloat = (min, max) => Math.random() * (max - min) + min;
-const randomInt = (min, max) => Math.floor(randomFloat(min, max));
-// const distance = (point1, point2) => {
-//   // sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
-//   const x1 = point1.x;
-//   const y1 = point1.y;
-//   const x2 = point2.x;
-//   const y2 = point2.y;
-//   const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
-//   return dist;
-// };
-
 const createPoints = (gl, n) => {
   const points = [];
   for (let i = 0; i < n; i++) {
-    const point = [randomInt(0, gl.canvas.width), randomInt(0, gl.canvas.height)];
+    const point = [
+      randomInt(-0.1 * gl.canvas.width, 1.1 * gl.canvas.width),
+      randomInt(-0.1 * gl.canvas.height, 1.1 * gl.canvas.height),
+    ];
     points.push(point);
   }
   console.log(gl.canvas.width, gl.canvas.height);
@@ -119,7 +141,7 @@ const main = async () => {
   // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-  const positions = createPositions(gl, 20);
+  const positions = createPositions(gl, 200);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
   //
@@ -129,8 +151,8 @@ const main = async () => {
   // Tell WebGL how to convert from clip space to pixels
   gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-  // Clear the canvas
-  gl.clearColor(0, 0, 1, 0.2); // Background
+  // Clear the canvas1
+  gl.clearColor(0, 0, 0, 0); // Background
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Tell it to use our program (pair of shaders)
@@ -153,13 +175,26 @@ const main = async () => {
   // Set the resolution
   gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
+  // Color palette
+  const palette = [
+    hexToRgb('#0077b5'),
+    hexToRgb('#000000'),
+    hexToRgb('#313335'),
+    hexToRgb('#86888a'),
+    hexToRgb('#caccce'),
+    hexToRgb('#00a0dc'),
+    hexToRgb('#8d6cab'),
+    hexToRgb('#dd5143'),
+  ];
+
   // draw
   const primitiveType = gl.TRIANGLES;
   offset = 0;
   const count = 3;
   while (offset < positions.length - count - 1) {
     // Set a random color.
-    gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
+    const color = getRandomElement(palette);
+    gl.uniform4f(colorUniformLocation, color[0], color[1], color[2], 1);
 
     // Draw triangle
     gl.drawArrays(primitiveType, offset, count);
