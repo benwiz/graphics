@@ -99,6 +99,8 @@ const createPositions = (gl, n) => {
 
 // Decide color which is a gradient from blue (#0077b5, [0,119,181], [0, .47, .71]) to white.
 const selectColor = (gl, x, y) => {
+  // TODO: Fix some problem related to to the distance function I think.
+
   const origin = { x: 0, y: 0 };
   const point = { x, y };
   const dist = distance(origin, point);
@@ -107,8 +109,8 @@ const selectColor = (gl, x, y) => {
   const rDiff = 1 * ratio;
   const gDiff = 0.53 * ratio;
   const bDiff = 0.29 * ratio;
-  const color = [0 + rDiff, 0.47 + gDiff, 0.71 + bDiff];
-  return color;
+  const color = [0 + rDiff, 0.47 + gDiff, 0.71 + bDiff, 1];
+  return [0, 0.47, 0.71, ratio];
 };
 
 const main = async () => {
@@ -194,7 +196,7 @@ const main = async () => {
   while (offset < positions.length - count - 1) {
     // Set a random color.
     const color = selectColor(gl, positions[offset], positions[offset + 1]);
-    gl.uniform4f(colorUniformLocation, color[0], color[1], color[2], 1);
+    gl.uniform4f(colorUniformLocation, color[0], color[1], color[2], color[3]);
 
     // Draw triangle
     gl.drawArrays(primitiveType, offset, count);
