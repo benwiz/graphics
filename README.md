@@ -35,4 +35,5 @@ LinkedIn color palette:
 
 ## To Do
 
-- Left off at the first iFrame
+- Finish making this work with delaunay
+- Consider implementing Voronoi on top (https://mapbox.github.io/delaunator/)
