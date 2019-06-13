@@ -35,5 +35,5 @@ LinkedIn color palette:
 
 ## To Do
 
-- Finish making this work with delaunay
+- Fix coloring bug
 - Consider implementing Voronoi on top (https://mapbox.github.io/delaunator/)
