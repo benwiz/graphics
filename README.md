@@ -1,3 +1,5 @@
-# ofSprinkles
+#  Sprinkles
 
-Check branch 2d or 3d (there is a branch for each)
+## To Do
+
+- Rounded caps on sprinkles. Use circles or half circles
