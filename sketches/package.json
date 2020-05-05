@@ -1,0 +1,44 @@
+{
+  "name": "sketches",
+  "version": "1.0.0",
+  "description": "Test the canvas-sketch boilerplate tool.",
+  "main": "index.js",
+  "scripts": {
+    "canvas-sketch": "run(){ http-server src/$1/dist/; }; run",
+    "new": "run(){ canvas-sketch src/$1/index.js --new --template=$2; } && run",
+    "my-new": "run(){ cp -r templates/$2 src/$1; } && run",
+    "start": "run(){ canvas-sketch src/$1/index.js; } && run",
+    "hot": "run(){ canvas-sketch src/$1/index.js --hot; } && run",
+    "build": "run(){ canvas-sketch src/$1/index.js --build && mkdir -p docs/$1/ && mv index.* docs/$1/; } && run",
+    "server": "run(){ http-server docs/$1/; } && run",
+    "gif": "run(){ canvas-sketch-gif ~/Downloads/ src/$1/out/$2.gif --fps=$3; } && run",
+    "gif-to-mp4": "run() { ffmpeg -i src/$1/out/$2.gif -movflags faststart -pix_fmt yuv420p -vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" src/$1/out/$2.mp4; } && run",
+    "mp4": "run(){ canvas-sketch-mp4 ~/Downloads/ --fps=$1; } && run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwiz/sketches.git"
+  },
+  "keywords": [],
+  "author": "Ben Wiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benwiz/sketches/issues"
+  },
+  "homepage": "https://github.com/benwiz/sketches#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "http-server": "^0.11.1"
+  },
+  "dependencies": {
+    "canvas-sketch": "^0.2.0",
+    "canvas-sketch-cli": "^1.2.0",
+    "compute-stdev": "^1.0.0",
+    "matter-js": "^0.14.2",
+    "p5": "^0.7.2",
+    "roughjs": "^3.0.0",
+    "three": "^0.100.0"
+  }
+}
