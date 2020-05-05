@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css?family=Dosis");
+@import "_variables";
+@import "@material/button/mdc-button";
+// @import "@material/select/mdc-select";
+@import "@material/form-field/mdc-form-field";
+@import "@material/radio/mdc-radio";
+
+body {
+  font-family: "Dosis", sans-serif;
+}
+
+#container {
+  text-align: center;
+
+  select {
+    margin: 0 auto;
+    width: 200px;
+  }
+
+  .border-box {
+    border: black 1px solid;
+  }
+
+  #status {
+    max-width: 350px;
+    margin: 10px auto;
+  }
+
+  #workspace {
+    display: flex;
+    justify-content: center;
+
+    & > div {
+      margin: 10px;
+    }
+
+    #canvasContainer {
+      cursor: crosshair;
+    }
+
+    #buttonContainer {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+  }
+}
+
+#links {
+  width: 100%;
+  margin: 25px auto;
+  text-align: center;
+
+  a {
+    color: gray;
+  }
+
+  i {
+    margin: 4px;
+    font-size: 22px;
+
+    &:hover {
+      color: lightgray;
+    }
+  }
+}

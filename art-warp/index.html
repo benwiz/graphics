@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131129805-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-131129805-1');
+  </script>
+  -->
+
+  <meta name="description" content="Cretate art in the likeness of the greats.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ben Wiz | Art Warp</title>
+
+  <link ref="canonical" href="https://benwiz.io/art-warp/">
+  <link rel="shortcut icon" href="images/hat.png" type="image/x-icon">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+  <!-- Custom -->
+  <link rel="stylesheet" type="text/css" href="./dist/css/index.css">
+</head>
+
+<body>
+  <div id="container">
+    <h1>Art Warp</h1>
+
+    <div id="model-radio-buttons">
+      <!-- edges2pikachu -->
+      <div class="mdc-form-field">
+        <div class="mdc-radio mdc-radio--disabled">
+          <input class="mdc-radio__native-control" type="radio" id="edges2pikachu" name="models" disabled checked>
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+        </div>
+        <label for="edges2pikachu">Pikachu</label>
+      </div>
+      <!-- edges2cats -->
+      <div class="mdc-form-field">
+        <div class="mdc-radio mdc-radio--disabled">
+          <input class="mdc-radio__native-control" type="radio" id="edges2cats" name="models" disabled>
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+        </div>
+        <label for="edges2cats">Cats</label>
+      </div>
+    </div>
+
+    <p id="status"></p>
+
+    <div id="workspace" class="flex">
+      <div>
+        <div id="canvasContainer"></div>
+        <div id="buttonContainer" class="flex">
+          <button disabled id="clearButton" class="mdc-button mdc-button--outlined">Clear</button>
+        </div>
+      </div>
+      <div id="transferContainer">
+      </div>
+      <div id="output">
+        <img src="">
+      </div>
+    </div>
+  </div>
+
+  <div id="links">
+    <a href="https://benwiz.io/"><i class="fas fa-home"></i></a>
+    <a href="https://github.com/benwiz/art-warp/"><i class="fab fa-github"></i></a>
+  </div>
+
+  <script src="./dist/js/index.js"></script>
+</body>
+
+</html>

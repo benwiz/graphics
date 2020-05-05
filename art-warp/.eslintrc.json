@@ -1,0 +1,25 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "node": false
+  },
+  "rules": {
+    "max-len": [1, 100, 2, { "ignoreComments": true }],
+    "no-console": 0,
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-param-reassign": ["error", { "props": false }],
+    "radix": ["error", "as-needed"],
+    "no-new": "off",
+    "no-mixed-operators": "off",
+    "no-return-assign": "off",
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignoreArrayIndexes": true,
+        "ignore": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 255, 360]
+      }
+    ],
+    "import/prefer-default-export": false
+  }
+}
