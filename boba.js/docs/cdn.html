@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boba.js</title>
+    <meta name="description" content="Demo page for Boba.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link ref="canonical" href="https://benwiz.io/boba.js/cdn">
+    <link rel="shortcut icon" href="images/boba.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis">
+    <link rel="stylesheet" href="./dist/css/index.css">
+  </head>
+  <body> 
+    <h1>Boba.js</h1>
+    <p>This is using <a href="https://unpkg.com/@benwiz/boba.js@latest/dist/bundle.js">UNPKG CDN</a>. See <a href="https://github.com/benwiz/boba.js/blob/gh-pages/cdn.html">cdn.html</a>.</p>
+    <p>Try using the <a href="/boba.js/">NPM library</a>.</p>
+    <p>See the WebAssembly version: <a href="/boba.wasm/">boba.wasm</a>.</p>
+
+    <a href="/">
+      <img src="./images/home.svg" width="24" height="24">
+    </a>
+    <a href="https://github.com/benwiz/boba.js">
+      <img src="./images/github.svg" width="24" height="24">
+    </a>
+
+    <!-- This is an example of a minimal setup for boba.js using the unpkg cdn. -->
+    <script src="https://unpkg.com/@benwiz/boba.js@latest/dist/bundle.js"></script>
+    <script>
+      const options = Boba.getDefaultOptions();
+      Boba.start(options);
+    </script>
+  </body>
+</html>
