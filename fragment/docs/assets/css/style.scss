@@ -1,0 +1,43 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+::selection {
+  background: #b2d8d8; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #b2d8d8; /* Gecko Browsers */
+}
+
+.status {
+  margin-bottom: 30px;
+  color: teal;
+  width: 100%;
+  text-align: center;
+}
+
+.images {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.image {
+  margin: 5px;
+  min-width: 250px;
+  min-height: 250px;
+  max-height: 350px;
+  width: auto;
+  height: auto;
+  border: 2px dashed teal;
+}
+
+.upload-image-label {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.upload-image:hover {
+  background-color: #b2d8d8;
+}
