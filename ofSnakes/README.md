@@ -1,5 +1,13 @@
 #  snakes
 
+## What
+
+Draw a grid of miniature "snakes" (like the game). It actually looks pretty nice.
+
+## How
+
+OpenFrameworks, C++
+
 ## To Do
 
 - More complex paths (probably allow overlapping)

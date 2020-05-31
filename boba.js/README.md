@@ -1,5 +1,7 @@
 # boba.js
 
+## What
+
 Boba.js is animated background JavaScript module published to [NPM](https://www.npmjs.com/package/@benwiz/boba.js).
 
 [Demo](https://benwiz.io/boba.js/)
@@ -7,6 +9,10 @@ Boba.js is animated background JavaScript module published to [NPM](https://www.
 ## Why
 
 I created a background for my website but wanted to be able to make it re-usable. Creating the NPM module was an excuse to practice TypeScript and learn how to publish an NPM module.
+
+## How
+
+Typescript using HTML5 Canvas
 
 ## How to Use
 

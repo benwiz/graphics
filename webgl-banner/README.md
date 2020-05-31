@@ -1,5 +1,7 @@
 # webgl-banner
 
+## What
+
 Learn WebGL by making a very simple banner
 
 First worked through [WebGL Fundamentals tutorial](https://webglfundamentals.org/webgl/lessons/webgl-fundamentals.html). Then doing my own thing.

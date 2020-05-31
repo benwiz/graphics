@@ -1,6 +1,12 @@
 #  fragmentVoronoi
 
+## What
+
 Draw a voronoi diagram around a set of points. Fill each cell with its average color. Move cells around. https://www.instagram.com/p/BpogVq8hAux/
+
+## How
+
+OpenFrameworks, C++
 
 ## To Do
 

@@ -1,6 +1,12 @@
 # fragment
 
-Take an image and output a fragmented (low-poly) version. It works by using OpenCV to detect "key points" then connets those key points with delaunay triangulation. Then it fills each triangle with the average color of the pixels within that triangle.
+## What
+
+Take an image and output a fragmented (low-poly) version. 
+
+## How
+
+It works by using OpenCV's (inside a Python AWS Lambda Function) to detect "key points" then (in a Clojure AWS Lambda Function) connects those key points with delaunay triangulation. Then (in Clojure Lambda function again) it fills each triangle with the average color of the pixels within that triangle.
 
 It works but the images are rarely nice looking. I've used both Canny edge detection and key point detection. Either could probably be good with some more work.
 

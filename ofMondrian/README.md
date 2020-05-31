@@ -1,8 +1,12 @@
 #  Mondrian
 
+## What
+
 Randomly generate a Mondrian-like image.
 
-Next project: recursiveMondrian
+## How
+
+OpenFrameworks, C++
 
 ## To Do
 
