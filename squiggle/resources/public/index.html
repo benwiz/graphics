@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="icon" type="image/png" href="/squiggle/assets/images/squiggle.png">
-    <title>Squiggle</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="https://clojurescript.org/images/cljs-logo-icon-32.png">
+    <style>
+      .grid-container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-column-gap: 8px;
+          width: fit-content;
+          width: -moz-fit-content;
+      }
+    </style>
   </head>
   <body>
+    <div id="app" class="grid-container">
 
-    <canvas id="delaunay-monsters"></canvas>
-    <!-- <canvas id="primitive-starry-night"></canvas> -->
-    <canvas id="pointillism-georges-seurat"></canvas>
-    <canvas id="pointillism-picasso-face"></canvas>
-    <canvas id="pointillism-girl-with-pearl-earing"></canvas>
-    <canvas id="pointillism-starry-night"></canvas>
-    <canvas id="tentacles"></canvas>
-    <canvas id="game-of-life"></canvas>
-    <canvas id="solar-system"></canvas>
-    <canvas id="ten-print-remake"></canvas>
+      <div id="pointillism-georges-seurat" style="grid-column: span 2;"></div>
+      <div id="pointillism-picasso-face"></div>
+      <div id="pointillism-girl-with-pearl-earing"></div>
+      <div id="pointillism-starry-night"></div>
+      <div id="tentacles"></div>
+      <!-- <div id="game-of-life"></div> -->
+      <div id="solar-system"></div>
+      <div id="ten-print-remake"></div>
 
-    <script src="js/main.js"></script>
-    <script>squiggle.core.run_sketch()</script>
+    </div> <!-- end of app div -->
+    
+    <!-- KEEP THIS SCRIPT TAG : IT LOADS YOUR APPLICATION CODE -->
+    <script src="cljs-out/dev-main.js" type="text/javascript"></script>
   </body>
 </html>
