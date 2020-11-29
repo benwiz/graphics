@@ -1,15 +1,14 @@
 (ns ^:figwheel-hooks com.benwiz.squiggle
-  (:require ;; [goog.dom :as gdom]
-            [quil.core :as q :include-macros true]
-            [quil.middleware :as m]
-            ;; [com.benwiz.squiggle.primitive :as primitive]
-            ;; [com.benwiz.squiggle.delaunay-monsters :as delaunay-monsters]
+  (:require ;; [com.benwiz.squiggle.primitive :as primitive]
+            [com.benwiz.squiggle.delaunay-monsters :as delaunay-monsters]
             [com.benwiz.squiggle.game-of-life :as game-of-life]
             [com.benwiz.squiggle.pointillism :as pointillism]
             [com.benwiz.squiggle.solar-system :as solar-system]
             [com.benwiz.squiggle.ten-print-remake :as ten-print-remake]
             [com.benwiz.squiggle.tentacles :as tentacles]
-            ))
+            ;; [goog.dom :as gdom]
+            [quil.core :as q :include-macros true]
+            [quil.middleware :as m]))
 
 (defn ^:export run-sketch
   []
@@ -69,20 +68,20 @@
     :update pointillism/update-state
     :draw pointillism/draw-state
     :middleware [m/fun-mode])
-  #_(q/defsketch sketch-primitive-starry-night
-    :host "primitive-starry-night"
-    :size [300 300]
-    :setup primitive/setup-starry-night
-    :update primitive/update-state
-    :draw primitive/draw-state
-    :middleware [m/fun-mode])
-  #_(q/defsketch sketch-delaunay-monsters
+  (q/defsketch sketch-delaunay-monsters
     :host "delaunay-monsters"
     :size [300 300]
     :setup delaunay-monsters/setup
     :update delaunay-monsters/update-state
     :draw delaunay-monsters/draw-state
-    :mouse-clicked delaunay-monsters/mouse-clicked
+    ;; :mouse-clicked delaunay-monsters/mouse-clicked
+    :middleware [m/fun-mode])
+  #_(q/defsketch sketch-primitive-starry-night
+    :host "primitive-starry-night"
+    :size [300 300]
+    :setup primitive/setup-starry-night
+    :update primitive/update-state
+    :draw primitive/draw-stat
     :middleware [m/fun-mode]))
 
 ;; specify reload hook with ^;after-load metadata

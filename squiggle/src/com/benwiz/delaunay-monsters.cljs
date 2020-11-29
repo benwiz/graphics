@@ -1,13 +1,9 @@
 (ns com.benwiz.squiggle.delaunay-monsters
   (:require [quil.core :as q :include-macros true]
             [com.benwiz.squiggle.delaunay :as delaunay]
-            [com.benwiz.squiggle.listen :as listen]
-            [cljs.core.async :as async])
-  (:require-macros
-    [cljs.core.async.macros :refer [go]]))
+            [com.benwiz.squiggle.listen :as listen]))
 
 (def num-points 10)
-(def step 2)
 (def edge-rate 4)
 (def triangle-rate 10)
 (def birth-rate 15)
@@ -21,7 +17,7 @@
 (defn coords [point]
   [(:x point) (:y point)])
 
-(defn update-point [point]
+(defn update-point [point step]
   (let [min-x -100
         max-x (+ (q/width) 100)
         min-y -100
@@ -78,27 +74,25 @@
 (defn setup []
   (q/frame-rate 30)
   ; (q/no-loop)
-  { :triangles []
-    :points (repeatedly num-points point)
-    ; :audio-channel (listen/audio)
-  })
+  {:triangles []
+   :points    (repeatedly num-points point)})
 
 (defn update-state [state]
-  ; (println listen/current-frame) ; use this : http://funcool.github.io/octet/latest/
-
-  { ; Calculate triangles to draw from previous state
-    :triangles (:triangles (delaunay/triangulate (map coords (:points state))))
-    ; Generate points for next state
-    :points (lazy-cat
-              ; Kill points
-              (remove nil?
-                ; Move points (maybe I should kill first, then move that subset... doesn't really matter unless movements start considering other points)
-                (map update-point (:points state)))
-              ; Birth point
-              (if (= (rand-int birth-rate) 0)
-                  [(point)]
-                  []))
-    :audio-channel (:audio-channel state)})
+  ;; (println listen/current-frame) ; use this : http://funcool.github.io/octet/latest/
+  (let [step (/ (reduce + @listen/current-frame) 4096)]
+    {;; Calculate triangles to draw from previous state
+     :triangles (:triangles (delaunay/triangulate (map coords (:points state))))
+                                        ; Generate points for next state
+     :points    (into (if (= (rand-int birth-rate) 0)
+                        ;; Birth point
+                        [(point)]
+                        [])
+                      (comp
+                        ;; Kill points
+                        (remove nil?)
+                        ;; Move points (maybe I should kill first, then move that subset... doesn't really matter unless movements start considering other points)
+                        (map #(update-point % step)))
+                      (:points state))}))
 
 (defn draw-state [state]
   (q/background 0 0 0)
@@ -106,7 +100,7 @@
   (mapv draw-edges (:triangles state))
   (mapv draw-triangles (:triangles state)))
 
-(defn mouse-clicked [state event]
+#_(defn mouse-clicked [state event]
   (println "click")
   ; This is an experiment for sound frames. Depending on how those work may be able to use (q/no-loop) in setup
   (if (= 0.5 step)
