@@ -1,7 +1,5 @@
 (ns com.benwiz.squiggle.noise-scape
-  (:require [quil.core :as q :include-macros true]
-            [com.benwiz.noise :as noise]
-            [clojure.core.matrix.impl.defaults :as d]))
+  (:require [quil.core :as q :include-macros true]))
 
 (defn setup
   []
@@ -16,9 +14,19 @@
 
 (defn draw
   [{:keys [t y]}]
+
   ;; (q/background 240)
   (q/stroke 0 0 0)
   (doseq [x (range 0 (q/width))]
     (q/point x (+ y
                   (* (* (q/height) 0.3)
                      (q/noise (/ x 100) t))))))
+
+(defn key-pressed
+  []
+  ;; TODO need real resume, maybe have to store state in atom
+  (case (q/key-as-keyword)
+    :p (q/no-loop)
+    :s (q/start-loop)
+    :e (q/save "resources/out/test.png")
+    nil))

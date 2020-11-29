@@ -5,7 +5,8 @@
                                       #_#_:git/url "https://github.com/mikera/core.matrix.git"
                                       #_#_:sha     "d28e8f311aa90b00c79578c159e67da9202b8495"
                                       :local/root "../core.matrix"} ;; until what's in master is fixed
-           cljs-audiocapture         {:mvn/version "0.1.4"}}
+           cljs-audiocapture         {:mvn/version "0.1.4"}
+           com.cemerick/url          {:mvn/version "0.1.1"}}
  :paths   ["src" "resources"]
  :aliases {:fig   {:extra-deps  {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
                                  com.bhauman/figwheel-main       {:mvn/version "0.2.11"}}
