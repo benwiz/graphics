@@ -3,15 +3,13 @@
             [quil.core :as q :include-macros true]
             [quil.middleware :as m]
             ;; [com.benwiz.squiggle.primitive :as primitive]
-            [com.benwiz.squiggle.delaunay-monsters :as delaunay-monsters]
+            ;; [com.benwiz.squiggle.delaunay-monsters :as delaunay-monsters]
             [com.benwiz.squiggle.game-of-life :as game-of-life]
             [com.benwiz.squiggle.pointillism :as pointillism]
             [com.benwiz.squiggle.solar-system :as solar-system]
             [com.benwiz.squiggle.ten-print-remake :as ten-print-remake]
             [com.benwiz.squiggle.tentacles :as tentacles]
             ))
-
-(prn "hello")
 
 (defn ^:export run-sketch
   []
