@@ -4,7 +4,7 @@
             [quil.middleware :as m]
             ;; [com.benwiz.squiggle.primitive :as primitive]
             [com.benwiz.squiggle.delaunay-monsters :as delaunay-monsters]
-            ;; [com.benwiz.squiggle.game-of-life :as game-of-life]
+            [com.benwiz.squiggle.game-of-life :as game-of-life]
             [com.benwiz.squiggle.pointillism :as pointillism]
             [com.benwiz.squiggle.solar-system :as solar-system]
             [com.benwiz.squiggle.ten-print-remake :as ten-print-remake]
@@ -29,7 +29,7 @@
     :update solar-system/update-state
     :draw solar-system/draw-state
     :middleware [m/fun-mode])
-  #_(q/defsketch sketch-game-of-life
+  (q/defsketch sketch-game-of-life
     :host "game-of-life"
     :size [300 300]
     :setup game-of-life/setup
