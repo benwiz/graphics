@@ -6,12 +6,19 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="https://clojurescript.org/images/cljs-logo-icon-32.png">
     <style>
+      body {
+          /* background-color: gray; */
+      }
       .grid-container {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          grid-column-gap: 8px;
+          grid-column-gap: 4px;
+          grid-row-gap: 2px;
           width: fit-content;
           width: -moz-fit-content;
+      }
+      .grid-container > div {
+          /* border: 2px black solid; */
       }
     </style>
   </head>
