@@ -8,6 +8,9 @@
             [com.benwiz.squiggle.solar-system :as solar-system]
             [com.benwiz.squiggle.ten-print-remake :as ten-print-remake]
             [com.benwiz.squiggle.tentacles :as tentacles]
+            [com.benwiz.squiggle.sketch-20201204 :as sketch-20201204]
+            [com.benwiz.squiggle.sketch-20201204b :as sketch-20201204b]
+            [com.benwiz.squiggle.sketch-20201206 :as sketch-20201206]
             ;; [goog.dom :as gdom]
             [quil.core :as q :include-macros true]
             [quil.middleware :as m]))
@@ -105,21 +108,36 @@
           :draw noise-scape/draw
           :key-pressed noise-scape/key-pressed
           :middleware [m/fun-mode])))
-    #_(q/defsketch sketch-delaunay-monsters ;; dont draw because it is seizure inducing
-        :host "delaunay-monsters"
-        :size [w h]
-        :setup delaunay-monsters/setup
-        :update delaunay-monsters/update-state
-        :draw delaunay-monsters/draw-state
-        ;; :mouse-clicked delaunay-monsters/mouse-clicked
-        :middleware [m/fun-mode])
-    #_(q/defsketch sketch-primitive-starry-night
-        :host "primitive-starry-night"
-        :size [w h]
-        :setup primitive/setup-starry-night
-        :update primitive/update-state
-        :draw primitive/draw-stat
-        :middleware [m/fun-mode])))
+    (let [id "sketch-20201204"]
+      (when (or (empty? sketches) (sketches id))
+        (q/defsketch sketch-sketch-20201204
+          :host id
+          :size [w h]
+          :setup sketch-20201204/setup
+          :update sketch-20201204/update-state
+          :draw sketch-20201204/draw
+          :key-pressed sketch-20201204/key-pressed
+          :middleware [m/fun-mode])))
+    (let [id "sketch-20201204b"]
+      (when (or (empty? sketches) (sketches id))
+        (q/defsketch sketch-sketch-20201204b
+          :host id
+          :size [w h]
+          :setup sketch-20201204b/setup
+          :update sketch-20201204b/update-state
+          :draw sketch-20201204b/draw
+          :key-pressed sketch-20201204b/key-pressed
+          :middleware [m/fun-mode])))
+    (let [id "sketch-20201206"]
+      (when (or (empty? sketches) (sketches id))
+        (q/defsketch sketch-sketch-20201206
+          :host id
+          :size [w h]
+          :setup sketch-20201206/setup
+          :update sketch-20201206/update-state
+          :draw sketch-20201206/draw
+          :key-pressed sketch-20201206/key-pressed
+          :middleware [m/fun-mode])))))
 
 ;; specify reload hook with ^;after-load metadata
 (defn ^:after-load on-reload []
