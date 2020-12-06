@@ -2,12 +2,19 @@
   (:require [quil.core :as q :include-macros true]
             [com.benwiz.squiggle.listen :as listen]))
 
+;; TODO try to not let succeeding lines overlap
+
 (defn setup
   []
+  (q/frame-rate 10)
   (q/background 255)
   (q/stroke 0 0 0)
-  {:y     (* 0.33 (q/height))
-   :max-y (* 0.9 (q/height))})
+  (let [y 0.02]
+    {:t          0.02
+     :first-y    y
+     :y          y
+     :max-y      (q/height)
+     :curr-max-y 0}))
 
 ;; http://terpconnect.umd.edu/~toh/spectrum/Smoothing.html
 (defn unweighted-sliding-average-smooth
@@ -25,31 +32,45 @@
           (drop ext (drop-last ext points)))))
 
 (defn update-state
-  [{:keys [y] :as state}]
-  (let [y-delta 10]
-    (-> state
-        ;; (update :y + y-delta)
-        (update :lines
-                (fn [lines]
-                  ;; TODO this is a lot of intermediate structures, probably can handle this all with a single reduce
-                  (if-let [frame @listen/current-frame]
-                    (let [points (-> (into []
-                                           (comp
-                                             (map (fn [x]
-                                                    [x (+ y
-                                                          (q/map-range (aget frame (int (q/map-range x 0 (dec (q/width)) 0 4096)))
-                                                                       -20000 20000
-                                                                       (- (* 0.1 (q/height))) (* 0.1 (q/height))))])))
-                                           (range (q/width)))
-                                     #_(unweighted-sliding-average-smooth 3))]
-                      (into []
-                            (map-indexed (fn [idx point]
-                                           [;; Previous point
-                                            (nth points idx)
-                                            ;; Current point
-                                            point]))
-                            (drop 1 points)))
-                    lines))))))
+  [{:keys [t y max-y first-y curr-max-y lines] :as state}]
+  (let [^js frame @listen/current-frame
+        t-delta   (if frame
+                    (q/map-range (/ (reduce (fn [acc x]
+                                              (+ acc (js/Math.abs x)))
+                                            0
+                                            frame)
+                                    (.-length frame))
+                                 0 4000 0 0.2)
+                    0.02)
+        new-state (-> state
+                      (update :t + t-delta)
+                      (update :y (fn [y]
+                                   (int (if (> y max-y)
+                                          first-y
+                                          (+ y 10)))))
+                      (update :lines
+                              (fn [lines]
+                                (if frame
+                                  (let [points (-> (into []
+                                                         (comp
+                                                           (map-indexed (fn [idx x]
+                                                                          [x (max (-> lines (nth idx (last lines)) second second)
+                                                                                  (* y (q/noise (/ (dec x) 300) t)))])))
+                                                         (range (inc (q/width)))))]
+                                    (into []
+                                          (map-indexed (fn [idx point]
+                                                         [;; Previous point
+                                                          (nth points idx)
+                                                          ;; Current point
+                                                          point]))
+                                          (drop 1 points)))
+                                  lines))))]
+    (-> new-state
+        (update :curr-max-y (fn [curr-max-y]
+                              (reduce (fn [acc [[_ y1] [_ y2]]]
+                                        (max acc y1 y2))
+                                      curr-max-y
+                                      (:lines new-state)))))))
 
 (defn draw
   [{:keys [y max-y lines]}]
@@ -62,8 +83,14 @@
   [state event]
   ;; TODO need real resume, maybe have to store state in atom
   (case (q/key-as-keyword)
-    :p (q/no-loop)
-    :s (q/start-loop)
-    :e (q/save "resources/out/test.png")
-    nil)
-  state)
+    :r (do (q/no-loop)
+           (q/background 255)
+           (q/start-loop)
+           (assoc state :y (:first-y state)))
+    :p (do (q/no-loop)
+           state)
+    :s (do (q/start-loop)
+           state)
+    :e (do (q/save "resources/out/test.png")
+           state)
+    state))

@@ -7,8 +7,7 @@
   []
   (q/background 255)
   (q/stroke 0 0 0)
-  {:t     0.02
-   :y     (* 0.1 (q/height))
+  {:y     (* 0.1 (q/height))
    :max-y (* 0.9 (q/height))})
 
 ;; http://terpconnect.umd.edu/~toh/spectrum/Smoothing.html
@@ -28,8 +27,7 @@
 
 (defn update-state
   [{:keys [y max-y] :as state}]
-  (let [y-delta 10
-        t-el]
+  (let [y-delta 10]
     (-> state
         (update :y (fn [y]
                      (if (<= y max-y)
