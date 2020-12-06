@@ -1,7 +1,6 @@
 (ns com.benwiz.squiggle.sketch-20201204b
   (:require [quil.core :as q :include-macros true]
-            [com.benwiz.squiggle.listen :as listen]
-            [manifold-cljs.time :as t]))
+            [com.benwiz.squiggle.listen :as listen]))
 
 (defn setup
   []
