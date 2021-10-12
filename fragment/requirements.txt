@@ -13,7 +13,7 @@ jmespath==0.9.3
 lazy-object-proxy==1.3.1
 mccabe==0.6.1
 numpy==1.15.0
-opencv-contrib-python==3.4.2.17
+opencv-contrib-python==4.2.0.32
 pep8==1.7.1
 pycodestyle==2.4.0
 pylint==1.9.3
