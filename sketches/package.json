@@ -30,7 +30,7 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.2"
   },
   "dependencies": {
     "canvas-sketch": "^0.2.0",
